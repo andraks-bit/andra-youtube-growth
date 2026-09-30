@@ -121,7 +121,7 @@ Channel average retention (90d): 35.9%
 
 ## Shorts vs long-form
 'is_likely_short' is a <=180s duration heuristic, not an official YouTube flag -- the public API does not expose one.
-- Shorts: {'count': 128, 'avg_lifetime_views': 492.7, 'avg_retention_pct_90d': 58.5}
+- Shorts: {'count': 128, 'avg_lifetime_views': 494.5, 'avg_retention_pct_90d': 58.5}
 - Long-form: {'count': 76, 'avg_lifetime_views': 328.1, 'avg_retention_pct_90d': 16.0}
 - Repurpose-into-Shorts candidates (high-retention long-form clips):
   - CROWN SYDNEY – Most Luxurious Hotel in Australia?! 😳🇦🇺 | ANDRA KIIRKIVI (retention 19.3%, 731s)
