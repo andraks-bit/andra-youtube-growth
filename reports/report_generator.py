@@ -4,7 +4,10 @@ import datetime
 import config
 
 
-def generate(channel_snapshot, video_catalog, analytics, seo, optimization, shorts, planning):
+def generate(channel_snapshot, video_catalog, analytics, seo, optimization, shorts, planning,
+             keyword_discovery=None, metadata_rewrites=None, momentum=None,
+             retention_patterns=None, destination_performance=None,
+             seo_packages=None, new_videos=None):
     today = datetime.date.today().isoformat()
     lines = []
     a = lines.append
@@ -97,14 +100,139 @@ def generate(channel_snapshot, video_catalog, analytics, seo, optimization, shor
     ) or "n/a")
     a("")
 
-    a("## New-video SEO package template")
-    a("For the next upload, combine the keyword gaps above with the recurring "
-      "words from top performers to draft:")
-    a("- Title: include one keyword-gap term naturally, keep 40-70 chars")
-    a("- Description: first 2 lines should restate the main keyword + a CTA link")
-    a("- Tags: mix broad channel tags with the specific keyword-gap terms")
-    a("- (This package is a template for you to fill in manually -- this "
-      "system does not generate or publish video metadata automatically.)")
-    a("")
+    if new_videos is not None:
+        a("## Newly detected videos since last run")
+        a(new_videos["note"])
+        if new_videos["new_videos"]:
+            for v in new_videos["new_videos"]:
+                a(f"- {v['title']} (published {v['published_at'][:10]}, id {v['video_id']})")
+        else:
+            a("- None detected this run.")
+        a("")
+
+    if momentum is not None:
+        a("## Momentum -- videos gaining or losing views")
+        a(momentum["note"])
+        a("")
+        a("**Gaining:**")
+        if momentum["gainers"]:
+            for g in momentum["gainers"]:
+                a(f"- {g['title']}: +{g['delta']} views (90d window)")
+        else:
+            a("- None yet.")
+        a("")
+        a("**Losing steam:**")
+        if momentum["losers"]:
+            for l in momentum["losers"]:
+                a(f"- {l['title']}: {l['delta']} views (90d window)")
+        else:
+            a("- None flagged.")
+        a("")
+
+    if retention_patterns is not None:
+        a("## Retention patterns: top vs. bottom performers")
+        a(retention_patterns["note"])
+        for fmt_key, fmt_label in (("long_form", "Long-form"), ("shorts", "Shorts")):
+            fmt = retention_patterns.get(fmt_key, {})
+            a("")
+            a(f"### {fmt_label}")
+            if not fmt.get("top_avg_curve"):
+                a(f"- Not enough {fmt_label.lower()} videos with retention curves yet "
+                  f"({fmt.get('videos_with_curves', 0)} available).")
+                continue
+            if fmt.get("insight"):
+                a(f"**Insight:** {fmt['insight']}")
+            a("")
+            a("| Elapsed | Top performers | Bottom performers |")
+            a("|---|---|---|")
+            for cp in sorted(fmt["top_avg_curve"]):
+                top_v = fmt["top_avg_curve"].get(cp)
+                bot_v = fmt["bottom_avg_curve"].get(cp)
+                top_s = f"{top_v*100:.0f}%" if top_v is not None else "n/a"
+                bot_s = f"{bot_v*100:.0f}%" if bot_v is not None else "n/a"
+                a(f"| {cp*100:.0f}% | {top_s} | {bot_s} |")
+        a("")
+
+    if destination_performance is not None:
+        a("## Destination performance & content-planning priority")
+        a(destination_performance["note"])
+        a("")
+        a("| Destination | Videos | Avg views/90d | Retention | Unmet keywords | Momentum | Priority |")
+        a("|---|---|---|---|---|---|---|")
+        for d in destination_performance["destinations"]:
+            ret = f"{d['avg_retention_pct']:.1f}%" if d["avg_retention_pct"] is not None else "n/a"
+            a(f"| {d['destination']} | {d['video_count']} | {d['avg_views_90d']} | {ret} | "
+              f"{d['unmet_demand_keywords']} | {d['momentum_90d_view_delta']:+d} | {d['priority_score']} |")
+        a("")
+
+    if keyword_discovery is not None:
+        a("## Keyword discovery by destination")
+        a(keyword_discovery["note"])
+        a("")
+        for dest, gaps in keyword_discovery["gaps_by_destination"].items():
+            if not gaps:
+                continue
+            a(f"**{dest} -- proven demand, not yet targeted:**")
+            for g in gaps[:8]:
+                a(f"- \"{g['term']}\" ({g['views']} views)")
+            a("")
+        for dest, opps in keyword_discovery["template_opportunities_by_destination"].items():
+            if not opps:
+                continue
+            a(f"**{dest} -- template keyword ideas (not real search-volume data):**")
+            for o in opps[:6]:
+                a(f"- {o}")
+            a("")
+
+    if metadata_rewrites is not None:
+        a("## Metadata rewrite suggestions for existing videos")
+        a(metadata_rewrites["note"])
+        a("")
+        for r in metadata_rewrites["rewrites"]:
+            a(f"### {r['current_title']}")
+            a(f"Destination: {r['destination']}  |  Video ID: {r['video_id']}")
+            a("Flagged because: " + "; ".join(r["reasons_flagged"]))
+            a("")
+            a("Suggested titles:")
+            for t in r["suggested_titles"]:
+                a(f"- {t}")
+            a("")
+            a("Suggested tags: " + ", ".join(r["suggested_tags"]))
+            a("Suggested hashtags: " + " ".join(r["suggested_hashtags"]))
+            a("")
+            a("Suggested description:")
+            a("```")
+            a(r["suggested_description"])
+            a("```")
+            a("")
+
+    if seo_packages is not None:
+        a("## New-video SEO packages by destination priority")
+        a(seo_packages["note"])
+        a("")
+        for pkg in seo_packages["packages"]:
+            a(f"### {pkg['destination']}")
+            a("Title options:")
+            for t in pkg["title_options"]:
+                a(f"- {t}")
+            a("")
+            a("Tags: " + ", ".join(pkg["tags"]))
+            a("Hashtags: " + " ".join(pkg["hashtags"]))
+            a("")
+            a("Description:")
+            a("```")
+            a(pkg["description"])
+            a("```")
+            a("")
+            a("Chapter template:")
+            for c in pkg["chapters_template"]:
+                a(f"- {c}")
+            a("")
+            a("Thumbnail text ideas: " + " / ".join(pkg["thumbnail_text_ideas"]))
+            a("")
+            a("Shorts ideas:")
+            for s in pkg["shorts_ideas"]:
+                a(f"- {s}")
+            a("")
 
     return "\n".join(lines)
