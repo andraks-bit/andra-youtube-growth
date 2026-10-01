@@ -122,3 +122,16 @@ GITHUB_LABEL_PROPOSAL = "yt-change-proposal"
 # through -- see approval_workflow.apply_approved().
 def youtube_writes_enabled():
     return os.environ.get("YT_WRITES_ENABLED", "").strip().lower() in ("1", "true", "yes")
+
+
+# --- Step 7: controlled write pilot ---
+# Second, independent gate on top of youtube_writes_enabled(). When set, it
+# restricts apply_approved() to that ONE proposal_id -- every other
+# 'approved' proposal is left untouched (still queued) even though writes
+# are globally on. This is deliberately a second, separate check rather than
+# folded into youtube_writes_enabled(): a human mistakenly approving another
+# issue during the pilot window must not be enough, by itself, to let it
+# through. Unset outside an explicit pilot window -- when unset, every
+# approved proposal is eligible (the Step 6 default).
+def pilot_only_proposal_id():
+    return os.environ.get("YT_WRITES_PILOT_ONLY_PROPOSAL_ID", "").strip() or None

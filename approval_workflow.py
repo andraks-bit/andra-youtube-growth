@@ -96,23 +96,37 @@ def _apply_one(youtube_client, p):
 
 def apply_approved(youtube_client, gh):
     """Applies every 'approved' proposal IF writes are enabled; otherwise
-    comments once per proposal that it's queued. Returns (applied, failed, queued)."""
+    comments once per proposal that it's queued. If config.pilot_only_
+    proposal_id() is set, every approved proposal EXCEPT that one id is
+    held back regardless of writes_on -- a second, independent gate for a
+    controlled pilot (see Step 7). Returns (applied, failed, queued)."""
     state = load_state()
     writes_on = config.youtube_writes_enabled()
+    pilot_id = config.pilot_only_proposal_id()
     applied = failed = queued = 0
 
     for p in state["proposals"]:
         if p["status"] != "approved":
             continue
 
-        if not writes_on:
+        pilot_blocked = pilot_id is not None and p["proposal_id"] != pilot_id
+
+        if not writes_on or pilot_blocked:
             if not p.get("commented_queued"):
-                gh.comment_on_issue(
-                    p["github_issue_number"],
-                    "Approved and queued. Real YouTube writes are currently disabled "
-                    "(`YT_WRITES_ENABLED` is off) -- this will be applied automatically "
-                    "once that's turned on, with no further action needed here."
-                )
+                if pilot_blocked:
+                    msg = (
+                        "Approved and queued, but held back by the active write pilot "
+                        f"(`YT_WRITES_PILOT_ONLY_PROPOSAL_ID` is restricted to a different "
+                        "proposal right now) -- this will be applied once the pilot "
+                        "restriction is lifted or covers this proposal."
+                    )
+                else:
+                    msg = (
+                        "Approved and queued. Real YouTube writes are currently disabled "
+                        "(`YT_WRITES_ENABLED` is off) -- this will be applied automatically "
+                        "once that's turned on, with no further action needed here."
+                    )
+                gh.comment_on_issue(p["github_issue_number"], msg)
                 p["commented_queued"] = True
             queued += 1
             continue

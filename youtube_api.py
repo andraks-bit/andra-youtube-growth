@@ -40,6 +40,18 @@ def _post(url, token, params=None, json_body=None):
     return resp.json()
 
 
+def _put(url, token, params=None, json_body=None):
+    # videos.update is documented as HTTP PUT, unlike the .insert endpoints
+    # (playlists.insert, playlistItems.insert) which are POST. Caught this
+    # via code review before the Step 7 pilot write -- POST would very
+    # likely have 405'd or behaved unpredictably against this endpoint.
+    resp = requests.put(url, params=params or {}, json=json_body,
+                         headers={"Authorization": f"Bearer {token}"})
+    if resp.status_code != 200:
+        raise ApiError(f"PUT {url} failed (HTTP {resp.status_code}): {resp.text}")
+    return resp.json()
+
+
 class YouTubeClient:
     def __init__(self):
         self.token, self.token_source = auth.get_access_token()
@@ -108,8 +120,8 @@ class YouTubeClient:
             "categoryId": current["categoryId"],  # required field; always preserve
             "tags": tags if tags is not None else current.get("tags", []),
         }
-        return _post(f"{DATA_API}/videos", self.token, params={"part": "snippet"},
-                     json_body={"id": video_id, "snippet": snippet})
+        return _put(f"{DATA_API}/videos", self.token, params={"part": "snippet"},
+                    json_body={"id": video_id, "snippet": snippet})
 
     def list_playlists(self, max_results=50):
         data = _get(f"{DATA_API}/playlists", self.token, {
