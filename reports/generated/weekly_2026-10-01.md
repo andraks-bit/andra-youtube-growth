@@ -15,12 +15,12 @@ Note: impressions and click-through rate are not included below -- the public Yo
 
 ## Traffic sources: this week vs. last week
 - YT_SEARCH: 31 vs 42 (-26.2%)
-- EXT_URL: 2 vs 1 (+100.0%)
 - YT_CHANNEL: 2 vs 11 (-81.8%)
+- EXT_URL: 2 vs 1 (+100.0%)
 - SUBSCRIBER: 1 vs 11 (-90.9%)
-- NO_LINK_OTHER: 0 vs 3 (-100.0%)
-- RELATED_VIDEO: 0 vs 152 (-100.0%)
 - SOUND_PAGE: 0 vs 0 (n/a)
+- RELATED_VIDEO: 0 vs 152 (-100.0%)
+- NO_LINK_OTHER: 0 vs 3 (-100.0%)
 
 - Search traffic this week: 31 | Suggested: 0 | Browse: 0
 
@@ -47,7 +47,7 @@ priority_score blends this destination's average 90-day views, average retention
 - **New York City** (score 0.441): 4 videos, avg 2.8 views/90d, retention 42.6%, 1 unmet keyword(s), momentum +0
 - **Other / Unclassified** (score 0.358): 53 videos, avg 0.7 views/90d, retention 43.7%, 0 unmet keyword(s), momentum +2
 - **Colombo / Sri Lanka** (score 0.095): 14 videos, avg 1.1 views/90d, retention 8.8%, 0 unmet keyword(s), momentum +0
-- **Punta Cana** (score 0.0): 0 videos, avg 0 views/90d, retention n/a, 0 unmet keyword(s), momentum +0
+- **Milan** (score 0.0): 0 videos, avg 0 views/90d, retention n/a, 0 unmet keyword(s), momentum +0
 
 ## Keyword opportunities
 - 7 proven search-demand keyword(s) across destinations aren't in any video yet.
