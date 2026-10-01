@@ -46,6 +46,54 @@
       "rejection_reason": "superseded: proposed_tags contained 'Sydney / Australia' as a single literal tag (invalid, slash not stripped) -- bug fixed in text_utils.clean_tag_parts; a corrected proposal for this video will be generated on the next run. Please close GitHub issue #2 manually.",
       "github_issue_number": 2,
       "commented_queued": false
+    },
+    {
+      "proposal_id": "45fa0463da",
+      "type": "metadata_update",
+      "video_id": "AynTk_WorY8",
+      "current_title": "MANLY BEACH SYDNEY\ud83c\udde6\ud83c\uddfa\ud83d\udccd Vlog ! #youtubeshorts #travel #vlog #sydney #sydney #australia",
+      "proposed_title": "Sydney / Australia Travel Vlog crown towers sydney",
+      "proposed_description": "Sydney / Australia -- crown towers sydney\n\n(original description was empty -- add 2-3 sentences here.)\n\nFollow for more travel vlogs.\n#Sydney #crowntowerssydney #travelvlog",
+      "proposed_tags": [
+        "Sydney",
+        "Australia",
+        "crown towers sydney",
+        "andra",
+        "kiirkivi",
+        "bali",
+        "vlog",
+        "youtubeshorts",
+        "weekend"
+      ],
+      "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
+      "destination": "Sydney / Australia",
+      "proposed_on": "2026-10-01",
+      "status": "pending",
+      "github_issue_number": 5,
+      "commented_queued": false
+    },
+    {
+      "proposal_id": "6c7643f63d",
+      "type": "metadata_update",
+      "video_id": "0jNKETzdNY0",
+      "current_title": "DOGS LIFE IN DUBAI\ud83d\ude0d\ud83d\udc36\ud83c\udde6\ud83c\uddea\u2728 #dog #uae #youtubeshorts #vlogger #dubai #dubailifestyle",
+      "proposed_title": "Dubai Travel Vlog 2026",
+      "proposed_description": "Dubai -- 2026\n\n(original description was empty -- add 2-3 sentences here.)\n\nFollow for more travel vlogs.\n#Dubai #travelvlog",
+      "proposed_tags": [
+        "Dubai",
+        "andra",
+        "kiirkivi",
+        "bali",
+        "vlog",
+        "youtubeshorts",
+        "weekend"
+      ],
+      "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
+      "destination": "Dubai",
+      "proposed_on": "2026-10-01",
+      "status": "pending",
+      "github_issue_number": 6,
+      "commented_queued": false
     }
   ]
 }

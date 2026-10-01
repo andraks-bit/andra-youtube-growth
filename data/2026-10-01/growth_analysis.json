@@ -513,18 +513,18 @@
         "priority_score": 0.0
       },
       {
-        "destination": "Milan",
-        "video_count": 0,
-        "avg_views_90d": 0,
+        "destination": "Tokyo / Japan",
+        "video_count": 5,
+        "avg_views_90d": 0.0,
         "avg_retention_pct": null,
         "momentum_90d_view_delta": 0,
         "unmet_demand_keywords": 0,
         "priority_score": 0.0
       },
       {
-        "destination": "Tokyo / Japan",
-        "video_count": 5,
-        "avg_views_90d": 0.0,
+        "destination": "Milan",
+        "video_count": 0,
+        "avg_views_90d": 0,
         "avg_retention_pct": null,
         "momentum_90d_view_delta": 0,
         "unmet_demand_keywords": 0,
@@ -1644,11 +1644,11 @@
         "rationale": "not yet covered on the channel"
       },
       {
-        "destination": "Milan",
-        "is_new_destination": true,
+        "destination": "Tokyo / Japan",
+        "is_new_destination": false,
         "priority_score": 0.0,
-        "target_keyword": "how much does Milan cost",
-        "rationale": "not yet covered on the channel"
+        "target_keyword": "how much does Tokyo / Japan cost",
+        "rationale": "5 existing videos, avg 0.0 views/90d"
       }
     ],
     "note": "Ranked by destination_performance's priority_score (real views + retention + momentum, blended with unmet search-demand count). Each rationale names the actual numbers behind the ranking -- not a generic suggestion."

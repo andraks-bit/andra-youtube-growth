@@ -186,8 +186,8 @@ priority_score blends this destination's average 90-day views, average retention
 | Other / Unclassified | 53 | 0.7 | 43.7% | 0 | +2 | 0.358 |
 | Colombo / Sri Lanka | 14 | 1.1 | 8.8% | 0 | +0 | 0.095 |
 | Punta Cana | 0 | 0 | n/a | 0 | +0 | 0.0 |
-| Milan | 0 | 0 | n/a | 0 | +0 | 0.0 |
 | Tokyo / Japan | 5 | 0.0 | n/a | 0 | +0 | 0.0 |
+| Milan | 0 | 0 | n/a | 0 | +0 | 0.0 |
 
 ## Keyword discovery by destination
 gaps_by_destination = real search terms already driving views (YouTube Analytics, last 90 days) not yet present in that destination's video text. template_opportunities_by_destination = generic high-intent query patterns (config.KEYWORD_INTENT_TEMPLATES), NOT real search-volume data -- there is no keyword-research API authorized for this project.
@@ -314,7 +314,7 @@ Suggested titles:
 - Sydney / Australia: Andra crown towers sydney
 - Exploring Sydney / Australia -- crown towers sydney
 
-Suggested tags: Sydney / Australia, crown towers sydney, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
+Suggested tags: Sydney, Australia, crown towers sydney, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
 Suggested hashtags: #Sydney #crowntowerssydney #travelvlog
 Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
 
@@ -397,7 +397,7 @@ Suggested titles:
 - Sydney / Australia: Andra crown towers sydney
 - Exploring Sydney / Australia -- crown towers sydney
 
-Suggested tags: Sydney / Australia, crown towers sydney, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
+Suggested tags: Sydney, Australia, crown towers sydney, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
 Suggested hashtags: #Sydney #crowntowerssydney #travelvlog
 Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
 
@@ -423,7 +423,7 @@ Suggested titles:
 - Sydney / Australia: Andra 2026
 - Exploring Sydney / Australia -- 2026
 
-Suggested tags: Sydney / Australia, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
+Suggested tags: Sydney, Australia, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
 Suggested hashtags: #Sydney #travelvlog
 Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
 
@@ -449,7 +449,7 @@ Suggested titles:
 - Marbella / Puerto Banus: Andra 2026
 - Exploring Marbella / Puerto Banus -- 2026
 
-Suggested tags: Marbella / Puerto Banus, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
+Suggested tags: Marbella, Puerto Banus, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
 Suggested hashtags: #Marbella #travelvlog
 Thumbnail text ideas: MARBELLA! / IS IT WORTH IT? / MARBELLA TRUTH / WE DID THIS IN MARBELLA
 
@@ -475,7 +475,7 @@ Suggested titles:
 - Sydney / Australia: Andra crown towers sydney
 - Exploring Sydney / Australia -- crown towers sydney
 
-Suggested tags: Sydney / Australia, crown towers sydney, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
+Suggested tags: Sydney, Australia, crown towers sydney, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
 Suggested hashtags: #Sydney #crowntowerssydney #travelvlog
 Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
 
@@ -501,7 +501,7 @@ Suggested titles:
 - Sydney / Australia: Andra 2026
 - Exploring Sydney / Australia -- 2026
 
-Suggested tags: Sydney / Australia, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
+Suggested tags: Sydney, Australia, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
 Suggested hashtags: #Sydney #travelvlog
 Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
 
@@ -579,7 +579,7 @@ Suggested titles:
 - Sydney / Australia: Andra crown towers sydney
 - Exploring Sydney / Australia -- crown towers sydney
 
-Suggested tags: Sydney / Australia, crown towers sydney, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
+Suggested tags: Sydney, Australia, crown towers sydney, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
 Suggested hashtags: #Sydney #crowntowerssydney #travelvlog
 Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
 
@@ -605,7 +605,7 @@ Title options:
 - First Time in Marbella / Puerto Banus: Puerto Banus Marbella
 - Marbella / Puerto Banus Diaries: Puerto Banus Marbella
 
-Tags: Marbella / Puerto Banus, Marbella, puerto banus marbella, marbella october, marbella puerto banus, Marbella / Puerto Banus vlog, Marbella / Puerto Banus travel guide, Marbella / Puerto Banus itinerary, andra, kiirkivi, bali, vlog
+Tags: Marbella, Puerto Banus, puerto banus marbella, marbella october, marbella puerto banus, Marbella / Puerto Banus vlog, Marbella / Puerto Banus travel guide, Marbella / Puerto Banus itinerary, andra, kiirkivi, bali, vlog
 Hashtags: #Marbella #puertobanusmarbella #marbellaoctober #marbellapuertobanus #travelvlog
 
 Description:
@@ -642,7 +642,7 @@ Title options:
 - First Time in Sydney / Australia: Crown Towers Sydney
 - Sydney / Australia Diaries: Crown Towers Sydney
 
-Tags: Sydney / Australia, Sydney, crown towers sydney, Sydney / Australia vlog, Sydney / Australia travel guide, Sydney / Australia itinerary, things to do in Sydney / Australia, Sydney / Australia food, andra, kiirkivi, bali, vlog
+Tags: Sydney, Australia, crown towers sydney, Sydney / Australia vlog, Sydney / Australia travel guide, Sydney / Australia itinerary, things to do in Sydney / Australia, Sydney / Australia food, andra, kiirkivi, bali, vlog
 Hashtags: #Sydney #crowntowerssydney #SydneyAustraliavlog #SydneyAustraliatravelguide #travelvlog
 
 Description:
@@ -790,7 +790,7 @@ Title options:
 - First Time in Colombo / Sri Lanka: Colombo / Sri Lanka Vlog
 - Colombo / Sri Lanka Diaries: Colombo / Sri Lanka Vlog
 
-Tags: Colombo / Sri Lanka, Colombo, Colombo / Sri Lanka vlog, Colombo / Sri Lanka travel guide, Colombo / Sri Lanka itinerary, things to do in Colombo / Sri Lanka, Colombo / Sri Lanka food, Colombo / Sri Lanka on a budget, andra, kiirkivi, bali, vlog
+Tags: Colombo, Sri Lanka, Colombo / Sri Lanka vlog, Colombo / Sri Lanka travel guide, Colombo / Sri Lanka itinerary, things to do in Colombo / Sri Lanka, Colombo / Sri Lanka food, Colombo / Sri Lanka on a budget, andra, kiirkivi, bali, vlog
 Hashtags: #Colombo #ColomboSriLankavlog #ColomboSriLankatravelguide #ColomboSriLankaitinerary #travelvlog
 
 Description:
@@ -1137,4 +1137,4 @@ Ranked by destination_performance's priority_score (real views + retention + mom
 - [EXPAND] **New York City** (score 0.441) | target keyword: "new york city apartment" -- 4 existing videos, avg 2.8 views/90d; 42.6% retention; 1 proven search gap(s)
 - [EXPAND] **Colombo / Sri Lanka** (score 0.095) -- 14 existing videos, avg 1.1 views/90d; 8.8% retention
 - [NEW DESTINATION] **Punta Cana** (score 0.0) | target keyword: "how much does Punta Cana cost" -- not yet covered on the channel
-- [NEW DESTINATION] **Milan** (score 0.0) | target keyword: "how much does Milan cost" -- not yet covered on the channel
+- [EXPAND] **Tokyo / Japan** (score 0.0) | target keyword: "how much does Tokyo / Japan cost" -- 5 existing videos, avg 0.0 views/90d
