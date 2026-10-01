@@ -114,12 +114,21 @@ class YouTubeClient:
 
     def update_video_snippet(self, video_id, title=None, description=None, tags=None):
         current = self.get_video_snippet(video_id)
-        snippet = {
-            "title": title if title is not None else current["title"],
-            "description": description if description is not None else current.get("description", ""),
-            "categoryId": current["categoryId"],  # required field; always preserve
-            "tags": tags if tags is not None else current.get("tags", []),
-        }
+        # Start from every writable field YouTube returned (not just the 3-4
+        # we usually touch) so nothing already set -- e.g. defaultLanguage --
+        # gets silently dropped by the full-object replace semantics of
+        # videos.update. Only output-only fields (channelId, publishedAt,
+        # thumbnails, localized, etc.) are excluded.
+        writable_fields = ("title", "description", "tags", "categoryId",
+                            "defaultLanguage", "defaultAudioLanguage")
+        snippet = {k: current[k] for k in writable_fields if k in current}
+        if title is not None:
+            snippet["title"] = title
+        if description is not None:
+            snippet["description"] = description
+        if tags is not None:
+            snippet["tags"] = tags
+        snippet.setdefault("tags", [])
         return _put(f"{DATA_API}/videos", self.token, params={"part": "snippet"},
                     json_body={"id": video_id, "snippet": snippet})
 
