@@ -18,9 +18,9 @@ Note: impressions and click-through rate are not included below -- the public Yo
 - EXT_URL: 2 vs 1 (+100.0%)
 - YT_CHANNEL: 2 vs 11 (-81.8%)
 - SUBSCRIBER: 1 vs 11 (-90.9%)
-- SOUND_PAGE: 0 vs 0 (n/a)
 - RELATED_VIDEO: 0 vs 152 (-100.0%)
 - NO_LINK_OTHER: 0 vs 3 (-100.0%)
+- SOUND_PAGE: 0 vs 0 (n/a)
 
 - Search traffic this week: 31 | Suggested: 0 | Browse: 0
 
