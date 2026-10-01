@@ -42,5 +42,19 @@ jobs:
           git config user.name "youtube-growth-bot"
           git config user.email "actions@users.noreply.github.com"
           git add data logs reports/generated
-          git diff --cached --quiet || git commit -m "Automated YouTube growth run $(date -u +%Y-%m-%d)"
-          git push
+          git diff --cached --quiet && exit 0
+          git commit -m "Automated YouTube growth run $(date -u +%Y-%m-%d)"
+          # Retry on push rejection (another push landed on main while this
+          # run was executing, e.g. a manual commit or an overlapping run) --
+          # fetch + rebase onto the new tip and retry, rather than losing
+          # this run's report/data outright.
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt/5) -- fetching and rebasing onto origin/main"
+            git fetch origin main
+            git rebase origin/main
+          done
+          echo "Push still failing after 5 attempts -- giving up"
+          exit 1
