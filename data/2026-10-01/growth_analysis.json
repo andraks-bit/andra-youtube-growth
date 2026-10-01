@@ -1,0 +1,536 @@
+{
+  "new_videos": {
+    "compared_against_date": "2026-09-30",
+    "new_videos": [],
+    "note": "Comparing today's catalog against the last snapshot (2026-09-30)."
+  },
+  "keyword_discovery": {
+    "gaps_by_destination": {
+      "Sydney / Australia": [
+        {
+          "term": "crown towers sydney",
+          "views": 5
+        }
+      ],
+      "Marbella / Puerto Banus": [
+        {
+          "term": "puerto banus marbella",
+          "views": 5
+        },
+        {
+          "term": "marbella october",
+          "views": 1
+        },
+        {
+          "term": "marbella puerto banus",
+          "views": 1
+        }
+      ],
+      "New York City": [
+        {
+          "term": "new york city apartment",
+          "views": 2
+        }
+      ]
+    },
+    "unmatched_gap_terms": [
+      {
+        "term": "buggy huggy",
+        "views": 4
+      },
+      {
+        "term": "shane",
+        "views": 1
+      }
+    ],
+    "template_opportunities_by_destination": {
+      "Tokyo / Japan": [
+        "Tokyo / Japan vlog",
+        "Tokyo / Japan travel guide",
+        "Tokyo / Japan itinerary",
+        "things to do in Tokyo / Japan",
+        "Tokyo / Japan food",
+        "Tokyo / Japan on a budget",
+        "is Tokyo / Japan worth visiting",
+        "Tokyo / Japan tips",
+        "best time to visit Tokyo / Japan",
+        "Tokyo / Japan day trip"
+      ],
+      "Milan": [
+        "Milan vlog",
+        "Milan travel guide",
+        "Milan itinerary",
+        "things to do in Milan",
+        "Milan food",
+        "Milan on a budget",
+        "is Milan worth visiting",
+        "Milan tips",
+        "best time to visit Milan",
+        "Milan day trip"
+      ],
+      "Dubai": [
+        "Dubai travel guide",
+        "Dubai itinerary",
+        "things to do in Dubai",
+        "Dubai on a budget",
+        "is Dubai worth visiting",
+        "Dubai tips",
+        "best time to visit Dubai",
+        "Dubai day trip"
+      ],
+      "Punta Cana": [
+        "Punta Cana vlog",
+        "Punta Cana travel guide",
+        "Punta Cana itinerary",
+        "things to do in Punta Cana",
+        "Punta Cana food",
+        "Punta Cana on a budget",
+        "is Punta Cana worth visiting",
+        "Punta Cana tips",
+        "best time to visit Punta Cana",
+        "Punta Cana day trip"
+      ],
+      "Bali": [
+        "Bali itinerary",
+        "things to do in Bali",
+        "Bali food",
+        "Bali on a budget",
+        "is Bali worth visiting",
+        "Bali tips",
+        "best time to visit Bali",
+        "Bali day trip"
+      ],
+      "Sydney / Australia": [
+        "Sydney / Australia vlog",
+        "Sydney / Australia travel guide",
+        "Sydney / Australia itinerary",
+        "things to do in Sydney / Australia",
+        "Sydney / Australia food",
+        "Sydney / Australia on a budget",
+        "is Sydney / Australia worth visiting",
+        "Sydney / Australia tips",
+        "best time to visit Sydney / Australia",
+        "Sydney / Australia day trip"
+      ],
+      "Marbella / Puerto Banus": [
+        "Marbella / Puerto Banus vlog",
+        "Marbella / Puerto Banus travel guide",
+        "Marbella / Puerto Banus itinerary",
+        "things to do in Marbella / Puerto Banus",
+        "Marbella / Puerto Banus food",
+        "Marbella / Puerto Banus on a budget",
+        "is Marbella / Puerto Banus worth visiting",
+        "Marbella / Puerto Banus tips",
+        "best time to visit Marbella / Puerto Banus",
+        "Marbella / Puerto Banus day trip"
+      ],
+      "New York City": [
+        "New York City vlog",
+        "New York City travel guide",
+        "New York City itinerary",
+        "things to do in New York City",
+        "New York City food",
+        "New York City on a budget",
+        "is New York City worth visiting",
+        "New York City tips",
+        "best time to visit New York City",
+        "New York City day trip"
+      ],
+      "Colombo / Sri Lanka": [
+        "Colombo / Sri Lanka vlog",
+        "Colombo / Sri Lanka travel guide",
+        "Colombo / Sri Lanka itinerary",
+        "things to do in Colombo / Sri Lanka",
+        "Colombo / Sri Lanka food",
+        "Colombo / Sri Lanka on a budget",
+        "is Colombo / Sri Lanka worth visiting",
+        "Colombo / Sri Lanka tips",
+        "best time to visit Colombo / Sri Lanka",
+        "Colombo / Sri Lanka day trip"
+      ]
+    },
+    "per_video_gaps": [
+      {
+        "video_id": "rk4LdjnVocI",
+        "title": "HELICOPTER TOUR IN SYDNEY !vlog #sydney #australia #travel #vloglife #vlog",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "WujqrbouwD4",
+        "title": "\ud83d\ude81 POV: You Said YES to the Best View in Sydney \ud83c\udde6\ud83c\uddfa | ANDRA KIIRKIVI ",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "7cKsmewpENE",
+        "title": "NEW VLOG ! SYDNEY PARKS\ud83d\ude33\ud83d\ude0d #sydney #australia #shorts #youtube #vlog #vlog ger g",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "4Scg09SvCIg",
+        "title": "RANDOM DAY IN SYDNEY \ud83c\udde6\ud83c\uddfa Bikes, Botanical Garden, Church & City Adventures \ud83d\ude33 | ANDRA KIIRKIVI",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "u28RQFHvqkM",
+        "title": "NEWCASTLE AUSTRALIA VLOG !\ud83d\ude33\ud83c\udde6\ud83c\uddfa\ud83e\udd98\ud83d\udc28\ud83c\udf05 #sydney #australia #youtubeshorts #vlog #shorts #vlog",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "PrWJZprm--4",
+        "title": "NEWCASTLE AUSTRALIA VLOG !\ud83c\udde6\ud83c\uddfa\ud83c\udf0f\ud83e\udd98\ud83d\udc28. WATCH TIL END TO SEE WHAT HAPPENED TO OUR CAR\ud83e\udd79\ud83d\ude22\ud83d\ude0f #sydney",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "KFakVb8SU24",
+        "title": "NEWCASTLE AUSTRALIA\ud83d\ude33\ud83c\udde6\ud83c\uddfa\ud83e\udd98\ud83d\udc28 Vlog ! #sydney #australia #newcastleaustralia #vlog #shorts",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "wBpO-DXf8r4",
+        "title": "NEWCASTLE, AUSTRALIA \ud83c\udde6\ud83c\uddfa \u2013 Hidden Gem + Wine Valley Road Trip \ud83c\udf77\ud83d\ude33 | ANDRA KIIRKIVI",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "OXX5JSy4F_o",
+        "title": "THE MOST LUXURIOUS HOTEL IN SYDNEY !\ud83c\udde6\ud83c\uddfa\u2728\ud83d\udc51 #sydney #hotel #australia #vlog #shorts",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "qPoSjuHztGM",
+        "title": "The MOST LUXURIOUS HOTEL IN SYDNEY\ud83d\ude31\ud83d\ude33\ud83c\udde6\ud83c\uddfa\u2728 ! VLOG ! #youtubeshorts #sydney #thecrownhotel #vlog",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "iqiGryAPcvk",
+        "title": "CROWN SYDNEY \u2013 Most Luxurious Hotel in Australia?! \ud83d\ude33\ud83c\udde6\ud83c\uddfa | ANDRA KIIRKIVI",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "-BYDltb5bwI",
+        "title": "BONDI BEACH SYNDEY !\ud83c\udde6\ud83c\uddfa\ud83e\udd98\ud83d\udc28 Vlog ! #youtubeshorts #beach #bondibeach #australia #sydney",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "5Dc9MRXZ0wM",
+        "title": "BONDI BEACH SYDNEY ! vlog ! #youtubeshorts #bondibeach #sydney #australia",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "zyprE9hDsWA",
+        "title": "Bondi Beach Sydney \ud83c\udde6\ud83c\uddfa Worth the Hype?!\ud83d\ude33 | ANDRA KIIRKIVI",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "P9CUFqjTn9o",
+        "title": "MANLY BEACH SYDNEY\ud83d\udccd\ud83c\udde6\ud83c\uddfa New Vlog ! #youtubeshorts #sydney #sydneyvlog #australia",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "AynTk_WorY8",
+        "title": "MANLY BEACH SYDNEY\ud83c\udde6\ud83c\uddfa\ud83d\udccd Vlog ! #youtubeshorts #travel #vlog #sydney #sydney #australia",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "5oS5pJhFHgI",
+        "title": "NEW SYDNEY VLOG ! \ud83d\udccd\ud83c\udde6\ud83c\uddfaManly Beach ! #youtubeshorts #vlog #sydney #australia",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "QpnmRPcEQNM",
+        "title": "Manly Beach Sydney \ud83c\udde6\ud83c\uddfa Worth the Trip?! | ANDRA KIIRKIVI ",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "qzYKwY3D4Cs",
+        "title": "HOME&AWAY AUSTRALIA FILMING SPOT. New Vlog !\ud83d\udccd\ud83c\udde6\ud83c\uddfa\ud83d\ude33\ud83e\udd98 #youtubeshorts #vlog #shorts #australia",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      },
+      {
+        "video_id": "KGVXVL8qKYg",
+        "title": "NEW VLOG ! Wild Kangaroos\ud83d\ude33\ud83c\udde6\ud83c\uddfa\ud83e\udd98 #youtubeshorts #travel #sydney #australia #australiavlog",
+        "destination": "Sydney / Australia",
+        "missing_terms": [
+          "crown towers sydney"
+        ]
+      }
+    ],
+    "note": "gaps_by_destination = real search terms already driving views (YouTube Analytics, last 90 days) not yet present in that destination's video text. template_opportunities_by_destination = generic high-intent query patterns (config.KEYWORD_INTENT_TEMPLATES), NOT real search-volume data -- there is no keyword-research API authorized for this project."
+  },
+  "momentum": {
+    "history_days_available": 1,
+    "compared_against_date": "2026-09-30",
+    "gainers": [
+      {
+        "video_id": "iqiGryAPcvk",
+        "title": "CROWN SYDNEY \u2013 Most Luxurious Hotel in Australia?! \ud83d\ude33\ud83c\udde6\ud83c\uddfa | ANDRA KIIRKIVI",
+        "views_90d_then": 190,
+        "views_90d_now": 196,
+        "delta": 6
+      },
+      {
+        "video_id": "qhLY4RDt9Hw",
+        "title": "OCTOBER IN MARBELLA\ud83c\uddea\ud83c\uddf8\ud83c\udf34\ud83d\ude0d\ud83c\udf0a#spain #shorts #youtubeshorts #vlog #vlogger g",
+        "views_90d_then": 67,
+        "views_90d_now": 69,
+        "delta": 2
+      },
+      {
+        "video_id": "G4czKAlB-KE",
+        "title": "TESTING THE BRABUS G-WAGON IN DUBAI\ud83c\udde6\ud83c\uddea\ud83d\udc8e \ud83d\udd25 | Luxury Weekend Vlog\ud83e\udd29 | ANDRA KIIRKIVI",
+        "views_90d_then": 50,
+        "views_90d_now": 52,
+        "delta": 2
+      },
+      {
+        "video_id": "ja-UO5ViQkA",
+        "title": "\u2b50 MALDIVES VLOG 2 | EXPLORING DIFFERENT ISLANDS IN THE MALDIVES \ud83c\udfdd\ufe0f\ud83e\ude75 | ANDRA KIIRKIVI",
+        "views_90d_then": 0,
+        "views_90d_now": 2,
+        "delta": 2
+      },
+      {
+        "video_id": "A1KYcSG3evE",
+        "title": "Spend a Friday With Me in Marbella | Shopping, Matcha, Blow-Dry & Night Out | ANDRA KIIRKIVI",
+        "views_90d_then": 0,
+        "views_90d_now": 2,
+        "delta": 2
+      }
+    ],
+    "losers": [
+      {
+        "video_id": "rV-gVSsENhs",
+        "title": "I Didn\u2019t Expect THIS in Sydney\u2026 \ud83c\udde6\ud83c\uddfa | First Day at Sydney Opera House | ANDRA KIIRKIVI",
+        "views_90d_then": 8,
+        "views_90d_now": 7,
+        "delta": -1
+      }
+    ],
+    "note": "Comparing each video's 90-day-windowed view count now vs on 2026-09-30 -- a video still climbing is getting fresh views; a flat one isn't, regardless of its lifetime total."
+  },
+  "retention_patterns": {
+    "videos_with_curves": 15,
+    "shorts": {
+      "videos_with_curves": 12,
+      "top_cohort": [
+        {
+          "video_id": "5Xg7Vn-1Eds",
+          "title": "\u2764\ufe0f\ud83d\udc8b\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39"
+        },
+        {
+          "video_id": "0jNKETzdNY0",
+          "title": "DOGS LIFE IN DUBAI\ud83d\ude0d\ud83d\udc36\ud83c\udde6\ud83c\uddea\u2728 #dog #uae #youtubeshorts #vlogger #dubai #dubailifestyle"
+        },
+        {
+          "video_id": "TkHEq4FhPBw",
+          "title": "SEPTEMBER IN NYC\ud83c\uddfa\ud83c\uddf8\ud83e\udef6\ud83c\udffd\ud83d\ude95\ud83d\uddfd #newyork #manhattan #usa #nyc #shorts #vlog #vlogger #video"
+        },
+        {
+          "video_id": "JtVwnQhImi0",
+          "title": "SYDNEY ZOO WORTH IT OR NOT ?\ud83d\ude33#sydney #sydneyvlog #australia #australiavlog #shorts #zoo"
+        },
+        {
+          "video_id": "_ftW0mMsYrM",
+          "title": "GILI AIR ISLAND BALI\ud83d\udccd\ud83c\uddee\ud83c\udde9\ud83e\udd65\ud83e\udd3f\ud83c\udfdd\ufe0f\ud83d\udc81\ud83c\udffc\u200d\u2640\ufe0f\ud83d\udc22\ud83d\udc34\ud83d\ude32 #youtubeshorts #bali #travel #indonesia"
+        }
+      ],
+      "bottom_cohort": [
+        {
+          "video_id": "OXX5JSy4F_o",
+          "title": "THE MOST LUXURIOUS HOTEL IN SYDNEY !\ud83c\udde6\ud83c\uddfa\u2728\ud83d\udc51 #sydney #hotel #australia #vlog #shorts"
+        },
+        {
+          "video_id": "ajHFYLk5J2A",
+          "title": "SYDNEY LIFE\ud83d\udccd\ud83c\udde6\ud83c\uddfa\ud83d\udc28\ud83e\udd98\ud83c\udf06\ud83c\udf09\ud83c\udfd9\ufe0f #youtubeshorts #travel #australiadiaries #sydney #sydneyvlog"
+        },
+        {
+          "video_id": "w-AkEt3EDgY",
+          "title": "BALI- LEMBONGAN ISLAND\ud83d\ude0d #travel #bali #indonesia #vlog #youtubeshorts"
+        },
+        {
+          "video_id": "L3QGpbgZmTM",
+          "title": "DUBAI FOUNTAIN AND ROSES\ud83c\udde6\ud83c\uddea\ud83c\udf39\ud83d\udc8b\u2764\ufe0f\u2728#dubai #dubailifestyle #vlog #dubaifountainshow"
+        },
+        {
+          "video_id": "QGA032cH8rc",
+          "title": "LEMBONGAN ISLAND BALI\ud83c\uddee\ud83c\udde9\ud83e\udd65\ud83c\udf27\ufe0f\ud83c\udfdd\ufe0f #lembongan #island #islandlife #bali #indonesia #shorts #youtube"
+        }
+      ],
+      "top_avg_curve": {
+        "0.1": 1.852,
+        "0.25": 1.719,
+        "0.5": 1.417,
+        "0.75": 1.14,
+        "0.9": 1.034
+      },
+      "bottom_avg_curve": {
+        "0.1": 1.3,
+        "0.25": 0.878,
+        "0.5": 0.658,
+        "0.75": 0.506,
+        "0.9": 0.458
+      },
+      "insight": "By the 25% mark, top-performing Shorts retain 172% of viewers on average vs 88% for lower-performing ones (84.1 points higher) (ratios above 100% are real -- Shorts get rewatched/looped, this isn't an error) -- the opening hook is the clearest differentiator here."
+    },
+    "long_form": {
+      "videos_with_curves": 3,
+      "top_cohort": [],
+      "bottom_cohort": [],
+      "top_avg_curve": {},
+      "bottom_avg_curve": {},
+      "insight": null
+    },
+    "note": "Compares average retention at fixed elapsed-time checkpoints across the top and bottom videos (by 90-day views) that have enough views for YouTube to expose a retention curve -- split by format, since Shorts retention (loop-driven) and long-form retention (drop-off-driven) aren't comparable."
+  },
+  "destination_performance": {
+    "destinations": [
+      {
+        "destination": "Marbella / Puerto Banus",
+        "video_count": 21,
+        "avg_views_90d": 7.4,
+        "avg_retention_pct": 35.4,
+        "momentum_90d_view_delta": 4,
+        "unmet_demand_keywords": 3,
+        "priority_score": 0.913
+      },
+      {
+        "destination": "Sydney / Australia",
+        "video_count": 35,
+        "avg_views_90d": 7.0,
+        "avg_retention_pct": 31.2,
+        "momentum_90d_view_delta": 5,
+        "unmet_demand_keywords": 1,
+        "priority_score": 0.746
+      },
+      {
+        "destination": "Dubai",
+        "video_count": 44,
+        "avg_views_90d": 5.6,
+        "avg_retention_pct": 32.3,
+        "momentum_90d_view_delta": 2,
+        "unmet_demand_keywords": 0,
+        "priority_score": 0.492
+      },
+      {
+        "destination": "Bali",
+        "video_count": 28,
+        "avg_views_90d": 5.3,
+        "avg_retention_pct": 43.7,
+        "momentum_90d_view_delta": 0,
+        "unmet_demand_keywords": 0,
+        "priority_score": 0.465
+      },
+      {
+        "destination": "New York City",
+        "video_count": 4,
+        "avg_views_90d": 2.8,
+        "avg_retention_pct": 42.6,
+        "momentum_90d_view_delta": 0,
+        "unmet_demand_keywords": 1,
+        "priority_score": 0.441
+      },
+      {
+        "destination": "Other / Unclassified",
+        "video_count": 53,
+        "avg_views_90d": 0.7,
+        "avg_retention_pct": 43.7,
+        "momentum_90d_view_delta": 2,
+        "unmet_demand_keywords": 0,
+        "priority_score": 0.358
+      },
+      {
+        "destination": "Colombo / Sri Lanka",
+        "video_count": 14,
+        "avg_views_90d": 1.1,
+        "avg_retention_pct": 8.8,
+        "momentum_90d_view_delta": 0,
+        "unmet_demand_keywords": 0,
+        "priority_score": 0.095
+      },
+      {
+        "destination": "Milan",
+        "video_count": 0,
+        "avg_views_90d": 0,
+        "avg_retention_pct": null,
+        "momentum_90d_view_delta": 0,
+        "unmet_demand_keywords": 0,
+        "priority_score": 0.0
+      },
+      {
+        "destination": "Punta Cana",
+        "video_count": 0,
+        "avg_views_90d": 0,
+        "avg_retention_pct": null,
+        "momentum_90d_view_delta": 0,
+        "unmet_demand_keywords": 0,
+        "priority_score": 0.0
+      },
+      {
+        "destination": "Tokyo / Japan",
+        "video_count": 5,
+        "avg_views_90d": 0.0,
+        "avg_retention_pct": null,
+        "momentum_90d_view_delta": 0,
+        "unmet_demand_keywords": 0,
+        "priority_score": 0.0
+      }
+    ],
+    "note": "priority_score blends this destination's average 90-day views, average retention, unmet search-demand keyword count, and view momentum -- each normalized 0-1 across destinations and weighted equally-ish (30/25/25/20). Destinations with zero videos today (e.g. newly planned ones) still appear, scored on demand/momentum signal alone."
+  }
+}
