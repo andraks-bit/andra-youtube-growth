@@ -34,58 +34,60 @@ Every run (`run_daily.py`):
 8. In GitHub Actions: commits `data/`, `logs/`, and `reports/generated/`
    back to this repo.
 
-## What this does NOT do (approval-only, by design)
+## What this does NOT do without your explicit approval
 
-This system **never calls a YouTube write endpoint**. There is no code path
-anywhere in this repo that can change a title, description, tag, thumbnail,
-visibility, publish date, or upload/delete a video. `youtube_api.py` only
-exposes `.list` / `reports.query` style read calls. Recommendations
-(keyword gaps, optimization opportunities, new-video SEO package template)
-are written to the report for you to review and apply manually. That stays
-true until you explicitly ask to build an approval workflow on top of this
-(Step 3+).
+Through Step 5, this system never called a YouTube write endpoint at all.
+Step 6 added a narrow, gated exception: `youtube_api.py` now has
+`update_video_snippet` / `create_playlist` / `add_video_to_playlist`, but
+every one of them is only ever called from `approval_workflow.apply_approved()`
+-- nowhere else in the codebase calls them. A change only reaches YouTube if
+**both** of these are true:
 
-## Known operational limitation: 7-day refresh token expiry
+1. A human approved it -- by adding the `approved` label to the proposal's
+   GitHub Issue (see "Step 6: approval workflow" below).
+2. The `YT_WRITES_ENABLED` repo variable is set to `true`. It's unset by
+   default, so approved proposals just queue indefinitely until you
+   deliberately flip this on (Settings -> Secrets and variables -> Actions ->
+   Variables -> `YT_WRITES_ENABLED` = `true`).
+
+Collection and analysis (title/description/tag suggestions, SEO packages,
+content-planning ideas) remain pure recommendations in the report either way.
+
+## Step 6: approval workflow
+
+Every run, after generating recommendations, the system:
+
+1. Checks every open proposal's GitHub Issue for a label change (`sync_change_approvals`).
+2. Applies anything approved -- for real, if `YT_WRITES_ENABLED=true`; otherwise it
+   comments once that it's queued and leaves it alone (`apply_approved_changes`).
+3. Opens up to `config.MAX_NEW_PROPOSALS_PER_RUN` (default 2) new Issues for
+   fresh candidates -- one video's title/description/tags bundled together,
+   or one suggested playlist -- each showing the current value, proposed
+   value, and why (`generate_change_proposals`).
+
+State lives in `data/pending_changes.json` (git-committed, so it survives
+across runs). Locally, all three steps skip gracefully (`GITHUB_TOKEN` isn't
+set outside GitHub Actions) -- that's expected, not a failure.
+
+**What can't be automated at all, regardless of approval:** thumbnails (this
+system produces thumbnail *text ideas*, not actual image files to upload),
+end-screens, cards, and comment-pinning -- none of these have a write
+endpoint in the public YouTube Data API. Those recommendations stay
+Studio-only manual actions forever.
+
+## OAuth status (fixed in Step 3)
 
 The Google Cloud OAuth consent screen for this project (`blogger-503016`)
-is in **Testing** publish status, which caps refresh-token lifetime at 7
-days regardless of scope (confirmed empirically in Step 1 -- every token
-issued reports `refresh_token_expires_in: 604799`). That means:
+was moved to **In production** publish status in Step 3, which removes the
+7-day refresh-token expiry that Testing-status apps have. Tokens no longer
+need weekly manual re-authorization.
 
-- The `YT_REFRESH_TOKEN` GitHub secret **will stop working about a week
-  after it's set**, and the scheduled workflow will fail loudly (non-zero
-  exit, visible in the Actions tab) rather than silently produce stale data.
-- Fix options, in order of effort: (a) manually re-run the OAuth flow and
-  update the GitHub secret weekly, or (b) move the OAuth consent screen to
-  "In production" in Google Cloud Console, which removes the 7-day cap.
-  Option (b) is a Cloud Console change only you can make -- see "Manual
-  setup" below.
+## Repo setup (done)
 
-## Manual setup required before this runs unattended on GitHub
-
-None of this has been done yet -- run_daily.py has only been run locally
-against real data so far (see Step 2 test results).
-
-1. **Choose/create a GitHub repo.** This machine has working SSH push
-   access to GitHub as `andraks-bit` (confirmed), separate from the
-   `devglobalxxx` account used for `boat-rental-platform`. Recommend a new
-   repo (e.g. `andra-youtube-growth`) rather than folding this into an
-   unrelated repo -- tell me the name and whether it should be private, and
-   I'll push this directory as its initial commit.
-2. **Add three repo secrets** (Settings -> Secrets and variables -> Actions):
-   - `YT_CLIENT_ID` -- from `blogger-automation/credentials/client_secret.json`
-   - `YT_CLIENT_SECRET` -- same file
-   - `YT_REFRESH_TOKEN` -- from `blogger-automation/credentials/token_marbella_analytics.json`
-   I can print the exact values for you to paste in, but I won't transmit
-   them anywhere myself -- entering secrets into GitHub's UI is something
-   you do directly.
-3. **Consider moving the OAuth consent screen to Production** (see above)
-   if you want this to run for more than ~7 days without manual
-   re-authorization.
-4. **Enable the workflow** -- once secrets are set and the repo is pushed,
-   the `schedule` trigger in `.github/workflows/youtube-growth.yml` takes
-   over automatically. `workflow_dispatch` is also enabled so you (or I, if
-   you ask) can trigger a manual run from the Actions tab to test it first.
+Live at `github.com/andraks-bit/andra-youtube-growth` (private), with
+`YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN` set as repo secrets
+and the `schedule` trigger active in `.github/workflows/youtube-growth.yml`.
+`workflow_dispatch` is also enabled for manual test runs from the Actions tab.
 
 ## Local usage
 

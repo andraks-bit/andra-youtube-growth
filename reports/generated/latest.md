@@ -185,9 +185,9 @@ priority_score blends this destination's average 90-day views, average retention
 | New York City | 4 | 2.8 | 42.6% | 1 | +0 | 0.441 |
 | Other / Unclassified | 53 | 0.7 | 43.7% | 0 | +2 | 0.358 |
 | Colombo / Sri Lanka | 14 | 1.1 | 8.8% | 0 | +0 | 0.095 |
+| Tokyo / Japan | 5 | 0.0 | n/a | 0 | +0 | 0.0 |
 | Milan | 0 | 0 | n/a | 0 | +0 | 0.0 |
 | Punta Cana | 0 | 0 | n/a | 0 | +0 | 0.0 |
-| Tokyo / Japan | 5 | 0.0 | n/a | 0 | +0 | 0.0 |
 
 ## Keyword discovery by destination
 gaps_by_destination = real search terms already driving views (YouTube Analytics, last 90 days) not yet present in that destination's video text. template_opportunities_by_destination = generic high-intent query patterns (config.KEYWORD_INTENT_TEMPLATES), NOT real search-volume data -- there is no keyword-research API authorized for this project.
@@ -1136,5 +1136,5 @@ Ranked by destination_performance's priority_score (real views + retention + mom
 - [EXPAND] **Bali** (score 0.465) | target keyword: "how much does Bali cost" -- 28 existing videos, avg 5.3 views/90d; 43.7% retention
 - [EXPAND] **New York City** (score 0.441) | target keyword: "new york city apartment" -- 4 existing videos, avg 2.8 views/90d; 42.6% retention; 1 proven search gap(s)
 - [EXPAND] **Colombo / Sri Lanka** (score 0.095) -- 14 existing videos, avg 1.1 views/90d; 8.8% retention
+- [EXPAND] **Tokyo / Japan** (score 0.0) | target keyword: "how much does Tokyo / Japan cost" -- 5 existing videos, avg 0.0 views/90d
 - [NEW DESTINATION] **Milan** (score 0.0) | target keyword: "how much does Milan cost" -- not yet covered on the channel
-- [NEW DESTINATION] **Punta Cana** (score 0.0) | target keyword: "how much does Punta Cana cost" -- not yet covered on the channel

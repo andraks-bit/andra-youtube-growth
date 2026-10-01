@@ -2,12 +2,16 @@
 """
 Orchestrator entrypoint for the Andra Kiirkivi YouTube Growth System.
 
-Runs the full read-only pipeline: collect channel + video + analytics data,
-run rule-based analysis, write a dated report, and log exactly what happened.
+Runs the full pipeline: collect channel + video + analytics data, run
+rule-based analysis, write a dated report, sync/apply any human-approved
+change proposals (Step 6), and log exactly what happened.
 
-Never calls a YouTube write endpoint. Exits non-zero if any step failed, so
-a scheduled GitHub Actions run shows as a failed workflow run (visible in
-the Actions tab / any configured notifications) rather than failing silently.
+Collection and analysis (Steps 1-5) never call a write endpoint. Step 6 can,
+but only for a specific proposal that a human approved via a GitHub Issue
+AND only if config.youtube_writes_enabled() is true -- see
+approval_workflow.py. Exits non-zero if any step failed, so a scheduled
+GitHub Actions run shows as a failed workflow run rather than failing
+silently.
 """
 import datetime
 import json
@@ -16,6 +20,8 @@ import sys
 
 import config
 import youtube_api
+import github_api
+import approval_workflow
 from run_logger import RunLogger
 from collectors import (
     channel_snapshot, video_catalog, analytics_collector, new_video_detector,
@@ -27,6 +33,7 @@ from analysis import (
     destination_performance, seo_package_generator,
     traffic_growth, search_seo, suggested_video_strategy, shorts_to_longform,
     content_opportunity_engine, new_video_launch_package, traffic_growth_actions,
+    change_proposals,
 )
 from reports import report_generator, weekly_report_generator
 
@@ -186,6 +193,46 @@ def main():
                 suggested_strategy_result, content_opportunity_result
             )
             step.set_produced(f"{len(traffic_actions_result['actions'])} ranked actions")
+
+    # --- Step 6: approval workflow (GitHub Issues). Gracefully skipped on
+    # local runs where GITHUB_TOKEN isn't set -- that's expected, not a
+    # failure; verify this part via a real GitHub Actions run instead. ---
+    gh = None
+    try:
+        gh = github_api.GitHubClient(config.GITHUB_REPO)
+    except github_api.GitHubError:
+        gh = None
+
+    with logger.step("sync_change_approvals") as step:
+        if gh is None:
+            step.set_collected("skipped -- no GITHUB_TOKEN (expected on local runs)")
+        else:
+            approved_n, rejected_n = approval_workflow.sync_approvals(gh)
+            step.set_collected(f"{approved_n} newly approved, {rejected_n} newly rejected")
+
+    with logger.step("apply_approved_changes") as step:
+        if gh is None:
+            step.set_collected("skipped -- no GITHUB_TOKEN (expected on local runs)")
+        else:
+            applied_n, failed_n, queued_n = approval_workflow.apply_approved(youtube_api.YouTubeClient(), gh)
+            writes_state = "ON" if config.youtube_writes_enabled() else "OFF"
+            step.set_produced(f"writes {writes_state}: {applied_n} applied, {failed_n} failed, {queued_n} queued")
+
+    with logger.step("generate_change_proposals") as step:
+        if gh is None:
+            step.set_collected("skipped -- no GITHUB_TOKEN (expected on local runs)")
+        elif rewrites_result is None or suggested_strategy_result is None:
+            step.set_collected("skipped -- upstream analysis unavailable this run")
+        else:
+            state = approval_workflow.load_state()
+            candidates = change_proposals.build(
+                rewrites_result, suggested_strategy_result,
+                exclude_video_ids=approval_workflow.already_proposed_video_ids(state),
+                exclude_playlist_titles=approval_workflow.already_proposed_playlist_titles(state),
+                max_count=config.MAX_NEW_PROPOSALS_PER_RUN,
+            )
+            created_n = approval_workflow.create_new_proposals(gh, candidates)
+            step.set_produced(f"{created_n} new proposal issue(s) opened")
 
     today = datetime.date.today().isoformat()
 

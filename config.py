@@ -94,3 +94,31 @@ LONGTAIL_KEYWORD_TEMPLATES = [
 ]
 
 TRAFFIC_ACTIONS_COUNT = 5
+
+# --- Step 6: approval workflow ---
+# GitHub repo this system lives in -- used to create/query/comment on Issues
+# via the GitHub REST API (the approval surface: a human applies the
+# "approved" label to the proposal issue they want applied).
+GITHUB_REPO = "andraks-bit/andra-youtube-growth"
+
+PENDING_CHANGES_FILE = os.path.join(BASE_DIR, "data", "pending_changes.json")
+
+# Bounded so a single run can't flood the Issues tab.
+MAX_NEW_PROPOSALS_PER_RUN = 2
+
+GITHUB_LABEL_PENDING = "pending-approval"
+GITHUB_LABEL_APPROVED = "approved"
+GITHUB_LABEL_APPLIED = "applied"
+GITHUB_LABEL_FAILED = "failed"
+GITHUB_LABEL_PROPOSAL = "yt-change-proposal"
+
+# THE kill switch for actually calling a YouTube write endpoint. Read from
+# the environment (a GitHub Actions secret/variable, or unset locally) --
+# deliberately NOT a Python constant, so turning real writes on/off never
+# requires a code change or redeploy. Defaults to OFF: approved proposals
+# queue indefinitely until this is explicitly turned on.
+#
+# This is the single gate every write path in this codebase must pass
+# through -- see approval_workflow.apply_approved().
+def youtube_writes_enabled():
+    return os.environ.get("YT_WRITES_ENABLED", "").strip().lower() in ("1", "true", "yes")

@@ -504,6 +504,15 @@
         "priority_score": 0.095
       },
       {
+        "destination": "Tokyo / Japan",
+        "video_count": 5,
+        "avg_views_90d": 0.0,
+        "avg_retention_pct": null,
+        "momentum_90d_view_delta": 0,
+        "unmet_demand_keywords": 0,
+        "priority_score": 0.0
+      },
+      {
         "destination": "Milan",
         "video_count": 0,
         "avg_views_90d": 0,
@@ -516,15 +525,6 @@
         "destination": "Punta Cana",
         "video_count": 0,
         "avg_views_90d": 0,
-        "avg_retention_pct": null,
-        "momentum_90d_view_delta": 0,
-        "unmet_demand_keywords": 0,
-        "priority_score": 0.0
-      },
-      {
-        "destination": "Tokyo / Japan",
-        "video_count": 5,
-        "avg_views_90d": 0.0,
         "avg_retention_pct": null,
         "momentum_90d_view_delta": 0,
         "unmet_demand_keywords": 0,
@@ -1637,17 +1637,17 @@
         "rationale": "14 existing videos, avg 1.1 views/90d; 8.8% retention"
       },
       {
+        "destination": "Tokyo / Japan",
+        "is_new_destination": false,
+        "priority_score": 0.0,
+        "target_keyword": "how much does Tokyo / Japan cost",
+        "rationale": "5 existing videos, avg 0.0 views/90d"
+      },
+      {
         "destination": "Milan",
         "is_new_destination": true,
         "priority_score": 0.0,
         "target_keyword": "how much does Milan cost",
-        "rationale": "not yet covered on the channel"
-      },
-      {
-        "destination": "Punta Cana",
-        "is_new_destination": true,
-        "priority_score": 0.0,
-        "target_keyword": "how much does Punta Cana cost",
         "rationale": "not yet covered on the channel"
       }
     ],

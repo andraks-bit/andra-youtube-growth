@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   run:
@@ -22,11 +23,17 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run growth system (read-only)
+      - name: Run growth system
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Kill switch for Step 6's approval workflow actually writing to
+          # YouTube. Unset/false by default -- approved proposals queue
+          # indefinitely until this repo variable is deliberately set to
+          # "true" (Settings -> Secrets and variables -> Actions -> Variables).
+          YT_WRITES_ENABLED: ${{ vars.YT_WRITES_ENABLED }}
         run: python run_daily.py
 
       - name: Commit data, logs, and report
