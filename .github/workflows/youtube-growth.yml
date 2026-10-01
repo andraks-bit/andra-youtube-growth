@@ -34,6 +34,11 @@ jobs:
           # indefinitely until this repo variable is deliberately set to
           # "true" (Settings -> Secrets and variables -> Actions -> Variables).
           YT_WRITES_ENABLED: ${{ vars.YT_WRITES_ENABLED }}
+          # Step 7 controlled-pilot safeguard: when set to a proposal_id,
+          # apply_approved() applies ONLY that proposal and holds back every
+          # other approved one regardless of YT_WRITES_ENABLED. Unset outside
+          # an explicit pilot window.
+          YT_WRITES_PILOT_ONLY_PROPOSAL_ID: ${{ vars.YT_WRITES_PILOT_ONLY_PROPOSAL_ID }}
         run: python run_daily.py
 
       - name: Commit data, logs, and report
