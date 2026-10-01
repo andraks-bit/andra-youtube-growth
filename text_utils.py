@@ -8,6 +8,12 @@ def to_hashtag(text):
     return "#" + cleaned if cleaned else ""
 
 
+def clean_tag_parts(dest_label):
+    """A destination label like 'Sydney / Australia' isn't a valid single tag
+    (YouTube tags shouldn't contain '/') -- split it into clean parts."""
+    return [part.strip() for part in dest_label.split("/") if part.strip()]
+
+
 def dedupe_ci(items):
     """Case-insensitive de-dup that keeps the first-seen casing and order."""
     seen = set()

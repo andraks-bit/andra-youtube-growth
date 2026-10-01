@@ -12,7 +12,7 @@ Template-based, not LLM-generated -- see analysis/metadata_rewriter.py for
 the same design choice and why.
 """
 import config
-from text_utils import to_hashtag, dedupe_ci, thumbnail_text_ideas, GENERIC_CHAPTER_TEMPLATE
+from text_utils import to_hashtag, dedupe_ci, thumbnail_text_ideas, GENERIC_CHAPTER_TEMPLATE, clean_tag_parts
 
 MAX_PACKAGES = 6
 
@@ -54,7 +54,7 @@ def analyze(destination_performance, keyword_discovery, content_planning):
 
         title_options = [t.format(dest=dest_label, kw=primary_kw.title()) for t in _TITLE_TEMPLATES]
 
-        tag_pool = [dest_label, dest_short] + keywords[:6] + top_words[:4]
+        tag_pool = clean_tag_parts(dest_label) + keywords[:6] + top_words[:4]
         tags = dedupe_ci(tag_pool)[:15]
 
         hashtags = dedupe_ci([

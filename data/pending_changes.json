@@ -42,7 +42,8 @@
       "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
       "destination": "Sydney / Australia",
       "proposed_on": "2026-10-01",
-      "status": "pending",
+      "status": "rejected",
+      "rejection_reason": "superseded: proposed_tags contained 'Sydney / Australia' as a single literal tag (invalid, slash not stripped) -- bug fixed in text_utils.clean_tag_parts; a corrected proposal for this video will be generated on the next run. Please close GitHub issue #2 manually.",
       "github_issue_number": 2,
       "commented_queued": false
     }

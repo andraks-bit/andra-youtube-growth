@@ -8,7 +8,7 @@ and real keyword gaps (from keyword_discovery), rather than a black box.
 Nothing here writes to YouTube; this only produces text for the report.
 """
 import destinations
-from text_utils import to_hashtag, dedupe_ci, thumbnail_text_ideas, GENERIC_CHAPTER_TEMPLATE
+from text_utils import to_hashtag, dedupe_ci, thumbnail_text_ideas, GENERIC_CHAPTER_TEMPLATE, clean_tag_parts
 
 _TITLE_TEMPLATES = [
     "{dest} Travel Vlog {extra}",
@@ -65,7 +65,7 @@ def analyze(video_catalog, optimization, keyword_discovery, content_planning):
             for t in _TITLE_TEMPLATES
         ]
 
-        tag_pool = [dest_label] + gap_terms[:4] + [w for w, _ in recurring_words[:6]]
+        tag_pool = clean_tag_parts(dest_label) + gap_terms[:4] + [w for w, _ in recurring_words[:6]]
         tags = dedupe_ci(tag_pool)[:12]
 
         hashtags = dedupe_ci([

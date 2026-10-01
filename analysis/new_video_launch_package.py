@@ -7,7 +7,7 @@ concretely useful rather than just a notification.
 import datetime
 
 import destinations
-from text_utils import to_hashtag, dedupe_ci, thumbnail_text_ideas, GENERIC_CHAPTER_TEMPLATE
+from text_utils import to_hashtag, dedupe_ci, thumbnail_text_ideas, GENERIC_CHAPTER_TEMPLATE, clean_tag_parts
 
 _TITLE_TEMPLATES = [
     "{dest} Travel Vlog 2026 | {kw}",
@@ -65,7 +65,7 @@ def analyze(new_videos, video_catalog, keyword_discovery, suggested_video_strate
         title_options = [t.format(dest=dest_label, kw=primary_keyword.title()) for t in _TITLE_TEMPLATES]
         dest_short = dest_label.split("/")[0].strip()
 
-        tags = dedupe_ci([dest_label, dest_short] + keywords[:6])[:15]
+        tags = dedupe_ci(clean_tag_parts(dest_label) + keywords[:6])[:15]
         hashtags = [h for h in dedupe_ci(
             [to_hashtag(dest_short)] + [to_hashtag(k) for k in keywords[:3]] + ["#travelvlog"]
         ) if h]
