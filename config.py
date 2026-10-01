@@ -77,3 +77,20 @@ MOMENTUM_LOOKBACK_DAYS = 14
 
 # Cohort size for top-vs-bottom retention pattern comparison.
 RETENTION_PATTERN_COHORT_SIZE = 5
+
+# --- Step 5: traffic & growth engine ---
+# How many top-by-views videos get a per-video traffic-source breakdown
+# query each run (a new API call per video -- bounded to control runtime,
+# same reasoning as RETENTION_MIN_VIEWS/the 15-video retention-curve cap).
+PRIORITY_VIDEO_COUNT = 15
+
+# Long-tail phrasing added to the Step 4 template list for search SEO.
+LONGTAIL_KEYWORD_TEMPLATES = [
+    "how much does {dest} cost",
+    "best area to stay in {dest}",
+    "{dest} itinerary 5 days",
+    "solo female travel {dest}",
+    "{dest} honest review",
+]
+
+TRAFFIC_ACTIONS_COUNT = 5

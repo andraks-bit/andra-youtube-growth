@@ -17,11 +17,16 @@ import sys
 import config
 import youtube_api
 from run_logger import RunLogger
-from collectors import channel_snapshot, video_catalog, analytics_collector, new_video_detector
+from collectors import (
+    channel_snapshot, video_catalog, analytics_collector, new_video_detector,
+    video_traffic_collector, traffic_source_trend_collector,
+)
 from analysis import (
     seo_keywords, optimization_opportunities, shorts_opportunities, content_planning,
     keyword_discovery, metadata_rewriter, momentum_tracker, retention_patterns,
     destination_performance, seo_package_generator,
+    traffic_growth, search_seo, suggested_video_strategy, shorts_to_longform,
+    content_opportunity_engine, new_video_launch_package, traffic_growth_actions,
 )
 from reports import report_generator, weekly_report_generator
 
@@ -60,6 +65,17 @@ def main():
             f"{len(analytics.get('daily', []))} daily rows, "
             f"{len(analytics.get('retention_curves', {}))} retention curves"
         )
+
+    video_traffic_result = None
+    if catalog is not None:
+        with logger.step("collect_video_traffic") as step:
+            video_traffic_result = video_traffic_collector.collect(client, catalog)
+            step.set_collected(f"{len(video_traffic_result['by_video'])} videos' traffic-source breakdown")
+
+    traffic_source_trend_result = None
+    with logger.step("collect_traffic_source_trend") as step:
+        traffic_source_trend_result = traffic_source_trend_collector.collect(client)
+        step.set_collected("this-week vs last-week traffic-source split")
 
     seo = optimization = shorts = planning = None
 
@@ -123,6 +139,54 @@ def main():
             seo_packages_result = seo_package_generator.analyze(dest_perf_result, kw_discovery_result, planning)
             step.set_produced(f"{len(seo_packages_result['packages'])} destination SEO packages")
 
+    # --- Step 5: traffic & growth engine (built on Step 4's outputs) ---
+    traffic_growth_result = search_seo_result = suggested_strategy_result = None
+    shorts_to_longform_result = content_opportunity_result = None
+    new_launch_packages_result = traffic_actions_result = None
+
+    if all(x is not None for x in (catalog, analytics, video_traffic_result, kw_discovery_result,
+                                    optimization, momentum_result)):
+        with logger.step("analyze_traffic_growth") as step:
+            traffic_growth_result = traffic_growth.analyze(
+                catalog, analytics, video_traffic_result, kw_discovery_result, optimization, momentum_result
+            )
+            step.set_produced(f"{len(traffic_growth_result['priority_videos'])} priority videos assessed")
+
+    if catalog is not None and analytics is not None and kw_discovery_result is not None:
+        with logger.step("analyze_search_seo") as step:
+            search_seo_result = search_seo.analyze(catalog, analytics, kw_discovery_result)
+            step.set_produced(f"{len(search_seo_result['prioritized_keywords'])} prioritized keywords")
+
+    if catalog is not None and analytics is not None:
+        with logger.step("analyze_suggested_video_strategy") as step:
+            suggested_strategy_result = suggested_video_strategy.analyze(catalog, analytics)
+            step.set_produced(f"{len(suggested_strategy_result['clusters'])} topic clusters")
+
+        with logger.step("analyze_shorts_to_longform") as step:
+            shorts_to_longform_result = shorts_to_longform.analyze(catalog, analytics)
+            step.set_produced(f"{len(shorts_to_longform_result['funnels'])} funnels")
+
+    if dest_perf_result is not None and search_seo_result is not None:
+        with logger.step("analyze_content_opportunity") as step:
+            content_opportunity_result = content_opportunity_engine.analyze(dest_perf_result, search_seo_result)
+            step.set_produced(f"{len(content_opportunity_result['next_video_ideas'])} next-video ideas")
+
+    if all(x is not None for x in (new_videos_result, catalog, kw_discovery_result, suggested_strategy_result)):
+        with logger.step("generate_new_video_launch_packages") as step:
+            new_launch_packages_result = new_video_launch_package.analyze(
+                new_videos_result, catalog, kw_discovery_result, suggested_strategy_result
+            )
+            step.set_produced(f"{len(new_launch_packages_result['packages'])} launch packages")
+
+    if all(x is not None for x in (traffic_growth_result, search_seo_result, momentum_result,
+                                    suggested_strategy_result, content_opportunity_result)):
+        with logger.step("analyze_traffic_growth_actions") as step:
+            traffic_actions_result = traffic_growth_actions.analyze(
+                traffic_growth_result, search_seo_result, momentum_result,
+                suggested_strategy_result, content_opportunity_result
+            )
+            step.set_produced(f"{len(traffic_actions_result['actions'])} ranked actions")
+
     today = datetime.date.today().isoformat()
 
     if all(x is not None for x in (snapshot, catalog, analytics)):
@@ -135,12 +199,21 @@ def main():
                 json.dump(catalog, f, indent=2)
             with open(os.path.join(day_dir, "analytics.json"), "w") as f:
                 json.dump(analytics, f, indent=2)
+            if video_traffic_result is not None:
+                with open(os.path.join(day_dir, "video_traffic.json"), "w") as f:
+                    json.dump(video_traffic_result, f, indent=2)
             growth_analysis = {
                 "new_videos": new_videos_result,
                 "keyword_discovery": kw_discovery_result,
                 "momentum": momentum_result,
                 "retention_patterns": retention_result,
                 "destination_performance": dest_perf_result,
+                "traffic_growth": traffic_growth_result,
+                "search_seo": search_seo_result,
+                "suggested_video_strategy": suggested_strategy_result,
+                "shorts_to_longform": shorts_to_longform_result,
+                "content_opportunity": content_opportunity_result,
+                "traffic_growth_actions": traffic_actions_result,
             }
             with open(os.path.join(day_dir, "growth_analysis.json"), "w") as f:
                 json.dump(growth_analysis, f, indent=2)
@@ -157,6 +230,13 @@ def main():
                 destination_performance=dest_perf_result,
                 seo_packages=seo_packages_result,
                 new_videos=new_videos_result,
+                traffic_growth_actions=traffic_actions_result,
+                traffic_growth=traffic_growth_result,
+                search_seo=search_seo_result,
+                suggested_video_strategy=suggested_strategy_result,
+                shorts_to_longform=shorts_to_longform_result,
+                content_opportunity=content_opportunity_result,
+                new_video_launch_packages=new_launch_packages_result,
             )
             report_path = os.path.join(config.REPORTS_DIR, f"{today}.md")
             with open(report_path, "w") as f:
@@ -169,7 +249,8 @@ def main():
     if all(x is not None for x in (snapshot, new_videos_result, momentum_result, dest_perf_result, kw_discovery_result)):
         with logger.step("generate_weekly_report") as step:
             weekly_md = weekly_report_generator.generate(
-                snapshot, momentum_result, dest_perf_result, new_videos_result, kw_discovery_result
+                snapshot, momentum_result, dest_perf_result, new_videos_result, kw_discovery_result,
+                analytics=analytics, traffic_source_trend=traffic_source_trend_result,
             )
             weekly_path = os.path.join(config.REPORTS_DIR, f"weekly_{today}.md")
             with open(weekly_path, "w") as f:

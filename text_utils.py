@@ -18,3 +18,26 @@ def dedupe_ci(items):
             seen.add(key)
             out.append(item)
     return out
+
+
+# Shared between metadata_rewriter.py (existing videos) and
+# seo_package_generator.py (new videos) so the two don't drift apart.
+GENERIC_CHAPTER_TEMPLATE = [
+    "00:00 Intro",
+    "00:XX Arrival / getting there",
+    "0X:XX Main highlight 1",
+    "0X:XX Main highlight 2",
+    "0X:XX Food & dining",
+    "0X:XX Final thoughts",
+]
+
+_THUMBNAIL_TEXT_TEMPLATES = [
+    "{dest_short}!",
+    "IS IT WORTH IT?",
+    "{dest_short} TRUTH",
+    "WE DID THIS IN {dest_short}",
+]
+
+
+def thumbnail_text_ideas(dest_short):
+    return [t.format(dest_short=dest_short.upper()) for t in _THUMBNAIL_TEXT_TEMPLATES]

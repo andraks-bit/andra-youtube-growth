@@ -1,37 +1,50 @@
 """
 Rolling 7-day growth summary, regenerated every run so it always reflects
-the trailing week rather than being gated to a specific day. Reuses this
-run's already-computed momentum/destination/new-video analysis rather than
-re-deriving them.
+the trailing week. Week-over-week views/watch-time come from the real
+per-calendar-day rows already collected this run (analytics['daily']) --
+no extra API calls. Traffic-source week-over-week comes from
+traffic_source_trend_collector's two dedicated 7-day queries (real data,
+not a 90-day-window approximation).
+
+Explicit: impressions and click-through rate are NOT included anywhere in
+this report because the public YouTube Analytics API does not expose them
+to creators (confirmed in Step 1/2 -- Studio-only).
 """
 import datetime
-import json
-import os
 
 import config
 
 
-def _daily_totals_last_n_days(n=7):
+def _week_over_week(daily_rows):
     today = datetime.date.today()
-    totals = []
-    for i in range(n):
-        d = (today - datetime.timedelta(days=i)).isoformat()
-        path = os.path.join(config.DATA_DIR, d, "analytics.json")
-        if not os.path.exists(path):
-            continue
+    this_week_start = today - datetime.timedelta(days=6)
+    last_week_start = today - datetime.timedelta(days=13)
+    last_week_end = today - datetime.timedelta(days=7)
+
+    this_week = {"views": 0, "minutes": 0}
+    last_week = {"views": 0, "minutes": 0}
+    for row in daily_rows:
         try:
-            with open(path) as f:
-                analytics = json.load(f)
-        except json.JSONDecodeError:
+            d = datetime.date.fromisoformat(row["day"])
+        except (KeyError, ValueError):
             continue
-        daily_rows = analytics.get("daily", [])
-        views = sum(r.get("views", 0) for r in daily_rows)
-        minutes = sum(r.get("estimatedMinutesWatched", 0) for r in daily_rows)
-        totals.append({"snapshot_date": d, "views_90d_window": views, "minutes_90d_window": minutes})
-    return totals
+        if this_week_start <= d <= today:
+            this_week["views"] += row.get("views", 0)
+            this_week["minutes"] += row.get("estimatedMinutesWatched", 0)
+        elif last_week_start <= d <= last_week_end:
+            last_week["views"] += row.get("views", 0)
+            last_week["minutes"] += row.get("estimatedMinutesWatched", 0)
+    return this_week, last_week
 
 
-def generate(channel_snapshot, momentum, destination_performance, new_videos, keyword_discovery):
+def _pct_change(now, then):
+    if then == 0:
+        return None
+    return round((now - then) / then * 100, 1)
+
+
+def generate(channel_snapshot, momentum, destination_performance, new_videos, keyword_discovery,
+             analytics=None, traffic_source_trend=None):
     today = datetime.date.today().isoformat()
     lines = []
     a = lines.append
@@ -40,11 +53,47 @@ def generate(channel_snapshot, momentum, destination_performance, new_videos, ke
     a("")
     a("**Analysis and recommendations only. Nothing was changed on YouTube.**")
     a("")
+    a("Note: impressions and click-through rate are not included below -- the public "
+      "YouTube Analytics API does not expose them to creators (Studio-only).")
+    a("")
 
     a("## Channel snapshot")
     a(f"- Subscribers: {channel_snapshot['subscriber_count']}")
     a(f"- Lifetime views: {channel_snapshot['view_count']}")
     a("")
+
+    if analytics is not None:
+        this_week, last_week = _week_over_week(analytics.get("daily", []))
+        a("## This week vs. last week")
+        views_pct = _pct_change(this_week["views"], last_week["views"])
+        minutes_pct = _pct_change(this_week["minutes"], last_week["minutes"])
+        a(f"- Views: {this_week['views']} vs {last_week['views']} "
+          f"({'n/a' if views_pct is None else f'{views_pct:+.1f}%'})")
+        a(f"- Watch time: {this_week['minutes']} min vs {last_week['minutes']} min "
+          f"({'n/a' if minutes_pct is None else f'{minutes_pct:+.1f}%'})")
+        daily_rows = analytics.get("daily", [])
+        subs_gained_week = sum(r.get("subscribersGained", 0) for r in daily_rows
+                                if _in_last_n_days(r.get("day"), 7))
+        subs_lost_week = sum(r.get("subscribersLost", 0) for r in daily_rows
+                              if _in_last_n_days(r.get("day"), 7))
+        a(f"- Subscribers this week: +{subs_gained_week} / -{subs_lost_week}")
+        a("")
+
+    if traffic_source_trend is not None:
+        a("## Traffic sources: this week vs. last week")
+        this_sources = traffic_source_trend["this_week"]["by_source"]
+        last_sources = traffic_source_trend["last_week"]["by_source"]
+        all_sources = sorted(set(this_sources) | set(last_sources), key=lambda s: -this_sources.get(s, 0))
+        for s in all_sources[:8]:
+            now_v, then_v = this_sources.get(s, 0), last_sources.get(s, 0)
+            pct = _pct_change(now_v, then_v)
+            a(f"- {s}: {now_v} vs {then_v} ({'n/a' if pct is None else f'{pct:+.1f}%'})")
+        a("")
+        search_now = this_sources.get("YT_SEARCH", 0)
+        suggested_now = this_sources.get("RELATED_VIDEO", 0)
+        browse_now = this_sources.get("BROWSE_FEATURES", 0)
+        a(f"- Search traffic this week: {search_now} | Suggested: {suggested_now} | Browse: {browse_now}")
+        a("")
 
     a("## New videos this week")
     if new_videos["new_videos"]:
@@ -54,7 +103,7 @@ def generate(channel_snapshot, momentum, destination_performance, new_videos, ke
         a(f"- None detected. {new_videos['note']}")
     a("")
 
-    a("## Momentum -- gaining views")
+    a("## Top gaining videos")
     a(momentum["note"])
     if momentum["gainers"]:
         for g in momentum["gainers"][:10]:
@@ -63,7 +112,7 @@ def generate(channel_snapshot, momentum, destination_performance, new_videos, ke
         a("- None yet.")
     a("")
 
-    a("## Momentum -- losing steam")
+    a("## Declining videos")
     if momentum["losers"]:
         for l in momentum["losers"][:10]:
             a(f"- {l['title']}: {l['delta']} views (90d window) since {momentum['compared_against_date']}")
@@ -84,6 +133,12 @@ def generate(channel_snapshot, momentum, destination_performance, new_videos, ke
         )
     a("")
 
+    a("## Keyword opportunities")
+    total_gap_keywords = sum(len(v) for v in keyword_discovery.get("gaps_by_destination", {}).values())
+    total_gap_keywords += len(keyword_discovery.get("unmatched_gap_terms", []))
+    a(f"- {total_gap_keywords} proven search-demand keyword(s) across destinations aren't in any video yet.")
+    a("")
+
     a("## Priority actions this week")
     actions = []
     top_dest = destination_performance["destinations"][0] if destination_performance["destinations"] else None
@@ -92,7 +147,6 @@ def generate(channel_snapshot, momentum, destination_performance, new_videos, ke
                         f"see its SEO package in the daily report.")
     if momentum["losers"]:
         actions.append(f"Revisit metadata for: {momentum['losers'][0]['title']} -- losing view momentum.")
-    total_gap_keywords = sum(len(v) for v in keyword_discovery.get("gaps_by_destination", {}).values())
     if total_gap_keywords:
         actions.append(f"{total_gap_keywords} proven search-demand keyword(s) across destinations "
                         f"aren't in any video yet -- see 'SEO keyword gaps' in the daily report.")
@@ -103,13 +157,14 @@ def generate(channel_snapshot, momentum, destination_performance, new_videos, ke
         a("- Nothing flagged this week.")
     a("")
 
-    a("## Trailing-week view trend (90-day windowed totals, per snapshot)")
-    totals = _daily_totals_last_n_days(7)
-    if totals:
-        for t in totals:
-            a(f"- {t['snapshot_date']}: {t['views_90d_window']} views, {t['minutes_90d_window']} min watched")
-    else:
-        a("- Not enough daily snapshots yet.")
-    a("")
-
     return "\n".join(lines)
+
+
+def _in_last_n_days(day_str, n):
+    if not day_str:
+        return False
+    try:
+        d = datetime.date.fromisoformat(day_str)
+    except ValueError:
+        return False
+    return (datetime.date.today() - d).days < n

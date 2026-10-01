@@ -12,7 +12,7 @@ Template-based, not LLM-generated -- see analysis/metadata_rewriter.py for
 the same design choice and why.
 """
 import config
-from text_utils import to_hashtag, dedupe_ci
+from text_utils import to_hashtag, dedupe_ci, thumbnail_text_ideas, GENERIC_CHAPTER_TEMPLATE
 
 MAX_PACKAGES = 6
 
@@ -23,28 +23,12 @@ _TITLE_TEMPLATES = [
     "{dest} Diaries: {kw}",
 ]
 
-_THUMBNAIL_TEXT_TEMPLATES = [
-    "{dest_short}!",
-    "IS IT WORTH IT?",
-    "{dest_short} TRUTH",
-    "WE DID THIS IN {dest_short}",
-]
-
 _SHORTS_IDEAS_TEMPLATES = [
     "3 things that surprised me in {dest}",
     "{dest} in 60 seconds",
     "Day in my life in {dest}",
     "Biggest mistake tourists make in {dest}",
     "Trying the most famous food in {dest}",
-]
-
-_CHAPTER_TEMPLATE = [
-    "00:00 Intro",
-    "00:XX Arrival / getting there",
-    "0X:XX Main highlight 1",
-    "0X:XX Main highlight 2",
-    "0X:XX Food & dining",
-    "0X:XX Final thoughts",
 ]
 
 
@@ -87,7 +71,6 @@ def analyze(destination_performance, keyword_discovery, content_planning):
             " ".join(hashtags),
         ])
 
-        thumbnail_text = [t.format(dest_short=dest_short.upper()) for t in _THUMBNAIL_TEXT_TEMPLATES]
         shorts_ideas = [t.format(dest=dest_label) for t in _SHORTS_IDEAS_TEMPLATES]
 
         packages.append({
@@ -96,8 +79,8 @@ def analyze(destination_performance, keyword_discovery, content_planning):
             "description": description,
             "tags": tags,
             "hashtags": hashtags,
-            "chapters_template": _CHAPTER_TEMPLATE,
-            "thumbnail_text_ideas": thumbnail_text,
+            "chapters_template": GENERIC_CHAPTER_TEMPLATE,
+            "thumbnail_text_ideas": thumbnail_text_ideas(dest_short),
             "shorts_ideas": shorts_ideas,
         })
 

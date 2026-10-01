@@ -7,7 +7,10 @@ import config
 def generate(channel_snapshot, video_catalog, analytics, seo, optimization, shorts, planning,
              keyword_discovery=None, metadata_rewrites=None, momentum=None,
              retention_patterns=None, destination_performance=None,
-             seo_packages=None, new_videos=None):
+             seo_packages=None, new_videos=None,
+             traffic_growth_actions=None, traffic_growth=None, search_seo=None,
+             suggested_video_strategy=None, shorts_to_longform=None,
+             content_opportunity=None, new_video_launch_packages=None):
     today = datetime.date.today().isoformat()
     lines = []
     a = lines.append
@@ -18,6 +21,14 @@ def generate(channel_snapshot, video_catalog, analytics, seo, optimization, shor
       "descriptions, tags, thumbnails, visibility, or videos were changed "
       "on YouTube by this run.**")
     a("")
+
+    if traffic_growth_actions is not None:
+        a("## TRAFFIC GROWTH ACTIONS")
+        a(traffic_growth_actions["note"])
+        a("")
+        for item in traffic_growth_actions["actions"]:
+            a(f"{item['rank']}. **[{item['category']}]** {item['action']}")
+        a("")
 
     a("## Channel snapshot")
     a(f"- Subscribers: {channel_snapshot['subscriber_count']}")
@@ -188,10 +199,16 @@ def generate(channel_snapshot, video_catalog, analytics, seo, optimization, shor
         a("## Metadata rewrite suggestions for existing videos")
         a(metadata_rewrites["note"])
         a("")
+        if metadata_rewrites.get("preserved_top_performers"):
+            a("**Preserved (already top performers, left untouched):** " + ", ".join(
+                p["title"][:40] for p in metadata_rewrites["preserved_top_performers"]
+            ))
+            a("")
         for r in metadata_rewrites["rewrites"]:
             a(f"### {r['current_title']}")
             a(f"Destination: {r['destination']}  |  Video ID: {r['video_id']}")
             a("Flagged because: " + "; ".join(r["reasons_flagged"]))
+            a(f"Target keyword: {r['target_keyword']}  |  Secondary: {', '.join(r['secondary_keywords'])}")
             a("")
             a("Suggested titles:")
             for t in r["suggested_titles"]:
@@ -199,11 +216,14 @@ def generate(channel_snapshot, video_catalog, analytics, seo, optimization, shor
             a("")
             a("Suggested tags: " + ", ".join(r["suggested_tags"]))
             a("Suggested hashtags: " + " ".join(r["suggested_hashtags"]))
+            a("Thumbnail text ideas: " + " / ".join(r["thumbnail_text_ideas"]))
             a("")
             a("Suggested description:")
             a("```")
             a(r["suggested_description"])
             a("```")
+            a("")
+            a("Chapter template: " + " | ".join(r["chapters_template"]))
             a("")
 
     if seo_packages is not None:
@@ -233,6 +253,128 @@ def generate(channel_snapshot, video_catalog, analytics, seo, optimization, shor
             a("Shorts ideas:")
             for s in pkg["shorts_ideas"]:
                 a(f"- {s}")
+            a("")
+
+    if traffic_growth is not None:
+        a("## Traffic growth opportunities (priority videos)")
+        a(traffic_growth["note"])
+        a("")
+        for v in traffic_growth["priority_videos"][:12]:
+            a(f"### {v['title']}")
+            a(f"Destination: {v['destination']}  |  Views (90d): {v['views_90d']}  |  "
+              f"Retention: {v['retention_pct']:.1f}%" if v["retention_pct"] is not None
+              else f"Destination: {v['destination']}  |  Views (90d): {v['views_90d']}")
+            for o in v["traffic_source_opportunities"]:
+                a(f"- Traffic source opportunity: {o}")
+            for k in v["search_keyword_opportunities"]:
+                a(f"- Search keyword opportunity: \"{k}\"")
+            for c in v["ctr_proxy_flags"]:
+                a(f"- {c}")
+            if v["retention_problem"]:
+                a(f"- Retention problem: {v['retention_problem']}")
+            if v["view_momentum_note"]:
+                a(f"- {v['view_momentum_note']}")
+            a("")
+
+    if search_seo is not None:
+        a("## YouTube Search SEO")
+        a(search_seo["note"])
+        a("")
+        a(f"**Near-ranking keywords:** {search_seo['near_ranking_keywords_note']}")
+        a("")
+        a(f"**Trending opportunities:** {search_seo['trending_opportunities_note']}")
+        a("")
+        if search_seo["rising_search_terms"]:
+            a(f"**Rising search terms** (vs {search_seo['rising_compared_against_date']}):")
+            for r in search_seo["rising_search_terms"][:8]:
+                a(f"- \"{r['term']}\": {r['views_then']} -> {r['views_now']} views ({r['delta']:+d})")
+            a("")
+        a("**Prioritized keyword list** (realistic traffic opportunity, not raw volume):")
+        for kw in search_seo["prioritized_keywords"][:15]:
+            dest_part = f" [{kw['destination']}]" if kw["destination"] else ""
+            a(f"- ({kw['tier']}) \"{kw['keyword']}\"{dest_part} -- {kw['views']}")
+        a("")
+        for dest, longtails in search_seo["longtail_opportunities_by_destination"].items():
+            a(f"**{dest} -- long-tail ideas (template, not real search-volume data):**")
+            for lt in longtails:
+                a(f"- {lt}")
+            a("")
+
+    if suggested_video_strategy is not None:
+        a("## Suggested-video / internal linking strategy")
+        a(suggested_video_strategy["note"])
+        a("")
+        for c in suggested_video_strategy["clusters"][:8]:
+            a(f"### {c['destination']} ({c['video_count']} videos)")
+            a(f"Hub video: {c['hub_video']['title']}")
+            if c["playlist_suggestion"]:
+                a(f"Playlist suggestion: {c['playlist_suggestion']}")
+            a(f"Description link text: {c['description_link_text']}")
+            a(f"Pinned comment text: {c['pinned_comment_text']}")
+            a("Recommended end-screen/card pairs:")
+            for p in c["recommended_pairs"][:5]:
+                a(f"- {p['from_title'][:40]} -> {p['to_title'][:40]} ({p['reason']})")
+            a("")
+
+    if shorts_to_longform is not None:
+        a("## Shorts -> long-form traffic funnels")
+        a(shorts_to_longform["note"])
+        a("")
+        for f in shorts_to_longform["funnels"][:8]:
+            a(f"### {f['destination']}")
+            a(f"Target long-form video: {f['target_longform_video']['title']}")
+            if f["existing_shorts_ctas"]:
+                a("Existing Shorts -- add this CTA:")
+                for s in f["existing_shorts_ctas"]:
+                    a(f"- {s['short_title'][:50]}: \"{s['suggested_cta']}\"")
+            a("New Shorts concepts to create:")
+            for idea in f["new_shorts_cta_ideas"]:
+                a(f"- {idea}")
+            a("")
+
+    if content_opportunity is not None:
+        a("## Content opportunity engine -- what to film next")
+        a(content_opportunity["note"])
+        a("")
+        for idea in content_opportunity["next_video_ideas"]:
+            tag = "NEW DESTINATION" if idea["is_new_destination"] else "EXPAND"
+            kw = f" | target keyword: \"{idea['target_keyword']}\"" if idea["target_keyword"] else ""
+            a(f"- [{tag}] **{idea['destination']}** (score {idea['priority_score']}){kw} -- {idea['rationale']}")
+        a("")
+
+    if new_video_launch_packages is not None and new_video_launch_packages["packages"]:
+        a("## New-video launch packages (auto-generated for newly detected uploads)")
+        a(new_video_launch_packages["note"])
+        a("")
+        for pkg in new_video_launch_packages["packages"]:
+            a(f"### {pkg['title']}")
+            a(f"Destination: {pkg['destination']}  |  Primary keyword: {pkg['primary_keyword']}")
+            a(f"Secondary keywords: {', '.join(pkg['secondary_keywords'])}")
+            a("")
+            a("Title options:")
+            for t in pkg["title_options"]:
+                a(f"- {t}")
+            a("")
+            a("Tags: " + ", ".join(pkg["tags"]))
+            a("Hashtags: " + " ".join(pkg["hashtags"]))
+            a("Thumbnail concepts: " + " / ".join(pkg["thumbnail_concepts"]))
+            a("")
+            a("Description:")
+            a("```")
+            a(pkg["description"])
+            a("```")
+            a("")
+            a("Chapter template: " + " | ".join(pkg["chapters_template"]))
+            a("Related videos to link: " + ", ".join(pkg["related_videos_to_link"]))
+            a(f"Suggested internal links: {pkg['suggested_internal_links']}")
+            a("Shorts ideas to promote this video:")
+            for s in pkg["shorts_ideas_to_promote_this_video"]:
+                a(f"- {s}")
+            if pkg["recommended_publishing_optimization"]:
+                po = pkg["recommended_publishing_optimization"]
+                a(f"Recommended publishing day: {po['day']} (this channel's historical avg "
+                  f"{po['avg_lifetime_views']} lifetime views for uploads on that day, "
+                  f"n={po['sample_size']})")
             a("")
 
     return "\n".join(lines)
