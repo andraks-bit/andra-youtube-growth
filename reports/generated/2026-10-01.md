@@ -13,7 +13,7 @@ Ranked by a transparent heuristic built from real numbers behind each candidate 
 
 ## Channel snapshot
 - Subscribers: 143
-- Lifetime views: 87380
+- Lifetime views: 87760
 - Video count: 203
 
 ## Last 90 days
@@ -68,10 +68,6 @@ keyword_gaps = search queries that already bring real views (per YouTube Analyti
 Suggestions only. No titles, descriptions, tags, or thumbnails were changed.
 Channel average retention (90d): 35.7%
 
-### GILI AIR ISLAND BALI📍🇮🇩🥥🤿🏝️💁🏼‍♀️🐢🐴😲 #youtubeshorts #bali #travel #indonesia
-- Video ID: _ftW0mMsYrM  |  Lifetime views: 8007
-  - no tags set on this video
-  - description is very short (<50 chars) -- limited SEO surface
 ### MANLY BEACH SYDNEY🇦🇺📍 Vlog ! #youtubeshorts #travel #vlog #sydney #sydney #australia
 - Video ID: AynTk_WorY8  |  Lifetime views: 2486
   - no tags set on this video
@@ -127,11 +123,15 @@ Channel average retention (90d): 35.7%
 - Video ID: 5Xg7Vn-1Eds  |  Lifetime views: 1429
   - no tags set on this video
   - description is very short (<50 chars) -- limited SEO surface
+### When your boyfriend surprises you🥰🥹✨🌹❤️ #dubai #youtubeshorts #dubailifestyle #burjkhalifa
+- Video ID: cRqBZdokHlA  |  Lifetime views: 1415
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
 
 ## Shorts vs long-form
 'is_likely_short' is a <=180s duration heuristic, not an official YouTube flag -- the public API does not expose one.
-- Shorts: {'count': 128, 'avg_lifetime_views': 501.2, 'avg_retention_pct_90d': 59.8}
-- Long-form: {'count': 76, 'avg_lifetime_views': 328.3, 'avg_retention_pct_90d': 16.1}
+- Shorts: {'count': 128, 'avg_lifetime_views': 501.6, 'avg_retention_pct_90d': 59.8}
+- Long-form: {'count': 77, 'avg_lifetime_views': 324.1, 'avg_retention_pct_90d': 16.1}
 - Repurpose-into-Shorts candidates (high-retention long-form clips):
   - CROWN SYDNEY – Most Luxurious Hotel in Australia?! 😳🇦🇺 | ANDRA KIIRKIVI (retention 19.3%, 731s)
 
@@ -141,7 +141,7 @@ Recurring words in top performers: andra(7), kiirkivi(7), bali(4), vlog(4), yout
 
 ## Newly detected videos since last run
 Comparing today's catalog against the last snapshot (2026-09-30).
-- None detected this run.
+- A LAST-MINUTE TRIP TO MILAN! 🇮🇹 | DUOMO & CITY CENTRE VLOG | ANDRA KIIRKIVI (published 2026-10-01, id 8ai8t2gqrdU)
 
 ## Momentum -- videos gaining or losing views
 Comparing each video's 90-day-windowed view count now vs on 2026-09-30 -- a video still climbing is getting fresh views; a flat one isn't, regardless of its lifetime total.
@@ -185,9 +185,9 @@ priority_score blends this destination's average 90-day views, average retention
 | New York City | 4 | 2.8 | 42.6% | 1 | +0 | 0.441 |
 | Other / Unclassified | 53 | 0.7 | 43.7% | 0 | +2 | 0.358 |
 | Colombo / Sri Lanka | 14 | 1.1 | 8.8% | 0 | +0 | 0.095 |
-| Punta Cana | 0 | 0 | n/a | 0 | +0 | 0.0 |
-| Milan | 0 | 0 | n/a | 0 | +0 | 0.0 |
 | Tokyo / Japan | 5 | 0.0 | n/a | 0 | +0 | 0.0 |
+| Punta Cana | 0 | 0 | n/a | 0 | +0 | 0.0 |
+| Milan | 1 | 0.0 | n/a | 0 | +0 | 0.0 |
 
 ## Keyword discovery by destination
 gaps_by_destination = real search terms already driving views (YouTube Analytics, last 90 days) not yet present in that destination's video text. template_opportunities_by_destination = generic high-intent query patterns (config.KEYWORD_INTENT_TEMPLATES), NOT real search-volume data -- there is no keyword-research API authorized for this project.
@@ -212,12 +212,12 @@ gaps_by_destination = real search terms already driving views (YouTube Analytics
 - Tokyo / Japan on a budget
 
 **Milan -- template keyword ideas (not real search-volume data):**
-- Milan vlog
 - Milan travel guide
 - Milan itinerary
-- things to do in Milan
 - Milan food
 - Milan on a budget
+- is Milan worth visiting
+- Milan tips
 
 **Dubai -- template keyword ideas (not real search-volume data):**
 - Dubai travel guide
@@ -277,32 +277,6 @@ gaps_by_destination = real search terms already driving views (YouTube Analytics
 
 ## Metadata rewrite suggestions for existing videos
 Template-based suggestions built from this channel's own proven keywords and real search-term gaps -- not LLM-generated copy. Nothing was changed on YouTube; review and edit before using. preserved_top_performers lists videos that tripped a technical flag but were deliberately left out because they're already top performers -- 'never change a strong-performing video blindly'.
-
-### GILI AIR ISLAND BALI📍🇮🇩🥥🤿🏝️💁🏼‍♀️🐢🐴😲 #youtubeshorts #bali #travel #indonesia
-Destination: Bali  |  Video ID: _ftW0mMsYrM
-Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
-Target keyword: 2026  |  Secondary: andra, kiirkivi, bali
-
-Suggested titles:
-- Bali Travel Vlog 2026
-- Bali: Andra 2026
-- Exploring Bali -- 2026
-
-Suggested tags: Bali, andra, kiirkivi, vlog, youtubeshorts, weekend
-Suggested hashtags: #Bali #travelvlog
-Thumbnail text ideas: BALI! / IS IT WORTH IT? / BALI TRUTH / WE DID THIS IN BALI
-
-Suggested description:
-```
-Bali -- 2026
-
-(original description was empty -- add 2-3 sentences here.)
-
-Follow for more travel vlogs.
-#Bali #travelvlog
-```
-
-Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
 
 ### MANLY BEACH SYDNEY🇦🇺📍 Vlog ! #youtubeshorts #travel #vlog #sydney #sydney #australia
 Destination: Sydney / Australia  |  Video ID: AynTk_WorY8
@@ -595,6 +569,32 @@ Follow for more travel vlogs.
 
 Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
 
+### DUBAI FOUNTAIN AND ROSES🇦🇪🌹💋❤️✨#dubai #dubailifestyle #vlog #dubaifountainshow
+Destination: Dubai  |  Video ID: L3QGpbgZmTM
+Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
+Target keyword: 2026  |  Secondary: andra, kiirkivi, bali
+
+Suggested titles:
+- Dubai Travel Vlog 2026
+- Dubai: Andra 2026
+- Exploring Dubai -- 2026
+
+Suggested tags: Dubai, andra, kiirkivi, bali, vlog, youtubeshorts, weekend
+Suggested hashtags: #Dubai #travelvlog
+Thumbnail text ideas: DUBAI! / IS IT WORTH IT? / DUBAI TRUTH / WE DID THIS IN DUBAI
+
+Suggested description:
+```
+Dubai -- 2026
+
+(original description was empty -- add 2-3 sentences here.)
+
+Follow for more travel vlogs.
+#Dubai #travelvlog
+```
+
+Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
+
 ## New-video SEO packages by destination priority
 Template-based SEO packages for your top-priority destinations (see destination_performance), refreshed with the latest keyword-gap data each run. Chapters are a generic structural starting point -- fill in real timestamps once the video is cut. Not LLM-generated, not published anywhere automatically.
 
@@ -844,7 +844,7 @@ Destination: Sydney / Australia  |  Views (90d): 5  |  Retention: 77.8%
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (21%) -- real opportunity to close this gap
 - low reach / high retention -- proxy for solid content that isn't getting discovered or clicked enough; consider a stronger title/thumbnail (not a real CTR measurement -- that data isn't exposed by the API)
 
-### GILI AIR ISLAND BALI📍🇮🇩🥥🤿🏝️💁🏼‍♀️🐢🐴😲 #youtubeshorts #bali #travel #indonesia
+### Bali Travel Vlog 2026
 Destination: Bali  |  Views (90d): 4  |  Retention: 62.6%
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (21%) -- real opportunity to close this gap
 
@@ -1006,7 +1006,7 @@ Pinned comment text: If you loved this, watch my Bali trip here → [link to I F
 Recommended end-screen/card pairs:
 - RENTED BUGGY N DRIVING AROUND LEMBONGAN  -> I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, (same destination (Bali); I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, is the top performer in this cluster)
 - BALI IS NOT WHAT YOU SEE ON INSTAGRAM 🇮🇩 -> I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, (same destination (Bali); I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, is the top performer in this cluster)
-- GILI AIR ISLAND BALI📍🇮🇩🥥🤿🏝️💁🏼‍♀️🐢🐴😲 #you -> I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, (same destination (Bali); I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, is the top performer in this cluster)
+- Bali Travel Vlog 2026 -> I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, (same destination (Bali); I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, is the top performer in this cluster)
 - BALI- LEMBONGAN ISLAND😍 #travel #bali #i -> I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, (same destination (Bali); I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, is the top performer in this cluster)
 - LEMBONGAN ISLAND BALI🇮🇩🥥🌧️🏝️ #lembongan  -> I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, (same destination (Bali); I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, is the top performer in this cluster)
 
@@ -1087,7 +1087,7 @@ New Shorts concepts to create:
 Target long-form video: I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, Almost No Tourists) | ANDRA KIIRKIVI #bali #travelvlog 
 Existing Shorts -- add this CTA:
 - RENTED BUGGY N DRIVING AROUND LEMBONGAN ISLAND BAL: "Watch the full story: "I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, Almost No" -- link in pinned comment/bio"
-- GILI AIR ISLAND BALI📍🇮🇩🥥🤿🏝️💁🏼‍♀️🐢🐴😲 #youtubeshorts: "Watch the full story: "I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, Almost No" -- link in pinned comment/bio"
+- Bali Travel Vlog 2026: "Watch the full story: "I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, Almost No" -- link in pinned comment/bio"
 - BALI- LEMBONGAN ISLAND😍 #travel #bali #indonesia #: "Watch the full story: "I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, Almost No" -- link in pinned comment/bio"
 New Shorts concepts to create:
 - 3 things that surprised me in Bali -- full story linked below
@@ -1136,5 +1136,39 @@ Ranked by destination_performance's priority_score (real views + retention + mom
 - [EXPAND] **Bali** (score 0.465) | target keyword: "how much does Bali cost" -- 28 existing videos, avg 5.3 views/90d; 43.7% retention
 - [EXPAND] **New York City** (score 0.441) | target keyword: "new york city apartment" -- 4 existing videos, avg 2.8 views/90d; 42.6% retention; 1 proven search gap(s)
 - [EXPAND] **Colombo / Sri Lanka** (score 0.095) -- 14 existing videos, avg 1.1 views/90d; 8.8% retention
+- [EXPAND] **Tokyo / Japan** (score 0.0) | target keyword: "how much does Tokyo / Japan cost" -- 5 existing videos, avg 0.0 views/90d
 - [NEW DESTINATION] **Punta Cana** (score 0.0) | target keyword: "how much does Punta Cana cost" -- not yet covered on the channel
-- [NEW DESTINATION] **Milan** (score 0.0) | target keyword: "how much does Milan cost" -- not yet covered on the channel
+
+## New-video launch packages (auto-generated for newly detected uploads)
+Generated automatically for every video detected as new since the last run -- no manual trigger needed. recommended_publishing_optimization is a real heuristic (this channel's own historical day-of-week vs average lifetime views), not external platform data.
+
+### A LAST-MINUTE TRIP TO MILAN! 🇮🇹 | DUOMO & CITY CENTRE VLOG | ANDRA KIIRKIVI
+Destination: Milan  |  Primary keyword: Milan travel guide
+Secondary keywords: Milan itinerary, Milan food, Milan on a budget, is Milan worth visiting
+
+Title options:
+- Milan Travel Vlog 2026 | Milan Travel Guide
+- Milan Travel Guide -- Milan Guide
+- First Time in Milan: Milan Travel Guide
+
+Tags: Milan, Milan travel guide, Milan itinerary, Milan food, Milan on a budget, is Milan worth visiting, Milan tips
+Hashtags: #Milan #Milantravelguide #Milanitinerary #Milanfood #travelvlog
+Thumbnail concepts: MILAN! / IS IT WORTH IT? / MILAN TRUTH / WE DID THIS IN MILAN
+
+Description:
+```
+Milan -- Milan travel guide
+
+Join me exploring Milan! Full Milan travel guide in this video.
+
+Subscribe for more travel vlogs.
+#Milan #Milantravelguide #Milanitinerary #Milanfood #travelvlog
+```
+
+Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
+Related videos to link: 
+Suggested internal links: No other videos in this destination cluster yet.
+Shorts ideas to promote this video:
+- 3 things that surprised me in Milan -- full story linked below
+- Milan in 60 seconds -- full vlog on the channel
+Recommended publishing day: Saturday (this channel's historical avg 647.5 lifetime views for uploads on that day, n=22)

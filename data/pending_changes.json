@@ -142,6 +142,54 @@
       "status": "pending",
       "github_issue_number": 8,
       "commented_queued": false
+    },
+    {
+      "proposal_id": "b475210394",
+      "type": "metadata_update",
+      "video_id": "JtVwnQhImi0",
+      "current_title": "SYDNEY ZOO WORTH IT OR NOT ?\ud83d\ude33#sydney #sydneyvlog #australia #australiavlog #shorts #zoo",
+      "proposed_title": "Sydney / Australia Travel Vlog 2026",
+      "proposed_description": "Sydney / Australia -- 2026\n\n(original description was empty -- add 2-3 sentences here.)\n\nFollow for more travel vlogs.\n#Sydney #travelvlog",
+      "proposed_tags": [
+        "Sydney",
+        "Australia",
+        "andra",
+        "kiirkivi",
+        "bali",
+        "vlog",
+        "youtubeshorts",
+        "weekend"
+      ],
+      "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
+      "destination": "Sydney / Australia",
+      "proposed_on": "2026-10-01",
+      "status": "pending",
+      "github_issue_number": 9,
+      "commented_queued": false
+    },
+    {
+      "proposal_id": "5dc1249974",
+      "type": "metadata_update",
+      "video_id": "cgR374ohKNM",
+      "current_title": "FRIDAY FUN IN PUERTO BAN\u00daS, MARBELLA \ud83c\uddea\ud83c\uddf8\ud83c\udf34\ud83d\udc8b #shorts #vlog #lamborghini #red #youtubeshorts",
+      "proposed_title": "Marbella / Puerto Banus Travel Vlog 2026",
+      "proposed_description": "Marbella / Puerto Banus -- 2026\n\n(original description was empty -- add 2-3 sentences here.)\n\nFollow for more travel vlogs.\n#Marbella #travelvlog",
+      "proposed_tags": [
+        "Marbella",
+        "Puerto Banus",
+        "andra",
+        "kiirkivi",
+        "bali",
+        "vlog",
+        "youtubeshorts",
+        "weekend"
+      ],
+      "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
+      "destination": "Marbella / Puerto Banus",
+      "proposed_on": "2026-10-01",
+      "status": "pending",
+      "github_issue_number": 10,
+      "commented_queued": false
     }
   ]
 }

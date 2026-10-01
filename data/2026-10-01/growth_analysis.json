@@ -1,7 +1,13 @@
 {
   "new_videos": {
     "compared_against_date": "2026-09-30",
-    "new_videos": [],
+    "new_videos": [
+      {
+        "video_id": "8ai8t2gqrdU",
+        "title": "A LAST-MINUTE TRIP TO MILAN! \ud83c\uddee\ud83c\uddf9 | DUOMO & CITY CENTRE VLOG | ANDRA KIIRKIVI",
+        "published_at": "2026-10-01T07:33:25Z"
+      }
+    ],
     "note": "Comparing today's catalog against the last snapshot (2026-09-30)."
   },
   "keyword_discovery": {
@@ -57,10 +63,8 @@
         "Tokyo / Japan day trip"
       ],
       "Milan": [
-        "Milan vlog",
         "Milan travel guide",
         "Milan itinerary",
-        "things to do in Milan",
         "Milan food",
         "Milan on a budget",
         "is Milan worth visiting",
@@ -387,7 +391,7 @@
         },
         {
           "video_id": "_ftW0mMsYrM",
-          "title": "GILI AIR ISLAND BALI\ud83d\udccd\ud83c\uddee\ud83c\udde9\ud83e\udd65\ud83e\udd3f\ud83c\udfdd\ufe0f\ud83d\udc81\ud83c\udffc\u200d\u2640\ufe0f\ud83d\udc22\ud83d\udc34\ud83d\ude32 #youtubeshorts #bali #travel #indonesia"
+          "title": "Bali Travel Vlog 2026"
         }
       ],
       "bottom_cohort": [
@@ -504,6 +508,15 @@
         "priority_score": 0.095
       },
       {
+        "destination": "Tokyo / Japan",
+        "video_count": 5,
+        "avg_views_90d": 0.0,
+        "avg_retention_pct": null,
+        "momentum_90d_view_delta": 0,
+        "unmet_demand_keywords": 0,
+        "priority_score": 0.0
+      },
+      {
         "destination": "Punta Cana",
         "video_count": 0,
         "avg_views_90d": 0,
@@ -514,16 +527,7 @@
       },
       {
         "destination": "Milan",
-        "video_count": 0,
-        "avg_views_90d": 0,
-        "avg_retention_pct": null,
-        "momentum_90d_view_delta": 0,
-        "unmet_demand_keywords": 0,
-        "priority_score": 0.0
-      },
-      {
-        "destination": "Tokyo / Japan",
-        "video_count": 5,
+        "video_count": 1,
         "avg_views_90d": 0.0,
         "avg_retention_pct": null,
         "momentum_90d_view_delta": 0,
@@ -602,7 +606,7 @@
       },
       {
         "video_id": "_ftW0mMsYrM",
-        "title": "GILI AIR ISLAND BALI\ud83d\udccd\ud83c\uddee\ud83c\udde9\ud83e\udd65\ud83e\udd3f\ud83c\udfdd\ufe0f\ud83d\udc81\ud83c\udffc\u200d\u2640\ufe0f\ud83d\udc22\ud83d\udc34\ud83d\ude32 #youtubeshorts #bali #travel #indonesia",
+        "title": "Bali Travel Vlog 2026",
         "destination": "Bali",
         "views_90d": 4,
         "retention_pct": 62.580000000000005,
@@ -1145,7 +1149,7 @@
           },
           {
             "from_video_id": "_ftW0mMsYrM",
-            "from_title": "GILI AIR ISLAND BALI\ud83d\udccd\ud83c\uddee\ud83c\udde9\ud83e\udd65\ud83e\udd3f\ud83c\udfdd\ufe0f\ud83d\udc81\ud83c\udffc\u200d\u2640\ufe0f\ud83d\udc22\ud83d\udc34\ud83d\ude32 #youtubeshorts #bali #travel #indonesia",
+            "from_title": "Bali Travel Vlog 2026",
             "to_video_id": "t_E0I25F4wI",
             "to_title": "I FOUND BALI\u2019S SECRET ISLAND \ud83c\udf34 (No Cars, Almost No Tourists) | ANDRA KIIRKIVI #bali #travelvlog ",
             "reason": "same destination (Bali); I FOUND BALI\u2019S SECRET ISLAND \ud83c\udf34 (No Cars, is the top performer in this cluster"
@@ -1487,7 +1491,7 @@
           },
           {
             "short_video_id": "_ftW0mMsYrM",
-            "short_title": "GILI AIR ISLAND BALI\ud83d\udccd\ud83c\uddee\ud83c\udde9\ud83e\udd65\ud83e\udd3f\ud83c\udfdd\ufe0f\ud83d\udc81\ud83c\udffc\u200d\u2640\ufe0f\ud83d\udc22\ud83d\udc34\ud83d\ude32 #youtubeshorts #bali #travel #indonesia",
+            "short_title": "Bali Travel Vlog 2026",
             "suggested_cta": "Watch the full story: \"I FOUND BALI\u2019S SECRET ISLAND \ud83c\udf34 (No Cars, Almost No\" -- link in pinned comment/bio"
           },
           {
@@ -1637,17 +1641,17 @@
         "rationale": "14 existing videos, avg 1.1 views/90d; 8.8% retention"
       },
       {
+        "destination": "Tokyo / Japan",
+        "is_new_destination": false,
+        "priority_score": 0.0,
+        "target_keyword": "how much does Tokyo / Japan cost",
+        "rationale": "5 existing videos, avg 0.0 views/90d"
+      },
+      {
         "destination": "Punta Cana",
         "is_new_destination": true,
         "priority_score": 0.0,
         "target_keyword": "how much does Punta Cana cost",
-        "rationale": "not yet covered on the channel"
-      },
-      {
-        "destination": "Milan",
-        "is_new_destination": true,
-        "priority_score": 0.0,
-        "target_keyword": "how much does Milan cost",
         "rationale": "not yet covered on the channel"
       }
     ],
