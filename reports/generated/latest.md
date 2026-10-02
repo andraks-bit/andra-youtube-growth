@@ -68,7 +68,7 @@ keyword_gaps = search queries that already bring real views (per YouTube Analyti
 
 ## Optimization opportunities (existing videos)
 Suggestions only. No titles, descriptions, tags, or thumbnails were changed.
-Channel average retention (90d): 34.7%
+Channel average retention (90d): 35.6%
 
 ### MANLY BEACH SYDNEY🇦🇺📍 Vlog ! #youtubeshorts #travel #vlog #sydney #sydney #australia
 - Video ID: AynTk_WorY8  |  Lifetime views: 2486
@@ -133,10 +133,9 @@ Channel average retention (90d): 34.7%
 ## Shorts vs long-form
 'is_likely_short' is a <=180s duration heuristic, not an official YouTube flag -- the public API does not expose one.
 - Shorts: {'count': 128, 'avg_lifetime_views': 502.1, 'avg_retention_pct_90d': 65.5}
-- Long-form: {'count': 77, 'avg_lifetime_views': 324.4, 'avg_retention_pct_90d': 14.2}
+- Long-form: {'count': 77, 'avg_lifetime_views': 324.4, 'avg_retention_pct_90d': 15.7}
 - Repurpose-into-Shorts candidates (high-retention long-form clips):
   - CROWN SYDNEY – Most Luxurious Hotel in Australia?! 😳🇦🇺 | ANDRA KIIRKIVI (retention 18.8%, 731s)
-  - Estepona Zoo Day 🐅🦁 🦓| Migraine & Pool Day in October🌊| ANDRA KIIRKIVI (retention 14.2%, 1185s)
 
 ## Content planning signal
 recurring_words_in_top_performers highlights terms common in titles of the best-performing recent videos (by 90-day views) -- a starting point for topic ideation, not a guarantee.
@@ -190,13 +189,13 @@ priority_score blends this destination's average 90-day views, average retention
 | Tokyo / Japan | 5 | 226.0 | 16.4% | 4 | +1130 | 0.841 |
 | Marbella / Puerto Banus | 21 | 7.0 | 44.9% | 3 | +6 | 0.448 |
 | New York City | 4 | 2.8 | 42.6% | 1 | +0 | 0.304 |
+| Sydney / Australia | 35 | 6.9 | 33.5% | 1 | +8 | 0.26 |
 | Bali | 28 | 5.2 | 43.5% | 0 | -1 | 0.249 |
-| Sydney / Australia | 35 | 6.9 | 29.7% | 1 | +8 | 0.239 |
 | Other / Unclassified | 53 | 0.7 | 38.4% | 0 | +6 | 0.216 |
 | Dubai | 44 | 5.6 | 30.9% | 0 | +3 | 0.18 |
 | Colombo / Sri Lanka | 14 | 1.1 | 8.6% | 0 | +0 | 0.05 |
-| Milan | 1 | 0.0 | n/a | 0 | +0 | 0.0 |
 | Punta Cana | 0 | 0 | n/a | 0 | +0 | 0.0 |
+| Milan | 1 | 0.0 | n/a | 0 | +0 | 0.0 |
 
 ## Keyword discovery by destination
 gaps_by_destination = real search terms already driving views (YouTube Analytics, last 90 days) not yet present in that destination's video text. template_opportunities_by_destination = generic high-intent query patterns (config.KEYWORD_INTENT_TEMPLATES), NOT real search-volume data -- there is no keyword-research API authorized for this project.
@@ -724,43 +723,6 @@ Shorts ideas:
 - Biggest mistake tourists make in New York City
 - Trying the most famous food in New York City
 
-### Bali
-Title options:
-- Bali Travel Vlog 2026 | Bali Itinerary
-- Bali Itinerary -- Bali Guide
-- First Time in Bali: Bali Itinerary
-- Bali Diaries: Bali Itinerary
-
-Tags: Bali, Bali itinerary, things to do in Bali, Bali food, Bali on a budget, is Bali worth visiting, Bali tips, andra, kiirkivi, japan, vlog
-Hashtags: #Bali #Baliitinerary #thingstodoinBali #Balifood #travelvlog
-
-Description:
-```
-Bali -- Bali itinerary
-
-Join me exploring Bali! Full Bali itinerary coming up.
-
-Subscribe for more travel vlogs.
-#Bali #Baliitinerary #thingstodoinBali #Balifood #travelvlog
-```
-
-Chapter template:
-- 00:00 Intro
-- 00:XX Arrival / getting there
-- 0X:XX Main highlight 1
-- 0X:XX Main highlight 2
-- 0X:XX Food & dining
-- 0X:XX Final thoughts
-
-Thumbnail text ideas: BALI! / IS IT WORTH IT? / BALI TRUTH / WE DID THIS IN BALI
-
-Shorts ideas:
-- 3 things that surprised me in Bali
-- Bali in 60 seconds
-- Day in my life in Bali
-- Biggest mistake tourists make in Bali
-- Trying the most famous food in Bali
-
 ### Sydney / Australia
 Title options:
 - Sydney / Australia Travel Vlog 2026 | Crown Towers Sydney
@@ -797,6 +759,43 @@ Shorts ideas:
 - Day in my life in Sydney / Australia
 - Biggest mistake tourists make in Sydney / Australia
 - Trying the most famous food in Sydney / Australia
+
+### Bali
+Title options:
+- Bali Travel Vlog 2026 | Bali Itinerary
+- Bali Itinerary -- Bali Guide
+- First Time in Bali: Bali Itinerary
+- Bali Diaries: Bali Itinerary
+
+Tags: Bali, Bali itinerary, things to do in Bali, Bali food, Bali on a budget, is Bali worth visiting, Bali tips, andra, kiirkivi, japan, vlog
+Hashtags: #Bali #Baliitinerary #thingstodoinBali #Balifood #travelvlog
+
+Description:
+```
+Bali -- Bali itinerary
+
+Join me exploring Bali! Full Bali itinerary coming up.
+
+Subscribe for more travel vlogs.
+#Bali #Baliitinerary #thingstodoinBali #Balifood #travelvlog
+```
+
+Chapter template:
+- 00:00 Intro
+- 00:XX Arrival / getting there
+- 0X:XX Main highlight 1
+- 0X:XX Main highlight 2
+- 0X:XX Food & dining
+- 0X:XX Final thoughts
+
+Thumbnail text ideas: BALI! / IS IT WORTH IT? / BALI TRUTH / WE DID THIS IN BALI
+
+Shorts ideas:
+- 3 things that surprised me in Bali
+- Bali in 60 seconds
+- Day in my life in Bali
+- Biggest mistake tourists make in Bali
+- Trying the most famous food in Bali
 
 ### Dubai
 Title options:
@@ -1150,8 +1149,8 @@ Ranked by destination_performance's priority_score (real views + retention + mom
 - [EXPAND] **Tokyo / Japan** (score 0.841) | target keyword: "tokyo first time" -- 5 existing videos, avg 226.0 views/90d; 16.4% retention; 4 proven search gap(s); momentum +1130
 - [EXPAND] **Marbella / Puerto Banus** (score 0.448) | target keyword: "puerto banus marbella" -- 21 existing videos, avg 7.0 views/90d; 44.9% retention; 3 proven search gap(s); momentum +6
 - [EXPAND] **New York City** (score 0.304) | target keyword: "new york city apartment" -- 4 existing videos, avg 2.8 views/90d; 42.6% retention; 1 proven search gap(s)
+- [EXPAND] **Sydney / Australia** (score 0.26) | target keyword: "crown towers sydney" -- 35 existing videos, avg 6.9 views/90d; 33.5% retention; 1 proven search gap(s); momentum +8
 - [EXPAND] **Bali** (score 0.249) | target keyword: "how much does Bali cost" -- 28 existing videos, avg 5.2 views/90d; 43.5% retention; momentum -1
-- [EXPAND] **Sydney / Australia** (score 0.239) | target keyword: "crown towers sydney" -- 35 existing videos, avg 6.9 views/90d; 29.7% retention; 1 proven search gap(s); momentum +8
 - [EXPAND] **Dubai** (score 0.18) | target keyword: "how much does Dubai cost" -- 44 existing videos, avg 5.6 views/90d; 30.9% retention; momentum +3
 - [EXPAND] **Colombo / Sri Lanka** (score 0.05) -- 14 existing videos, avg 1.1 views/90d; 8.6% retention
-- [EXPAND] **Milan** (score 0.0) | target keyword: "how much does Milan cost" -- 1 existing videos, avg 0.0 views/90d
+- [NEW DESTINATION] **Punta Cana** (score 0.0) | target keyword: "how much does Punta Cana cost" -- not yet covered on the channel

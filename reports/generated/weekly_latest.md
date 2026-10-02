@@ -50,8 +50,8 @@ priority_score blends this destination's average 90-day views, average retention
 - **Tokyo / Japan** (score 0.841): 5 videos, avg 226.0 views/90d, retention 16.4%, 4 unmet keyword(s), momentum +1130
 - **Marbella / Puerto Banus** (score 0.448): 21 videos, avg 7.0 views/90d, retention 44.9%, 3 unmet keyword(s), momentum +6
 - **New York City** (score 0.304): 4 videos, avg 2.8 views/90d, retention 42.6%, 1 unmet keyword(s), momentum +0
+- **Sydney / Australia** (score 0.26): 35 videos, avg 6.9 views/90d, retention 33.5%, 1 unmet keyword(s), momentum +8
 - **Bali** (score 0.249): 28 videos, avg 5.2 views/90d, retention 43.5%, 0 unmet keyword(s), momentum -1
-- **Sydney / Australia** (score 0.239): 35 videos, avg 6.9 views/90d, retention 29.7%, 1 unmet keyword(s), momentum +8
 - **Other / Unclassified** (score 0.216): 53 videos, avg 0.7 views/90d, retention 38.4%, 0 unmet keyword(s), momentum +6
 - **Dubai** (score 0.18): 44 videos, avg 5.6 views/90d, retention 30.9%, 0 unmet keyword(s), momentum +3
 - **Colombo / Sri Lanka** (score 0.05): 14 videos, avg 1.1 views/90d, retention 8.6%, 0 unmet keyword(s), momentum +0

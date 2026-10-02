@@ -284,6 +284,54 @@
       "status": "pending",
       "github_issue_number": 14,
       "commented_queued": false
+    },
+    {
+      "proposal_id": "f89a4934e1",
+      "type": "metadata_update",
+      "video_id": "PrWJZprm--4",
+      "current_title": "NEWCASTLE AUSTRALIA VLOG !\ud83c\udde6\ud83c\uddfa\ud83c\udf0f\ud83e\udd98\ud83d\udc28. WATCH TIL END TO SEE WHAT HAPPENED TO OUR CAR\ud83e\udd79\ud83d\ude22\ud83d\ude0f #sydney",
+      "proposed_title": "Sydney / Australia Travel Vlog crown towers sydney",
+      "proposed_description": "Sydney / Australia -- crown towers sydney\n\n(original description was empty -- add 2-3 sentences here.)\n\nFollow for more travel vlogs.\n#Sydney #crowntowerssydney #travelvlog",
+      "proposed_tags": [
+        "Sydney",
+        "Australia",
+        "crown towers sydney",
+        "andra",
+        "kiirkivi",
+        "japan",
+        "vlog",
+        "bali",
+        "youtubeshorts"
+      ],
+      "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
+      "destination": "Sydney / Australia",
+      "proposed_on": "2026-10-02",
+      "status": "pending",
+      "github_issue_number": 17,
+      "commented_queued": false
+    },
+    {
+      "proposal_id": "c7e04a6cb1",
+      "type": "metadata_update",
+      "video_id": "L3QGpbgZmTM",
+      "current_title": "DUBAI FOUNTAIN AND ROSES\ud83c\udde6\ud83c\uddea\ud83c\udf39\ud83d\udc8b\u2764\ufe0f\u2728#dubai #dubailifestyle #vlog #dubaifountainshow",
+      "proposed_title": "Dubai Travel Vlog 2026",
+      "proposed_description": "Dubai -- 2026\n\n(original description was empty -- add 2-3 sentences here.)\n\nFollow for more travel vlogs.\n#Dubai #travelvlog",
+      "proposed_tags": [
+        "Dubai",
+        "andra",
+        "kiirkivi",
+        "japan",
+        "vlog",
+        "bali",
+        "youtubeshorts"
+      ],
+      "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
+      "destination": "Dubai",
+      "proposed_on": "2026-10-02",
+      "status": "pending",
+      "github_issue_number": 18,
+      "commented_queued": false
     }
   ]
 }
