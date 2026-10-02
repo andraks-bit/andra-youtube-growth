@@ -34,7 +34,7 @@ from analysis import (
     destination_performance, seo_package_generator,
     traffic_growth, search_seo, suggested_video_strategy, shorts_to_longform,
     content_opportunity_engine, new_video_launch_package, traffic_growth_actions,
-    change_proposals,
+    change_proposals, ctr_optimization, growth_backlog,
 )
 from reports import report_generator, weekly_report_generator
 
@@ -195,6 +195,28 @@ def main():
             )
             step.set_produced(f"{len(traffic_actions_result['actions'])} ranked actions")
 
+    ctr_opt_result = growth_backlog_result = None
+    if all(x is not None for x in (catalog, analytics, optimization, planning)):
+        with logger.step("analyze_ctr_optimization") as step:
+            ctr_opt_result = ctr_optimization.analyze(
+                catalog, analytics, optimization, planning
+            )
+            critical_failures = len(ctr_opt_result.get("critical_ctr_failures", []))
+            critical_wins = len(ctr_opt_result.get("critical_ctr_wins", []))
+            step.set_produced(f"{critical_failures} urgent CTR fixes, {critical_wins} high-performing patterns")
+
+    if all(x is not None for x in (ctr_opt_result, shorts_result, kw_discovery_result,
+                                    suggested_strategy_result, new_videos_result)):
+        with logger.step("build_growth_backlog") as step:
+            growth_backlog_result = growth_backlog.build_backlog(
+                ctr_opt_result, shorts_result, kw_discovery_result,
+                suggested_strategy_result, new_videos_result, traffic_growth_result
+            )
+            step.set_produced(
+                f"{growth_backlog_result['total_opportunities']} opportunities identified; "
+                f"{growth_backlog_result['high_priority_count']} high-priority"
+            )
+
     # --- Step 6: approval workflow (GitHub Issues). Gracefully skipped on
     # local runs where GITHUB_TOKEN isn't set -- that's expected, not a
     # failure; verify this part via a real GitHub Actions run instead. ---
@@ -262,6 +284,8 @@ def main():
                 "shorts_to_longform": shorts_to_longform_result,
                 "content_opportunity": content_opportunity_result,
                 "traffic_growth_actions": traffic_actions_result,
+                "ctr_optimization": ctr_opt_result,
+                "growth_backlog": growth_backlog_result,
             }
             with open(os.path.join(day_dir, "growth_analysis.json"), "w") as f:
                 json.dump(growth_analysis, f, indent=2)
