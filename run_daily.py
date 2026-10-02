@@ -35,7 +35,8 @@ from analysis import (
     traffic_growth, search_seo, suggested_video_strategy, shorts_to_longform,
     content_opportunity_engine, new_video_launch_package, traffic_growth_actions,
     change_proposals, ctr_optimization, growth_backlog,
-    competitor_intelligence, trend_detection,
+    competitor_intelligence, trend_detection, content_ideation,
+    distribution_strategy, impact_tracking, growth_metrics, growth_digest,
 )
 from reports import report_generator, weekly_report_generator
 
@@ -242,6 +243,41 @@ def main():
                 f"top 5: {', '.join([o['title'][:30] for o in growth_backlog_result.get('top_5_this_week', [])[:2]])}"
             )
 
+    # Phase 4: Distribution Strategy
+    distribution_result = None
+    if all(x is not None for x in (catalog, dest_perf_result, kw_discovery_result)):
+        with logger.step("analyze_distribution_strategy") as step:
+            distribution_result = distribution_strategy.analyze(
+                catalog, dest_perf_result, kw_discovery_result,
+                ctr_opt_result, None
+            )
+            total_dist = distribution_result.get("total_opportunities", 0)
+            expected_traffic = distribution_result.get("total_expected_traffic", 0)
+            step.set_produced(f"{total_dist} distribution opportunities, {expected_traffic}+ expected external views")
+
+    # Phase 5: Impact Tracking
+    impact_result = None
+    with logger.step("analyze_impact_tracking") as step:
+        impact_result = impact_tracking.analyze()
+        step.set_produced("Impact tracking initialized for optimization measurement")
+
+    # Phase 6: Growth Metrics
+    metrics_result = None
+    if analytics is not None:
+        with logger.step("calculate_growth_metrics") as step:
+            metrics_result = growth_metrics.analyze(analytics)
+            health_score = metrics_result.get("channel_health_score", 0)
+            step.set_produced(f"Channel Health Score: {health_score}/100")
+
+    # Phase 7: Enhanced Growth Digest (generated but not sent until Monday)
+    digest_result = None
+    if all(x is not None for x in (metrics_result, impact_result, growth_backlog_result, distribution_result)):
+        with logger.step("generate_growth_digest") as step:
+            digest_result = growth_digest.generate_growth_digest(
+                metrics_result, impact_result, growth_backlog_result, distribution_result
+            )
+            step.set_produced(f"Growth digest prepared ({len(digest_result)} chars)")
+
     # --- Step 6: approval workflow (GitHub Issues). Gracefully skipped on
     # local runs where GITHUB_TOKEN isn't set -- that's expected, not a
     # failure; verify this part via a real GitHub Actions run instead. ---
@@ -313,6 +349,10 @@ def main():
                 "competitor_intelligence": competitor_intel_result,
                 "trend_detection": trends_result,
                 "growth_backlog": growth_backlog_result,
+                "distribution_strategy": distribution_result,
+                "impact_tracking": impact_result,
+                "growth_metrics": metrics_result,
+                "growth_digest": digest_result,
             }
             with open(os.path.join(day_dir, "growth_analysis.json"), "w") as f:
                 json.dump(growth_analysis, f, indent=2)
