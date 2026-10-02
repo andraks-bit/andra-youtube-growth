@@ -586,18 +586,18 @@
         "priority_score": 0.05
       },
       {
-        "destination": "Punta Cana",
-        "video_count": 0,
-        "avg_views_90d": 0,
+        "destination": "Milan",
+        "video_count": 1,
+        "avg_views_90d": 0.0,
         "avg_retention_pct": null,
         "momentum_90d_view_delta": 0,
         "unmet_demand_keywords": 0,
         "priority_score": 0.0
       },
       {
-        "destination": "Milan",
-        "video_count": 1,
-        "avg_views_90d": 0.0,
+        "destination": "Punta Cana",
+        "video_count": 0,
+        "avg_views_90d": 0,
         "avg_retention_pct": null,
         "momentum_90d_view_delta": 0,
         "unmet_demand_keywords": 0,
@@ -1722,11 +1722,11 @@
         "rationale": "14 existing videos, avg 1.1 views/90d; 8.6% retention"
       },
       {
-        "destination": "Punta Cana",
-        "is_new_destination": true,
+        "destination": "Milan",
+        "is_new_destination": false,
         "priority_score": 0.0,
-        "target_keyword": "how much does Punta Cana cost",
-        "rationale": "not yet covered on the channel"
+        "target_keyword": "how much does Milan cost",
+        "rationale": "1 existing videos, avg 0.0 views/90d"
       }
     ],
     "note": "Ranked by destination_performance's priority_score (real views + retention + momentum, blended with unmet search-demand count). Each rationale names the actual numbers behind the ranking -- not a generic suggestion."

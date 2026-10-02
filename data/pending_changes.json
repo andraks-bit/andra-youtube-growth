@@ -370,6 +370,44 @@
       "status": "pending",
       "github_issue_number": 20,
       "commented_queued": false
+    },
+    {
+      "proposal_id": "18dbff375b",
+      "type": "playlist",
+      "playlist_title": "Bali Travel Vlogs",
+      "video_ids": [
+        "t_E0I25F4wI",
+        "Zb1rfCeE91U",
+        "ryLqxRJey9g",
+        "_ftW0mMsYrM",
+        "w-AkEt3EDgY",
+        "QGA032cH8rc"
+      ],
+      "destination": "Bali",
+      "reasoning": "28 videos in the Bali cluster have no playlist yet",
+      "proposed_on": "2026-10-02",
+      "status": "pending",
+      "github_issue_number": 21,
+      "commented_queued": false
+    },
+    {
+      "proposal_id": "fe986e397a",
+      "type": "playlist",
+      "playlist_title": "Marbella / Puerto Banus Travel Vlogs",
+      "video_ids": [
+        "qhLY4RDt9Hw",
+        "Ftbc5teJtV8",
+        "V4EJEcs1emA",
+        "ICy46-0EFX4",
+        "h3xclTObQwY",
+        "16TJnASAC6k"
+      ],
+      "destination": "Marbella / Puerto Banus",
+      "reasoning": "21 videos in the Marbella / Puerto Banus cluster have no playlist yet",
+      "proposed_on": "2026-10-02",
+      "status": "pending",
+      "github_issue_number": 22,
+      "commented_queued": false
     }
   ]
 }

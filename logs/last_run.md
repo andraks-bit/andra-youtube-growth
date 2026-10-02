@@ -1,17 +1,17 @@
-# Run 20261002T065024Z
+# Run 20261002T113640Z
 
-- Started: 2026-10-02T06:50:24.583132Z
-- Finished: 2026-10-02T06:54:40.440834Z
+- Started: 2026-10-02T11:36:40.730211Z
+- Finished: 2026-10-02T11:41:19.699319Z
 - Overall status: **SUCCESS**
 
 | Step | Status | Collected | Produced | Duration (s) | Error |
 |---|---|---|---|---|---|
-| auth | success | token via environment | None | 0.10 |  |
-| collect_channel_snapshot | success | 143 subs, 203 videos | None | 0.11 |  |
-| collect_video_catalog | success | 205 videos | None | 2.43 |  |
-| collect_analytics | success | 88 daily rows, 15 retention curves | None | 245.37 |  |
-| collect_video_traffic | success | 15 videos' traffic-source breakdown | None | 3.38 |  |
-| collect_traffic_source_trend | success | this-week vs last-week traffic-source split | None | 0.31 |  |
+| auth | success | token via environment | None | 0.15 |  |
+| collect_channel_snapshot | success | 143 subs, 203 videos | None | 0.16 |  |
+| collect_video_catalog | success | 205 videos | None | 3.12 |  |
+| collect_analytics | success | 88 daily rows, 15 retention curves | None | 263.00 |  |
+| collect_video_traffic | success | 15 videos' traffic-source breakdown | None | 5.61 |  |
+| collect_traffic_source_trend | success | this-week vs last-week traffic-source split | None | 0.82 |  |
 | analyze_seo_keywords | success | None | 17 keyword gaps | 0.00 |  |
 | analyze_optimization_opportunities | success | None | 181 flagged videos | 0.00 |  |
 | analyze_shorts_opportunities | success | None | 2 repurpose candidates | 0.00 |  |
@@ -36,9 +36,9 @@
 | analyze_distribution_strategy | success | None | 10 distribution opportunities, 315+ expected external views | 0.00 |  |
 | analyze_impact_tracking | success | None | Impact tracking initialized for optimization measurement | 0.00 |  |
 | calculate_growth_metrics | success | None | Channel Health Score: 50/100 | 0.00 |  |
-| sync_change_approvals | success | 0 newly approved, 0 newly rejected | None | 2.96 |  |
-| apply_approved_changes | success | None | writes OFF: 0 applied, 0 failed, 0 queued | 0.08 |  |
-| generate_change_proposals | success | None | 2 new proposal issue(s) opened | 1.09 |  |
-| save_data_snapshot | success | None | growth_analysis JSON serialization skipped (TypeError) | 0.02 |  |
+| sync_change_approvals | success | 0 newly approved, 0 newly rejected | None | 4.85 |  |
+| apply_approved_changes | success | None | writes OFF: 0 applied, 0 failed, 0 queued | 0.15 |  |
+| generate_change_proposals | success | None | 2 new proposal issue(s) opened | 1.06 |  |
+| save_data_snapshot | success | None | growth_analysis JSON serialization skipped (TypeError) | 0.01 |  |
 | generate_report | success | None | /home/runner/work/andra-youtube-growth/andra-youtube-growth/reports/generated/2026-10-02.md | 0.00 |  |
 | generate_weekly_report | success | None | /home/runner/work/andra-youtube-growth/andra-youtube-growth/reports/generated/weekly_2026-10-02.md | 0.00 |  |
