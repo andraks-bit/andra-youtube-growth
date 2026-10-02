@@ -228,7 +228,7 @@ def main():
             step.set_produced(f"{urgent_count} urgent trends, {seasonal_peaks} seasonal peaks identified")
 
     if all(x is not None for x in (ctr_opt_result, competitor_intel_result, trends_result,
-                                    shorts_result, kw_discovery_result, suggested_strategy_result, new_videos_result)):
+                                    shorts_result, kw_discovery_result, suggested_strategy_result, new_videos_result, traffic_growth_result)):
         with logger.step("build_growth_backlog") as step:
             growth_backlog_result = growth_backlog.build_backlog(
                 ctr_opt_result, shorts_result, kw_discovery_result,
