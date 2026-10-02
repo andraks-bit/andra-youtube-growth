@@ -35,6 +35,7 @@ from analysis import (
     traffic_growth, search_seo, suggested_video_strategy, shorts_to_longform,
     content_opportunity_engine, new_video_launch_package, traffic_growth_actions,
     change_proposals, ctr_optimization, growth_backlog,
+    competitor_intelligence, trend_detection,
 )
 from reports import report_generator, weekly_report_generator
 
@@ -195,7 +196,8 @@ def main():
             )
             step.set_produced(f"{len(traffic_actions_result['actions'])} ranked actions")
 
-    ctr_opt_result = growth_backlog_result = None
+    ctr_opt_result = competitor_intel_result = trends_result = growth_backlog_result = None
+
     if all(x is not None for x in (catalog, analytics, optimization, planning)):
         with logger.step("analyze_ctr_optimization") as step:
             ctr_opt_result = ctr_optimization.analyze(
@@ -205,16 +207,39 @@ def main():
             critical_wins = len(ctr_opt_result.get("critical_ctr_wins", []))
             step.set_produced(f"{critical_failures} urgent CTR fixes, {critical_wins} high-performing patterns")
 
-    if all(x is not None for x in (ctr_opt_result, shorts_result, kw_discovery_result,
-                                    suggested_strategy_result, new_videos_result)):
+    if all(x is not None for x in (catalog, kw_discovery_result, dest_perf_result)):
+        with logger.step("analyze_competitor_intelligence") as step:
+            competitor_intel_result = competitor_intelligence.analyze(
+                catalog, kw_discovery_result, momentum_result, dest_perf_result
+            )
+            gap_count = competitor_intel_result.get("gap_analysis", {}).get("gap_count", 0)
+            opp_count = len(competitor_intel_result.get("opportunities", {}).get("opportunities", []))
+            step.set_produced(f"{gap_count} content gaps identified, {opp_count} opportunities")
+
+    if all(x is not None for x in (catalog, momentum_result, dest_perf_result, kw_discovery_result)):
+        with logger.step("detect_trends_and_demand") as step:
+            trends_result = trend_detection.analyze(
+                catalog, momentum_result, dest_perf_result, kw_discovery_result,
+                analytics=analytics, shorts_result=shorts_result
+            )
+            urgent_count = trends_result.get("total_urgent_count", 0)
+            seasonal_peaks = len(trends_result.get("seasonal_opportunities", {}).get("seasonal_opportunities", []))
+            step.set_produced(f"{urgent_count} urgent trends, {seasonal_peaks} seasonal peaks identified")
+
+    if all(x is not None for x in (ctr_opt_result, competitor_intel_result, trends_result,
+                                    shorts_result, kw_discovery_result, suggested_strategy_result, new_videos_result)):
         with logger.step("build_growth_backlog") as step:
             growth_backlog_result = growth_backlog.build_backlog(
                 ctr_opt_result, shorts_result, kw_discovery_result,
-                suggested_strategy_result, new_videos_result, traffic_growth_result
+                suggested_strategy_result, new_videos_result, traffic_growth_result,
+                competitor_intel_result=competitor_intel_result,
+                trends_result=trends_result,
             )
+            total_opps = growth_backlog_result.get("total_opportunities", 0)
+            high_priority = growth_backlog_result.get("high_priority_count", 0)
             step.set_produced(
-                f"{growth_backlog_result['total_opportunities']} opportunities identified; "
-                f"{growth_backlog_result['high_priority_count']} high-priority"
+                f"{total_opps} growth opportunities; {high_priority} high-priority; "
+                f"top 5: {', '.join([o['title'][:30] for o in growth_backlog_result.get('top_5_this_week', [])[:2]])}"
             )
 
     # --- Step 6: approval workflow (GitHub Issues). Gracefully skipped on
@@ -285,6 +310,8 @@ def main():
                 "content_opportunity": content_opportunity_result,
                 "traffic_growth_actions": traffic_actions_result,
                 "ctr_optimization": ctr_opt_result,
+                "competitor_intelligence": competitor_intel_result,
+                "trend_detection": trends_result,
                 "growth_backlog": growth_backlog_result,
             }
             with open(os.path.join(day_dir, "growth_analysis.json"), "w") as f:
