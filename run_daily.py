@@ -354,9 +354,12 @@ def main():
                 "growth_metrics": metrics_result,
                 "growth_digest": digest_result,
             }
-            with open(os.path.join(day_dir, "growth_analysis.json"), "w") as f:
-                json.dump(growth_analysis, f, indent=2)
-            step.set_produced(f"data/{today}/*.json")
+            try:
+                with open(os.path.join(day_dir, "growth_analysis.json"), "w") as f:
+                    json.dump(growth_analysis, f, indent=2)
+                step.set_produced(f"data/{today}/*.json")
+            except (TypeError, ValueError) as e:
+                step.set_produced(f"growth_analysis JSON serialization skipped ({type(e).__name__})")
 
     if all(x is not None for x in (snapshot, catalog, analytics, seo, optimization, shorts, planning)):
         with logger.step("generate_report") as step:
