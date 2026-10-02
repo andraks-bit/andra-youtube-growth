@@ -23,6 +23,17 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Determine if Monday (for digest)
+        id: check_monday
+        run: |
+          # Check if today is Monday (day 1)
+          DAY=$(date -u +%w)
+          if [ "$DAY" = "1" ]; then
+            echo "send_digest=true" >> $GITHUB_OUTPUT
+          else
+            echo "send_digest=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Run growth system
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
@@ -39,6 +50,13 @@ jobs:
           # other approved one regardless of YT_WRITES_ENABLED. Unset outside
           # an explicit pilot window.
           YT_WRITES_PILOT_ONLY_PROPOSAL_ID: ${{ vars.YT_WRITES_PILOT_ONLY_PROPOSAL_ID }}
+          # Digest delivery: set on Mondays to send weekly summary
+          SEND_DIGEST: ${{ steps.check_monday.outputs.send_digest == 'true' && '1' || '' }}
+          DIGEST_RECIPIENT_EMAIL: ${{ secrets.DIGEST_RECIPIENT_EMAIL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
         run: python run_daily.py
 
       - name: Commit data, logs, and report

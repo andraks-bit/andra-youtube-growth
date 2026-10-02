@@ -22,6 +22,7 @@ import config
 import youtube_api
 import github_api
 import approval_workflow
+import digest
 from run_logger import RunLogger
 from collectors import (
     channel_snapshot, video_catalog, analytics_collector, new_video_detector,
@@ -306,6 +307,17 @@ def main():
             with open(weekly_latest_path, "w") as f:
                 f.write(weekly_md)
             step.set_produced(weekly_path)
+
+    if os.environ.get("SEND_DIGEST"):
+        with logger.step("send_digest") as step:
+            digest_text = digest.generate_digest_text(
+                os.path.join(config.REPORTS_DIR, "weekly_latest.md"),
+                os.path.join(config.DATA_DIR, "pending_changes.json"),
+            )
+            recipient = os.environ.get("DIGEST_RECIPIENT_EMAIL", "andra.kiirkivi@gmail.com")
+            sent = digest.send_digest_email(digest_text, recipient)
+            status = "sent" if sent else "queued for manual review (SMTP not configured)"
+            step.set_produced(f"digest {status} to {recipient}")
 
     summary = logger.finalize()
     print(json.dumps(summary, indent=2))
