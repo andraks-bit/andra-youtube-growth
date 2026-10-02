@@ -332,6 +332,44 @@
       "status": "pending",
       "github_issue_number": 18,
       "commented_queued": false
+    },
+    {
+      "proposal_id": "5139b60474",
+      "type": "playlist",
+      "playlist_title": "Dubai Travel Vlogs",
+      "video_ids": [
+        "YnEF1X3OxIE",
+        "G4czKAlB-KE",
+        "0jNKETzdNY0",
+        "kKhlhUaPDek",
+        "cRqBZdokHlA",
+        "Zm4VNF6JWbs"
+      ],
+      "destination": "Dubai",
+      "reasoning": "44 videos in the Dubai cluster have no playlist yet",
+      "proposed_on": "2026-10-02",
+      "status": "pending",
+      "github_issue_number": 19,
+      "commented_queued": false
+    },
+    {
+      "proposal_id": "b9498889ca",
+      "type": "playlist",
+      "playlist_title": "Sydney / Australia Travel Vlogs",
+      "video_ids": [
+        "iqiGryAPcvk",
+        "WujqrbouwD4",
+        "rk4LdjnVocI",
+        "rV-gVSsENhs",
+        "JtVwnQhImi0",
+        "wBpO-DXf8r4"
+      ],
+      "destination": "Sydney / Australia",
+      "reasoning": "35 videos in the Sydney / Australia cluster have no playlist yet",
+      "proposed_on": "2026-10-02",
+      "status": "pending",
+      "github_issue_number": 20,
+      "commented_queued": false
     }
   ]
 }

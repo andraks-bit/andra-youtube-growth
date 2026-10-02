@@ -541,15 +541,6 @@
         "priority_score": 0.304
       },
       {
-        "destination": "Sydney / Australia",
-        "video_count": 35,
-        "avg_views_90d": 6.9,
-        "avg_retention_pct": 33.5,
-        "momentum_90d_view_delta": 8,
-        "unmet_demand_keywords": 1,
-        "priority_score": 0.26
-      },
-      {
         "destination": "Bali",
         "video_count": 28,
         "avg_views_90d": 5.2,
@@ -557,6 +548,15 @@
         "momentum_90d_view_delta": -1,
         "unmet_demand_keywords": 0,
         "priority_score": 0.249
+      },
+      {
+        "destination": "Sydney / Australia",
+        "video_count": 35,
+        "avg_views_90d": 6.9,
+        "avg_retention_pct": 29.7,
+        "momentum_90d_view_delta": 8,
+        "unmet_demand_keywords": 1,
+        "priority_score": 0.239
       },
       {
         "destination": "Other / Unclassified",
@@ -1694,18 +1694,18 @@
         "rationale": "4 existing videos, avg 2.8 views/90d; 42.6% retention; 1 proven search gap(s)"
       },
       {
-        "destination": "Sydney / Australia",
-        "is_new_destination": false,
-        "priority_score": 0.26,
-        "target_keyword": "crown towers sydney",
-        "rationale": "35 existing videos, avg 6.9 views/90d; 33.5% retention; 1 proven search gap(s); momentum +8"
-      },
-      {
         "destination": "Bali",
         "is_new_destination": false,
         "priority_score": 0.249,
         "target_keyword": "how much does Bali cost",
         "rationale": "28 existing videos, avg 5.2 views/90d; 43.5% retention; momentum -1"
+      },
+      {
+        "destination": "Sydney / Australia",
+        "is_new_destination": false,
+        "priority_score": 0.239,
+        "target_keyword": "crown towers sydney",
+        "rationale": "35 existing videos, avg 6.9 views/90d; 29.7% retention; 1 proven search gap(s); momentum +8"
       },
       {
         "destination": "Dubai",
@@ -1918,20 +1918,6 @@
         "title_options": []
       },
       {
-        "video_id": "WujqrbouwD4",
-        "views_90d": 13,
-        "retention_pct": 27.85,
-        "ctr_proxy_score": 0,
-        "diagnosis": "Average performance; no major red flags or standout signal",
-        "signal_confidence": 0.6,
-        "views_vs_avg_ratio": 0.26,
-        "retention_vs_avg_ratio": 1.0,
-        "title": "\ud83d\ude81 POV: You Said YES to the Best View in Sydney \ud83c\udde6\ud83c\uddfa | ANDRA KIIRKIVI ",
-        "is_top_performer": false,
-        "optimization_target": "No urgent red flags; watch over time",
-        "title_options": []
-      },
-      {
         "video_id": "8c0z_MbqzcQ",
         "views_90d": 13,
         "retention_pct": 6.709999999999999,
@@ -1941,6 +1927,20 @@
         "views_vs_avg_ratio": 0.26,
         "retention_vs_avg_ratio": 1.0,
         "title": "COME AND SPEND TIME WITH ME IN TOKYO\ud83c\uddef\ud83c\uddf5\ud83d\udc3d\ud83d\udc37 #explorejapan #japan #tokyo #japanese",
+        "is_top_performer": false,
+        "optimization_target": "No urgent red flags; watch over time",
+        "title_options": []
+      },
+      {
+        "video_id": "WujqrbouwD4",
+        "views_90d": 13,
+        "retention_pct": 27.85,
+        "ctr_proxy_score": 0,
+        "diagnosis": "Average performance; no major red flags or standout signal",
+        "signal_confidence": 0.6,
+        "views_vs_avg_ratio": 0.26,
+        "retention_vs_avg_ratio": 1.0,
+        "title": "\ud83d\ude81 POV: You Said YES to the Best View in Sydney \ud83c\udde6\ud83c\uddfa | ANDRA KIIRKIVI ",
         "is_top_performer": false,
         "optimization_target": "No urgent red flags; watch over time",
         "title_options": []
@@ -1988,20 +1988,6 @@
         "title_options": []
       },
       {
-        "video_id": "ryLqxRJey9g",
-        "views_90d": 8,
-        "retention_pct": 19.76,
-        "ctr_proxy_score": 0,
-        "diagnosis": "Average performance; no major red flags or standout signal",
-        "signal_confidence": 0.6,
-        "views_vs_avg_ratio": 0.16,
-        "retention_vs_avg_ratio": 1.0,
-        "title": "BALI IS NOT WHAT YOU SEE ON INSTAGRAM \ud83c\uddee\ud83c\udde9 (Honest Lembongan Review + Buggy Trip) | ANDRA KIIRKVI",
-        "is_top_performer": false,
-        "optimization_target": "No urgent red flags; watch over time",
-        "title_options": []
-      },
-      {
         "video_id": "0jNKETzdNY0",
         "views_90d": 8,
         "retention_pct": 118,
@@ -2011,6 +1997,20 @@
         "views_vs_avg_ratio": 0.16,
         "retention_vs_avg_ratio": 1.0,
         "title": "DOGS LIFE IN DUBAI\ud83d\ude0d\ud83d\udc36\ud83c\udde6\ud83c\uddea\u2728 #dog #uae #youtubeshorts #vlogger #dubai #dubailifestyle",
+        "is_top_performer": false,
+        "optimization_target": "No urgent red flags; watch over time",
+        "title_options": []
+      },
+      {
+        "video_id": "ryLqxRJey9g",
+        "views_90d": 8,
+        "retention_pct": 19.76,
+        "ctr_proxy_score": 0,
+        "diagnosis": "Average performance; no major red flags or standout signal",
+        "signal_confidence": 0.6,
+        "views_vs_avg_ratio": 0.16,
+        "retention_vs_avg_ratio": 1.0,
+        "title": "BALI IS NOT WHAT YOU SEE ON INSTAGRAM \ud83c\uddee\ud83c\udde9 (Honest Lembongan Review + Buggy Trip) | ANDRA KIIRKVI",
         "is_top_performer": false,
         "optimization_target": "No urgent red flags; watch over time",
         "title_options": []
@@ -2030,20 +2030,6 @@
         "title_options": []
       },
       {
-        "video_id": "h3xclTObQwY",
-        "views_90d": 7,
-        "retention_pct": 28.7,
-        "ctr_proxy_score": 0,
-        "diagnosis": "Average performance; no major red flags or standout signal",
-        "signal_confidence": 0.6,
-        "views_vs_avg_ratio": 0.14,
-        "retention_vs_avg_ratio": 1.0,
-        "title": "SAFARI ZOO IN MARBELLA, ESTEPONA\ud83e\udef6\ud83c\udffd\ud83d\udc18\ud83d\udc12\ud83e\udd81\ud83e\udd9b\ud83e\udd98\ud83e\udd92\ud83e\udd93 CHECK IT OUT, SUPER COOL PLACE\ud83e\udd29 #zoo #travel",
-        "is_top_performer": false,
-        "optimization_target": "No urgent red flags; watch over time",
-        "title_options": []
-      },
-      {
         "video_id": "kKhlhUaPDek",
         "views_90d": 7,
         "retention_pct": 19.81,
@@ -2053,6 +2039,20 @@
         "views_vs_avg_ratio": 0.14,
         "retention_vs_avg_ratio": 1.0,
         "title": "Living the Dubai Life \ud83c\udde6\ud83c\uddea\u2600\ufe0f | A Few Days with Me\ud83d\udc81\ud83c\udffc\u200d\u2640\ufe0f | ANDRA KIIRKIVI",
+        "is_top_performer": false,
+        "optimization_target": "No urgent red flags; watch over time",
+        "title_options": []
+      },
+      {
+        "video_id": "TkHEq4FhPBw",
+        "views_90d": 7,
+        "retention_pct": 77.13,
+        "ctr_proxy_score": 0,
+        "diagnosis": "Average performance; no major red flags or standout signal",
+        "signal_confidence": 0.6,
+        "views_vs_avg_ratio": 0.14,
+        "retention_vs_avg_ratio": 1.0,
+        "title": "SEPTEMBER IN NYC\ud83c\uddfa\ud83c\uddf8\ud83e\udef6\ud83c\udffd\ud83d\ude95\ud83d\uddfd #newyork #manhattan #usa #nyc #shorts #vlog #vlogger #video",
         "is_top_performer": false,
         "optimization_target": "No urgent red flags; watch over time",
         "title_options": []
@@ -2072,15 +2072,15 @@
         "title_options": []
       },
       {
-        "video_id": "TkHEq4FhPBw",
+        "video_id": "h3xclTObQwY",
         "views_90d": 7,
-        "retention_pct": 77.13,
+        "retention_pct": 28.7,
         "ctr_proxy_score": 0,
         "diagnosis": "Average performance; no major red flags or standout signal",
         "signal_confidence": 0.6,
         "views_vs_avg_ratio": 0.14,
         "retention_vs_avg_ratio": 1.0,
-        "title": "SEPTEMBER IN NYC\ud83c\uddfa\ud83c\uddf8\ud83e\udef6\ud83c\udffd\ud83d\ude95\ud83d\uddfd #newyork #manhattan #usa #nyc #shorts #vlog #vlogger #video",
+        "title": "SAFARI ZOO IN MARBELLA, ESTEPONA\ud83e\udef6\ud83c\udffd\ud83d\udc18\ud83d\udc12\ud83e\udd81\ud83e\udd9b\ud83e\udd98\ud83e\udd92\ud83e\udd93 CHECK IT OUT, SUPER COOL PLACE\ud83e\udd29 #zoo #travel",
         "is_top_performer": false,
         "optimization_target": "No urgent red flags; watch over time",
         "title_options": []
@@ -2114,20 +2114,6 @@
         "title_options": []
       },
       {
-        "video_id": "cRqBZdokHlA",
-        "views_90d": 5,
-        "retention_pct": 11.34,
-        "ctr_proxy_score": 0,
-        "diagnosis": "Average performance; no major red flags or standout signal",
-        "signal_confidence": 0.6,
-        "views_vs_avg_ratio": 0.1,
-        "retention_vs_avg_ratio": 1.0,
-        "title": "When your boyfriend surprises you\ud83e\udd70\ud83e\udd79\u2728\ud83c\udf39\u2764\ufe0f #dubai #youtubeshorts #dubailifestyle #burjkhalifa",
-        "is_top_performer": false,
-        "optimization_target": "No urgent red flags; watch over time",
-        "title_options": []
-      },
-      {
         "video_id": "wBpO-DXf8r4",
         "views_90d": 5,
         "retention_pct": 5.48,
@@ -2137,6 +2123,20 @@
         "views_vs_avg_ratio": 0.1,
         "retention_vs_avg_ratio": 1.0,
         "title": "NEWCASTLE, AUSTRALIA \ud83c\udde6\ud83c\uddfa \u2013 Hidden Gem + Wine Valley Road Trip \ud83c\udf77\ud83d\ude33 | ANDRA KIIRKIVI",
+        "is_top_performer": false,
+        "optimization_target": "No urgent red flags; watch over time",
+        "title_options": []
+      },
+      {
+        "video_id": "cRqBZdokHlA",
+        "views_90d": 5,
+        "retention_pct": 11.34,
+        "ctr_proxy_score": 0,
+        "diagnosis": "Average performance; no major red flags or standout signal",
+        "signal_confidence": 0.6,
+        "views_vs_avg_ratio": 0.1,
+        "retention_vs_avg_ratio": 1.0,
+        "title": "When your boyfriend surprises you\ud83e\udd70\ud83e\udd79\u2728\ud83c\udf39\u2764\ufe0f #dubai #youtubeshorts #dubailifestyle #burjkhalifa",
         "is_top_performer": false,
         "optimization_target": "No urgent red flags; watch over time",
         "title_options": []
@@ -2206,6 +2206,16 @@
         "title_options": []
       },
       {
+        "video_id": "q7ailCDtrig",
+        "ctr_proxy_score": 0,
+        "diagnosis": "Insufficient data (low views or no retention)",
+        "signal_confidence": 0.0,
+        "title": "Exploring Sydney City & Chinatown\u2026 Not What I Expected \ud83d\ude33\ud83c\udde6\ud83c\uddfa | VLOG | ANDRA KIIRKIVI",
+        "is_top_performer": false,
+        "optimization_target": "No urgent red flags; watch over time",
+        "title_options": []
+      },
+      {
         "video_id": "_ftW0mMsYrM",
         "ctr_proxy_score": 0,
         "diagnosis": "Insufficient data (low views or no retention)",
@@ -2236,16 +2246,6 @@
         "title_options": []
       },
       {
-        "video_id": "q7ailCDtrig",
-        "ctr_proxy_score": 0,
-        "diagnosis": "Insufficient data (low views or no retention)",
-        "signal_confidence": 0.0,
-        "title": "Exploring Sydney City & Chinatown\u2026 Not What I Expected \ud83d\ude33\ud83c\udde6\ud83c\uddfa | VLOG | ANDRA KIIRKIVI",
-        "is_top_performer": false,
-        "optimization_target": "No urgent red flags; watch over time",
-        "title_options": []
-      },
-      {
         "video_id": "wJn9KPrmb3E",
         "ctr_proxy_score": 0,
         "diagnosis": "Insufficient data (low views or no retention)",
@@ -2266,11 +2266,11 @@
         "title_options": []
       },
       {
-        "video_id": "R2GSVmig-HU",
+        "video_id": "cA18LxPJz2Q",
         "ctr_proxy_score": 0,
         "diagnosis": "Insufficient data (low views or no retention)",
         "signal_confidence": 0.0,
-        "title": "I Found the Home & Away Beach\u2026 and Wild Kangaroos \ud83d\ude33\ud83c\udde6\ud83c\uddfa | ANDRA KIIRKIVI",
+        "title": "Sydney Zoo\u2026 Not What I Expected \ud83d\ude33\ud83d\udc28\ud83c\udde6\ud83c\uddfa | ANDRA KIIRKIVI | VLOG ",
         "is_top_performer": false,
         "optimization_target": "No urgent red flags; watch over time",
         "title_options": []
