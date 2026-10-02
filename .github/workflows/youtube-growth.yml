@@ -67,15 +67,16 @@ jobs:
           git add data logs reports/generated
           git diff --cached --quiet && exit 0
           git commit -m "Automated YouTube growth run $(date -u +%Y-%m-%d)"
-          # Retry on push rejection (another push landed on main while this
-          # run was executing, e.g. a manual commit or an overlapping run) --
-          # fetch + rebase onto the new tip and retry, rather than losing
-          # this run's report/data outright.
+          # Retry on push rejection with fetch+rebase to handle concurrent
+          # pushes (e.g. overlapping runs, manual commits). Fetch first to
+          # ensure we have the latest remote state before rebasing.
+          git fetch origin main
           for attempt in 1 2 3 4 5; do
             if git push; then
               exit 0
             fi
-            echo "Push rejected (attempt $attempt/5) -- fetching and rebasing onto origin/main"
+            echo "Push rejected (attempt $attempt/5) -- rebasing onto origin/main and retrying"
+            git rebase --abort 2>/dev/null || true
             git fetch origin main
             git rebase origin/main
           done
