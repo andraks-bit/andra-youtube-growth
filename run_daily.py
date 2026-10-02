@@ -197,7 +197,7 @@ def main():
             )
             step.set_produced(f"{len(traffic_actions_result['actions'])} ranked actions")
 
-    ctr_opt_result = competitor_intel_result = trends_result = growth_backlog_result = None
+    ctr_opt_result = competitor_intel_result = trends_result = growth_backlog_result = shorts_result = None
 
     if all(x is not None for x in (catalog, analytics, optimization, planning)):
         with logger.step("analyze_ctr_optimization") as step:
