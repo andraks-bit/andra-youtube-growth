@@ -190,6 +190,55 @@
       "status": "pending",
       "github_issue_number": 10,
       "commented_queued": false
+    },
+    {
+      "proposal_id": "c23fa72315",
+      "type": "metadata_update",
+      "video_id": "OXX5JSy4F_o",
+      "current_title": "THE MOST LUXURIOUS HOTEL IN SYDNEY !\ud83c\udde6\ud83c\uddfa\u2728\ud83d\udc51 #sydney #hotel #australia #vlog #shorts",
+      "proposed_title": "Sydney / Australia Travel Vlog crown towers sydney",
+      "proposed_description": "Sydney / Australia -- crown towers sydney\n\n(original description was empty -- add 2-3 sentences here.)\n\nFollow for more travel vlogs.\n#Sydney #crowntowerssydney #travelvlog",
+      "proposed_tags": [
+        "Sydney",
+        "Australia",
+        "crown towers sydney",
+        "andra",
+        "kiirkivi",
+        "japan",
+        "vlog",
+        "bali",
+        "youtubeshorts"
+      ],
+      "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
+      "destination": "Sydney / Australia",
+      "proposed_on": "2026-10-02",
+      "status": "pending",
+      "github_issue_number": 11,
+      "commented_queued": false
+    },
+    {
+      "proposal_id": "7578aed481",
+      "type": "metadata_update",
+      "video_id": "ajHFYLk5J2A",
+      "current_title": "SYDNEY LIFE\ud83d\udccd\ud83c\udde6\ud83c\uddfa\ud83d\udc28\ud83e\udd98\ud83c\udf06\ud83c\udf09\ud83c\udfd9\ufe0f #youtubeshorts #travel #australiadiaries #sydney #sydneyvlog",
+      "proposed_title": "Sydney / Australia Travel Vlog 2026",
+      "proposed_description": "Sydney / Australia -- 2026\n\n(original description was empty -- add 2-3 sentences here.)\n\nFollow for more travel vlogs.\n#Sydney #travelvlog",
+      "proposed_tags": [
+        "Sydney",
+        "Australia",
+        "andra",
+        "kiirkivi",
+        "japan",
+        "vlog",
+        "bali",
+        "youtubeshorts"
+      ],
+      "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
+      "destination": "Sydney / Australia",
+      "proposed_on": "2026-10-02",
+      "status": "pending",
+      "github_issue_number": 12,
+      "commented_queued": false
     }
   ]
 }
