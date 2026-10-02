@@ -239,6 +239,51 @@
       "status": "pending",
       "github_issue_number": 12,
       "commented_queued": false
+    },
+    {
+      "proposal_id": "4363dbd56c",
+      "type": "metadata_update",
+      "video_id": "w-AkEt3EDgY",
+      "current_title": "BALI- LEMBONGAN ISLAND\ud83d\ude0d #travel #bali #indonesia #vlog #youtubeshorts",
+      "proposed_title": "Bali Travel Vlog 2026",
+      "proposed_description": "Bali -- 2026\n\n(original description was empty -- add 2-3 sentences here.)\n\nFollow for more travel vlogs.\n#Bali #travelvlog",
+      "proposed_tags": [
+        "Bali",
+        "andra",
+        "kiirkivi",
+        "japan",
+        "vlog",
+        "youtubeshorts"
+      ],
+      "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
+      "destination": "Bali",
+      "proposed_on": "2026-10-02",
+      "status": "pending",
+      "github_issue_number": 13,
+      "commented_queued": false
+    },
+    {
+      "proposal_id": "b47914c951",
+      "type": "metadata_update",
+      "video_id": "TkHEq4FhPBw",
+      "current_title": "SEPTEMBER IN NYC\ud83c\uddfa\ud83c\uddf8\ud83e\udef6\ud83c\udffd\ud83d\ude95\ud83d\uddfd #newyork #manhattan #usa #nyc #shorts #vlog #vlogger #video",
+      "proposed_title": "New York City Travel Vlog 2026",
+      "proposed_description": "New York City -- 2026\n\n(original description was empty -- add 2-3 sentences here.)\n\nFollow for more travel vlogs.\n#NewYorkCity #travelvlog",
+      "proposed_tags": [
+        "New York City",
+        "andra",
+        "kiirkivi",
+        "japan",
+        "vlog",
+        "bali",
+        "youtubeshorts"
+      ],
+      "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
+      "destination": "New York City",
+      "proposed_on": "2026-10-02",
+      "status": "pending",
+      "github_issue_number": 14,
+      "commented_queued": false
     }
   ]
 }

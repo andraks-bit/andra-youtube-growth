@@ -195,8 +195,8 @@ priority_score blends this destination's average 90-day views, average retention
 | Other / Unclassified | 53 | 0.7 | 38.4% | 0 | +6 | 0.216 |
 | Dubai | 44 | 5.6 | 30.9% | 0 | +3 | 0.18 |
 | Colombo / Sri Lanka | 14 | 1.1 | 8.6% | 0 | +0 | 0.05 |
-| Punta Cana | 0 | 0 | n/a | 0 | +0 | 0.0 |
 | Milan | 1 | 0.0 | n/a | 0 | +0 | 0.0 |
+| Punta Cana | 0 | 0 | n/a | 0 | +0 | 0.0 |
 
 ## Keyword discovery by destination
 gaps_by_destination = real search terms already driving views (YouTube Analytics, last 90 days) not yet present in that destination's video text. template_opportunities_by_destination = generic high-intent query patterns (config.KEYWORD_INTENT_TEMPLATES), NOT real search-volume data -- there is no keyword-research API authorized for this project.
@@ -1154,4 +1154,4 @@ Ranked by destination_performance's priority_score (real views + retention + mom
 - [EXPAND] **Sydney / Australia** (score 0.239) | target keyword: "crown towers sydney" -- 35 existing videos, avg 6.9 views/90d; 29.7% retention; 1 proven search gap(s); momentum +8
 - [EXPAND] **Dubai** (score 0.18) | target keyword: "how much does Dubai cost" -- 44 existing videos, avg 5.6 views/90d; 30.9% retention; momentum +3
 - [EXPAND] **Colombo / Sri Lanka** (score 0.05) -- 14 existing videos, avg 1.1 views/90d; 8.6% retention
-- [NEW DESTINATION] **Punta Cana** (score 0.0) | target keyword: "how much does Punta Cana cost" -- not yet covered on the channel
+- [EXPAND] **Milan** (score 0.0) | target keyword: "how much does Milan cost" -- 1 existing videos, avg 0.0 views/90d

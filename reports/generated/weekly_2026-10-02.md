@@ -16,8 +16,8 @@ Note: impressions and click-through rate are not included below -- the public Yo
 ## Traffic sources: this week vs. last week
 - SHORTS: 1165 vs 0 (n/a)
 - YT_SEARCH: 67 vs 37 (+81.1%)
-- RELATED_VIDEO: 22 vs 152 (-85.5%)
 - YT_CHANNEL: 22 vs 11 (+100.0%)
+- RELATED_VIDEO: 22 vs 152 (-85.5%)
 - SUBSCRIBER: 20 vs 11 (+81.8%)
 - YT_OTHER_PAGE: 18 vs 0 (n/a)
 - EXT_URL: 7 vs 1 (+600.0%)
