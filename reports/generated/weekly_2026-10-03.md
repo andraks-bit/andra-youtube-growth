@@ -6,24 +6,12 @@ Note: impressions and click-through rate are not included below -- the public Yo
 
 ## Channel snapshot
 - Subscribers: 142
-- Lifetime views: 89242
+- Lifetime views: 89276
 
 ## This week vs. last week
 - Views: 3298 vs 222 (+1385.6%)
 - Watch time: 568 min vs 230 min (+147.0%)
 - Subscribers this week: +5 / -0
-
-## Traffic sources: this week vs. last week
-- SHORTS: 3030 vs 0 (n/a)
-- YT_SEARCH: 100 vs 44 (+127.3%)
-- YT_OTHER_PAGE: 45 vs 0 (n/a)
-- YT_CHANNEL: 33 vs 11 (+200.0%)
-- SUBSCRIBER: 25 vs 11 (+127.3%)
-- RELATED_VIDEO: 23 vs 152 (-84.9%)
-- EXT_URL: 17 vs 1 (+1600.0%)
-- NOTIFICATION: 14 vs 0 (n/a)
-
-- Search traffic this week: 100 | Suggested: 23 | Browse: 0
 
 ## New videos this week
 - COME W ME TO DISNEYLAND TOKYO🇯🇵🏰💖🩷🎠🥳 #japan #tokyo #tokyodisneyland (published 2026-10-02)

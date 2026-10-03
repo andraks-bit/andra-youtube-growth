@@ -446,6 +446,52 @@
       "status": "pending",
       "github_issue_number": 24,
       "commented_queued": false
+    },
+    {
+      "proposal_id": "d2f3425f6d",
+      "type": "metadata_update",
+      "video_id": "QGA032cH8rc",
+      "current_title": "LEMBONGAN ISLAND BALI\ud83c\uddee\ud83c\udde9\ud83e\udd65\ud83c\udf27\ufe0f\ud83c\udfdd\ufe0f #lembongan #island #islandlife #bali #indonesia #shorts #youtube",
+      "proposed_title": "Bali Travel Vlog 2026",
+      "proposed_description": "Bali -- 2026\n\n(original description was empty -- add 2-3 sentences here.)\n\nFollow for more travel vlogs.\n#Bali #travelvlog",
+      "proposed_tags": [
+        "Bali",
+        "tokyo",
+        "japan",
+        "vlog",
+        "andra",
+        "kiirkivi"
+      ],
+      "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
+      "destination": "Bali",
+      "proposed_on": "2026-10-03",
+      "status": "pending",
+      "github_issue_number": 25,
+      "commented_queued": false
+    },
+    {
+      "proposal_id": "957c29cdae",
+      "type": "metadata_update",
+      "video_id": "5Xg7Vn-1Eds",
+      "current_title": "\u2764\ufe0f\ud83d\udc8b\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39\ud83c\udf39",
+      "proposed_title": "Other / Unclassified Travel Vlog 2026",
+      "proposed_description": "Other / Unclassified -- 2026\n\n(original description was empty -- add 2-3 sentences here.)\n\nFollow for more travel vlogs.\n#Other #travelvlog",
+      "proposed_tags": [
+        "Other",
+        "Unclassified",
+        "tokyo",
+        "japan",
+        "vlog",
+        "andra",
+        "kiirkivi",
+        "bali"
+      ],
+      "reasoning": "no tags set on this video; description is very short (<50 chars) -- limited SEO surface",
+      "destination": "Other / Unclassified",
+      "proposed_on": "2026-10-03",
+      "status": "pending",
+      "github_issue_number": 26,
+      "commented_queued": false
     }
   ]
 }

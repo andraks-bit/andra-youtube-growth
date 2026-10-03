@@ -13,7 +13,7 @@ Ranked by a transparent heuristic built from real numbers behind each candidate 
 
 ## Channel snapshot
 - Subscribers: 142
-- Lifetime views: 89242
+- Lifetime views: 89276
 - Video count: 205
 
 ## Last 90 days
@@ -70,53 +70,6 @@ keyword_gaps = search queries that already bring real views (per YouTube Analyti
 Suggestions only. No titles, descriptions, tags, or thumbnails were changed.
 Channel average retention (90d): 37.1%
 
-### MANLY BEACH SYDNEY🇦🇺📍 Vlog ! #youtubeshorts #travel #vlog #sydney #sydney #australia
-- Video ID: AynTk_WorY8  |  Lifetime views: 2487
-  - no tags set on this video
-  - description is very short (<50 chars) -- limited SEO surface
-### DOGS LIFE IN DUBAI😍🐶🇦🇪✨ #dog #uae #youtubeshorts #vlogger #dubai #dubailifestyle
-- Video ID: 0jNKETzdNY0  |  Lifetime views: 2404
-  - no tags set on this video
-  - description is very short (<50 chars) -- limited SEO surface
-### TESTING BRABUS G WAGON IN DUBAI💁🏼‍♀️🇦🇪🔥#gwagon #brabus #brabusgwagon #dubai #dubailife #uae
-- Video ID: U6OEcd6fIvw  |  Lifetime views: 2188
-  - no tags set on this video
-### MANLY BEACH SYDNEY📍🇦🇺 New Vlog ! #youtubeshorts #sydney #sydneyvlog #australia
-- Video ID: P9CUFqjTn9o  |  Lifetime views: 2078
-  - no tags set on this video
-  - description is very short (<50 chars) -- limited SEO surface
-### SYDNEY ZOO WORTH IT OR NOT ?😳#sydney #sydneyvlog #australia #australiavlog #shorts #zoo
-- Video ID: JtVwnQhImi0  |  Lifetime views: 1688
-  - no tags set on this video
-  - description is very short (<50 chars) -- limited SEO surface
-### FRIDAY FUN IN PUERTO BANÚS, MARBELLA 🇪🇸🌴💋 #shorts #vlog #lamborghini #red #youtubeshorts
-- Video ID: cgR374ohKNM  |  Lifetime views: 1672
-  - no tags set on this video
-  - description is very short (<50 chars) -- limited SEO surface
-### THE MOST LUXURIOUS HOTEL IN SYDNEY !🇦🇺✨👑 #sydney #hotel #australia #vlog #shorts
-- Video ID: OXX5JSy4F_o  |  Lifetime views: 1596
-  - no tags set on this video
-  - description is very short (<50 chars) -- limited SEO surface
-### SYDNEY LIFE📍🇦🇺🐨🦘🌆🌉🏙️ #youtubeshorts #travel #australiadiaries #sydney #sydneyvlog
-- Video ID: ajHFYLk5J2A  |  Lifetime views: 1592
-  - no tags set on this video
-  - description is very short (<50 chars) -- limited SEO surface
-### BALI- LEMBONGAN ISLAND😍 #travel #bali #indonesia #vlog #youtubeshorts
-- Video ID: w-AkEt3EDgY  |  Lifetime views: 1575
-  - no tags set on this video
-  - description is very short (<50 chars) -- limited SEO surface
-### SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhattan #usa #nyc #shorts #vlog #vlogger #video
-- Video ID: TkHEq4FhPBw  |  Lifetime views: 1551
-  - no tags set on this video
-  - description is very short (<50 chars) -- limited SEO surface
-### NEWCASTLE AUSTRALIA VLOG !🇦🇺🌏🦘🐨. WATCH TIL END TO SEE WHAT HAPPENED TO OUR CAR🥹😢😏 #sydney
-- Video ID: PrWJZprm--4  |  Lifetime views: 1481
-  - no tags set on this video
-  - description is very short (<50 chars) -- limited SEO surface
-### DUBAI FOUNTAIN AND ROSES🇦🇪🌹💋❤️✨#dubai #dubailifestyle #vlog #dubaifountainshow
-- Video ID: L3QGpbgZmTM  |  Lifetime views: 1455
-  - no tags set on this video
-  - description is very short (<50 chars) -- limited SEO surface
 ### LEMBONGAN ISLAND BALI🇮🇩🥥🌧️🏝️ #lembongan #island #islandlife #bali #indonesia #shorts #youtube
 - Video ID: QGA032cH8rc  |  Lifetime views: 1444
   - no tags set on this video
@@ -129,11 +82,59 @@ Channel average retention (90d): 37.1%
 - Video ID: cRqBZdokHlA  |  Lifetime views: 1415
   - no tags set on this video
   - description is very short (<50 chars) -- limited SEO surface
+### 📍PORTO CERVO | SARDINIA, ITALY #italy #shorts #vlog #sardinia #portocervo #lifestylevlogger #life
+- Video ID: cFp9jfeyEqM  |  Lifetime views: 1334
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
+### EXPLORING SYDNEY 📍🇦🇺💁🏼‍♀️ #travel #sydney #sydneyoperahouse #australia #australiavlog #youtube
+- Video ID: aWi3bf5TaDw  |  Lifetime views: 1292
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
+### NEW VLOG WITH MY YORKSHIRE BENJAMIN 😍🐶🇫🇮❄️ #vlog #dog #shorts #youtubeshorts #snow #travel
+- Video ID: -hZpkXnEyt0  |  Lifetime views: 1241
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
+### NEW VLOG ! Wild Kangaroos😳🇦🇺🦘 #youtubeshorts #travel #sydney #australia #australiavlog
+- Video ID: KGVXVL8qKYg  |  Lifetime views: 1233
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
+### YORKSHIRE TERRIER ENJOYING THE MALL💚💛🐶🐾 #yorkshire #yorkshireterrier #mall #shorts #youtube
+- Video ID: DzEBkeB-qEU  |  Lifetime views: 1131
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
+### TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo #visitjapan #japanese
+- Video ID: xOqM9Krj5TQ  |  Lifetime views: 1121
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
+### NEW JAPAN VLOG🎌🇯🇵🏯 #explorejapan #japan #luxurylifestyle #japan2026 #tokyo #tokyotravel
+- Video ID: 6X3wabBXrPM  |  Lifetime views: 1082
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
+### JETCAR FUN IN MALDIVES🥰
+- Video ID: 4QXt1cwgRKM  |  Lifetime views: 1042
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
+### ✨DUBAI NIGHTS !😍🇦🇪✨#youtubeshorts #vlog #dubai #uae #burjkhalifa #youtube
+- Video ID: 8xOvYmKFGtQ  |  Lifetime views: 1016
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
+### MALDIVES VLOG PART 2 ! 💕🩵🏝️💁🏼‍♀️ #maldives #vlog #youtubeshorts #shorts #vlogger
+- Video ID: ijWGbdt5vXs  |  Lifetime views: 1010
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
+### LEMBONGAN ISLAND LIFE in BALI🇮🇩 #bali #island #youtubeshorts #islandlife #indonesia
+- Video ID: lTftUIpGHLA  |  Lifetime views: 975
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
+### Dubai Fountain show✨😍🥳 #dubai #dubailifestyle #dubaifountainshow #shorts #youtube
+- Video ID: w-k9wPVyJpI  |  Lifetime views: 973
+  - no tags set on this video
+  - description is very short (<50 chars) -- limited SEO surface
 
 ## Shorts vs long-form
 'is_likely_short' is a <=180s duration heuristic, not an official YouTube flag -- the public API does not expose one.
-- Shorts: {'count': 130, 'avg_lifetime_views': 500.9, 'avg_retention_pct_90d': 66.0}
-- Long-form: {'count': 77, 'avg_lifetime_views': 325.0, 'avg_retention_pct_90d': 14.8}
+- Shorts: {'count': 130, 'avg_lifetime_views': 501.4, 'avg_retention_pct_90d': 66.0}
+- Long-form: {'count': 77, 'avg_lifetime_views': 325.2, 'avg_retention_pct_90d': 14.8}
 - Repurpose-into-Shorts candidates (high-retention long-form clips):
   - CROWN SYDNEY – Most Luxurious Hotel in Australia?! 😳🇦🇺 | ANDRA KIIRKIVI (retention 18.7%, 731s)
 
@@ -295,221 +296,10 @@ gaps_by_destination = real search terms already driving views (YouTube Analytics
 ## Metadata rewrite suggestions for existing videos
 Template-based suggestions built from this channel's own proven keywords and real search-term gaps -- not LLM-generated copy. Nothing was changed on YouTube; review and edit before using. preserved_top_performers lists videos that tripped a technical flag but were deliberately left out because they're already top performers -- 'never change a strong-performing video blindly'.
 
-### MANLY BEACH SYDNEY🇦🇺📍 Vlog ! #youtubeshorts #travel #vlog #sydney #sydney #australia
-Destination: Sydney / Australia  |  Video ID: AynTk_WorY8
-Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
-Target keyword: 2026  |  Secondary: tokyo, japan, vlog
+**Preserved (already top performers, left untouched):** TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja, NEW JAPAN VLOG🎌🇯🇵🏯 #explorejapan #japan 
 
-Suggested titles:
-- Sydney / Australia Travel Vlog 2026
-- Sydney / Australia: Tokyo 2026
-- Exploring Sydney / Australia -- 2026
-
-Suggested tags: Sydney, Australia, tokyo, japan, vlog, andra, kiirkivi, bali
-Suggested hashtags: #Sydney #travelvlog
-Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
-
-Suggested description:
-```
-Sydney / Australia -- 2026
-
-(original description was empty -- add 2-3 sentences here.)
-
-Follow for more travel vlogs.
-#Sydney #travelvlog
-```
-
-Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
-
-### DOGS LIFE IN DUBAI😍🐶🇦🇪✨ #dog #uae #youtubeshorts #vlogger #dubai #dubailifestyle
-Destination: Dubai  |  Video ID: 0jNKETzdNY0
-Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
-Target keyword: 2026  |  Secondary: tokyo, japan, vlog
-
-Suggested titles:
-- Dubai Travel Vlog 2026
-- Dubai: Tokyo 2026
-- Exploring Dubai -- 2026
-
-Suggested tags: Dubai, tokyo, japan, vlog, andra, kiirkivi, bali
-Suggested hashtags: #Dubai #travelvlog
-Thumbnail text ideas: DUBAI! / IS IT WORTH IT? / DUBAI TRUTH / WE DID THIS IN DUBAI
-
-Suggested description:
-```
-Dubai -- 2026
-
-(original description was empty -- add 2-3 sentences here.)
-
-Follow for more travel vlogs.
-#Dubai #travelvlog
-```
-
-Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
-
-### TESTING BRABUS G WAGON IN DUBAI💁🏼‍♀️🇦🇪🔥#gwagon #brabus #brabusgwagon #dubai #dubailife #uae
-Destination: Dubai  |  Video ID: U6OEcd6fIvw
-Flagged because: no tags set on this video
-Target keyword: 2026  |  Secondary: tokyo, japan, vlog
-
-Suggested titles:
-- Dubai Travel Vlog 2026
-- Dubai: Tokyo 2026
-- Exploring Dubai -- 2026
-
-Suggested tags: Dubai, tokyo, japan, vlog, andra, kiirkivi, bali
-Suggested hashtags: #Dubai #travelvlog
-Thumbnail text ideas: DUBAI! / IS IT WORTH IT? / DUBAI TRUTH / WE DID THIS IN DUBAI
-
-Suggested description:
-```
-Dubai -- 2026
-
-Weekend in Dubai 🇦🇪 | BRABUS G-WAGON 🔥
-
-Testing the powerful BRABUS G-WAGON during a luxury weekend in Dubai.
-Supercar vibes, elite lifestyle and unforgettable city energy.
-
-If you love Dubai vlogs, l
-
-Follow for more travel vlogs.
-#Dubai #travelvlog
-```
-
-Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
-
-### MANLY BEACH SYDNEY📍🇦🇺 New Vlog ! #youtubeshorts #sydney #sydneyvlog #australia
-Destination: Sydney / Australia  |  Video ID: P9CUFqjTn9o
-Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
-Target keyword: 2026  |  Secondary: tokyo, japan, vlog
-
-Suggested titles:
-- Sydney / Australia Travel Vlog 2026
-- Sydney / Australia: Tokyo 2026
-- Exploring Sydney / Australia -- 2026
-
-Suggested tags: Sydney, Australia, tokyo, japan, vlog, andra, kiirkivi, bali
-Suggested hashtags: #Sydney #travelvlog
-Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
-
-Suggested description:
-```
-Sydney / Australia -- 2026
-
-(original description was empty -- add 2-3 sentences here.)
-
-Follow for more travel vlogs.
-#Sydney #travelvlog
-```
-
-Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
-
-### SYDNEY ZOO WORTH IT OR NOT ?😳#sydney #sydneyvlog #australia #australiavlog #shorts #zoo
-Destination: Sydney / Australia  |  Video ID: JtVwnQhImi0
-Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
-Target keyword: 2026  |  Secondary: tokyo, japan, vlog
-
-Suggested titles:
-- Sydney / Australia Travel Vlog 2026
-- Sydney / Australia: Tokyo 2026
-- Exploring Sydney / Australia -- 2026
-
-Suggested tags: Sydney, Australia, tokyo, japan, vlog, andra, kiirkivi, bali
-Suggested hashtags: #Sydney #travelvlog
-Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
-
-Suggested description:
-```
-Sydney / Australia -- 2026
-
-(original description was empty -- add 2-3 sentences here.)
-
-Follow for more travel vlogs.
-#Sydney #travelvlog
-```
-
-Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
-
-### FRIDAY FUN IN PUERTO BANÚS, MARBELLA 🇪🇸🌴💋 #shorts #vlog #lamborghini #red #youtubeshorts
-Destination: Marbella / Puerto Banus  |  Video ID: cgR374ohKNM
-Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
-Target keyword: 2026  |  Secondary: tokyo, japan, vlog
-
-Suggested titles:
-- Marbella / Puerto Banus Travel Vlog 2026
-- Marbella / Puerto Banus: Tokyo 2026
-- Exploring Marbella / Puerto Banus -- 2026
-
-Suggested tags: Marbella, Puerto Banus, tokyo, japan, vlog, andra, kiirkivi, bali
-Suggested hashtags: #Marbella #travelvlog
-Thumbnail text ideas: MARBELLA! / IS IT WORTH IT? / MARBELLA TRUTH / WE DID THIS IN MARBELLA
-
-Suggested description:
-```
-Marbella / Puerto Banus -- 2026
-
-(original description was empty -- add 2-3 sentences here.)
-
-Follow for more travel vlogs.
-#Marbella #travelvlog
-```
-
-Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
-
-### THE MOST LUXURIOUS HOTEL IN SYDNEY !🇦🇺✨👑 #sydney #hotel #australia #vlog #shorts
-Destination: Sydney / Australia  |  Video ID: OXX5JSy4F_o
-Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
-Target keyword: crown towers sydney  |  Secondary: tokyo, japan, vlog
-
-Suggested titles:
-- Sydney / Australia Travel Vlog crown towers sydney
-- Sydney / Australia: Tokyo crown towers sydney
-- Exploring Sydney / Australia -- crown towers sydney
-
-Suggested tags: Sydney, Australia, crown towers sydney, tokyo, japan, vlog, andra, kiirkivi, bali
-Suggested hashtags: #Sydney #crowntowerssydney #travelvlog
-Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
-
-Suggested description:
-```
-Sydney / Australia -- crown towers sydney
-
-(original description was empty -- add 2-3 sentences here.)
-
-Follow for more travel vlogs.
-#Sydney #crowntowerssydney #travelvlog
-```
-
-Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
-
-### SYDNEY LIFE📍🇦🇺🐨🦘🌆🌉🏙️ #youtubeshorts #travel #australiadiaries #sydney #sydneyvlog
-Destination: Sydney / Australia  |  Video ID: ajHFYLk5J2A
-Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
-Target keyword: 2026  |  Secondary: tokyo, japan, vlog
-
-Suggested titles:
-- Sydney / Australia Travel Vlog 2026
-- Sydney / Australia: Tokyo 2026
-- Exploring Sydney / Australia -- 2026
-
-Suggested tags: Sydney, Australia, tokyo, japan, vlog, andra, kiirkivi, bali
-Suggested hashtags: #Sydney #travelvlog
-Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
-
-Suggested description:
-```
-Sydney / Australia -- 2026
-
-(original description was empty -- add 2-3 sentences here.)
-
-Follow for more travel vlogs.
-#Sydney #travelvlog
-```
-
-Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
-
-### BALI- LEMBONGAN ISLAND😍 #travel #bali #indonesia #vlog #youtubeshorts
-Destination: Bali  |  Video ID: w-AkEt3EDgY
+### LEMBONGAN ISLAND BALI🇮🇩🥥🌧️🏝️ #lembongan #island #islandlife #bali #indonesia #shorts #youtube
+Destination: Bali  |  Video ID: QGA032cH8rc
 Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
 Target keyword: 2026  |  Secondary: tokyo, japan, vlog
 
@@ -534,60 +324,216 @@ Follow for more travel vlogs.
 
 Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
 
-### SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhattan #usa #nyc #shorts #vlog #vlogger #video
-Destination: New York City  |  Video ID: TkHEq4FhPBw
+### ❤️💋🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹🌹
+Destination: Other / Unclassified  |  Video ID: 5Xg7Vn-1Eds
 Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
 Target keyword: 2026  |  Secondary: tokyo, japan, vlog
 
 Suggested titles:
-- New York City Travel Vlog 2026
-- New York City: Tokyo 2026
-- Exploring New York City -- 2026
+- Other / Unclassified Travel Vlog 2026
+- Other / Unclassified: Tokyo 2026
+- Exploring Other / Unclassified -- 2026
 
-Suggested tags: New York City, tokyo, japan, vlog, andra, kiirkivi, bali
-Suggested hashtags: #NewYorkCity #travelvlog
-Thumbnail text ideas: NEW YORK CITY! / IS IT WORTH IT? / NEW YORK CITY TRUTH / WE DID THIS IN NEW YORK CITY
+Suggested tags: Other, Unclassified, tokyo, japan, vlog, andra, kiirkivi, bali
+Suggested hashtags: #Other #travelvlog
+Thumbnail text ideas: OTHER! / IS IT WORTH IT? / OTHER TRUTH / WE DID THIS IN OTHER
 
 Suggested description:
 ```
-New York City -- 2026
+Other / Unclassified -- 2026
 
 (original description was empty -- add 2-3 sentences here.)
 
 Follow for more travel vlogs.
-#NewYorkCity #travelvlog
+#Other #travelvlog
 ```
 
 Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
 
-### NEWCASTLE AUSTRALIA VLOG !🇦🇺🌏🦘🐨. WATCH TIL END TO SEE WHAT HAPPENED TO OUR CAR🥹😢😏 #sydney
-Destination: Sydney / Australia  |  Video ID: PrWJZprm--4
+### When your boyfriend surprises you🥰🥹✨🌹❤️ #dubai #youtubeshorts #dubailifestyle #burjkhalifa
+Destination: Dubai  |  Video ID: cRqBZdokHlA
 Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
-Target keyword: crown towers sydney  |  Secondary: tokyo, japan, vlog
+Target keyword: 2026  |  Secondary: tokyo, japan, vlog
 
 Suggested titles:
-- Sydney / Australia Travel Vlog crown towers sydney
-- Sydney / Australia: Tokyo crown towers sydney
-- Exploring Sydney / Australia -- crown towers sydney
+- Dubai Travel Vlog 2026
+- Dubai: Tokyo 2026
+- Exploring Dubai -- 2026
 
-Suggested tags: Sydney, Australia, crown towers sydney, tokyo, japan, vlog, andra, kiirkivi, bali
-Suggested hashtags: #Sydney #crowntowerssydney #travelvlog
+Suggested tags: Dubai, tokyo, japan, vlog, andra, kiirkivi, bali
+Suggested hashtags: #Dubai #travelvlog
+Thumbnail text ideas: DUBAI! / IS IT WORTH IT? / DUBAI TRUTH / WE DID THIS IN DUBAI
+
+Suggested description:
+```
+Dubai -- 2026
+
+(original description was empty -- add 2-3 sentences here.)
+
+Follow for more travel vlogs.
+#Dubai #travelvlog
+```
+
+Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
+
+### 📍PORTO CERVO | SARDINIA, ITALY #italy #shorts #vlog #sardinia #portocervo #lifestylevlogger #life
+Destination: Other / Unclassified  |  Video ID: cFp9jfeyEqM
+Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
+Target keyword: 2026  |  Secondary: tokyo, japan, vlog
+
+Suggested titles:
+- Other / Unclassified Travel Vlog 2026
+- Other / Unclassified: Tokyo 2026
+- Exploring Other / Unclassified -- 2026
+
+Suggested tags: Other, Unclassified, tokyo, japan, vlog, andra, kiirkivi, bali
+Suggested hashtags: #Other #travelvlog
+Thumbnail text ideas: OTHER! / IS IT WORTH IT? / OTHER TRUTH / WE DID THIS IN OTHER
+
+Suggested description:
+```
+Other / Unclassified -- 2026
+
+(original description was empty -- add 2-3 sentences here.)
+
+Follow for more travel vlogs.
+#Other #travelvlog
+```
+
+Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
+
+### EXPLORING SYDNEY 📍🇦🇺💁🏼‍♀️ #travel #sydney #sydneyoperahouse #australia #australiavlog #youtube
+Destination: Sydney / Australia  |  Video ID: aWi3bf5TaDw
+Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
+Target keyword: 2026  |  Secondary: tokyo, japan, vlog
+
+Suggested titles:
+- Sydney / Australia Travel Vlog 2026
+- Sydney / Australia: Tokyo 2026
+- Exploring Sydney / Australia -- 2026
+
+Suggested tags: Sydney, Australia, tokyo, japan, vlog, andra, kiirkivi, bali
+Suggested hashtags: #Sydney #travelvlog
 Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
 
 Suggested description:
 ```
-Sydney / Australia -- crown towers sydney
+Sydney / Australia -- 2026
 
 (original description was empty -- add 2-3 sentences here.)
 
 Follow for more travel vlogs.
-#Sydney #crowntowerssydney #travelvlog
+#Sydney #travelvlog
 ```
 
 Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
 
-### DUBAI FOUNTAIN AND ROSES🇦🇪🌹💋❤️✨#dubai #dubailifestyle #vlog #dubaifountainshow
-Destination: Dubai  |  Video ID: L3QGpbgZmTM
+### NEW VLOG WITH MY YORKSHIRE BENJAMIN 😍🐶🇫🇮❄️ #vlog #dog #shorts #youtubeshorts #snow #travel
+Destination: Other / Unclassified  |  Video ID: -hZpkXnEyt0
+Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
+Target keyword: 2026  |  Secondary: tokyo, japan, vlog
+
+Suggested titles:
+- Other / Unclassified Travel Vlog 2026
+- Other / Unclassified: Tokyo 2026
+- Exploring Other / Unclassified -- 2026
+
+Suggested tags: Other, Unclassified, tokyo, japan, vlog, andra, kiirkivi, bali
+Suggested hashtags: #Other #travelvlog
+Thumbnail text ideas: OTHER! / IS IT WORTH IT? / OTHER TRUTH / WE DID THIS IN OTHER
+
+Suggested description:
+```
+Other / Unclassified -- 2026
+
+(original description was empty -- add 2-3 sentences here.)
+
+Follow for more travel vlogs.
+#Other #travelvlog
+```
+
+Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
+
+### NEW VLOG ! Wild Kangaroos😳🇦🇺🦘 #youtubeshorts #travel #sydney #australia #australiavlog
+Destination: Sydney / Australia  |  Video ID: KGVXVL8qKYg
+Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
+Target keyword: 2026  |  Secondary: tokyo, japan, vlog
+
+Suggested titles:
+- Sydney / Australia Travel Vlog 2026
+- Sydney / Australia: Tokyo 2026
+- Exploring Sydney / Australia -- 2026
+
+Suggested tags: Sydney, Australia, tokyo, japan, vlog, andra, kiirkivi, bali
+Suggested hashtags: #Sydney #travelvlog
+Thumbnail text ideas: SYDNEY! / IS IT WORTH IT? / SYDNEY TRUTH / WE DID THIS IN SYDNEY
+
+Suggested description:
+```
+Sydney / Australia -- 2026
+
+(original description was empty -- add 2-3 sentences here.)
+
+Follow for more travel vlogs.
+#Sydney #travelvlog
+```
+
+Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
+
+### YORKSHIRE TERRIER ENJOYING THE MALL💚💛🐶🐾 #yorkshire #yorkshireterrier #mall #shorts #youtube
+Destination: Other / Unclassified  |  Video ID: DzEBkeB-qEU
+Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
+Target keyword: 2026  |  Secondary: tokyo, japan, vlog
+
+Suggested titles:
+- Other / Unclassified Travel Vlog 2026
+- Other / Unclassified: Tokyo 2026
+- Exploring Other / Unclassified -- 2026
+
+Suggested tags: Other, Unclassified, tokyo, japan, vlog, andra, kiirkivi, bali
+Suggested hashtags: #Other #travelvlog
+Thumbnail text ideas: OTHER! / IS IT WORTH IT? / OTHER TRUTH / WE DID THIS IN OTHER
+
+Suggested description:
+```
+Other / Unclassified -- 2026
+
+(original description was empty -- add 2-3 sentences here.)
+
+Follow for more travel vlogs.
+#Other #travelvlog
+```
+
+Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
+
+### JETCAR FUN IN MALDIVES🥰
+Destination: Other / Unclassified  |  Video ID: 4QXt1cwgRKM
+Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
+Target keyword: 2026  |  Secondary: tokyo, japan, vlog
+
+Suggested titles:
+- Other / Unclassified Travel Vlog 2026
+- Other / Unclassified: Tokyo 2026
+- Exploring Other / Unclassified -- 2026
+
+Suggested tags: Other, Unclassified, tokyo, japan, vlog, andra, kiirkivi, bali
+Suggested hashtags: #Other #travelvlog
+Thumbnail text ideas: OTHER! / IS IT WORTH IT? / OTHER TRUTH / WE DID THIS IN OTHER
+
+Suggested description:
+```
+Other / Unclassified -- 2026
+
+(original description was empty -- add 2-3 sentences here.)
+
+Follow for more travel vlogs.
+#Other #travelvlog
+```
+
+Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
+
+### ✨DUBAI NIGHTS !😍🇦🇪✨#youtubeshorts #vlog #dubai #uae #burjkhalifa #youtube
+Destination: Dubai  |  Video ID: 8xOvYmKFGtQ
 Flagged because: no tags set on this video; description is very short (<50 chars) -- limited SEO surface
 Target keyword: 2026  |  Secondary: tokyo, japan, vlog
 
@@ -847,17 +793,17 @@ Destination: Other / Unclassified  |  Views (90d): 12  |  Retention: 127.8%
 - low reach / high retention -- proxy for solid content that isn't getting discovered or clicked enough; consider a stronger title/thumbnail (not a real CTR measurement -- that data isn't exposed by the API)
 - view momentum: gaining (+3 views, 90d window) -- real view-count trend, not an impressions metric (not exposed by the API)
 
-### DOGS LIFE IN DUBAI😍🐶🇦🇪✨ #dog #uae #youtubeshorts #vlogger #dubai #dubailifestyle
+### DOGS LIFE IN DUBAI | Dubai
 Destination: Dubai  |  Views (90d): 8  |  Retention: 118.0%
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (6%) -- real opportunity to close this gap
 - low reach / high retention -- proxy for solid content that isn't getting discovered or clicked enough; consider a stronger title/thumbnail (not a real CTR measurement -- that data isn't exposed by the API)
 
-### SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhattan #usa #nyc #shorts #vlog #vlogger #video
+### SEPTEMBER IN NYC | New York City
 Destination: New York City  |  Views (90d): 7  |  Retention: 77.1%
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (6%) -- real opportunity to close this gap
 - low reach / high retention -- proxy for solid content that isn't getting discovered or clicked enough; consider a stronger title/thumbnail (not a real CTR measurement -- that data isn't exposed by the API)
 
-### SYDNEY ZOO WORTH IT OR NOT ?😳#sydney #sydneyvlog #australia #australiavlog #shorts #zoo
+### SYDNEY ZOO WORTH IT OR NOT | Sydney / Australia
 Destination: Sydney / Australia  |  Views (90d): 5  |  Retention: 77.8%
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (6%) -- real opportunity to close this gap
 - low reach / high retention -- proxy for solid content that isn't getting discovered or clicked enough; consider a stronger title/thumbnail (not a real CTR measurement -- that data isn't exposed by the API)
@@ -866,36 +812,36 @@ Destination: Sydney / Australia  |  Views (90d): 5  |  Retention: 77.8%
 Destination: Bali  |  Views (90d): 4  |  Retention: 62.6%
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (6%) -- real opportunity to close this gap
 
-### MANLY BEACH SYDNEY🇦🇺📍 Vlog ! #youtubeshorts #travel #vlog #sydney #sydney #australia
+### MANLY BEACH SYDNEY📍 Vlog | Sydney / Australia
 Destination: Sydney / Australia  |  Views (90d): 0
 - Traffic source opportunity: YouTube Search share (0%) is well below this channel's average (13%) -- real opportunity to close this gap
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (6%) -- real opportunity to close this gap
 
-### TESTING BRABUS G WAGON IN DUBAI💁🏼‍♀️🇦🇪🔥#gwagon #brabus #brabusgwagon #dubai #dubailife #uae
+### TESTING BRABUS G WAGON IN DUBAI🏼‍️ | Dubai
 Destination: Dubai  |  Views (90d): 0
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (6%) -- real opportunity to close this gap
 
-### MANLY BEACH SYDNEY📍🇦🇺 New Vlog ! #youtubeshorts #sydney #sydneyvlog #australia
+### MANLY BEACH SYDNEY📍 New Vlog | Sydney / Australia
 Destination: Sydney / Australia  |  Views (90d): 0
 - Traffic source opportunity: YouTube Search share (0%) is well below this channel's average (13%) -- real opportunity to close this gap
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (6%) -- real opportunity to close this gap
 
-### FRIDAY FUN IN PUERTO BANÚS, MARBELLA 🇪🇸🌴💋 #shorts #vlog #lamborghini #red #youtubeshorts
+### FRIDAY FUN IN PUERTO BANÚS, MARBELLA 🌴 | Marbella / Puerto Banus
 Destination: Marbella / Puerto Banus  |  Views (90d): 0
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (6%) -- real opportunity to close this gap
 
-### THE MOST LUXURIOUS HOTEL IN SYDNEY !🇦🇺✨👑 #sydney #hotel #australia #vlog #shorts
+### THE MOST LUXURIOUS HOTEL IN SYDNEY | Sydney / Australia
 Destination: Sydney / Australia  |  Views (90d): 0
 - Traffic source opportunity: YouTube Search share (0%) is well below this channel's average (13%) -- real opportunity to close this gap
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (6%) -- real opportunity to close this gap
 - Search keyword opportunity: "crown towers sydney"
 
-### SYDNEY LIFE📍🇦🇺🐨🦘🌆🌉🏙️ #youtubeshorts #travel #australiadiaries #sydney #sydneyvlog
+### SYDNEY LIFE📍 | Sydney / Australia
 Destination: Sydney / Australia  |  Views (90d): 0
 - Traffic source opportunity: YouTube Search share (0%) is well below this channel's average (13%) -- real opportunity to close this gap
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (6%) -- real opportunity to close this gap
 
-### BALI- LEMBONGAN ISLAND😍 #travel #bali #indonesia #vlog #youtubeshorts
+### BALI- LEMBONGAN ISLAND | Bali
 Destination: Bali  |  Views (90d): 0
 - Traffic source opportunity: YouTube Search share (0%) is well below this channel's average (13%) -- real opportunity to close this gap
 - Traffic source opportunity: Suggested videos share (0%) is well below this channel's average (6%) -- real opportunity to close this gap
@@ -1004,7 +950,7 @@ Description link text: More from Dubai: [link to Weekend in Dubai 🌴 Beach Vib
 Pinned comment text: If you loved this, watch my Dubai trip here → [link to Weekend in Dubai 🌴 Beach Vibes + Minu Shopping Hau]
 Recommended end-screen/card pairs:
 - TESTING THE BRABUS G-WAGON IN DUBAI🇦🇪💎 🔥 -> Weekend in Dubai 🌴 Beach Vibes + Minu Sh (same destination (Dubai); Weekend in Dubai 🌴 Beach Vibes + Minu Sh is the top performer in this cluster)
-- DOGS LIFE IN DUBAI😍🐶🇦🇪✨ #dog #uae #youtu -> Weekend in Dubai 🌴 Beach Vibes + Minu Sh (same destination (Dubai); Weekend in Dubai 🌴 Beach Vibes + Minu Sh is the top performer in this cluster)
+- DOGS LIFE IN DUBAI | Dubai -> Weekend in Dubai 🌴 Beach Vibes + Minu Sh (same destination (Dubai); Weekend in Dubai 🌴 Beach Vibes + Minu Sh is the top performer in this cluster)
 - Living the Dubai Life 🇦🇪☀️ | A Few Days  -> Weekend in Dubai 🌴 Beach Vibes + Minu Sh (same destination (Dubai); Weekend in Dubai 🌴 Beach Vibes + Minu Sh is the top performer in this cluster)
 - When your boyfriend surprises you🥰🥹✨🌹❤️  -> Weekend in Dubai 🌴 Beach Vibes + Minu Sh (same destination (Dubai); Weekend in Dubai 🌴 Beach Vibes + Minu Sh is the top performer in this cluster)
 - BACK IN DUBAI 🇦🇪 | CRYPTO EVENT, EVENING -> Weekend in Dubai 🌴 Beach Vibes + Minu Sh (same destination (Dubai); Weekend in Dubai 🌴 Beach Vibes + Minu Sh is the top performer in this cluster)
@@ -1018,7 +964,7 @@ Recommended end-screen/card pairs:
 - 🚁 POV: You Said YES to the Best View in  -> CROWN SYDNEY – Most Luxurious Hotel in A (same destination (Sydney / Australia); CROWN SYDNEY – Most Luxurious Hotel in A is the top performer in this cluster)
 - HELICOPTER TOUR IN SYDNEY !vlog #sydney  -> CROWN SYDNEY – Most Luxurious Hotel in A (same destination (Sydney / Australia); CROWN SYDNEY – Most Luxurious Hotel in A is the top performer in this cluster)
 - I Didn’t Expect THIS in Sydney… 🇦🇺 | Fir -> CROWN SYDNEY – Most Luxurious Hotel in A (same destination (Sydney / Australia); CROWN SYDNEY – Most Luxurious Hotel in A is the top performer in this cluster)
-- SYDNEY ZOO WORTH IT OR NOT ?😳#sydney #sy -> CROWN SYDNEY – Most Luxurious Hotel in A (same destination (Sydney / Australia); CROWN SYDNEY – Most Luxurious Hotel in A is the top performer in this cluster)
+- SYDNEY ZOO WORTH IT OR NOT | Sydney / Au -> CROWN SYDNEY – Most Luxurious Hotel in A (same destination (Sydney / Australia); CROWN SYDNEY – Most Luxurious Hotel in A is the top performer in this cluster)
 - Exploring Sydney City & Chinatown… Not W -> CROWN SYDNEY – Most Luxurious Hotel in A (same destination (Sydney / Australia); CROWN SYDNEY – Most Luxurious Hotel in A is the top performer in this cluster)
 
 ### Bali (28 videos)
@@ -1030,7 +976,7 @@ Recommended end-screen/card pairs:
 - RENTED BUGGY N DRIVING AROUND LEMBONGAN  -> I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, (same destination (Bali); I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, is the top performer in this cluster)
 - BALI IS NOT WHAT YOU SEE ON INSTAGRAM 🇮🇩 -> I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, (same destination (Bali); I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, is the top performer in this cluster)
 - Bali Travel Vlog 2026 -> I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, (same destination (Bali); I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, is the top performer in this cluster)
-- BALI- LEMBONGAN ISLAND😍 #travel #bali #i -> I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, (same destination (Bali); I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, is the top performer in this cluster)
+- BALI- LEMBONGAN ISLAND | Bali -> I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, (same destination (Bali); I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, is the top performer in this cluster)
 - LEMBONGAN ISLAND BALI🇮🇩🥥🌧️🏝️ #lembongan  -> I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, (same destination (Bali); I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, is the top performer in this cluster)
 
 ### Marbella / Puerto Banus (21 videos)
@@ -1070,16 +1016,16 @@ Recommended end-screen/card pairs:
 - COME W ME TO DISNEYLAND TOKYO🇯🇵🏰💖🩷🎠🥳 #ja -> TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja (same destination (Tokyo / Japan); TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja is the top performer in this cluster)
 
 ### New York City (4 videos)
-Hub video: SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhattan #usa #nyc #shorts #vlog #vlogger #video
+Hub video: SEPTEMBER IN NYC | New York City
 Playlist suggestion: New York City Travel Vlogs
-Description link text: More from New York City: [link to SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhattan #usa #n]
-Pinned comment text: If you loved this, watch my New York City trip here → [link to SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhattan #usa #n]
+Description link text: More from New York City: [link to SEPTEMBER IN NYC | New York City]
+Pinned comment text: If you loved this, watch my New York City trip here → [link to SEPTEMBER IN NYC | New York City]
 Recommended end-screen/card pairs:
-- 📍 CARRIE BRADSHAW APARTMENT IN NEW YORK  -> SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhatt (same destination (New York City); SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhatt is the top performer in this cluster)
-- NYC 🇺🇸🗽🚕🍎| CENTRAL PARK MORNING STROLL   -> SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhatt (same destination (New York City); SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhatt is the top performer in this cluster)
-- NEW YORK FASHION WEEK 2025 | 🇺🇸 #lifesty -> SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhatt (same destination (New York City); SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhatt is the top performer in this cluster)
-- SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhatt -> 📍 CARRIE BRADSHAW APARTMENT IN NEW YORK  (keep viewers inside the New York City cluster after the top performer)
-- SEPTEMBER IN NYC🇺🇸🫶🏽🚕🗽 #newyork #manhatt -> NYC 🇺🇸🗽🚕🍎| CENTRAL PARK MORNING STROLL   (keep viewers inside the New York City cluster after the top performer)
+- 📍 CARRIE BRADSHAW APARTMENT IN NEW YORK  -> SEPTEMBER IN NYC | New York City (same destination (New York City); SEPTEMBER IN NYC | New York City is the top performer in this cluster)
+- NYC 🇺🇸🗽🚕🍎| CENTRAL PARK MORNING STROLL   -> SEPTEMBER IN NYC | New York City (same destination (New York City); SEPTEMBER IN NYC | New York City is the top performer in this cluster)
+- NEW YORK FASHION WEEK 2025 | 🇺🇸 #lifesty -> SEPTEMBER IN NYC | New York City (same destination (New York City); SEPTEMBER IN NYC | New York City is the top performer in this cluster)
+- SEPTEMBER IN NYC | New York City -> 📍 CARRIE BRADSHAW APARTMENT IN NEW YORK  (keep viewers inside the New York City cluster after the top performer)
+- SEPTEMBER IN NYC | New York City -> NYC 🇺🇸🗽🚕🍎| CENTRAL PARK MORNING STROLL   (keep viewers inside the New York City cluster after the top performer)
 
 ## Shorts -> long-form traffic funnels
 Pairs each destination's existing Shorts with its strongest long-form video (by 90-day views) and suggests a CTA pointing viewers there -- increases session time by moving viewers from a Short into a longer watch.
@@ -1099,8 +1045,8 @@ New Shorts concepts to create:
 Target long-form video: CROWN SYDNEY – Most Luxurious Hotel in Australia?! 😳🇦🇺 | ANDRA KIIRKIVI
 Existing Shorts -- add this CTA:
 - HELICOPTER TOUR IN SYDNEY !vlog #sydney #australia: "Watch the full story: "CROWN SYDNEY – Most Luxurious Hotel in Australia?!" -- link in pinned comment/bio"
-- SYDNEY ZOO WORTH IT OR NOT ?😳#sydney #sydneyvlog #: "Watch the full story: "CROWN SYDNEY – Most Luxurious Hotel in Australia?!" -- link in pinned comment/bio"
-- THE MOST LUXURIOUS HOTEL IN SYDNEY !🇦🇺✨👑 #sydney #: "Watch the full story: "CROWN SYDNEY – Most Luxurious Hotel in Australia?!" -- link in pinned comment/bio"
+- SYDNEY ZOO WORTH IT OR NOT | Sydney / Australia: "Watch the full story: "CROWN SYDNEY – Most Luxurious Hotel in Australia?!" -- link in pinned comment/bio"
+- THE MOST LUXURIOUS HOTEL IN SYDNEY | Sydney / Aust: "Watch the full story: "CROWN SYDNEY – Most Luxurious Hotel in Australia?!" -- link in pinned comment/bio"
 New Shorts concepts to create:
 - 3 things that surprised me in Sydney / Australia -- full story linked below
 - Sydney / Australia in 60 seconds -- the full vlog is on the channel
@@ -1111,7 +1057,7 @@ Target long-form video: I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, Almost No 
 Existing Shorts -- add this CTA:
 - RENTED BUGGY N DRIVING AROUND LEMBONGAN ISLAND BAL: "Watch the full story: "I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, Almost No" -- link in pinned comment/bio"
 - Bali Travel Vlog 2026: "Watch the full story: "I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, Almost No" -- link in pinned comment/bio"
-- BALI- LEMBONGAN ISLAND😍 #travel #bali #indonesia #: "Watch the full story: "I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, Almost No" -- link in pinned comment/bio"
+- BALI- LEMBONGAN ISLAND | Bali: "Watch the full story: "I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, Almost No" -- link in pinned comment/bio"
 New Shorts concepts to create:
 - 3 things that surprised me in Bali -- full story linked below
 - Bali in 60 seconds -- the full vlog is on the channel
@@ -1120,9 +1066,9 @@ New Shorts concepts to create:
 ### Dubai
 Target long-form video: Weekend in Dubai 🌴 Beach Vibes + Minu Shopping Haul | ANDRA KIIRKIVI
 Existing Shorts -- add this CTA:
-- DOGS LIFE IN DUBAI😍🐶🇦🇪✨ #dog #uae #youtubeshorts #: "Watch the full story: "Weekend in Dubai 🌴 Beach Vibes + Minu Shopping Hau" -- link in pinned comment/bio"
+- DOGS LIFE IN DUBAI | Dubai: "Watch the full story: "Weekend in Dubai 🌴 Beach Vibes + Minu Shopping Hau" -- link in pinned comment/bio"
 - When your boyfriend surprises you🥰🥹✨🌹❤️ #dubai #yo: "Watch the full story: "Weekend in Dubai 🌴 Beach Vibes + Minu Shopping Hau" -- link in pinned comment/bio"
-- DUBAI FOUNTAIN AND ROSES🇦🇪🌹💋❤️✨#dubai #dubailifest: "Watch the full story: "Weekend in Dubai 🌴 Beach Vibes + Minu Shopping Hau" -- link in pinned comment/bio"
+- DUBAI FOUNTAIN AND ROSES | Dubai: "Watch the full story: "Weekend in Dubai 🌴 Beach Vibes + Minu Shopping Hau" -- link in pinned comment/bio"
 New Shorts concepts to create:
 - 3 things that surprised me in Dubai -- full story linked below
 - Dubai in 60 seconds -- the full vlog is on the channel
