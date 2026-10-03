@@ -13,7 +13,22 @@ Note: impressions and click-through rate are not included below -- the public Yo
 - Watch time: 568 min vs 230 min (+147.0%)
 - Subscribers this week: +5 / -0
 
+## Traffic sources: this week vs. last week
+- SHORTS: 3030 vs 0 (n/a)
+- YT_SEARCH: 100 vs 44 (+127.3%)
+- YT_OTHER_PAGE: 45 vs 0 (n/a)
+- YT_CHANNEL: 33 vs 11 (+200.0%)
+- SUBSCRIBER: 25 vs 11 (+127.3%)
+- RELATED_VIDEO: 23 vs 152 (-84.9%)
+- EXT_URL: 17 vs 1 (+1600.0%)
+- NOTIFICATION: 14 vs 0 (n/a)
+
+- Search traffic this week: 100 | Suggested: 23 | Browse: 0
+
 ## New videos this week
+- COME W ME TO TOKYO DISNEYLAND 🇯🇵🥳💖🎠🏰🤩 #tokyo #japan #disney #disneyland #tokyodisneyland (published 2026-10-03)
+- COME W ME TO TOKYO DISNEYLAND 🇯🇵🥳🏰💖🎈🎠 # #japan #tokyo #tokyodisneyland #tokyotravel (published 2026-10-03)
+- VLOG ! COME W ME TO TOKYO DISNEYLAND 🇯🇵🥳🏰🎠💖🎈 #tokyo #japan #tokyodisneyland (published 2026-10-03)
 - COME W ME TO DISNEYLAND TOKYO🇯🇵🏰💖🩷🎠🥳 #japan #tokyo #tokyodisneyland (published 2026-10-02)
 - COME W ME TO TOKYO DISNEYLAND! VLOG ! 💖🥳🇯🇵🏰🎠🩷 #explorejapan #japan #tokyo #tokyodisneyland (published 2026-10-02)
 
@@ -38,14 +53,14 @@ Comparing each video's 90-day-windowed view count now vs on 2026-09-30 -- a vide
 
 ## Destination priority this week
 priority_score blends this destination's average 90-day views, average retention, unmet search-demand keyword count, and view momentum -- each normalized 0-1 across destinations and weighted equally-ish (30/25/25/20). Destinations with zero videos today (e.g. newly planned ones) still appear, scored on demand/momentum signal alone.
-- **Tokyo / Japan** (score 0.926): 7 videos, avg 437.3 views/90d, retention 31.2%, 6 unmet keyword(s), momentum +3061
-- **Marbella / Puerto Banus** (score 0.297): 21 videos, avg 7.0 views/90d, retention 44.3%, 1 unmet keyword(s), momentum +5
-- **New York City** (score 0.284): 4 videos, avg 2.8 views/90d, retention 42.6%, 1 unmet keyword(s), momentum +0
+- **Tokyo / Japan** (score 0.926): 10 videos, avg 306.1 views/90d, retention 31.2%, 6 unmet keyword(s), momentum +3061
+- **Marbella / Puerto Banus** (score 0.299): 21 videos, avg 7.0 views/90d, retention 44.3%, 1 unmet keyword(s), momentum +5
+- **New York City** (score 0.285): 4 videos, avg 2.8 views/90d, retention 42.6%, 1 unmet keyword(s), momentum +0
+- **Bali** (score 0.251): 28 videos, avg 5.2 views/90d, retention 43.5%, 0 unmet keyword(s), momentum -2
 - **Other / Unclassified** (score 0.249): 53 videos, avg 0.6 views/90d, retention 44.0%, 0 unmet keyword(s), momentum +3
-- **Bali** (score 0.249): 28 videos, avg 5.2 views/90d, retention 43.5%, 0 unmet keyword(s), momentum -2
-- **Sydney / Australia** (score 0.233): 35 videos, avg 6.9 views/90d, retention 32.9%, 1 unmet keyword(s), momentum +11
-- **Dubai** (score 0.179): 44 videos, avg 5.6 views/90d, retention 31.0%, 0 unmet keyword(s), momentum +2
-- **Colombo / Sri Lanka** (score 0.049): 14 videos, avg 1.1 views/90d, retention 8.6%, 0 unmet keyword(s), momentum +0
+- **Sydney / Australia** (score 0.235): 35 videos, avg 6.9 views/90d, retention 32.9%, 1 unmet keyword(s), momentum +11
+- **Dubai** (score 0.181): 44 videos, avg 5.6 views/90d, retention 31.0%, 0 unmet keyword(s), momentum +2
+- **Colombo / Sri Lanka** (score 0.05): 14 videos, avg 1.1 views/90d, retention 8.6%, 0 unmet keyword(s), momentum +0
 
 ## Keyword opportunities
 - 12 proven search-demand keyword(s) across destinations aren't in any video yet.

@@ -3,6 +3,21 @@
     "compared_against_date": "2026-10-02",
     "new_videos": [
       {
+        "video_id": "FnhtTcoPsng",
+        "title": "COME W ME TO TOKYO DISNEYLAND \ud83c\uddef\ud83c\uddf5\ud83e\udd73\ud83d\udc96\ud83c\udfa0\ud83c\udff0\ud83e\udd29 #tokyo #japan #disney #disneyland #tokyodisneyland",
+        "published_at": "2026-10-03T11:15:38Z"
+      },
+      {
+        "video_id": "SPXY_V7ST2w",
+        "title": "COME W ME TO TOKYO DISNEYLAND \ud83c\uddef\ud83c\uddf5\ud83e\udd73\ud83c\udff0\ud83d\udc96\ud83c\udf88\ud83c\udfa0 # #japan #tokyo #tokyodisneyland #tokyotravel",
+        "published_at": "2026-10-03T11:12:23Z"
+      },
+      {
+        "video_id": "4lw4Zj6OOeQ",
+        "title": "VLOG ! COME W ME TO TOKYO DISNEYLAND \ud83c\uddef\ud83c\uddf5\ud83e\udd73\ud83c\udff0\ud83c\udfa0\ud83d\udc96\ud83c\udf88 #tokyo #japan #tokyodisneyland",
+        "published_at": "2026-10-03T11:10:13Z"
+      },
+      {
         "video_id": "CNSco7xnZnU",
         "title": "COME W ME TO DISNEYLAND TOKYO\ud83c\uddef\ud83c\uddf5\ud83c\udff0\ud83d\udc96\ud83e\ude77\ud83c\udfa0\ud83e\udd73 #japan #tokyo #tokyodisneyland",
         "published_at": "2026-10-02T16:28:45Z"
@@ -182,6 +197,42 @@
     },
     "per_video_gaps": [
       {
+        "video_id": "FnhtTcoPsng",
+        "title": "COME W ME TO TOKYO DISNEYLAND \ud83c\uddef\ud83c\uddf5\ud83e\udd73\ud83d\udc96\ud83c\udfa0\ud83c\udff0\ud83e\udd29 #tokyo #japan #disney #disneyland #tokyodisneyland",
+        "destination": "Tokyo / Japan",
+        "missing_terms": [
+          "tokyo first time",
+          "japan trip first time",
+          "first time in japan vlog",
+          "japan trip",
+          "japan trip vlog"
+        ]
+      },
+      {
+        "video_id": "SPXY_V7ST2w",
+        "title": "COME W ME TO TOKYO DISNEYLAND \ud83c\uddef\ud83c\uddf5\ud83e\udd73\ud83c\udff0\ud83d\udc96\ud83c\udf88\ud83c\udfa0 # #japan #tokyo #tokyodisneyland #tokyotravel",
+        "destination": "Tokyo / Japan",
+        "missing_terms": [
+          "tokyo first time",
+          "japan trip first time",
+          "first time in japan vlog",
+          "japan trip",
+          "japan trip vlog"
+        ]
+      },
+      {
+        "video_id": "4lw4Zj6OOeQ",
+        "title": "VLOG ! COME W ME TO TOKYO DISNEYLAND \ud83c\uddef\ud83c\uddf5\ud83e\udd73\ud83c\udff0\ud83c\udfa0\ud83d\udc96\ud83c\udf88 #tokyo #japan #tokyodisneyland",
+        "destination": "Tokyo / Japan",
+        "missing_terms": [
+          "tokyo first time",
+          "japan trip first time",
+          "first time in japan vlog",
+          "japan trip",
+          "japan trip vlog"
+        ]
+      },
+      {
         "video_id": "CNSco7xnZnU",
         "title": "COME W ME TO DISNEYLAND TOKYO\ud83c\uddef\ud83c\uddf5\ud83c\udff0\ud83d\udc96\ud83e\ude77\ud83c\udfa0\ud83e\udd73 #japan #tokyo #tokyodisneyland",
         "destination": "Tokyo / Japan",
@@ -340,30 +391,6 @@
       {
         "video_id": "qPoSjuHztGM",
         "title": "The MOST LUXURIOUS HOTEL IN SYDNEY\ud83d\ude31\ud83d\ude33\ud83c\udde6\ud83c\uddfa\u2728 ! VLOG ! #youtubeshorts #sydney #thecrownhotel #vlog",
-        "destination": "Sydney / Australia",
-        "missing_terms": [
-          "crown towers sydney"
-        ]
-      },
-      {
-        "video_id": "iqiGryAPcvk",
-        "title": "CROWN SYDNEY \u2013 Most Luxurious Hotel in Australia?! \ud83d\ude33\ud83c\udde6\ud83c\uddfa | ANDRA KIIRKIVI",
-        "destination": "Sydney / Australia",
-        "missing_terms": [
-          "crown towers sydney"
-        ]
-      },
-      {
-        "video_id": "-BYDltb5bwI",
-        "title": "BONDI BEACH SYNDEY !\ud83c\udde6\ud83c\uddfa\ud83e\udd98\ud83d\udc28 Vlog ! #youtubeshorts #beach #bondibeach #australia #sydney",
-        "destination": "Sydney / Australia",
-        "missing_terms": [
-          "crown towers sydney"
-        ]
-      },
-      {
-        "video_id": "5Dc9MRXZ0wM",
-        "title": "BONDI BEACH SYDNEY ! vlog ! #youtubeshorts #bondibeach #sydney #australia",
         "destination": "Sydney / Australia",
         "missing_terms": [
           "crown towers sydney"
@@ -557,8 +584,8 @@
     "destinations": [
       {
         "destination": "Tokyo / Japan",
-        "video_count": 7,
-        "avg_views_90d": 437.3,
+        "video_count": 10,
+        "avg_views_90d": 306.1,
         "avg_retention_pct": 31.2,
         "momentum_90d_view_delta": 3061,
         "unmet_demand_keywords": 6,
@@ -571,7 +598,7 @@
         "avg_retention_pct": 44.3,
         "momentum_90d_view_delta": 5,
         "unmet_demand_keywords": 1,
-        "priority_score": 0.297
+        "priority_score": 0.299
       },
       {
         "destination": "New York City",
@@ -580,7 +607,16 @@
         "avg_retention_pct": 42.6,
         "momentum_90d_view_delta": 0,
         "unmet_demand_keywords": 1,
-        "priority_score": 0.284
+        "priority_score": 0.285
+      },
+      {
+        "destination": "Bali",
+        "video_count": 28,
+        "avg_views_90d": 5.2,
+        "avg_retention_pct": 43.5,
+        "momentum_90d_view_delta": -2,
+        "unmet_demand_keywords": 0,
+        "priority_score": 0.251
       },
       {
         "destination": "Other / Unclassified",
@@ -592,22 +628,13 @@
         "priority_score": 0.249
       },
       {
-        "destination": "Bali",
-        "video_count": 28,
-        "avg_views_90d": 5.2,
-        "avg_retention_pct": 43.5,
-        "momentum_90d_view_delta": -2,
-        "unmet_demand_keywords": 0,
-        "priority_score": 0.249
-      },
-      {
         "destination": "Sydney / Australia",
         "video_count": 35,
         "avg_views_90d": 6.9,
         "avg_retention_pct": 32.9,
         "momentum_90d_view_delta": 11,
         "unmet_demand_keywords": 1,
-        "priority_score": 0.233
+        "priority_score": 0.235
       },
       {
         "destination": "Dubai",
@@ -616,7 +643,7 @@
         "avg_retention_pct": 31.0,
         "momentum_90d_view_delta": 2,
         "unmet_demand_keywords": 0,
-        "priority_score": 0.179
+        "priority_score": 0.181
       },
       {
         "destination": "Colombo / Sri Lanka",
@@ -625,21 +652,21 @@
         "avg_retention_pct": 8.6,
         "momentum_90d_view_delta": 0,
         "unmet_demand_keywords": 0,
-        "priority_score": 0.049
+        "priority_score": 0.05
       },
       {
-        "destination": "Milan",
-        "video_count": 1,
-        "avg_views_90d": 0.0,
+        "destination": "Punta Cana",
+        "video_count": 0,
+        "avg_views_90d": 0,
         "avg_retention_pct": null,
         "momentum_90d_view_delta": 0,
         "unmet_demand_keywords": 0,
         "priority_score": 0.0
       },
       {
-        "destination": "Punta Cana",
-        "video_count": 0,
-        "avg_views_90d": 0,
+        "destination": "Milan",
+        "video_count": 1,
+        "avg_views_90d": 0.0,
         "avg_retention_pct": null,
         "momentum_90d_view_delta": 0,
         "unmet_demand_keywords": 0,
@@ -1457,7 +1484,7 @@
       },
       {
         "destination": "Tokyo / Japan",
-        "video_count": 7,
+        "video_count": 10,
         "hub_video": {
           "video_id": "xOqM9Krj5TQ",
           "title": "TOKYO VLOG OUT NOW !\ud83c\uddef\ud83c\uddf5 #explorejapan #japan #tokyo #visitjapan #japanese"
@@ -1492,8 +1519,8 @@
             "reason": "same destination (Tokyo / Japan); TOKYO VLOG OUT NOW !\ud83c\uddef\ud83c\uddf5 #explorejapan #ja is the top performer in this cluster"
           },
           {
-            "from_video_id": "CNSco7xnZnU",
-            "from_title": "COME W ME TO DISNEYLAND TOKYO\ud83c\uddef\ud83c\uddf5\ud83c\udff0\ud83d\udc96\ud83e\ude77\ud83c\udfa0\ud83e\udd73 #japan #tokyo #tokyodisneyland",
+            "from_video_id": "FnhtTcoPsng",
+            "from_title": "COME W ME TO TOKYO DISNEYLAND \ud83c\uddef\ud83c\uddf5\ud83e\udd73\ud83d\udc96\ud83c\udfa0\ud83c\udff0\ud83e\udd29 #tokyo #japan #disney #disneyland #tokyodisneyland",
             "to_video_id": "xOqM9Krj5TQ",
             "to_title": "TOKYO VLOG OUT NOW !\ud83c\uddef\ud83c\uddf5 #explorejapan #japan #tokyo #visitjapan #japanese",
             "reason": "same destination (Tokyo / Japan); TOKYO VLOG OUT NOW !\ud83c\uddef\ud83c\uddf5 #explorejapan #ja is the top performer in this cluster"
@@ -1754,56 +1781,56 @@
         "is_new_destination": false,
         "priority_score": 0.926,
         "target_keyword": "tokyo first time",
-        "rationale": "7 existing videos, avg 437.3 views/90d; 31.2% retention; 6 proven search gap(s); momentum +3061"
+        "rationale": "10 existing videos, avg 306.1 views/90d; 31.2% retention; 6 proven search gap(s); momentum +3061"
       },
       {
         "destination": "Marbella / Puerto Banus",
         "is_new_destination": false,
-        "priority_score": 0.297,
+        "priority_score": 0.299,
         "target_keyword": "puerto banus marbella",
         "rationale": "21 existing videos, avg 7.0 views/90d; 44.3% retention; 1 proven search gap(s); momentum +5"
       },
       {
         "destination": "New York City",
         "is_new_destination": false,
-        "priority_score": 0.284,
+        "priority_score": 0.285,
         "target_keyword": "new york city apartment",
         "rationale": "4 existing videos, avg 2.8 views/90d; 42.6% retention; 1 proven search gap(s)"
       },
       {
         "destination": "Bali",
         "is_new_destination": false,
-        "priority_score": 0.249,
+        "priority_score": 0.251,
         "target_keyword": null,
         "rationale": "28 existing videos, avg 5.2 views/90d; 43.5% retention; momentum -2"
       },
       {
         "destination": "Sydney / Australia",
         "is_new_destination": false,
-        "priority_score": 0.233,
+        "priority_score": 0.235,
         "target_keyword": "crown towers sydney",
         "rationale": "35 existing videos, avg 6.9 views/90d; 32.9% retention; 1 proven search gap(s); momentum +11"
       },
       {
         "destination": "Dubai",
         "is_new_destination": false,
-        "priority_score": 0.179,
+        "priority_score": 0.181,
         "target_keyword": "how much does Dubai cost",
         "rationale": "44 existing videos, avg 5.6 views/90d; 31.0% retention; momentum +2"
       },
       {
         "destination": "Colombo / Sri Lanka",
         "is_new_destination": false,
-        "priority_score": 0.049,
+        "priority_score": 0.05,
         "target_keyword": null,
         "rationale": "14 existing videos, avg 1.1 views/90d; 8.6% retention"
       },
       {
-        "destination": "Milan",
-        "is_new_destination": false,
+        "destination": "Punta Cana",
+        "is_new_destination": true,
         "priority_score": 0.0,
-        "target_keyword": "how much does Milan cost",
-        "rationale": "1 existing videos, avg 0.0 views/90d"
+        "target_keyword": null,
+        "rationale": "not yet covered on the channel"
       }
     ],
     "note": "Ranked by destination_performance's priority_score (real views + retention + momentum, blended with unmet search-demand count). Each rationale names the actual numbers behind the ranking -- not a generic suggestion."
@@ -1813,7 +1840,7 @@
       {
         "rank": 1,
         "category": "next_video",
-        "action": "Plan your next Tokyo / Japan video targeting \"tokyo first time\" -- 7 existing videos, avg 437.3 views/90d; 31.2% retention; 6 proven search gap(s); momentum +3061"
+        "action": "Plan your next Tokyo / Japan video targeting \"tokyo first time\" -- 10 existing videos, avg 306.1 views/90d; 31.2% retention; 6 proven search gap(s); momentum +3061"
       },
       {
         "rank": 2,

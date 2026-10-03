@@ -5,7 +5,7 @@
 ## TRAFFIC GROWTH ACTIONS
 Ranked by a transparent heuristic built from real numbers behind each candidate (views, search-gap views, momentum delta) -- not a predictive ROI model. One action per category is surfaced first so this isn't dominated by a single signal type.
 
-1. **[next_video]** Plan your next Tokyo / Japan video targeting "tokyo first time" -- 7 existing videos, avg 437.3 views/90d; 31.2% retention; 6 proven search gap(s); momentum +3061
+1. **[next_video]** Plan your next Tokyo / Japan video targeting "tokyo first time" -- 10 existing videos, avg 306.1 views/90d; 31.2% retention; 6 proven search gap(s); momentum +3061
 2. **[target_keyword_gap]** Add "crown towers sydney" in a Sydney / Australia video's title/tags -- already driving 6 real search views without being targeted
 3. **[internal_linking]** Create a "Dubai Travel Vlogs" playlist and cross-link the 44 videos in that cluster (end-screen/cards to "Weekend in Dubai 🌴 Beach Vibes + Minu Sh")
 4. **[address_declining_video]** Revisit "I FOUND BALI’S SECRET ISLAND 🌴 (No Cars, Almost No Tourists)" -- losing view momentum (-2 views, 90d window, since 2026-09-30)
@@ -14,7 +14,7 @@ Ranked by a transparent heuristic built from real numbers behind each candidate 
 ## Channel snapshot
 - Subscribers: 142
 - Lifetime views: 89276
-- Video count: 205
+- Video count: 208
 
 ## Last 90 days
 - Views: 4369
@@ -133,7 +133,7 @@ Channel average retention (90d): 37.1%
 
 ## Shorts vs long-form
 'is_likely_short' is a <=180s duration heuristic, not an official YouTube flag -- the public API does not expose one.
-- Shorts: {'count': 130, 'avg_lifetime_views': 501.4, 'avg_retention_pct_90d': 66.0}
+- Shorts: {'count': 133, 'avg_lifetime_views': 491.6, 'avg_retention_pct_90d': 66.0}
 - Long-form: {'count': 77, 'avg_lifetime_views': 325.2, 'avg_retention_pct_90d': 14.8}
 - Repurpose-into-Shorts candidates (high-retention long-form clips):
   - CROWN SYDNEY – Most Luxurious Hotel in Australia?! 😳🇦🇺 | ANDRA KIIRKIVI (retention 18.7%, 731s)
@@ -144,6 +144,9 @@ Recurring words in top performers: tokyo(6), japan(6), vlog(5), andra(5), kiirki
 
 ## Newly detected videos since last run
 Comparing today's catalog against the last snapshot (2026-10-02).
+- COME W ME TO TOKYO DISNEYLAND 🇯🇵🥳💖🎠🏰🤩 #tokyo #japan #disney #disneyland #tokyodisneyland (published 2026-10-03, id FnhtTcoPsng)
+- COME W ME TO TOKYO DISNEYLAND 🇯🇵🥳🏰💖🎈🎠 # #japan #tokyo #tokyodisneyland #tokyotravel (published 2026-10-03, id SPXY_V7ST2w)
+- VLOG ! COME W ME TO TOKYO DISNEYLAND 🇯🇵🥳🏰🎠💖🎈 #tokyo #japan #tokyodisneyland (published 2026-10-03, id 4lw4Zj6OOeQ)
 - COME W ME TO DISNEYLAND TOKYO🇯🇵🏰💖🩷🎠🥳 #japan #tokyo #tokyodisneyland (published 2026-10-02, id CNSco7xnZnU)
 - COME W ME TO TOKYO DISNEYLAND! VLOG ! 💖🥳🇯🇵🏰🎠🩷 #explorejapan #japan #tokyo #tokyodisneyland (published 2026-10-02, id 2NfP6dRe8B8)
 
@@ -190,16 +193,16 @@ priority_score blends this destination's average 90-day views, average retention
 
 | Destination | Videos | Avg views/90d | Retention | Unmet keywords | Momentum | Priority |
 |---|---|---|---|---|---|---|
-| Tokyo / Japan | 7 | 437.3 | 31.2% | 6 | +3061 | 0.926 |
-| Marbella / Puerto Banus | 21 | 7.0 | 44.3% | 1 | +5 | 0.297 |
-| New York City | 4 | 2.8 | 42.6% | 1 | +0 | 0.284 |
+| Tokyo / Japan | 10 | 306.1 | 31.2% | 6 | +3061 | 0.926 |
+| Marbella / Puerto Banus | 21 | 7.0 | 44.3% | 1 | +5 | 0.299 |
+| New York City | 4 | 2.8 | 42.6% | 1 | +0 | 0.285 |
+| Bali | 28 | 5.2 | 43.5% | 0 | -2 | 0.251 |
 | Other / Unclassified | 53 | 0.6 | 44.0% | 0 | +3 | 0.249 |
-| Bali | 28 | 5.2 | 43.5% | 0 | -2 | 0.249 |
-| Sydney / Australia | 35 | 6.9 | 32.9% | 1 | +11 | 0.233 |
-| Dubai | 44 | 5.6 | 31.0% | 0 | +2 | 0.179 |
-| Colombo / Sri Lanka | 14 | 1.1 | 8.6% | 0 | +0 | 0.049 |
-| Milan | 1 | 0.0 | n/a | 0 | +0 | 0.0 |
+| Sydney / Australia | 35 | 6.9 | 32.9% | 1 | +11 | 0.235 |
+| Dubai | 44 | 5.6 | 31.0% | 0 | +2 | 0.181 |
+| Colombo / Sri Lanka | 14 | 1.1 | 8.6% | 0 | +0 | 0.05 |
 | Punta Cana | 0 | 0 | n/a | 0 | +0 | 0.0 |
+| Milan | 1 | 0.0 | n/a | 0 | +0 | 0.0 |
 
 ## Keyword discovery by destination
 gaps_by_destination = real search terms already driving views (YouTube Analytics, last 90 days) not yet present in that destination's video text. template_opportunities_by_destination = generic high-intent query patterns (config.KEYWORD_INTENT_TEMPLATES), NOT real search-volume data -- there is no keyword-research API authorized for this project.
@@ -1003,7 +1006,7 @@ Recommended end-screen/card pairs:
 - SAFARI TIME IN SRI LANKA !#safari #vlogg -> Sri Lanka Vlog Part 1 | Exploring Colomb (same destination (Colombo / Sri Lanka); Sri Lanka Vlog Part 1 | Exploring Colomb is the top performer in this cluster)
 - SRI LANKA VLOG PART 1 OUT NOW🥰💁🏼‍♀️ #sri -> Sri Lanka Vlog Part 1 | Exploring Colomb (same destination (Colombo / Sri Lanka); Sri Lanka Vlog Part 1 | Exploring Colomb is the top performer in this cluster)
 
-### Tokyo / Japan (7 videos)
+### Tokyo / Japan (10 videos)
 Hub video: TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo #visitjapan #japanese
 Playlist suggestion: Tokyo / Japan Travel Vlogs
 Description link text: More from Tokyo / Japan: [link to TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo]
@@ -1013,7 +1016,7 @@ Recommended end-screen/card pairs:
 - COME AND SPEND TIME WITH ME IN TOKYO🇯🇵🐽🐷 -> TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja (same destination (Tokyo / Japan); TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja is the top performer in this cluster)
 - MY FIRST TIME IN JAPAN 🇯🇵 | TOKYO TRAVEL -> TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja (same destination (Tokyo / Japan); TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja is the top performer in this cluster)
 - COME W ME TO TOKYO DISNEYLAND! VLOG ! 💖🥳 -> TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja (same destination (Tokyo / Japan); TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja is the top performer in this cluster)
-- COME W ME TO DISNEYLAND TOKYO🇯🇵🏰💖🩷🎠🥳 #ja -> TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja (same destination (Tokyo / Japan); TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja is the top performer in this cluster)
+- COME W ME TO TOKYO DISNEYLAND 🇯🇵🥳💖🎠🏰🤩 #t -> TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja (same destination (Tokyo / Japan); TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #ja is the top performer in this cluster)
 
 ### New York City (4 videos)
 Hub video: SEPTEMBER IN NYC | New York City
@@ -1099,17 +1102,110 @@ New Shorts concepts to create:
 ## Content opportunity engine -- what to film next
 Ranked by destination_performance's priority_score (real views + retention + momentum, blended with unmet search-demand count). Each rationale names the actual numbers behind the ranking -- not a generic suggestion.
 
-- [EXPAND] **Tokyo / Japan** (score 0.926) | target keyword: "tokyo first time" -- 7 existing videos, avg 437.3 views/90d; 31.2% retention; 6 proven search gap(s); momentum +3061
-- [EXPAND] **Marbella / Puerto Banus** (score 0.297) | target keyword: "puerto banus marbella" -- 21 existing videos, avg 7.0 views/90d; 44.3% retention; 1 proven search gap(s); momentum +5
-- [EXPAND] **New York City** (score 0.284) | target keyword: "new york city apartment" -- 4 existing videos, avg 2.8 views/90d; 42.6% retention; 1 proven search gap(s)
-- [EXPAND] **Bali** (score 0.249) -- 28 existing videos, avg 5.2 views/90d; 43.5% retention; momentum -2
-- [EXPAND] **Sydney / Australia** (score 0.233) | target keyword: "crown towers sydney" -- 35 existing videos, avg 6.9 views/90d; 32.9% retention; 1 proven search gap(s); momentum +11
-- [EXPAND] **Dubai** (score 0.179) | target keyword: "how much does Dubai cost" -- 44 existing videos, avg 5.6 views/90d; 31.0% retention; momentum +2
-- [EXPAND] **Colombo / Sri Lanka** (score 0.049) -- 14 existing videos, avg 1.1 views/90d; 8.6% retention
-- [EXPAND] **Milan** (score 0.0) | target keyword: "how much does Milan cost" -- 1 existing videos, avg 0.0 views/90d
+- [EXPAND] **Tokyo / Japan** (score 0.926) | target keyword: "tokyo first time" -- 10 existing videos, avg 306.1 views/90d; 31.2% retention; 6 proven search gap(s); momentum +3061
+- [EXPAND] **Marbella / Puerto Banus** (score 0.299) | target keyword: "puerto banus marbella" -- 21 existing videos, avg 7.0 views/90d; 44.3% retention; 1 proven search gap(s); momentum +5
+- [EXPAND] **New York City** (score 0.285) | target keyword: "new york city apartment" -- 4 existing videos, avg 2.8 views/90d; 42.6% retention; 1 proven search gap(s)
+- [EXPAND] **Bali** (score 0.251) -- 28 existing videos, avg 5.2 views/90d; 43.5% retention; momentum -2
+- [EXPAND] **Sydney / Australia** (score 0.235) | target keyword: "crown towers sydney" -- 35 existing videos, avg 6.9 views/90d; 32.9% retention; 1 proven search gap(s); momentum +11
+- [EXPAND] **Dubai** (score 0.181) | target keyword: "how much does Dubai cost" -- 44 existing videos, avg 5.6 views/90d; 31.0% retention; momentum +2
+- [EXPAND] **Colombo / Sri Lanka** (score 0.05) -- 14 existing videos, avg 1.1 views/90d; 8.6% retention
+- [NEW DESTINATION] **Punta Cana** (score 0.0) -- not yet covered on the channel
 
 ## New-video launch packages (auto-generated for newly detected uploads)
 Generated automatically for every video detected as new since the last run -- no manual trigger needed. recommended_publishing_optimization is a real heuristic (this channel's own historical day-of-week vs average lifetime views), not external platform data.
+
+### COME W ME TO TOKYO DISNEYLAND 🇯🇵🥳💖🎠🏰🤩 #tokyo #japan #disney #disneyland #tokyodisneyland
+Destination: Tokyo / Japan  |  Primary keyword: tokyo first time
+Secondary keywords: japan trip first time, first time in japan vlog, japan trip, japan trip vlog
+
+Title options:
+- Tokyo / Japan Travel Vlog 2026 | Tokyo First Time
+- Tokyo First Time -- Tokyo / Japan Guide
+- First Time in Tokyo / Japan: Tokyo First Time
+
+Tags: Tokyo, Japan, tokyo first time, japan trip first time, first time in japan vlog, japan trip, japan trip vlog, japan tsunami 2011
+Hashtags: #Tokyo #tokyofirsttime #japantripfirsttime #firsttimeinjapanvlog #travelvlog
+Thumbnail concepts: TOKYO! / IS IT WORTH IT? / TOKYO TRUTH / WE DID THIS IN TOKYO
+
+Description:
+```
+Tokyo / Japan -- tokyo first time
+
+Join me exploring Tokyo / Japan! Full tokyo first time in this video.
+
+Subscribe for more travel vlogs.
+#Tokyo #tokyofirsttime #japantripfirsttime #firsttimeinjapanvlog #travelvlog
+```
+
+Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
+Related videos to link: TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo #visitjapan #japanese, TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo #visitjapan #japanese, TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo #visitjapan #japanese
+Suggested internal links: More from Tokyo / Japan: [link to TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo]
+Shorts ideas to promote this video:
+- 3 things that surprised me in Tokyo / Japan -- full story linked below
+- Tokyo / Japan in 60 seconds -- full vlog on the channel
+Recommended publishing day: Saturday (this channel's historical avg 578.0 lifetime views for uploads on that day, n=25)
+
+### COME W ME TO TOKYO DISNEYLAND 🇯🇵🥳🏰💖🎈🎠 # #japan #tokyo #tokyodisneyland #tokyotravel
+Destination: Tokyo / Japan  |  Primary keyword: tokyo first time
+Secondary keywords: japan trip first time, first time in japan vlog, japan trip, japan trip vlog
+
+Title options:
+- Tokyo / Japan Travel Vlog 2026 | Tokyo First Time
+- Tokyo First Time -- Tokyo / Japan Guide
+- First Time in Tokyo / Japan: Tokyo First Time
+
+Tags: Tokyo, Japan, tokyo first time, japan trip first time, first time in japan vlog, japan trip, japan trip vlog, japan tsunami 2011
+Hashtags: #Tokyo #tokyofirsttime #japantripfirsttime #firsttimeinjapanvlog #travelvlog
+Thumbnail concepts: TOKYO! / IS IT WORTH IT? / TOKYO TRUTH / WE DID THIS IN TOKYO
+
+Description:
+```
+Tokyo / Japan -- tokyo first time
+
+Join me exploring Tokyo / Japan! Full tokyo first time in this video.
+
+Subscribe for more travel vlogs.
+#Tokyo #tokyofirsttime #japantripfirsttime #firsttimeinjapanvlog #travelvlog
+```
+
+Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
+Related videos to link: TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo #visitjapan #japanese, TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo #visitjapan #japanese, TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo #visitjapan #japanese
+Suggested internal links: More from Tokyo / Japan: [link to TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo]
+Shorts ideas to promote this video:
+- 3 things that surprised me in Tokyo / Japan -- full story linked below
+- Tokyo / Japan in 60 seconds -- full vlog on the channel
+Recommended publishing day: Saturday (this channel's historical avg 578.0 lifetime views for uploads on that day, n=25)
+
+### VLOG ! COME W ME TO TOKYO DISNEYLAND 🇯🇵🥳🏰🎠💖🎈 #tokyo #japan #tokyodisneyland
+Destination: Tokyo / Japan  |  Primary keyword: tokyo first time
+Secondary keywords: japan trip first time, first time in japan vlog, japan trip, japan trip vlog
+
+Title options:
+- Tokyo / Japan Travel Vlog 2026 | Tokyo First Time
+- Tokyo First Time -- Tokyo / Japan Guide
+- First Time in Tokyo / Japan: Tokyo First Time
+
+Tags: Tokyo, Japan, tokyo first time, japan trip first time, first time in japan vlog, japan trip, japan trip vlog, japan tsunami 2011
+Hashtags: #Tokyo #tokyofirsttime #japantripfirsttime #firsttimeinjapanvlog #travelvlog
+Thumbnail concepts: TOKYO! / IS IT WORTH IT? / TOKYO TRUTH / WE DID THIS IN TOKYO
+
+Description:
+```
+Tokyo / Japan -- tokyo first time
+
+Join me exploring Tokyo / Japan! Full tokyo first time in this video.
+
+Subscribe for more travel vlogs.
+#Tokyo #tokyofirsttime #japantripfirsttime #firsttimeinjapanvlog #travelvlog
+```
+
+Chapter template: 00:00 Intro | 00:XX Arrival / getting there | 0X:XX Main highlight 1 | 0X:XX Main highlight 2 | 0X:XX Food & dining | 0X:XX Final thoughts
+Related videos to link: TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo #visitjapan #japanese, TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo #visitjapan #japanese, TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo #visitjapan #japanese
+Suggested internal links: More from Tokyo / Japan: [link to TOKYO VLOG OUT NOW !🇯🇵 #explorejapan #japan #tokyo]
+Shorts ideas to promote this video:
+- 3 things that surprised me in Tokyo / Japan -- full story linked below
+- Tokyo / Japan in 60 seconds -- full vlog on the channel
+Recommended publishing day: Saturday (this channel's historical avg 578.0 lifetime views for uploads on that day, n=25)
 
 ### COME W ME TO DISNEYLAND TOKYO🇯🇵🏰💖🩷🎠🥳 #japan #tokyo #tokyodisneyland
 Destination: Tokyo / Japan  |  Primary keyword: tokyo first time
@@ -1140,7 +1236,7 @@ Suggested internal links: More from Tokyo / Japan: [link to TOKYO VLOG OUT NOW !
 Shorts ideas to promote this video:
 - 3 things that surprised me in Tokyo / Japan -- full story linked below
 - Tokyo / Japan in 60 seconds -- full vlog on the channel
-Recommended publishing day: Saturday (this channel's historical avg 647.7 lifetime views for uploads on that day, n=22)
+Recommended publishing day: Saturday (this channel's historical avg 578.0 lifetime views for uploads on that day, n=25)
 
 ### COME W ME TO TOKYO DISNEYLAND! VLOG ! 💖🥳🇯🇵🏰🎠🩷 #explorejapan #japan #tokyo #tokyodisneyland
 Destination: Tokyo / Japan  |  Primary keyword: tokyo first time
@@ -1171,4 +1267,4 @@ Suggested internal links: More from Tokyo / Japan: [link to TOKYO VLOG OUT NOW !
 Shorts ideas to promote this video:
 - 3 things that surprised me in Tokyo / Japan -- full story linked below
 - Tokyo / Japan in 60 seconds -- full vlog on the channel
-Recommended publishing day: Saturday (this channel's historical avg 647.7 lifetime views for uploads on that day, n=22)
+Recommended publishing day: Saturday (this channel's historical avg 578.0 lifetime views for uploads on that day, n=25)
