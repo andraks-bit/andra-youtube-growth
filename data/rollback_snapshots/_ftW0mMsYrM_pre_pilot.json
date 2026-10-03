@@ -1,0 +1,48 @@
+{
+  "video_id": "_ftW0mMsYrM",
+  "proposal_id": "8010124027",
+  "github_issue_number": 1,
+  "captured_at": "2026-10-01T05:49:25.065234Z",
+  "purpose": "Pre-pilot rollback snapshot -- full live snippet before Step 7 write pilot applies proposal #1",
+  "snippet_before": {
+    "publishedAt": "2026-03-10T23:15:45Z",
+    "channelId": "UCNFCKmMFaHUDuKIGub7exhA",
+    "title": "GILI AIR ISLAND BALI📍🇮🇩🥥🤿🏝️💁🏼‍♀️🐢🐴😲 #youtubeshorts #bali #travel #indonesia",
+    "description": "",
+    "thumbnails": {
+      "default": {
+        "url": "https://i.ytimg.com/vi/_ftW0mMsYrM/default.jpg",
+        "width": 120,
+        "height": 90
+      },
+      "medium": {
+        "url": "https://i.ytimg.com/vi/_ftW0mMsYrM/mqdefault.jpg",
+        "width": 320,
+        "height": 180
+      },
+      "high": {
+        "url": "https://i.ytimg.com/vi/_ftW0mMsYrM/hqdefault.jpg",
+        "width": 480,
+        "height": 360
+      },
+      "standard": {
+        "url": "https://i.ytimg.com/vi/_ftW0mMsYrM/sddefault.jpg",
+        "width": 640,
+        "height": 480
+      },
+      "maxres": {
+        "url": "https://i.ytimg.com/vi/_ftW0mMsYrM/maxresdefault.jpg",
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "channelTitle": "Andra Kiirkivi",
+    "categoryId": "24",
+    "liveBroadcastContent": "none",
+    "defaultLanguage": "en",
+    "localized": {
+      "title": "GILI AIR ISLAND BALI📍🇮🇩🥥🤿🏝️💁🏼‍♀️🐢🐴😲 #youtubeshorts #bali #travel #indonesia",
+      "description": ""
+    }
+  }
+}
