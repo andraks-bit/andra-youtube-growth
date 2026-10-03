@@ -29,10 +29,12 @@ def _read_text(path):
         return ""
 
 
-def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None):
+def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None,
+                        traffic_growth_actions=None):
     """
     Generate a concise digest combining:
       - Weekly report highlights (top 3 destinations, view trends, keyword gaps)
+      - TOP 5 GROWTH ACTIONS (ranked by expected impact)
       - Pending proposals summary (count, key details, approval links)
       - Next actions (what to do this week)
 
@@ -40,6 +42,7 @@ def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None
         weekly_report_path: Path to weekly_latest.md or similar
         pending_changes_path: Path to data/pending_changes.json
         run_date: Date string (YYYY-MM-DD). If None, today's date is used.
+        traffic_growth_actions: Result dict from traffic_growth_actions.analyze() (optional)
 
     Returns:
         Digest text (plain text, email-safe).
@@ -144,6 +147,20 @@ def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None
         if len(proposals_list) > 5:
             pending_section += f"    ... and {len(proposals_list) - 5} more\n"
 
+    # TOP 5 GROWTH ACTIONS (ranked by expected impact)
+    top_actions_section = "\n⭐ TOP 5 GROWTH ACTIONS THIS WEEK\n"
+    if traffic_growth_actions and traffic_growth_actions.get("actions"):
+        actions_list = traffic_growth_actions.get("actions", [])[:5]
+        for i, action in enumerate(actions_list, 1):
+            category = action.get("category", "action")
+            text = action.get("text", "")
+            score = action.get("score", 0)
+            top_actions_section += f"  {i}. {text}\n"
+            if score > 0:
+                top_actions_section += f"     (Impact score: {score:.0f})\n"
+    else:
+        top_actions_section += "  No growth actions this week. Continue with standard optimization.\n"
+
     # Next actions
     actions_section = "\n✅ THIS WEEK'S ACTIONS\n"
     actions = []
@@ -174,7 +191,7 @@ def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None
 
     # Combine all sections
     digest = header + channel_section + trends_section + dest_section + keyword_section + \
-             pending_section + actions_section + footer
+             top_actions_section + pending_section + actions_section + footer
 
     return digest
 

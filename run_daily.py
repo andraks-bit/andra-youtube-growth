@@ -37,6 +37,7 @@ from analysis import (
     change_proposals, ctr_optimization, growth_backlog,
     competitor_intelligence, trend_detection, content_ideation,
     distribution_strategy, impact_tracking, growth_metrics, growth_digest,
+    growth_engine, older_video_refresh,
 )
 from reports import report_generator, weekly_report_generator
 
@@ -197,6 +198,25 @@ def main():
             )
             step.set_produced(f"{len(traffic_actions_result['actions'])} ranked actions")
 
+    growth_engine_result = older_video_refresh_result = None
+
+    if all(x is not None for x in (catalog, traffic_growth_result, search_seo_result, keyword_discovery_result)):
+        with logger.step("generate_growth_concepts") as step:
+            growth_engine_result = growth_engine.analyze(
+                catalog, traffic_growth_result, search_seo_result, keyword_discovery_result,
+                analytics.get("retention_curves", {}), analytics
+            )
+            candidates = len(growth_engine_result.get("candidates", []))
+            step.set_produced(f"{candidates} videos with title/thumbnail concepts")
+
+    if all(x is not None for x in (catalog, analytics, momentum_result, dest_perf_result)):
+        with logger.step("analyze_older_video_refresh") as step:
+            older_video_refresh_result = older_video_refresh.analyze(
+                catalog, analytics, momentum_result, dest_perf_result
+            )
+            refresh_candidates = len(older_video_refresh_result.get("refresh_candidates", []))
+            step.set_produced(f"{refresh_candidates} older videos worth refreshing")
+
     ctr_opt_result = competitor_intel_result = trends_result = growth_backlog_result = shorts_result = None
 
     if all(x is not None for x in (catalog, analytics, optimization, planning)):
@@ -345,6 +365,8 @@ def main():
                 "shorts_to_longform": shorts_to_longform_result,
                 "content_opportunity": content_opportunity_result,
                 "traffic_growth_actions": traffic_actions_result,
+                "growth_engine": growth_engine_result,
+                "older_video_refresh": older_video_refresh_result,
                 "ctr_optimization": ctr_opt_result,
                 "competitor_intelligence": competitor_intel_result,
                 "trend_detection": trends_result,
@@ -379,6 +401,8 @@ def main():
                 shorts_to_longform=shorts_to_longform_result,
                 content_opportunity=content_opportunity_result,
                 new_video_launch_packages=new_launch_packages_result,
+                growth_engine=growth_engine_result,
+                older_video_refresh=older_video_refresh_result,
             )
             report_path = os.path.join(config.REPORTS_DIR, f"{today}.md")
             with open(report_path, "w") as f:
@@ -407,6 +431,7 @@ def main():
             digest_text = digest.generate_digest_text(
                 os.path.join(config.REPORTS_DIR, "weekly_latest.md"),
                 os.path.join(config.DATA_DIR, "pending_changes.json"),
+                traffic_growth_actions=traffic_actions_result,
             )
             recipient = os.environ.get("DIGEST_RECIPIENT_EMAIL", "andra.kiirkivi@gmail.com")
             sent = digest.send_digest_email(digest_text, recipient)

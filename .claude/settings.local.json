@@ -319,7 +319,10 @@
       "Bash(sort -k6,7)",
       "Bash(curl -s \"https://api.github.com/repos/andraks-bit/andra-youtube-growth/issues?state=all&per_page=50\")",
       "Bash(run_in_background: true *)",
-      "Bash(python3 test_api_retry.py)"
+      "Bash(python3 test_api_retry.py)",
+      "Bash(ls -la ~/.ssh/ 2>/dev/null | head -10)",
+      "Bash(git restore *)",
+      "Bash(git merge *)"
     ]
   }
 }
