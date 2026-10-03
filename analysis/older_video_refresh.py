@@ -74,7 +74,11 @@ def analyze(video_catalog, analytics, momentum_result, destination_performance):
 
     for video in video_catalog:
         video_id = video["video_id"]
-        published = datetime.datetime.fromisoformat(video["published_at"]).date()
+        # Handle ISO format with 'Z' timezone suffix
+        published_str = video["published_at"]
+        if published_str.endswith("Z"):
+            published_str = published_str[:-1]
+        published = datetime.datetime.fromisoformat(published_str).date()
         days_old = (today - published).days
 
         # Filter 1: At least 30 days old
