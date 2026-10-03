@@ -40,6 +40,7 @@ from analysis import (
     growth_engine, older_video_refresh,
     subscriber_conversion, subscriber_patterns, subscriber_growth_opportunities, subscriber_tracking,
     external_traffic_analysis, distribution_tracker,
+    discovery_engine, opportunity_tracker, growth_executor,
 )
 from reports import report_generator, weekly_report_generator
 
@@ -275,6 +276,32 @@ def main():
             health = distribution_tracker_result.get("distribution_health", {}).get("assessment", "unknown")
             step.set_produced(f"Distribution health: {health}")
 
+    # Daily Growth Discovery & Execution Engine
+    discovery_result = growth_execution_result = opportunity_tracking_result = None
+
+    if all(x is not None for x in (catalog, subscriber_tracking_result)):
+        with logger.step("discover_daily_growth_opportunities") as step:
+            discovery_result = discovery_engine.discover_opportunities(
+                catalog, analytics, subscriber_tracking_result or {}
+            )
+            new_opps = discovery_result.get("new_opportunities_discovered", 0)
+            step.set_produced(f"{new_opps} new growth opportunities discovered and tracked")
+
+    if discovery_result:
+        with logger.step("execute_growth_actions") as step:
+            growth_execution_result = growth_executor.execute_opportunities(
+                discovery_result, catalog, analytics
+            )
+            executed = growth_execution_result.get("total_executed", 0)
+            pending_approval = growth_execution_result.get("total_pending_approval", 0)
+            step.set_produced(f"{executed} actions executed, {pending_approval} need approval")
+
+    with logger.step("track_opportunities") as step:
+        opportunity_tracking_result = opportunity_tracker.analyze(None)
+        total_opps = opportunity_tracking_result.get("total_opportunities", 0)
+        discovered_today = opportunity_tracking_result.get("discovered_today", 0)
+        step.set_produced(f"{total_opps} total tracked, {discovered_today} discovered today")
+
     ctr_opt_result = competitor_intel_result = trends_result = growth_backlog_result = shorts_result = None
 
     if all(x is not None for x in (catalog, analytics, optimization, planning)):
@@ -431,6 +458,9 @@ def main():
                 "subscriber_tracking": subscriber_tracking_result,
                 "external_traffic_analysis": external_traffic_result,
                 "distribution_tracker": distribution_tracker_result,
+                "discovery_engine": discovery_result,
+                "growth_executor": growth_execution_result,
+                "opportunity_tracker": opportunity_tracking_result,
                 "ctr_optimization": ctr_opt_result,
                 "competitor_intelligence": competitor_intel_result,
                 "trend_detection": trends_result,
@@ -499,6 +529,8 @@ def main():
                 subscriber_growth_opportunities=subscriber_growth_result,
                 subscriber_tracking=subscriber_tracking_result,
                 external_traffic_analysis=external_traffic_result,
+                discovery_result=discovery_result,
+                growth_execution_result=growth_execution_result,
             )
             recipient = os.environ.get("DIGEST_RECIPIENT_EMAIL", "andra.kiirkivi@gmail.com")
             sent = digest.send_digest_email(digest_text, recipient)
