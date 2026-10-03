@@ -1,0 +1,84 @@
+name: YouTube Growth System (Andra Kiirkivi)
+
+on:
+  schedule:
+    # 06:00 UTC daily. Adjust to taste -- this is the only schedule knob.
+    - cron: "0 6 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Determine if Monday (for digest)
+        id: check_monday
+        run: |
+          # Check if today is Monday (day 1)
+          DAY=$(date -u +%w)
+          if [ "$DAY" = "1" ]; then
+            echo "send_digest=true" >> $GITHUB_OUTPUT
+          else
+            echo "send_digest=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run growth system
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Kill switch for Step 6's approval workflow actually writing to
+          # YouTube. Unset/false by default -- approved proposals queue
+          # indefinitely until this repo variable is deliberately set to
+          # "true" (Settings -> Secrets and variables -> Actions -> Variables).
+          YT_WRITES_ENABLED: ${{ vars.YT_WRITES_ENABLED }}
+          # Step 7 controlled-pilot safeguard: when set to a proposal_id,
+          # apply_approved() applies ONLY that proposal and holds back every
+          # other approved one regardless of YT_WRITES_ENABLED. Unset outside
+          # an explicit pilot window.
+          YT_WRITES_PILOT_ONLY_PROPOSAL_ID: ${{ vars.YT_WRITES_PILOT_ONLY_PROPOSAL_ID }}
+          # Digest delivery: set on Mondays to send weekly summary
+          SEND_DIGEST: ${{ steps.check_monday.outputs.send_digest == 'true' && '1' || '' }}
+          DIGEST_RECIPIENT_EMAIL: ${{ secrets.DIGEST_RECIPIENT_EMAIL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: python run_daily.py
+
+      - name: Commit data, logs, and report
+        if: always()
+        run: |
+          git config user.name "youtube-growth-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data logs reports/generated
+          git diff --cached --quiet && exit 0
+          git commit -m "Automated YouTube growth run $(date -u +%Y-%m-%d)"
+          # Retry on push rejection with fetch+rebase to handle concurrent
+          # pushes (e.g. overlapping runs, manual commits). Fetch first to
+          # ensure we have the latest remote state before rebasing.
+          git fetch origin main
+          for attempt in 1 2 3 4 5; do
+            if git push; then
+              exit 0
+            fi
+            echo "Push rejected (attempt $attempt/5) -- rebasing onto origin/main and retrying"
+            git rebase --abort 2>/dev/null || true
+            git fetch origin main
+            git rebase origin/main
+          done
+          echo "Push still failing after 5 attempts -- giving up"
+          exit 1
