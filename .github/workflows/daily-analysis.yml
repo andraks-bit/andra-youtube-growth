@@ -1,0 +1,107 @@
+name: Daily YouTube Analysis & Proposals
+
+on:
+  schedule:
+    # Runs every day at 9:00 AM UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    # Allow manual trigger from GitHub UI
+    inputs:
+      send_digest:
+        description: 'Send digest email after analysis?'
+        required: false
+        default: 'false'
+
+env:
+  YT_WRITES_ENABLED: 'false'  # CRITICAL: Never auto-deploy without explicit approval
+
+jobs:
+  daily-analysis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install google-auth-oauthlib google-auth-httplib2 google-api-python-client PyGithub requests python-dotenv
+
+      - name: Run daily YouTube analysis
+        env:
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
+          YT_WRITES_ENABLED: 'false'
+        working-directory: youtube-growth-system
+        run: python run_daily.py
+
+      - name: Upload analysis logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: daily-logs-${{ github.run_number }}
+          path: youtube-growth-system/logs/
+          retention-days: 30
+
+      - name: Upload generated reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: daily-reports-${{ github.run_number }}
+          path: youtube-growth-system/reports/generated/
+          retention-days: 30
+
+      - name: Comment with results
+        if: always()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const logFile = 'youtube-growth-system/logs/run_log.jsonl';
+            if (fs.existsSync(logFile)) {
+              const lines = fs.readFileSync(logFile, 'utf8').trim().split('\n');
+              const lastLine = lines[lines.length - 1];
+              try {
+                const result = JSON.parse(lastLine);
+                const status = result.overall_status === 'success' ? '✅ SUCCESS' : '❌ FAILED';
+                let comment = `## ${status}\n\n`;
+                comment += `**Run**: ${new Date().toLocaleString('en-US', {timeZone: 'UTC'})} UTC\n\n`;
+
+                if (result.steps) {
+                  comment += '### Analysis Steps\n\n';
+                  for (const step of result.steps.slice(0, 5)) {
+                    comment += `- ✓ ${step.name}: ${step.produced || step.collected || 'completed'}\n`;
+                  }
+                  if (result.steps.length > 5) {
+                    comment += `- ... and ${result.steps.length - 5} more steps\n`;
+                  }
+                }
+
+                console.log(comment);
+              } catch(e) {
+                console.log('Could not parse run results');
+              }
+            }
+
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: 1,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `⚠️ **Daily analysis failed** at ${new Date().toLocaleString('en-US', {timeZone: 'UTC'})} UTC\n\nCheck the [workflow run](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) for details.`
+            }).catch(() => console.log('Could not post failure notification'));
