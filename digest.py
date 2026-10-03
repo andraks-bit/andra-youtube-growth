@@ -31,7 +31,7 @@ def _read_text(path):
 
 def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None,
                         traffic_growth_actions=None, subscriber_growth_opportunities=None,
-                        subscriber_tracking=None):
+                        subscriber_tracking=None, external_traffic_analysis=None):
     """
     Generate a concise digest combining:
       - Weekly report highlights (top 3 destinations, view trends, keyword gaps)
@@ -225,9 +225,20 @@ def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None
     footer += "More details: https://github.com/andraks-bit/andra-youtube-growth/issues\n"
     footer += "Full report: reports/generated/weekly_latest.md\n"
 
+    # TOP EXTERNAL TRAFFIC OPPORTUNITIES
+    ext_traffic_section = "\n🌐 TOP EXTERNAL TRAFFIC OPPORTUNITIES\n"
+    if external_traffic_analysis and external_traffic_analysis.get("traffic_opportunities_summary"):
+        summary = external_traffic_analysis["traffic_opportunities_summary"]
+        ext_traffic_section += f"  Shorts repurposing: {summary.get('shorts_repurposing_opportunities', 0)} videos\n"
+        ext_traffic_section += f"  Pinterest pins: {summary.get('pinterest_pin_opportunities', 0)} opportunities\n"
+        ext_traffic_section += f"  Collaboration: {summary.get('collaboration_opportunities', 0)} options\n"
+        ext_traffic_section += f"  Estimated reach: {summary.get('estimated_additional_reach', 'n/a')}\n"
+    else:
+        ext_traffic_section += "  No external distribution opportunities identified this week.\n"
+
     # Combine all sections
     digest = header + channel_section + trends_section + dest_section + keyword_section + \
-             top_actions_section + sub_growth_section + sub_tracking_section + \
+             top_actions_section + sub_growth_section + sub_tracking_section + ext_traffic_section + \
              pending_section + actions_section + footer
 
     return digest

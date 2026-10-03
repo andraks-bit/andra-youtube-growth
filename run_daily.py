@@ -39,6 +39,7 @@ from analysis import (
     distribution_strategy, impact_tracking, growth_metrics, growth_digest,
     growth_engine, older_video_refresh,
     subscriber_conversion, subscriber_patterns, subscriber_growth_opportunities, subscriber_tracking,
+    external_traffic_analysis, distribution_tracker,
 )
 from reports import report_generator, weekly_report_generator
 
@@ -254,6 +255,26 @@ def main():
             trend = subscriber_tracking_result.get("subscriber_velocity", {}).get("trend_direction", "stable")
             step.set_produced(f"Subscriber trend: {trend}")
 
+    # External Traffic & Distribution Engine
+    external_traffic_result = distribution_tracker_result = None
+
+    if all(x is not None for x in (catalog, optimization, subscriber_conversion_result)):
+        with logger.step("analyze_external_traffic_opportunities") as step:
+            external_traffic_result = external_traffic_analysis.analyze(
+                catalog, optimization or {}, analytics, subscriber_conversion_result
+            )
+            shorts_opps = len(external_traffic_result.get("shorts_opportunities", []))
+            pinterest_opps = len(external_traffic_result.get("pinterest_opportunities", []))
+            step.set_produced(f"{shorts_opps} Shorts + {pinterest_opps} Pinterest opportunities")
+
+    if analytics:
+        with logger.step("track_distribution_performance") as step:
+            distribution_tracker_result = distribution_tracker.analyze(
+                analytics, external_traffic_result or {}
+            )
+            health = distribution_tracker_result.get("distribution_health", {}).get("assessment", "unknown")
+            step.set_produced(f"Distribution health: {health}")
+
     ctr_opt_result = competitor_intel_result = trends_result = growth_backlog_result = shorts_result = None
 
     if all(x is not None for x in (catalog, analytics, optimization, planning)):
@@ -408,6 +429,8 @@ def main():
                 "subscriber_patterns": subscriber_patterns_result,
                 "subscriber_growth_opportunities": subscriber_growth_result,
                 "subscriber_tracking": subscriber_tracking_result,
+                "external_traffic_analysis": external_traffic_result,
+                "distribution_tracker": distribution_tracker_result,
                 "ctr_optimization": ctr_opt_result,
                 "competitor_intelligence": competitor_intel_result,
                 "trend_detection": trends_result,
@@ -475,6 +498,7 @@ def main():
                 traffic_growth_actions=traffic_actions_result,
                 subscriber_growth_opportunities=subscriber_growth_result,
                 subscriber_tracking=subscriber_tracking_result,
+                external_traffic_analysis=external_traffic_result,
             )
             recipient = os.environ.get("DIGEST_RECIPIENT_EMAIL", "andra.kiirkivi@gmail.com")
             sent = digest.send_digest_email(digest_text, recipient)
