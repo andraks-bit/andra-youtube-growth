@@ -38,6 +38,7 @@ from analysis import (
     competitor_intelligence, trend_detection, content_ideation,
     distribution_strategy, impact_tracking, growth_metrics, growth_digest,
     growth_engine, older_video_refresh,
+    subscriber_conversion, subscriber_patterns, subscriber_growth_opportunities, subscriber_tracking,
 )
 from reports import report_generator, weekly_report_generator
 
@@ -217,6 +218,42 @@ def main():
             refresh_candidates = len(older_video_refresh_result.get("refresh_candidates", []))
             step.set_produced(f"{refresh_candidates} older videos worth refreshing")
 
+    # Subscriber Growth Engine
+    subscriber_conversion_result = subscriber_patterns_result = subscriber_growth_result = subscriber_tracking_result = None
+
+    if all(x is not None for x in (analytics, catalog)):
+        with logger.step("analyze_subscriber_conversion") as step:
+            subscriber_conversion_result = subscriber_conversion.analyze(
+                analytics, catalog, optimization or {}, analytics.get("traffic_sources", [])
+            )
+            high_pot = len(subscriber_conversion_result.get("high_potential_videos", []))
+            step.set_produced(f"{high_pot} high-potential subscriber-converting videos identified")
+
+    if all(x is not None for x in (catalog, optimization, analytics, subscriber_conversion_result, traffic_growth_result)):
+        with logger.step("analyze_subscriber_patterns") as step:
+            subscriber_patterns_result = subscriber_patterns.analyze(
+                catalog, optimization or {}, analytics, subscriber_conversion_result, traffic_growth_result or {}
+            )
+            patterns = len(subscriber_patterns_result.get("high_subscriber_patterns", []))
+            step.set_produced(f"{patterns} subscriber growth patterns identified")
+
+    if all(x is not None for x in (catalog, optimization, analytics, subscriber_conversion_result, suggested_strategy_result, shorts_to_longform_result)):
+        with logger.step("analyze_subscriber_growth_opportunities") as step:
+            subscriber_growth_result = subscriber_growth_opportunities.analyze(
+                catalog, optimization or {}, analytics, subscriber_conversion_result,
+                suggested_strategy_result or {}, shorts_to_longform_result or {}
+            )
+            ctas = len(subscriber_growth_result.get("cta_recommendations", []))
+            step.set_produced(f"{ctas} CTA opportunities identified")
+
+    if analytics:
+        with logger.step("track_subscriber_growth") as step:
+            subscriber_tracking_result = subscriber_tracking.analyze(
+                analytics, catalog
+            )
+            trend = subscriber_tracking_result.get("subscriber_velocity", {}).get("trend_direction", "stable")
+            step.set_produced(f"Subscriber trend: {trend}")
+
     ctr_opt_result = competitor_intel_result = trends_result = growth_backlog_result = shorts_result = None
 
     if all(x is not None for x in (catalog, analytics, optimization, planning)):
@@ -367,6 +404,10 @@ def main():
                 "traffic_growth_actions": traffic_actions_result,
                 "growth_engine": growth_engine_result,
                 "older_video_refresh": older_video_refresh_result,
+                "subscriber_conversion": subscriber_conversion_result,
+                "subscriber_patterns": subscriber_patterns_result,
+                "subscriber_growth_opportunities": subscriber_growth_result,
+                "subscriber_tracking": subscriber_tracking_result,
                 "ctr_optimization": ctr_opt_result,
                 "competitor_intelligence": competitor_intel_result,
                 "trend_detection": trends_result,
@@ -432,6 +473,8 @@ def main():
                 os.path.join(config.REPORTS_DIR, "weekly_latest.md"),
                 os.path.join(config.DATA_DIR, "pending_changes.json"),
                 traffic_growth_actions=traffic_actions_result,
+                subscriber_growth_opportunities=subscriber_growth_result,
+                subscriber_tracking=subscriber_tracking_result,
             )
             recipient = os.environ.get("DIGEST_RECIPIENT_EMAIL", "andra.kiirkivi@gmail.com")
             sent = digest.send_digest_email(digest_text, recipient)

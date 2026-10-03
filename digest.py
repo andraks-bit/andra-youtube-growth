@@ -30,11 +30,14 @@ def _read_text(path):
 
 
 def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None,
-                        traffic_growth_actions=None):
+                        traffic_growth_actions=None, subscriber_growth_opportunities=None,
+                        subscriber_tracking=None):
     """
     Generate a concise digest combining:
       - Weekly report highlights (top 3 destinations, view trends, keyword gaps)
-      - TOP 5 GROWTH ACTIONS (ranked by expected impact)
+      - ⭐ TOP 5 GROWTH ACTIONS (ranked by expected impact)
+      - 🎯 TOP SUBSCRIBER GROWTH OPPORTUNITIES (ranked by subscriber conversion potential)
+      - Subscriber tracking metrics (daily/weekly growth, velocity)
       - Pending proposals summary (count, key details, approval links)
       - Next actions (what to do this week)
 
@@ -43,6 +46,8 @@ def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None
         pending_changes_path: Path to data/pending_changes.json
         run_date: Date string (YYYY-MM-DD). If None, today's date is used.
         traffic_growth_actions: Result dict from traffic_growth_actions.analyze() (optional)
+        subscriber_growth_opportunities: Result from subscriber_growth_opportunities.analyze() (optional)
+        subscriber_tracking: Result from subscriber_tracking.analyze() (optional)
 
     Returns:
         Digest text (plain text, email-safe).
@@ -161,6 +166,37 @@ def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None
     else:
         top_actions_section += "  No growth actions this week. Continue with standard optimization.\n"
 
+    # TOP SUBSCRIBER GROWTH OPPORTUNITIES (ranked by subscriber conversion potential)
+    sub_growth_section = "\n🎯 TOP SUBSCRIBER GROWTH OPPORTUNITIES\n"
+    if subscriber_growth_opportunities and subscriber_growth_opportunities.get("cta_recommendations"):
+        cta_list = subscriber_growth_opportunities.get("cta_recommendations", [])[:5]
+        for i, cta_item in enumerate(cta_list, 1):
+            video_title = cta_item.get("title", "")[:50]
+            cta_detail = cta_item.get("cta", {})
+            timing = cta_detail.get("timing", "")
+            sub_growth_section += f"  {i}. {video_title}\n"
+            sub_growth_section += f"     CTA timing: {timing}\n"
+            sub_growth_section += f"     Recommendation: {cta_detail.get('cta_recommendation', '')}\n"
+    else:
+        sub_growth_section += "  No subscriber growth opportunities detected this week.\n"
+
+    # Subscriber tracking metrics
+    sub_tracking_section = "\n📊 SUBSCRIBER GROWTH TRACKING\n"
+    if subscriber_tracking and subscriber_tracking.get("current_metrics"):
+        metrics = subscriber_tracking["current_metrics"]
+        sub_tracking_section += f"  Today: +{metrics.get('subs_gained_today', 0)} subscribers "
+        sub_tracking_section += f"({metrics.get('subs_per_1k_views_today', 0):.1f} per 1k views)\n"
+
+        velocity = subscriber_tracking.get("subscriber_velocity", {})
+        trend = velocity.get("trend_direction", "")
+        sub_tracking_section += f"  Weekly trend: {trend}\n"
+
+        benchmark = subscriber_tracking.get("benchmark_data", {})
+        avg_conv = benchmark.get("avg_subs_per_1k_views", 0)
+        sub_tracking_section += f"  Average conversion: {avg_conv:.1f} subs per 1k views\n"
+    else:
+        sub_tracking_section += "  No subscriber tracking data available.\n"
+
     # Next actions
     actions_section = "\n✅ THIS WEEK'S ACTIONS\n"
     actions = []
@@ -191,7 +227,8 @@ def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None
 
     # Combine all sections
     digest = header + channel_section + trends_section + dest_section + keyword_section + \
-             top_actions_section + pending_section + actions_section + footer
+             top_actions_section + sub_growth_section + sub_tracking_section + \
+             pending_section + actions_section + footer
 
     return digest
 
