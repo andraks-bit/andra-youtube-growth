@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "platform",
+      "runtimeExecutable": "/Users/nunnu/.local/node-v24.18.0/bin/npm",
+      "runtimeArgs": ["--prefix", "boat-rental-platform", "run", "dev"],
+      "port": 3000
+    }
+  ]
+}

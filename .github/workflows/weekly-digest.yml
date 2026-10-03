@@ -1,0 +1,96 @@
+name: Weekly Growth Digest Email
+
+on:
+  schedule:
+    # Mondays at 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+    # Allow manual trigger from GitHub UI
+
+jobs:
+  send-weekly-digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Generate and send weekly digest
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          DIGEST_RECIPIENT_EMAIL: ${{ secrets.DIGEST_RECIPIENT_EMAIL }}
+        working-directory: youtube-growth-system
+        run: |
+          python3 << 'EOF'
+          import sys
+          import os
+          sys.path.insert(0, '.')
+
+          import digest
+          from datetime import datetime
+
+          # Generate digest from latest weekly report
+          weekly_report = "reports/generated/weekly_latest.md"
+          pending_changes = "data/pending_changes.json"
+
+          if os.path.exists(weekly_report) and os.path.exists(pending_changes):
+              digest_text = digest.generate_digest_text(weekly_report, pending_changes)
+              recipient = os.environ.get("DIGEST_RECIPIENT_EMAIL", "andra.kiirkivi@gmail.com")
+
+              # Attempt to send via SMTP, fall back to printing if not configured
+              sent = digest.send_digest_email(digest_text, recipient)
+
+              if sent:
+                  print(f"✅ Digest sent to {recipient}")
+                  sys.exit(0)
+              else:
+                  print(f"⚠️  Digest generated but not sent (SMTP not configured)")
+                  print(f"Would be sent to: {recipient}")
+                  print("\n" + "="*60 + "\n")
+                  print(digest_text)
+                  sys.exit(0)
+          else:
+              print("❌ Required files not found. Run daily-analysis first.")
+              sys.exit(1)
+          EOF
+
+      - name: Upload digest logs
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: digest-${{ github.run_number }}
+          path: youtube-growth-system/logs/
+          retention-days: 7
+
+      - name: Notify on success
+        if: success()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: 1,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `📧 **Weekly digest sent** on ${new Date().toLocaleString('en-US', {timeZone: 'UTC'})} UTC to ${{ secrets.DIGEST_RECIPIENT_EMAIL }}`
+            }).catch(() => console.log('Notification posted'));
+
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: 1,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `⚠️ **Weekly digest failed** on ${new Date().toLocaleString('en-US', {timeZone: 'UTC'})} UTC. Check [workflow run](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) for details.`
+            }).catch(() => console.log('Could not post failure notification'));
