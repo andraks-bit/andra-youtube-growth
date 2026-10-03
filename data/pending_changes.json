@@ -408,6 +408,44 @@
       "status": "pending",
       "github_issue_number": 22,
       "commented_queued": false
+    },
+    {
+      "proposal_id": "d2fc217269",
+      "type": "playlist",
+      "playlist_title": "Colombo / Sri Lanka Travel Vlogs",
+      "video_ids": [
+        "feSh6XYKqZI",
+        "sMptwZFM4AU",
+        "FOzUYOLyl2Y",
+        "XNuNBzQmI5M",
+        "IdICyAuDhms",
+        "-WIMDJPtQd0"
+      ],
+      "destination": "Colombo / Sri Lanka",
+      "reasoning": "14 videos in the Colombo / Sri Lanka cluster have no playlist yet",
+      "proposed_on": "2026-10-03",
+      "status": "pending",
+      "github_issue_number": 23,
+      "commented_queued": false
+    },
+    {
+      "proposal_id": "1d8cfa9b03",
+      "type": "playlist",
+      "playlist_title": "Tokyo / Japan Travel Vlogs",
+      "video_ids": [
+        "xOqM9Krj5TQ",
+        "6X3wabBXrPM",
+        "8c0z_MbqzcQ",
+        "YwsKWNLqA_I",
+        "2NfP6dRe8B8",
+        "CNSco7xnZnU"
+      ],
+      "destination": "Tokyo / Japan",
+      "reasoning": "7 videos in the Tokyo / Japan cluster have no playlist yet",
+      "proposed_on": "2026-10-03",
+      "status": "pending",
+      "github_issue_number": 24,
+      "commented_queued": false
     }
   ]
 }

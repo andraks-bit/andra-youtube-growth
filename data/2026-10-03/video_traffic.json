@@ -1,0 +1,119 @@
+{
+  "window_start": "2026-07-05",
+  "window_end": "2026-10-03",
+  "by_video": {
+    "_ftW0mMsYrM": [
+      {
+        "insightTrafficSourceType": "YT_SEARCH",
+        "views": 3
+      },
+      {
+        "insightTrafficSourceType": "SHORTS",
+        "views": 1
+      },
+      {
+        "insightTrafficSourceType": "NO_LINK_OTHER",
+        "views": 0
+      }
+    ],
+    "AynTk_WorY8": [
+      {
+        "insightTrafficSourceType": "YT_CHANNEL",
+        "views": 1
+      }
+    ],
+    "0jNKETzdNY0": [
+      {
+        "insightTrafficSourceType": "YT_SEARCH",
+        "views": 7
+      },
+      {
+        "insightTrafficSourceType": "SHORTS",
+        "views": 1
+      }
+    ],
+    "U6OEcd6fIvw": [
+      {
+        "insightTrafficSourceType": "YT_SEARCH",
+        "views": 2
+      }
+    ],
+    "P9CUFqjTn9o": [
+      {
+        "insightTrafficSourceType": "NO_LINK_OTHER",
+        "views": 0
+      }
+    ],
+    "JtVwnQhImi0": [
+      {
+        "insightTrafficSourceType": "YT_SEARCH",
+        "views": 5
+      }
+    ],
+    "cgR374ohKNM": [
+      {
+        "insightTrafficSourceType": "YT_SEARCH",
+        "views": 1
+      }
+    ],
+    "OXX5JSy4F_o": [
+      {
+        "insightTrafficSourceType": "SHORTS",
+        "views": 1
+      },
+      {
+        "insightTrafficSourceType": "NO_LINK_OTHER",
+        "views": 0
+      }
+    ],
+    "ajHFYLk5J2A": [
+      {
+        "insightTrafficSourceType": "NO_LINK_OTHER",
+        "views": 0
+      }
+    ],
+    "w-AkEt3EDgY": [],
+    "TkHEq4FhPBw": [
+      {
+        "insightTrafficSourceType": "YT_SEARCH",
+        "views": 7
+      }
+    ],
+    "PrWJZprm--4": [
+      {
+        "insightTrafficSourceType": "SHORTS",
+        "views": 2
+      },
+      {
+        "insightTrafficSourceType": "YT_SEARCH",
+        "views": 1
+      }
+    ],
+    "L3QGpbgZmTM": [
+      {
+        "insightTrafficSourceType": "YT_CHANNEL",
+        "views": 1
+      }
+    ],
+    "QGA032cH8rc": [],
+    "5Xg7Vn-1Eds": [
+      {
+        "insightTrafficSourceType": "YT_CHANNEL",
+        "views": 6
+      },
+      {
+        "insightTrafficSourceType": "SHORTS",
+        "views": 3
+      },
+      {
+        "insightTrafficSourceType": "YT_OTHER_PAGE",
+        "views": 2
+      },
+      {
+        "insightTrafficSourceType": "SUBSCRIBER",
+        "views": 1
+      }
+    ]
+  },
+  "note": "Real per-video traffic-source breakdown (YouTube Analytics) for the top 15 videos by lifetime views."
+}
