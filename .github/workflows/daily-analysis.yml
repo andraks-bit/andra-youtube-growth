@@ -46,6 +46,47 @@ jobs:
         working-directory: youtube-growth-system
         run: python run_daily.py
 
+      - name: Send daily growth digest email
+        if: success()
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          DIGEST_RECIPIENT_EMAIL: ${{ secrets.DIGEST_RECIPIENT_EMAIL }}
+        working-directory: youtube-growth-system
+        run: |
+          python3 << 'EOF'
+          import sys
+          import os
+          sys.path.insert(0, '.')
+
+          import digest
+          from datetime import datetime
+
+          # Generate digest from latest reports
+          weekly_report = "reports/generated/weekly_latest.md"
+          pending_changes = "data/pending_changes.json"
+
+          if os.path.exists(weekly_report) and os.path.exists(pending_changes):
+              digest_text = digest.generate_digest_text(weekly_report, pending_changes)
+              recipient = os.environ.get("DIGEST_RECIPIENT_EMAIL", "andra.kiirkivi@gmail.com")
+              run_date = datetime.now().isoformat(timespec='minutes')
+
+              # Send via SMTP (or print if not configured)
+              sent = digest.send_digest_email(digest_text, recipient)
+
+              if sent:
+                  print(f"✅ Daily digest email sent to {recipient}")
+              else:
+                  print(f"⚠️  Daily digest generated but email not sent (SMTP not configured or skipped)")
+                  print(f"   Would be sent to: {recipient}")
+                  print(f"\nDigest Preview (first 500 chars):\n{digest_text[:500]}\n...")
+          else:
+              print("⚠️  Reports not found. Digest not sent. (Workflow may have had issues)")
+              sys.exit(1)
+          EOF
+
       - name: Upload analysis logs
         if: always()
         uses: actions/upload-artifact@v3
