@@ -41,6 +41,7 @@ from analysis import (
     subscriber_conversion, subscriber_patterns, subscriber_growth_opportunities, subscriber_tracking,
     external_traffic_analysis, distribution_tracker,
     discovery_engine, opportunity_tracker, growth_executor,
+    execution_engine, short_digest,
 )
 from reports import report_generator, weekly_report_generator
 
@@ -90,6 +91,16 @@ def main():
     with logger.step("collect_traffic_source_trend") as step:
         traffic_source_trend_result = traffic_source_trend_collector.collect(client)
         step.set_collected("this-week vs last-week traffic-source split")
+
+    # EXECUTION PRIORITY: Run core execution engine FIRST
+    execution_result = None
+    with logger.step("execute_daily_growth_work") as step:
+        if catalog is not None and analytics is not None:
+            execution_result = execution_engine.analyze(catalog, analytics)
+            total_work = execution_result.get("total_work_items", 0)
+            step.set_produced(f"{total_work} work items identified for execution")
+        else:
+            step.set_collected("skipped -- missing catalog or analytics")
 
     seo = optimization = shorts = planning = None
 
@@ -522,20 +533,44 @@ def main():
 
     if os.environ.get("SEND_DIGEST"):
         with logger.step("send_digest") as step:
-            digest_text = digest.generate_digest_text(
-                os.path.join(config.REPORTS_DIR, "weekly_latest.md"),
-                os.path.join(config.DATA_DIR, "pending_changes.json"),
-                traffic_growth_actions=traffic_actions_result,
-                subscriber_growth_opportunities=subscriber_growth_result,
-                subscriber_tracking=subscriber_tracking_result,
-                external_traffic_analysis=external_traffic_result,
-                discovery_result=discovery_result,
-                growth_execution_result=growth_execution_result,
-            )
-            recipient = os.environ.get("DIGEST_RECIPIENT_EMAIL", "andra.kiirkivi@gmail.com")
-            sent = digest.send_digest_email(digest_text, recipient)
-            status = "sent" if sent else "queued for manual review (SMTP not configured)"
-            step.set_produced(f"digest {status} to {recipient}")
+            # EXECUTION MODE: Send minimal execution digest instead of analysis report
+            if os.environ.get("EXECUTION_MODE", "").lower() in ("1", "true", "yes"):
+                # Load previous snapshot for results comparison
+                prev_snapshot_path = os.path.join(config.DATA_DIR, "latest_snapshot.json")
+                prev_snapshot = None
+                try:
+                    if os.path.exists(prev_snapshot_path):
+                        with open(prev_snapshot_path) as f:
+                            prev_snapshot = json.load(f)
+                except Exception:
+                    pass
+
+                short_digest_text = short_digest.generate_short_digest(
+                    execution_result or {},
+                    opportunity_tracking_result or {},
+                    analytics,
+                    prev_snapshot
+                )
+                recipient = os.environ.get("DIGEST_RECIPIENT_EMAIL", "andra.kiirkivi@gmail.com")
+                sent = short_digest.send_short_digest(short_digest_text, recipient)
+                status = "sent" if sent else "printed (SMTP not configured)"
+                step.set_produced(f"execution digest {status} to {recipient}")
+            else:
+                # Standard detailed digest
+                digest_text = digest.generate_digest_text(
+                    os.path.join(config.REPORTS_DIR, "weekly_latest.md"),
+                    os.path.join(config.DATA_DIR, "pending_changes.json"),
+                    traffic_growth_actions=traffic_actions_result,
+                    subscriber_growth_opportunities=subscriber_growth_result,
+                    subscriber_tracking=subscriber_tracking_result,
+                    external_traffic_analysis=external_traffic_result,
+                    discovery_result=discovery_result,
+                    growth_execution_result=growth_execution_result,
+                )
+                recipient = os.environ.get("DIGEST_RECIPIENT_EMAIL", "andra.kiirkivi@gmail.com")
+                sent = digest.send_digest_email(digest_text, recipient)
+                status = "sent" if sent else "queued for manual review (SMTP not configured)"
+                step.set_produced(f"detailed digest {status} to {recipient}")
 
     summary = logger.finalize()
     print(json.dumps(summary, indent=2))
