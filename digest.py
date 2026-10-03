@@ -31,7 +31,8 @@ def _read_text(path):
 
 def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None,
                         traffic_growth_actions=None, subscriber_growth_opportunities=None,
-                        subscriber_tracking=None, external_traffic_analysis=None):
+                        subscriber_tracking=None, external_traffic_analysis=None,
+                        discovery_result=None, growth_execution_result=None):
     """
     Generate a concise digest combining:
       - Weekly report highlights (top 3 destinations, view trends, keyword gaps)
@@ -236,9 +237,54 @@ def generate_digest_text(weekly_report_path, pending_changes_path, run_date=None
     else:
         ext_traffic_section += "  No external distribution opportunities identified this week.\n"
 
+    # NEW GROWTH OPPORTUNITIES DISCOVERED TODAY
+    discovery_section = "\n🆕 NEW GROWTH OPPORTUNITIES DISCOVERED TODAY\n"
+    if discovery_result and discovery_result.get("opportunities"):
+        opps = discovery_result.get("opportunities", [])[:10]
+        for i, opp in enumerate(opps, 1):
+            source = opp.get("source_type", "unknown").upper()
+            desc = opp.get("description", "")[:60]
+            target = opp.get("target", "")[:40]
+            discovery_section += f"  {i}. [{source}] {desc}\n"
+            discovery_section += f"     → {target}\n"
+    else:
+        discovery_section += "  No new opportunities discovered this run.\n"
+
+    # EXECUTION STATUS: What was completed vs what needs approval
+    execution_section = "\n⚡ EXECUTION STATUS\n"
+    if growth_execution_result:
+        executed = growth_execution_result.get("executed_today", [])
+        pending = growth_execution_result.get("needs_approval", [])
+
+        if executed:
+            execution_section += f"  ✅ EXECUTED TODAY: {len(executed)} actions prepared/completed\n"
+            for item in executed[:5]:
+                action = item.get("action", "")
+                status = item.get("status", "pending")
+                execution_section += f"     • {action} ({status})\n"
+            if len(executed) > 5:
+                execution_section += f"     ... and {len(executed) - 5} more\n"
+
+        if pending:
+            execution_section += f"\n  ⏳ NEEDS YOUR APPROVAL: {len(pending)} actions await your authorization\n"
+            for item in pending[:5]:
+                action_type = item.get("type", "unknown")
+                title = item.get("title", "")[:50]
+                action_req = item.get("action_required", "")[:50]
+                execution_section += f"     • [{action_type}] {title}\n"
+                execution_section += f"       Action: {action_req}\n"
+            if len(pending) > 5:
+                execution_section += f"     ... and {len(pending) - 5} more\n"
+
+        if not executed and not pending:
+            execution_section += "  No execution actions this run.\n"
+    else:
+        execution_section += "  Execution analysis not available.\n"
+
     # Combine all sections
     digest = header + channel_section + trends_section + dest_section + keyword_section + \
              top_actions_section + sub_growth_section + sub_tracking_section + ext_traffic_section + \
+             discovery_section + execution_section + \
              pending_section + actions_section + footer
 
     return digest
