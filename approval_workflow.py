@@ -177,7 +177,12 @@ def _format_playlist_issue_body(p):
 
 
 def create_new_proposals(gh, candidates):
-    """Opens one GitHub issue per candidate, records it in state. Returns count created."""
+    """Opens one GitHub issue per candidate, records it in state. Returns count created.
+
+    RESILIENCE: Saves state after each successful issue creation so that if an error
+    occurs mid-loop, successfully-created issues aren't orphaned. This prevents
+    GitHub Issues from being created but losing the proposal record.
+    """
     state = load_state()
     created = 0
 
@@ -189,14 +194,26 @@ def create_new_proposals(gh, candidates):
             title = f"[YT change] Create playlist: {c['playlist_title']}"
             body = _format_playlist_issue_body(c)
 
-        issue = gh.create_issue(
-            title, body, labels=[config.GITHUB_LABEL_PROPOSAL, config.GITHUB_LABEL_PENDING]
-        )
-        c["status"] = "pending"
-        c["github_issue_number"] = issue["number"]
-        c["commented_queued"] = False
-        state["proposals"].append(c)
-        created += 1
+        try:
+            issue = gh.create_issue(
+                title, body, labels=[config.GITHUB_LABEL_PROPOSAL, config.GITHUB_LABEL_PENDING]
+            )
+            c["status"] = "pending"
+            c["github_issue_number"] = issue["number"]
+            c["commented_queued"] = False
+            state["proposals"].append(c)
+            created += 1
+            # Persist immediately after successful issue creation to prevent loss
+            # of the proposal if an error occurs in a later iteration
+            save_state(state)
+        except Exception as e:
+            # Log the error and continue with remaining candidates
+            # The issue was created on GitHub but the proposal tracking failed
+            # This will show up on the next run when trying to dedupe against
+            # already_proposed_video_ids/already_proposed_playlist_titles
+            print(f"[create_new_proposals] Failed to persist proposal after creating GitHub issue: {e}")
+            # Don't increment created count since we failed to fully track this proposal
+            # The issue exists on GitHub but we've warned about the tracking failure
+            raise  # Re-raise so the workflow logs this as a failure
 
-    save_state(state)
     return created
