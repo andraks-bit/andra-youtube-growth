@@ -12,6 +12,7 @@ in this codebase calls a write method, and the OAuth scope that makes this
 possible (`youtube`, full manage) was already granted back in Step 1 --
 no new consent was needed.
 """
+import time
 import requests
 
 import auth
@@ -25,19 +26,59 @@ class ApiError(RuntimeError):
     pass
 
 
+class ApiRetryableError(ApiError):
+    pass
+
+
+def _is_retryable(status_code):
+    if status_code >= 500:
+        return True
+    if status_code == 429:
+        return True
+    return False
+
+
+def _retry_with_backoff(method, url, token, params=None, json_body=None, expected_status=(200,)):
+    max_retries = 3
+    for attempt in range(max_retries + 1):
+        try:
+            if method == "GET":
+                resp = requests.get(url, params=params, headers={"Authorization": f"Bearer {token}"})
+            elif method == "POST":
+                resp = requests.post(url, params=params or {}, json=json_body,
+                                     headers={"Authorization": f"Bearer {token}"})
+            elif method == "PUT":
+                resp = requests.put(url, params=params or {}, json=json_body,
+                                    headers={"Authorization": f"Bearer {token}"})
+
+            if resp.status_code in expected_status:
+                return resp.json()
+
+            if _is_retryable(resp.status_code) and attempt < max_retries:
+                delay = 2 ** attempt
+                print(f"⚠️  {method} {url} returned HTTP {resp.status_code}. Retry {attempt + 1}/{max_retries} in {delay}s...")
+                time.sleep(delay)
+                continue
+
+            raise ApiError(f"{method} {url} failed (HTTP {resp.status_code}): {resp.text}")
+
+        except (requests.ConnectionError, requests.Timeout, requests.RequestException) as e:
+            if attempt < max_retries:
+                delay = 2 ** attempt
+                print(f"⚠️  {method} {url} network error. Retry {attempt + 1}/{max_retries} in {delay}s... ({e})")
+                time.sleep(delay)
+                continue
+            raise ApiError(f"{method} {url} network error after {max_retries + 1} attempts: {e}")
+
+    raise ApiError(f"{method} {url} failed after exhausting retries")
+
+
 def _get(url, token, params):
-    resp = requests.get(url, params=params, headers={"Authorization": f"Bearer {token}"})
-    if resp.status_code != 200:
-        raise ApiError(f"GET {url} failed (HTTP {resp.status_code}): {resp.text}")
-    return resp.json()
+    return _retry_with_backoff("GET", url, token, params=params, expected_status=(200,))
 
 
 def _post(url, token, params=None, json_body=None):
-    resp = requests.post(url, params=params or {}, json=json_body,
-                          headers={"Authorization": f"Bearer {token}"})
-    if resp.status_code not in (200, 201):
-        raise ApiError(f"POST {url} failed (HTTP {resp.status_code}): {resp.text}")
-    return resp.json()
+    return _retry_with_backoff("POST", url, token, params=params, json_body=json_body, expected_status=(200, 201))
 
 
 def _put(url, token, params=None, json_body=None):
@@ -45,11 +86,7 @@ def _put(url, token, params=None, json_body=None):
     # (playlists.insert, playlistItems.insert) which are POST. Caught this
     # via code review before the Step 7 pilot write -- POST would very
     # likely have 405'd or behaved unpredictably against this endpoint.
-    resp = requests.put(url, params=params or {}, json=json_body,
-                         headers={"Authorization": f"Bearer {token}"})
-    if resp.status_code != 200:
-        raise ApiError(f"PUT {url} failed (HTTP {resp.status_code}): {resp.text}")
-    return resp.json()
+    return _retry_with_backoff("PUT", url, token, params=params, json_body=json_body, expected_status=(200,))
 
 
 class YouTubeClient:
