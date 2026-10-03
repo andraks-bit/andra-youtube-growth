@@ -6,6 +6,7 @@ which can't show a real this-week-vs-last-week split. This collects that
 split directly instead of approximating it.
 """
 import datetime
+import youtube_api
 
 
 def _week_window(weeks_back):
@@ -15,24 +16,29 @@ def _week_window(weeks_back):
 
 
 def collect(client):
-    this_start, this_end = _week_window(0)
-    last_start, last_end = _week_window(1)
+    try:
+        this_start, this_end = _week_window(0)
+        last_start, last_end = _week_window(1)
 
-    this_week = client.analytics_query(
-        startDate=this_start, endDate=this_end,
-        metrics="views", dimensions="insightTrafficSourceType", sort="-views",
-    )
-    last_week = client.analytics_query(
-        startDate=last_start, endDate=last_end,
-        metrics="views", dimensions="insightTrafficSourceType", sort="-views",
-    )
+        this_week = client.analytics_query(
+            startDate=this_start, endDate=this_end,
+            metrics="views", dimensions="insightTrafficSourceType", sort="-views",
+        )
+        last_week = client.analytics_query(
+            startDate=last_start, endDate=last_end,
+            metrics="views", dimensions="insightTrafficSourceType", sort="-views",
+        )
 
-    def rows_to_dict(report):
-        cols = [c["name"] for c in report.get("columnHeaders", [])]
-        return {dict(zip(cols, row))["insightTrafficSourceType"]: dict(zip(cols, row))["views"]
-                for row in report.get("rows", [])}
+        def rows_to_dict(report):
+            cols = [c["name"] for c in report.get("columnHeaders", [])]
+            return {dict(zip(cols, row))["insightTrafficSourceType"]: dict(zip(cols, row))["views"]
+                    for row in report.get("rows", [])}
 
-    return {
-        "this_week": {"start": this_start, "end": this_end, "by_source": rows_to_dict(this_week)},
-        "last_week": {"start": last_start, "end": last_end, "by_source": rows_to_dict(last_week)},
-    }
+        return {
+            "this_week": {"start": this_start, "end": this_end, "by_source": rows_to_dict(this_week)},
+            "last_week": {"start": last_start, "end": last_end, "by_source": rows_to_dict(last_week)},
+        }
+    except youtube_api.ApiError as e:
+        print(f"⚠️  Traffic source trend collection failed (API error): {e}")
+        print("   Continuing with other analysis...")
+        return None
