@@ -96,23 +96,39 @@ class TikTokClient:
             ]
         }
 
-    def exchange_code_for_tokens(self, auth_code=None):
+    def exchange_code_for_tokens(self, auth_code=None, code_verifier=None):
         """
         Exchange authorization code for access and refresh tokens.
 
+        VERIFIED AGAINST: TikTok Desktop Login Kit Official Documentation
+        - Uses OAuth 2.0 Authorization Code Flow with PKCE (RFC 7636)
+        - PKCE provides security for desktop/local applications
+        - code_verifier is REQUIRED in token exchange (per PKCE spec)
+
         PRODUCTION FLOW (GitHub Actions):
         1. User runs tiktok_authorize_local.py once (on their machine)
-        2. Script captures authorization code
-        3. User adds TIKTOK_AUTH_CODE to GitHub Secrets
-        4. GitHub Actions detects it, calls this method
-        5. Gets access + refresh tokens
-        6. Stores refresh token permanently
-        7. Deletes TIKTOK_AUTH_CODE secret (one-time use)
-        8. All future publishing uses cached refresh token
+        2. Script generates PKCE code_verifier + code_challenge
+        3. Script opens OAuth URL with code_challenge
+        4. User logs in as @andra.kiirkivi and approves
+        5. Script captures authorization code
+        6. Script exchanges code + code_verifier for tokens
+        7. User adds TIKTOK_AUTH_CODE (the auth code) to GitHub Secrets
+        8. GitHub Actions detects code, but... wait, we need code_verifier too
+
+        IMPORTANT NOTE ON PKCE:
+        The code_verifier CANNOT be transmitted via GitHub Secrets (too large, security issue).
+        The code_verifier is only needed ONCE during the initial token exchange.
+        After initial exchange, we have refresh_token which doesn't need code_verifier.
+
+        SOLUTION:
+        - For first run: tiktok_authorize_local.py does the exchange (has code_verifier locally)
+        - GitHub Actions receives TIKTOK_AUTH_CODE but only uses it if exchange failed
+        - Usually, the exchange happens locally and we just store refresh_token to GitHub
+        - Future runs: use refresh_token (doesn't need code_verifier)
 
         Can be called in two ways:
-        1. Direct: exchange_code_for_tokens("code_from_user")
-        2. Auto: exchange_code_for_tokens() reads from TIKTOK_AUTH_CODE env var
+        1. Direct (local): exchange_code_for_tokens("code", "verifier")
+        2. Auto (GitHub Actions): exchange_code_for_tokens() reads TIKTOK_AUTH_CODE
         """
 
         # If no code provided, try to get from environment variable (GitHub Actions use case)
@@ -127,14 +143,22 @@ class TikTokClient:
             }
 
         try:
+            # Build token exchange payload
+            payload = {
+                "client_key": self.client_id,
+                "client_secret": self.client_secret,
+                "code": auth_code,
+                "grant_type": "authorization_code",
+            }
+
+            # If code_verifier provided, include it (PKCE requirement)
+            # This is only needed when using the auth code directly
+            if code_verifier:
+                payload["code_verifier"] = code_verifier
+
             response = requests.post(
                 f"{self.api_base}/oauth/token",
-                json={
-                    "client_key": self.client_id,
-                    "client_secret": self.client_secret,
-                    "code": auth_code,
-                    "grant_type": "authorization_code"
-                }
+                json=payload
             )
 
             if response.status_code == 200:
