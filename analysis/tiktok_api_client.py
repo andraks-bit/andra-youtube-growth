@@ -98,7 +98,17 @@ class TikTokClient:
 
     def exchange_code_for_tokens(self, auth_code=None):
         """
-        Exchange authorization code for access token.
+        Exchange authorization code for access and refresh tokens.
+
+        PRODUCTION FLOW (GitHub Actions):
+        1. User runs tiktok_authorize_local.py once (on their machine)
+        2. Script captures authorization code
+        3. User adds TIKTOK_AUTH_CODE to GitHub Secrets
+        4. GitHub Actions detects it, calls this method
+        5. Gets access + refresh tokens
+        6. Stores refresh token permanently
+        7. Deletes TIKTOK_AUTH_CODE secret (one-time use)
+        8. All future publishing uses cached refresh token
 
         Can be called in two ways:
         1. Direct: exchange_code_for_tokens("code_from_user")
@@ -113,7 +123,7 @@ class TikTokClient:
             return {
                 "status": "no_code",
                 "message": "No authorization code provided",
-                "action": "Provide auth_code parameter or set TIKTOK_AUTH_CODE environment variable"
+                "action": "Run tiktok_authorize_local.py to get authorization code, then add to GitHub Secrets"
             }
 
         try:
@@ -131,16 +141,20 @@ class TikTokClient:
                 data = response.json()
                 access_token = data.get("data", {}).get("access_token")
                 refresh_token = data.get("data", {}).get("refresh_token")
+                expires_in = data.get("data", {}).get("expires_in")
 
                 if access_token and refresh_token:
                     self.save_tokens(access_token, refresh_token)
                     self.access_token = access_token
+                    self.refresh_token = refresh_token
 
                     return {
                         "status": "success",
-                        "message": "TikTok account authorized successfully",
-                        "access_token": access_token[:20] + "...",  # Don't expose full token
-                        "next_run": "Automatic publishing will begin at next scheduled workflow run"
+                        "message": "✅ TikTok account authorized successfully",
+                        "tokens_saved": "Refresh token stored securely in data/tiktok_tokens.json",
+                        "next_action": "1) Delete TIKTOK_AUTH_CODE from GitHub Secrets (no longer needed)\n2) Publishing will begin automatically at next workflow run",
+                        "expires_in_seconds": expires_in,
+                        "automatic_renewal": "Refresh token will be used automatically to renew access token when needed"
                     }
                 else:
                     return {
@@ -150,14 +164,65 @@ class TikTokClient:
             else:
                 return {
                     "status": "error",
-                    "message": f"Authorization failed: {response.text}",
-                    "status_code": response.status_code
+                    "message": f"Authorization failed: HTTP {response.status_code}",
+                    "details": response.text,
+                    "action": "Check that authorization code is valid and not expired"
                 }
 
         except Exception as e:
             return {
                 "status": "error",
-                "message": f"Authorization error: {str(e)}"
+                "message": f"Authorization error: {str(e)}",
+                "action": "Check internet connection and try again"
+            }
+
+    def refresh_access_token(self):
+        """
+        Use refresh token to get a new access token.
+        Called automatically when access token expires.
+        """
+        if not self.refresh_token:
+            return {
+                "status": "no_refresh_token",
+                "message": "No refresh token available"
+            }
+
+        try:
+            response = requests.post(
+                f"{self.api_base}/oauth/token",
+                json={
+                    "client_key": self.client_id,
+                    "client_secret": self.client_secret,
+                    "refresh_token": self.refresh_token,
+                    "grant_type": "refresh_token"
+                }
+            )
+
+            if response.status_code == 200:
+                data = response.json()
+                new_access_token = data.get("data", {}).get("access_token")
+                new_refresh_token = data.get("data", {}).get("refresh_token")
+
+                if new_access_token:
+                    self.access_token = new_access_token
+                    if new_refresh_token:
+                        self.refresh_token = new_refresh_token
+                    self.save_tokens(new_access_token, self.refresh_token)
+
+                    return {
+                        "status": "success",
+                        "message": "✅ Access token refreshed automatically"
+                    }
+            else:
+                return {
+                    "status": "error",
+                    "message": f"Token refresh failed: {response.text}"
+                }
+
+        except Exception as e:
+            return {
+                "status": "error",
+                "message": f"Token refresh error: {str(e)}"
             }
 
     def publish_video(self, video_file_path, caption, hashtags):
