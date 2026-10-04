@@ -51,6 +51,15 @@ class TikTokClient:
         """
         Generate OAuth login URL for user to authorize.
         User opens this URL, logs in to @andra.kiirkivi, approves the app.
+
+        Flow:
+        1. User opens this URL in browser
+        2. Logs in as @andra.kiirkivi
+        3. Approves the app
+        4. Gets redirected to http://localhost:3000/callback?code=XXXXX
+        5. Copies the authorization code (XXXXX)
+        6. Provides code to system via TIKTOK_AUTH_CODE env variable
+        7. System exchanges code for access token
         """
         if not self.client_id:
             return {
@@ -59,23 +68,54 @@ class TikTokClient:
                 "action": "Set TIKTOK_CLIENT_ID + TIKTOK_CLIENT_SECRET in GitHub Secrets"
             }
 
+        # Production redirect URI for GitHub Actions (manual code exchange)
+        redirect_uri = "http://localhost:3000/callback"
+
         auth_url = (
             f"https://www.tiktok.com/v2/oauth/authorize"
             f"?client_key={self.client_id}"
             f"&response_type=code"
             f"&scope=user.info.basic,video.upload"
-            f"&redirect_uri=http://localhost:3000/callback"
+            f"&redirect_uri={redirect_uri}"
         )
 
         return {
             "status": "authorization_needed",
-            "message": "Open this URL to authorize TikTok access",
+            "message": "ONE-TIME SETUP: Open this URL to authorize TikTok access",
             "authorization_url": auth_url,
-            "next_step": "After login, provide the authorization code"
+            "next_step": "After login and approval, copy the authorization code from the redirect URL",
+            "redirect_uri": redirect_uri,
+            "instructions": [
+                "1. Click the authorization URL above",
+                "2. Log in as @andra.kiirkivi",
+                "3. Approve the app",
+                "4. TikTok redirects to: http://localhost:3000/callback?code=XXXXX",
+                "5. Copy the code value (the part after 'code=')",
+                "6. Set TIKTOK_AUTH_CODE environment variable with this code",
+                "7. Next workflow run will exchange code for permanent access token"
+            ]
         }
 
-    def exchange_code_for_tokens(self, auth_code):
-        """Exchange authorization code for access token"""
+    def exchange_code_for_tokens(self, auth_code=None):
+        """
+        Exchange authorization code for access token.
+
+        Can be called in two ways:
+        1. Direct: exchange_code_for_tokens("code_from_user")
+        2. Auto: exchange_code_for_tokens() reads from TIKTOK_AUTH_CODE env var
+        """
+
+        # If no code provided, try to get from environment variable (GitHub Actions use case)
+        if not auth_code:
+            auth_code = os.environ.get("TIKTOK_AUTH_CODE")
+
+        if not auth_code:
+            return {
+                "status": "no_code",
+                "message": "No authorization code provided",
+                "action": "Provide auth_code parameter or set TIKTOK_AUTH_CODE environment variable"
+            }
+
         try:
             response = requests.post(
                 f"{self.api_base}/oauth/token",
@@ -92,18 +132,26 @@ class TikTokClient:
                 access_token = data.get("data", {}).get("access_token")
                 refresh_token = data.get("data", {}).get("refresh_token")
 
-                self.save_tokens(access_token, refresh_token)
-                self.access_token = access_token
+                if access_token and refresh_token:
+                    self.save_tokens(access_token, refresh_token)
+                    self.access_token = access_token
 
-                return {
-                    "status": "success",
-                    "message": "TikTok account authorized successfully",
-                    "access_token": access_token
-                }
+                    return {
+                        "status": "success",
+                        "message": "TikTok account authorized successfully",
+                        "access_token": access_token[:20] + "...",  # Don't expose full token
+                        "next_run": "Automatic publishing will begin at next scheduled workflow run"
+                    }
+                else:
+                    return {
+                        "status": "error",
+                        "message": f"No tokens in response: {data}"
+                    }
             else:
                 return {
                     "status": "error",
-                    "message": f"Authorization failed: {response.text}"
+                    "message": f"Authorization failed: {response.text}",
+                    "status_code": response.status_code
                 }
 
         except Exception as e:
