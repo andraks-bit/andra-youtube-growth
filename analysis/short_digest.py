@@ -14,21 +14,57 @@ import os
 import datetime
 
 
-def generate_short_digest(execution_result, opportunity_tracking, analytics, previous_snapshot=None):
+def generate_short_digest(execution_result, opportunity_tracking, analytics, growth_engines=None, previous_snapshot=None):
     """
-    Generate minimal execution digest.
-    Goal: one page maximum. Show what was DONE, not analysis.
+    Generate minimal execution digest with key growth insights.
+    Goal: one page maximum. Show what was DONE + KEY METRICS.
     """
 
     date_str = datetime.date.today().isoformat()
 
     digest = f"""
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-DAILY EXECUTION DIGEST — {date_str}
+DAILY GROWTH EXECUTION — {date_str}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-⚡ WORK COMPLETED TODAY
+🎯 SUBSCRIBER GROWTH ENGINE
 """
+
+    if growth_engines and growth_engines.get("subscriber_optimizer"):
+        sub_opt = growth_engines["subscriber_optimizer"]
+        conv_rate = sub_opt.get("channel_conversion_rate", 0)
+        potential = sub_opt.get("total_subscriber_potential", 0)
+        digest += f"  Conversion: {conv_rate:.1f} subs/1k views | {potential:,} subs potential from fixes\n"
+    else:
+        digest += "  (Analysis pending)\n"
+
+    digest += "\n🌐 YOUTUBE DISCOVERY OPTIMIZATION\n"
+    if growth_engines and growth_engines.get("discovery_optimizer"):
+        disc_opt = growth_engines["discovery_optimizer"]
+        browse_suggested = disc_opt.get("total_browse_suggested", 0)
+        digest += f"  Browse/Suggested: {browse_suggested:.0f}% of traffic | Potential: 2x views if optimized to 50%\n"
+    else:
+        digest += "  (Analysis pending)\n"
+
+    digest += "\n📹 SHORTS & DISTRIBUTION PLAN\n"
+    if growth_engines and growth_engines.get("shorts_distribution"):
+        shorts_opt = growth_engines["shorts_distribution"]
+        clips = shorts_opt.get("clips_to_extract", 0)
+        reach = shorts_opt.get("strategy_summary", {}).get("monthly_reach_potential", "Unknown")
+        digest += f"  {clips} Shorts ready to extract | {reach} potential monthly reach\n"
+    else:
+        digest += "  (Analysis pending)\n"
+
+    digest += "\n🧪 EXPERIMENTATION\n"
+    if growth_engines and growth_engines.get("experimentation"):
+        exp = growth_engines["experimentation"]
+        hyps = len(exp.get("new_hypotheses_this_week", []))
+        proven = len(exp.get("proven_strategies", []))
+        digest += f"  {hyps} hypotheses queued | {proven} proven strategies\n"
+    else:
+        digest += "  (Analysis pending)\n"
+
+    digest += "\n⚡ WORK COMPLETED TODAY\n"
 
     # Show completed work
     completed = execution_result.get("internal_work_completed", [])
