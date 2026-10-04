@@ -37,6 +37,55 @@ jobs:
           pip install --upgrade pip
           pip install google-auth-oauthlib google-auth-httplib2 google-api-python-client PyGithub requests python-dotenv
 
+      - name: Handle TikTok One-Time Authorization (if needed)
+        env:
+          TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_AUTH_CODE: ${{ secrets.TIKTOK_AUTH_CODE }}
+        working-directory: youtube-growth-system
+        run: |
+          python3 << 'EOF'
+          import os
+          import sys
+          sys.path.insert(0, '.')
+
+          from analysis import tiktok_api_client
+
+          # Check if auth code provided (one-time setup)
+          auth_code = os.environ.get("TIKTOK_AUTH_CODE")
+          client_id = os.environ.get("TIKTOK_CLIENT_ID")
+          client_secret = os.environ.get("TIKTOK_CLIENT_SECRET")
+
+          if auth_code and client_id and client_secret:
+              print("\n🔐 TIKTOK: One-time authorization in progress...")
+
+              client = tiktok_api_client.TikTokClient()
+              result = client.exchange_code_for_tokens(auth_code)
+
+              if result.get("status") == "success":
+                  print("✅ TikTok authorization successful!")
+                  print(f"   {result.get('tokens_saved')}")
+                  print(f"\n   NEXT STEP: Delete TIKTOK_AUTH_CODE from GitHub Secrets")
+                  print(f"   (It was only needed this one time)")
+              else:
+                  print(f"❌ TikTok authorization failed: {result.get('message')}")
+                  print(f"   Details: {result.get('details', 'N/A')}")
+                  sys.exit(1)
+          elif client_id and client_secret:
+              # Credentials exist but no auth code - check if tokens are cached
+              client = tiktok_api_client.TikTokClient()
+              client.load_stored_tokens()
+              if client.is_authorized():
+                  print("✅ TIKTOK: Already authorized (using cached tokens)")
+              else:
+                  print("⏳ TIKTOK: Awaiting authorization code")
+                  print("   1. Run: python tiktok_authorize_local.py")
+                  print("   2. Add TIKTOK_AUTH_CODE to GitHub Secrets")
+                  print("   3. Re-run this workflow")
+          else:
+              print("⏳ TIKTOK: Credentials not yet configured")
+          EOF
+
       - name: Run daily YouTube growth execution
         env:
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
@@ -52,6 +101,8 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           DIGEST_RECIPIENT_EMAIL: ${{ secrets.DIGEST_RECIPIENT_EMAIL }}
+          TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
         working-directory: youtube-growth-system
         run: python run_daily.py
 
