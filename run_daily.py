@@ -43,6 +43,7 @@ from analysis import (
     discovery_engine, opportunity_tracker, growth_executor,
     execution_engine, short_digest,
     subscriber_optimizer, discovery_optimizer, experimentation_engine, shorts_distribution_engine,
+    tiktok_publisher, tiktok_analytics,
 )
 from reports import report_generator, weekly_report_generator
 
@@ -140,6 +141,19 @@ def main():
             clips = shorts_result.get("clips_to_extract", 0)
             reach = shorts_result.get("strategy_summary", {}).get("monthly_reach_potential", "unknown")
             step.set_produced(f"{candidates} videos → {clips} Shorts. {reach}")
+
+    # TIKTOK PUBLISHER: Autonomous TikTok distribution from YouTube content
+    tiktok_result = None
+    if all(x is not None for x in (catalog, analytics)):
+        with logger.step("publish_to_tiktok") as step:
+            tiktok_result = tiktok_publisher.analyze(catalog, analytics)
+            status = tiktok_result.get("status", "unknown")
+            content_prepared = tiktok_result.get("content_prepared", 0)
+            posted = tiktok_result.get("posted_today", 0)
+            if status == "not_authorized":
+                step.set_collected(f"Awaiting TikTok authorization ({content_prepared} videos ready)")
+            else:
+                step.set_produced(f"TikTok operational: {content_prepared} candidates, {posted} posted today")
 
     seo = optimization = shorts = planning = None
 
@@ -515,6 +529,7 @@ def main():
                 "discovery_optimizer": discovery_optimizer_result,
                 "experimentation": experimentation_result,
                 "shorts_distribution": shorts_result,
+                "tiktok_publisher": tiktok_result,
                 "ctr_optimization": ctr_opt_result,
                 "competitor_intelligence": competitor_intel_result,
                 "trend_detection": trends_result,
