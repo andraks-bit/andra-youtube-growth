@@ -64,6 +64,19 @@ DAILY GROWTH EXECUTION — {date_str}
     else:
         digest += "  (Analysis pending)\n"
 
+    digest += "\n📱 TIKTOK @andra.kiirkivi\n"
+    if growth_engines and growth_engines.get("tiktok_publisher"):
+        tiktok = growth_engines["tiktok_publisher"]
+        status = tiktok.get("status", "unknown")
+        if status == "not_authorized":
+            digest += f"  ⏳ Awaiting authorization | {tiktok.get('content_prepared', 0)} videos ready to publish\n"
+        else:
+            posted = tiktok.get("posted_today", 0)
+            reach = tiktok.get("weekly_reach", "Unknown")
+            digest += f"  ✅ Operational | Posted: {posted} today | {reach} weekly reach\n"
+    else:
+        digest += "  (Not yet configured)\n"
+
     digest += "\n⚡ WORK COMPLETED TODAY\n"
 
     # Show completed work
