@@ -42,6 +42,7 @@ from analysis import (
     external_traffic_analysis, distribution_tracker,
     discovery_engine, opportunity_tracker, growth_executor,
     execution_engine, short_digest,
+    subscriber_optimizer, discovery_optimizer, experimentation_engine, shorts_distribution_engine,
 )
 from reports import report_generator, weekly_report_generator
 
@@ -101,6 +102,44 @@ def main():
             step.set_produced(f"{total_work} work items identified for execution")
         else:
             step.set_collected("skipped -- missing catalog or analytics")
+
+    # SUBSCRIBER GROWTH ENGINE: Find high-converters, fix underperformers
+    subscriber_optimizer_result = None
+    if all(x is not None for x in (analytics, catalog)):
+        with logger.step("optimize_subscriber_conversion") as step:
+            subscriber_optimizer_result = subscriber_optimizer.analyze(analytics, catalog)
+            channel_conversion = subscriber_optimizer_result.get("channel_conversion_rate", 0)
+            total_potential = subscriber_optimizer_result.get("total_subscriber_potential", 0)
+            step.set_produced(f"Conversion rate: {channel_conversion:.1f} subs/1k views. {total_potential} subs potential from fixes")
+
+    # YOUTUBE DISCOVERY OPTIMIZER: Focus Browse/Suggested, not just Search
+    discovery_optimizer_result = None
+    if all(x is not None for x in (analytics, catalog)):
+        with logger.step("optimize_youtube_discovery") as step:
+            discovery_optimizer_result = discovery_optimizer.analyze(analytics, catalog, momentum_result)
+            browse_suggested = discovery_optimizer_result.get("total_browse_suggested", 0)
+            step.set_produced(f"Browse/Suggested: {browse_suggested:.1f}% of traffic. Potential to 2x if optimized to 50%")
+
+    # EXPERIMENTATION ENGINE: Track A/B tests, measure what works
+    experimentation_result = None
+    if all(x is not None for x in (analytics, catalog)):
+        with logger.step("run_growth_experiments") as step:
+            experimentation_result = experimentation_engine.analyze(
+                subscriber_optimizer_result, discovery_optimizer_result, analytics, catalog
+            )
+            new_hyps = len(experimentation_result.get("new_hypotheses_this_week", []))
+            proven = len(experimentation_result.get("proven_strategies", []))
+            step.set_produced(f"{new_hyps} new hypotheses queued. {proven} proven strategies identified")
+
+    # SHORTS & DISTRIBUTION ENGINE: Plan Shorts extraction and multi-platform distribution
+    shorts_result = None
+    if catalog is not None:
+        with logger.step("plan_shorts_distribution") as step:
+            shorts_result = shorts_distribution_engine.analyze(catalog, analytics)
+            candidates = shorts_result.get("shorts_extraction_candidates", 0)
+            clips = shorts_result.get("clips_to_extract", 0)
+            reach = shorts_result.get("strategy_summary", {}).get("monthly_reach_potential", "unknown")
+            step.set_produced(f"{candidates} videos → {clips} Shorts. {reach}")
 
     seo = optimization = shorts = planning = None
 
@@ -472,6 +511,10 @@ def main():
                 "discovery_engine": discovery_result,
                 "growth_executor": growth_execution_result,
                 "opportunity_tracker": opportunity_tracking_result,
+                "subscriber_optimizer": subscriber_optimizer_result,
+                "discovery_optimizer": discovery_optimizer_result,
+                "experimentation": experimentation_result,
+                "shorts_distribution": shorts_result,
                 "ctr_optimization": ctr_opt_result,
                 "competitor_intelligence": competitor_intel_result,
                 "trend_detection": trends_result,
@@ -545,10 +588,17 @@ def main():
                 except Exception:
                     pass
 
+                growth_engines = {
+                    "subscriber_optimizer": subscriber_optimizer_result,
+                    "discovery_optimizer": discovery_optimizer_result,
+                    "shorts_distribution": shorts_result,
+                    "experimentation": experimentation_result,
+                }
                 short_digest_text = short_digest.generate_short_digest(
                     execution_result or {},
                     opportunity_tracking_result or {},
                     analytics,
+                    growth_engines,
                     prev_snapshot
                 )
                 recipient = os.environ.get("DIGEST_RECIPIENT_EMAIL", "andra.kiirkivi@gmail.com")
