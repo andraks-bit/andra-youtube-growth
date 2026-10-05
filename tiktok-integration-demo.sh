@@ -23,7 +23,13 @@ BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 NC='\033[0m'
 
-# Configuration
+# Configuration - Load from environment or .env file
+if [ -f .env ]; then
+    set -a
+    source .env
+    set +a
+fi
+
 TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID:-}"
 TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET:-}"
 REDIRECT_URI="https://andraks-bit.github.io/andra-youtube-growth/tiktok-callback.html"

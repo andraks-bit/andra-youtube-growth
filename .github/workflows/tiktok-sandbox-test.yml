@@ -1,0 +1,58 @@
+name: TikTok Sandbox Integration Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      video_file:
+        description: 'Path to MP4 video file (relative to repo root, or leave empty for test video)'
+        required: false
+        default: 'test-video.mp4'
+
+jobs:
+  test-tiktok-sandbox:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up environment
+        run: |
+          chmod +x tiktok-integration-demo.sh
+
+      - name: Create test video if needed
+        run: |
+          if [ ! -f "${{ github.event.inputs.video_file }}" ]; then
+            echo "Creating test video..."
+            apt-get update && apt-get install -y ffmpeg >/dev/null 2>&1
+            ffmpeg -f lavfi -i testsrc=s=1280x720:d=5 -f lavfi -i sine=f=440:d=5 -pix_fmt yuv420p "${{ github.event.inputs.video_file }}" -y 2>/dev/null
+            echo "✓ Test video created: ${{ github.event.inputs.video_file }}"
+          fi
+
+      - name: Run TikTok Sandbox Integration Test
+        env:
+          TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+        run: |
+          echo "Starting TikTok Sandbox integration test..."
+          echo "Client ID: ${TIKTOK_CLIENT_ID:0:10}..."
+          echo "Client Secret: [PROTECTED]"
+          echo ""
+
+          # Note: This workflow demonstrates the automation but cannot complete OAuth
+          # because it requires user interaction (browser login) which isn't possible in CI
+          #
+          # For complete testing with OAuth:
+          # 1. Add GitHub Secrets: TIKTOK_CLIENT_ID and TIKTOK_CLIENT_SECRET
+          # 2. Run locally: export TIKTOK_CLIENT_ID=xxx && export TIKTOK_CLIENT_SECRET=yyy
+          # 3. Then run: ./tiktok-integration-demo.sh test-video.mp4
+
+          ./tiktok-integration-demo.sh "${{ github.event.inputs.video_file }}"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: tiktok-sandbox-test-results
+          path: /tmp/tiktok_demo_state.json
+          retention-days: 7
