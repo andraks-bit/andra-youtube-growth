@@ -3,12 +3,44 @@ __pycache__/
 .env
 .env.*
 
-# Defensive: this repo's code never writes credentials into its own tree
-# (the OAuth client/token files live outside this repo, in
-# ../blogger-automation/credentials/), but these patterns guard against any
-# credential file ever landing here by accident.
+# ===== CRITICAL: Credential Files =====
+# NEVER commit credentials, API keys, tokens, or secrets
+# These patterns prevent accidental commits of exposed credentials
 credentials/
+*.credentials
+*credentials.json
 *token*.json
+*_token.json
 *client_secret*.json
+*client_secret
 *.pem
 *.key
+*.p12
+*.pkcs12
+
+# OAuth and refresh tokens
+*refresh_token*
+*access_token*
+*/auth/tokens/*
+*/auth/*.json
+
+# Blogger automation credentials (these files contain active OAuth tokens)
+blogger-automation/credentials/
+blogger-automation/auth/
+youtube-growth-system/tokens/
+youtube-growth-system/auth/
+
+# Environment files (may contain secrets)
+.env.local
+.env.*.local
+.env.production
+.env.production.local
+.env.*.production
+
+# Runtime state files that may contain sensitive info
+.cache/
+*.log
+*.log.*
+.DS_Store
+.idea/
+.vscode/settings.json
