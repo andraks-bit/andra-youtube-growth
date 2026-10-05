@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok OAuth Callback - Andra YouTube Growth</title>
+    <style>
+        body { font-family: system-ui; padding: 20px; max-width: 600px; margin: 50px auto; }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        code { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; }
+        pre { background: #f5f5f5; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>TikTok OAuth Authorization</h1>
+    
+    <div id="status"></div>
+    
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+        const state = params.get('state');
+        const error = params.get('error');
+        const error_description = params.get('error_description');
+        
+        const statusDiv = document.getElementById('status');
+        
+        if (error) {
+            statusDiv.innerHTML = `<p class="error"><strong>Authorization Error:</strong> ${error_description || error}</p>`;
+        } else if (code) {
+            statusDiv.innerHTML = `
+                <p class="success"><strong>✅ Authorization Code Received</strong></p>
+                <p>Copy this code and paste it into the GitHub Action or manual token exchange script:</p>
+                <pre>${code}</pre>
+                <p><strong>State:</strong> <code>${state || '(none)'}</code></p>
+                <p><strong>Next Steps:</strong></p>
+                <ol>
+                    <li>Copy the authorization code above</li>
+                    <li>Exchange it for a refresh token using the tiktok_authorize_local.py script</li>
+                    <li>Store the refresh token in GitHub Secrets as TIKTOK_REFRESH_TOKEN</li>
+                    <li>The automation will then run daily to post to TikTok</li>
+                </ol>
+            `;
+        } else {
+            statusDiv.innerHTML = `<p class="error">No authorization code received. Please start the authorization flow again.</p>`;
+        }
+    </script>
+</body>
+</html>
