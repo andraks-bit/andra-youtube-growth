@@ -1,0 +1,17 @@
+# Minimal GitHub Pages Configuration
+# Disable Jekyll processing for static files
+exclude:
+  - "*.pyc"
+  - "__pycache__"
+  - ".env*"
+  - "node_modules"
+  - "venv"
+
+# Allow all file types to be served
+include:
+  - ".gitkeep"
+  - "*.txt"
+  - "*.html"
+
+# Set base URL for subdirectory deployment
+baseurl: /andra-youtube-growth
