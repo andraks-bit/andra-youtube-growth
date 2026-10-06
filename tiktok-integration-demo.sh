@@ -33,9 +33,23 @@ fi
 TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID:-}"
 TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET:-}"
 
+# CRITICAL: Check if environment variable is corrupted (GitHub Actions masking as ***)
+if [ "$TIKTOK_CLIENT_ID" = "***" ] || [ "$TIKTOK_CLIENT_ID" = "*" ]; then
+    echo_error "FATAL: Client Key is masked/corrupted (contains only asterisks)"
+    echo_error "This indicates GitHub Actions masked the secret before script execution"
+    echo_error "The GitHub Secret may not be set correctly or workflow has an issue"
+    exit 1
+fi
+
 # Trim all whitespace/newlines from credentials (GitHub Actions may include them)
 TIKTOK_CLIENT_ID=$(echo "$TIKTOK_CLIENT_ID" | xargs)
 TIKTOK_CLIENT_SECRET=$(echo "$TIKTOK_CLIENT_SECRET" | xargs)
+
+# Verify trimming didn't corrupt the value
+if [ "$TIKTOK_CLIENT_ID" = "***" ] || [ "$TIKTOK_CLIENT_ID" = "*" ]; then
+    echo_error "FATAL: Client Key became masked after trimming"
+    exit 1
+fi
 
 REDIRECT_URI="https://andraks-bit.github.io/andra-youtube-growth/tiktok-callback.html"
 AUTH_ENDPOINT="https://www.tiktok.com/v2/auth/authorize/"
@@ -111,6 +125,14 @@ start_oauth() {
         echo_info "This should have been caught by verify_inputs()"
         exit 1
     fi
+
+    # Verify Client Key is not masked as *** (GitHub Actions security feature)
+    if [ "$TIKTOK_CLIENT_ID" = "***" ] || [ "$TIKTOK_CLIENT_ID" = "*" ]; then
+        echo_error "FATAL: Client Key is masked (*** or *) - cannot proceed with OAuth"
+        echo_error "The GitHub Actions workflow may have corrupted the secret"
+        exit 1
+    fi
+
     echo_step "Client Key loaded (length: ${#TIKTOK_CLIENT_ID} chars)"
 
     STATE=$(openssl rand -hex 16)
@@ -151,7 +173,25 @@ start_oauth() {
         echo_error "This indicates Client Key was not properly injected into URL"
         exit 1
     fi
-    echo_success "Client Key verified in OAuth URL (length: ${#CLIENT_KEY_IN_URL} chars)"
+
+    # Verify the URL doesn't contain masked asterisks or placeholder values
+    if echo "$CLIENT_KEY_IN_URL" | grep -qE '^\*+$|^%2A+$'; then
+        echo_error "FATAL: Client Key in URL is masked (*** or %2A) - not the real value"
+        echo_error "GitHub Actions may have replaced the secret with masked value"
+        exit 1
+    fi
+
+    # Verify URL-encoded and original lengths match (approximately)
+    # The encoded value should be same length or slightly longer due to URL encoding
+    ORIGINAL_LENGTH=${#TIKTOK_CLIENT_ID}
+    URL_ENCODED_LENGTH=${#CLIENT_KEY_IN_URL}
+    if [ "$URL_ENCODED_LENGTH" -lt "$ORIGINAL_LENGTH" ]; then
+        echo_error "WARNING: URL-encoded Client Key is shorter than original"
+        echo_error "Original: $ORIGINAL_LENGTH chars, Encoded: $URL_ENCODED_LENGTH chars"
+        echo_error "This may indicate value corruption"
+    fi
+
+    echo_success "Client Key verified in OAuth URL (original: ${ORIGINAL_LENGTH} chars, in URL: ${URL_ENCODED_LENGTH} chars)"
 
     # Save PKCE verifier for token exchange (needed when exchanging code for tokens)
     echo "$CODE_VERIFIER" > "$STATE_FILE.verifier"
