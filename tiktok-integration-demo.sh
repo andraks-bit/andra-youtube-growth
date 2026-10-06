@@ -30,8 +30,11 @@ if [ -f .env ]; then
     set +a
 fi
 
-TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID:-}"
-TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET:-}"
+# Support both generic and Sandbox-specific credentials
+# Prefer Sandbox-specific credentials if available (for Sandbox testing)
+# Fall back to generic credentials (which may be Production or Sandbox)
+TIKTOK_CLIENT_ID="${TIKTOK_SANDBOX_CLIENT_ID:-${TIKTOK_CLIENT_ID:-}}"
+TIKTOK_CLIENT_SECRET="${TIKTOK_SANDBOX_CLIENT_SECRET:-${TIKTOK_CLIENT_SECRET:-}}"
 
 # CRITICAL: Check if environment variable is corrupted (GitHub Actions masking as ***)
 if [ "$TIKTOK_CLIENT_ID" = "***" ] || [ "$TIKTOK_CLIENT_ID" = "*" ]; then

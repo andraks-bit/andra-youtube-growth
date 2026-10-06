@@ -31,18 +31,30 @@ jobs:
 
       - name: Verify GitHub Secrets are present
         env:
+          TIKTOK_SANDBOX_CLIENT_ID: ${{ secrets.TIKTOK_SANDBOX_CLIENT_ID }}
+          TIKTOK_SANDBOX_CLIENT_SECRET: ${{ secrets.TIKTOK_SANDBOX_CLIENT_SECRET }}
           TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
         run: |
+          # Check for Sandbox-specific credentials first (preferred for Sandbox testing)
+          if [ -n "$TIKTOK_SANDBOX_CLIENT_ID" ] && [ -n "$TIKTOK_SANDBOX_CLIENT_SECRET" ]; then
+            echo "✓ Sandbox-specific credentials found (TIKTOK_SANDBOX_CLIENT_ID)"
+            exit 0
+          fi
+
+          # Fall back to generic credentials
           if [ -z "$TIKTOK_CLIENT_ID" ] || [ -z "$TIKTOK_CLIENT_SECRET" ]; then
-            echo "✗ ERROR: GitHub Secrets not found or empty"
-            echo "Required secrets: TIKTOK_CLIENT_ID, TIKTOK_CLIENT_SECRET"
+            echo "✗ ERROR: No GitHub Secrets found or empty"
+            echo "Required: TIKTOK_SANDBOX_CLIENT_ID + TIKTOK_SANDBOX_CLIENT_SECRET (preferred for Sandbox)"
+            echo "   OR: TIKTOK_CLIENT_ID + TIKTOK_CLIENT_SECRET (if using Sandbox app credentials)"
             exit 1
           fi
-          echo "✓ GitHub Secrets verified (Client Key and Secret present)"
+          echo "✓ Using generic credentials (ensure these are Sandbox app credentials, not Production)"
 
       - name: Run TikTok Sandbox Integration Test
         env:
+          TIKTOK_SANDBOX_CLIENT_ID: ${{ secrets.TIKTOK_SANDBOX_CLIENT_ID }}
+          TIKTOK_SANDBOX_CLIENT_SECRET: ${{ secrets.TIKTOK_SANDBOX_CLIENT_SECRET }}
           TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
         run: |
@@ -51,6 +63,9 @@ jobs:
           echo ""
 
           # Export variables to ensure they're available to the script
+          # Script will prefer Sandbox-specific if available, otherwise use generic
+          export TIKTOK_SANDBOX_CLIENT_ID="${TIKTOK_SANDBOX_CLIENT_ID}"
+          export TIKTOK_SANDBOX_CLIENT_SECRET="${TIKTOK_SANDBOX_CLIENT_SECRET}"
           export TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID}"
           export TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET}"
 
