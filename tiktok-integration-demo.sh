@@ -32,6 +32,11 @@ fi
 
 TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID:-}"
 TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET:-}"
+
+# Trim all whitespace/newlines from credentials (GitHub Actions may include them)
+TIKTOK_CLIENT_ID=$(echo "$TIKTOK_CLIENT_ID" | xargs)
+TIKTOK_CLIENT_SECRET=$(echo "$TIKTOK_CLIENT_SECRET" | xargs)
+
 REDIRECT_URI="https://andraks-bit.github.io/andra-youtube-growth/tiktok-callback.html"
 AUTH_ENDPOINT="https://www.tiktok.com/v2/auth/authorize/"
 TOKEN_ENDPOINT="https://open.tiktokapis.com/v2/oauth/token/"
@@ -119,6 +124,13 @@ start_oauth() {
     CLIENT_KEY_ENCODED=$(python3 -c "import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=''))" "$TIKTOK_CLIENT_ID")
     if [ -z "$CLIENT_KEY_ENCODED" ]; then
         echo_error "Client Key URL encoding failed - encoded value is empty"
+        exit 1
+    fi
+
+    # Verify the encoded Client Key does NOT contain URL-encoded whitespace (%0A, %0D, %20, etc.)
+    if echo "$CLIENT_KEY_ENCODED" | grep -qE '%0A|%0D|%09|%20'; then
+        echo_error "Client Key contains whitespace after encoding"
+        echo_error "Encoded value starts with: ${CLIENT_KEY_ENCODED:0:20}"
         exit 1
     fi
     echo_step "Client Key encoded (length: ${#CLIENT_KEY_ENCODED} chars)"
