@@ -120,8 +120,9 @@ start_oauth() {
     CODE_CHALLENGE=$(echo -n "$CODE_VERIFIER" | python3 -c "import sys, hashlib, base64; data=sys.stdin.read().encode(); print(base64.urlsafe_b64encode(hashlib.sha256(data).digest()).decode().rstrip('='))")
 
     # Build authorization URL with proper encoding
-    # URL-encode the Client Key (pass as argv to avoid shell quoting issues)
-    CLIENT_KEY_ENCODED=$(python3 -c "import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=''))" "$TIKTOK_CLIENT_ID")
+    # TikTok client_key should preserve safe OAuth characters (-._~)
+    # Use safe='-._~' instead of safe='' to match TikTok's expectations
+    CLIENT_KEY_ENCODED=$(python3 -c "import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe='-._~'))" "$TIKTOK_CLIENT_ID")
     if [ -z "$CLIENT_KEY_ENCODED" ]; then
         echo_error "Client Key URL encoding failed - encoded value is empty"
         exit 1
