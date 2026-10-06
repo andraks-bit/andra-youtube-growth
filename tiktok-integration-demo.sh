@@ -108,34 +108,36 @@ start_oauth() {
 
     AUTH_URL="${AUTH_ENDPOINT}?client_key=${TIKTOK_CLIENT_ID}&redirect_uri=${REDIRECT_ENCODED}&scope=${SCOPES_ENCODED}&response_type=code&state=${STATE}"
 
-    # Check if running in headless environment (GitHub Actions, CI/CD, etc.)
-    if [ -n "$CI" ] || [ -n "$GITHUB_ACTIONS" ] || [ -n "$RUNNER_OS" ]; then
-        # Headless environment detected - cannot open browser
-        echo_error "GitHub Actions (Headless Environment) Detected"
+    # CRITICAL: Check if running in headless environment FIRST
+    # GitHub Actions sets GITHUB_ACTIONS=true in environment
+    if [ "$GITHUB_ACTIONS" = "true" ] || [ -n "$RUNNER_OS" ]; then
+        # HEADLESS GITHUB ACTIONS ENVIRONMENT - DO NOT ATTEMPT TO OPEN BROWSER
         echo ""
-        echo_info "OAuth requires browser interaction, which is not available in CI/CD"
+        echo "════════════════════════════════════════════════════════════"
+        echo "TikTok OAuth Authorization Required (Headless Environment)"
+        echo "════════════════════════════════════════════════════════════"
         echo ""
-        echo_step "To complete the TikTok Sandbox integration test:"
+        echo "Step 1: Open this authorization URL in your browser:"
         echo ""
-        echo "1. Copy this authorization URL:"
+        echo "$AUTH_URL"
         echo ""
-        echo "   $AUTH_URL"
+        echo "Step 2: Sign in with your TikTok account @andra.kiirkivi"
+        echo "Step 3: Approve the requested permissions"
+        echo "Step 4: You will be redirected to:"
+        echo "        $REDIRECT_URI"
         echo ""
-        echo "2. Open it in your browser on your machine"
-        echo "3. Sign in with @andra.kiirkivi and approve permissions"
-        echo "4. You'll see a callback page with your authorization code"
-        echo "5. Run the test locally to complete:"
+        echo "Step 5: Copy the complete callback URL from your browser"
+        echo "Step 6: Run the test locally to complete OAuth:"
         echo ""
-        echo "   export TIKTOK_CLIENT_ID='${TIKTOK_CLIENT_ID:0:10}...'"
-        echo "   export TIKTOK_CLIENT_SECRET='[your_secret]'"
-        echo "   ./tiktok-integration-demo.sh ~/demo-video.mp4"
+        echo "        ./test-tiktok-sandbox.sh"
         echo ""
-        echo_info "The local script will prompt you to paste the callback URL"
+        echo "════════════════════════════════════════════════════════════"
         echo ""
-        exit 0
+        # Exit successfully - workflow has provided the URL
+        return 0
     fi
 
-    # Interactive browser environment (local machine)
+    # NON-HEADLESS LOCAL ENVIRONMENT - Can attempt browser automation
     echo_step "Opening TikTok Sandbox login in browser..."
     echo_info "Authorization URL: $AUTH_URL"
     echo ""
@@ -146,13 +148,11 @@ start_oauth() {
     echo_step "Copy the FULL callback URL from your browser"
     echo ""
 
-    # Try to open browser
+    # Try to open browser (only on local machines, not in CI)
     if command -v open &> /dev/null; then
-        open "$AUTH_URL"
+        open "$AUTH_URL" 2>/dev/null || true
     elif command -v xdg-open &> /dev/null; then
-        xdg-open "$AUTH_URL"
-    else
-        echo_info "Open this URL in your browser: $AUTH_URL"
+        xdg-open "$AUTH_URL" 2>/dev/null || true
     fi
 
     echo_step "Waiting for authorization callback..."
@@ -315,6 +315,16 @@ main() {
     echo_header "🔐 TikTok Sandbox Integration - Real End-to-End Demo"
 
     verify_inputs
+
+    # Check if running in headless GitHub Actions environment
+    if [ "$GITHUB_ACTIONS" = "true" ] || [ -n "$RUNNER_OS" ]; then
+        # Headless: Show OAuth URL and stop
+        start_oauth
+        # Return after showing the authorization URL in headless mode
+        return 0
+    fi
+
+    # Interactive local environment: Complete full OAuth flow
     start_oauth
     exchange_token
     upload_video
