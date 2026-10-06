@@ -102,11 +102,19 @@ start_oauth() {
 
     STATE=$(openssl rand -hex 16)
 
+    # PKCE (RFC 7636) - Required for TikTok Web Login Kit security
+    CODE_VERIFIER=$(openssl rand -base64 32 | tr '+/' '-_' | tr -d '=' | cut -c1-128)
+    CODE_CHALLENGE=$(echo -n "$CODE_VERIFIER" | python3 -c "import sys, hashlib, base64; data=sys.stdin.read().encode(); print(base64.urlsafe_b64encode(hashlib.sha256(data).digest()).decode().rstrip('='))")
+
     # Build authorization URL with proper encoding
     REDIRECT_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$REDIRECT_URI', safe=''))")
     SCOPES_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('user.info.basic video.upload video.publish video.list', safe=''))")
 
-    AUTH_URL="${AUTH_ENDPOINT}?client_key=${TIKTOK_CLIENT_ID}&redirect_uri=${REDIRECT_ENCODED}&scope=${SCOPES_ENCODED}&response_type=code&state=${STATE}"
+    # TikTok Web Login Kit OAuth endpoint with PKCE
+    AUTH_URL="${AUTH_ENDPOINT}?client_key=${TIKTOK_CLIENT_ID}&redirect_uri=${REDIRECT_ENCODED}&scope=${SCOPES_ENCODED}&response_type=code&state=${STATE}&code_challenge=${CODE_CHALLENGE}&code_challenge_method=S256"
+
+    # Save PKCE verifier for token exchange (needed when exchanging code for tokens)
+    echo "$CODE_VERIFIER" > "$STATE_FILE.verifier"
 
     # CRITICAL: Check if running in headless environment FIRST
     # GitHub Actions sets GITHUB_ACTIONS=true in environment
@@ -185,13 +193,17 @@ exchange_token() {
     echo_step "Sending token exchange to TikTok servers..."
     echo_info "Endpoint: $TOKEN_ENDPOINT"
 
-    # Make real token exchange request
+    # Load PKCE verifier (saved during authorization)
+    CODE_VERIFIER=$(cat "$STATE_FILE.verifier" 2>/dev/null)
+
+    # Make real token exchange request with PKCE
     RESPONSE=$(curl -s -X POST "$TOKEN_ENDPOINT" \
         -H "Content-Type: application/x-www-form-urlencoded" \
         -d "client_id=${TIKTOK_CLIENT_ID}" \
         -d "client_secret=${TIKTOK_CLIENT_SECRET}" \
         -d "code=${AUTH_CODE}" \
-        -d "grant_type=authorization_code")
+        -d "grant_type=authorization_code" \
+        -d "code_verifier=${CODE_VERIFIER}")
 
     # Parse response
     ACCESS_TOKEN=$(echo "$RESPONSE" | grep -o '"access_token":"[^"]*' | head -1 | cut -d'"' -f4)
