@@ -56,6 +56,14 @@ jobs:
 
           ./tiktok-integration-demo.sh "${{ github.event.inputs.video_file }}"
 
+      - name: Upload OAuth URL (unmaked by GitHub masking)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tiktok-oauth-url
+          path: /tmp/tiktok_oauth_url.txt
+          retention-days: 7
+
       - name: Upload results
         if: always()
         uses: actions/upload-artifact@v4

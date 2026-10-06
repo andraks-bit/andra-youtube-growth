@@ -200,28 +200,34 @@ start_oauth() {
     # GitHub Actions sets GITHUB_ACTIONS=true in environment
     if [ "$GITHUB_ACTIONS" = "true" ] || [ -n "$RUNNER_OS" ]; then
         # HEADLESS GITHUB ACTIONS ENVIRONMENT - DO NOT ATTEMPT TO OPEN BROWSER
+        # IMPORTANT: Save URL to file instead of printing to logs
+        # GitHub Actions masks secrets in all log output, so printing the URL here
+        # would result in client_key=*** being sent to TikTok
+
+        OAUTH_URL_FILE="/tmp/tiktok_oauth_url.txt"
+        echo "$AUTH_URL" > "$OAUTH_URL_FILE"
+
         echo ""
         echo "════════════════════════════════════════════════════════════"
-        echo "TikTok OAuth Authorization Required (Headless Environment)"
+        echo "TikTok OAuth Authorization Required"
         echo "════════════════════════════════════════════════════════════"
         echo ""
-        echo "Step 1: Open this authorization URL in your browser:"
+        echo "✓ Authorization URL has been generated and saved to artifact"
         echo ""
-        echo "$AUTH_URL"
+        echo "IMPORTANT: Do NOT copy the URL from the workflow logs below"
+        echo "GitHub masks secrets in logs as *** which breaks the OAuth"
         echo ""
-        echo "Step 2: Sign in with your TikTok account @andra.kiirkivi"
-        echo "Step 3: Approve the requested permissions"
-        echo "Step 4: You will be redirected to:"
-        echo "        $REDIRECT_URI"
-        echo ""
-        echo "Step 5: Copy the complete callback URL from your browser"
-        echo "Step 6: Run the test locally to complete OAuth:"
-        echo ""
-        echo "        ./test-tiktok-sandbox.sh"
+        echo "Instead:"
+        echo "1. Download the 'tiktok-oauth-url' artifact from this workflow run"
+        echo "2. Open the oauth-url.txt file in the artifact"
+        echo "3. Copy the REAL authorization URL (not masked)"
+        echo "4. Paste it into your browser"
+        echo "5. Sign in with @andra.kiirkivi and approve permissions"
+        echo "6. You will be redirected to the callback page"
         echo ""
         echo "════════════════════════════════════════════════════════════"
         echo ""
-        # Exit successfully - workflow has provided the URL
+        # Exit successfully - URL is saved as artifact
         return 0
     fi
 
