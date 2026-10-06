@@ -33,7 +33,7 @@ fi
 TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID:-}"
 TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET:-}"
 REDIRECT_URI="https://andraks-bit.github.io/andra-youtube-growth/tiktok-callback.html"
-AUTH_ENDPOINT="https://www.tiktok.com/v2/oauth/authorize/"
+AUTH_ENDPOINT="https://www.tiktok.com/v2/oauth/authorize"
 TOKEN_ENDPOINT="https://open.tiktokapis.com/v2/oauth/token/"
 UPLOAD_ENDPOINT="https://open.tiktokapis.com/v2/post/publish/upload/"
 PUBLISH_ENDPOINT="https://open.tiktokapis.com/v2/post/publish/action/publish/"
@@ -111,7 +111,7 @@ start_oauth() {
     SCOPES_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('user.info.basic video.upload video.publish video.list', safe=''))")
 
     # TikTok Web Login Kit OAuth endpoint with PKCE
-    AUTH_URL="${AUTH_ENDPOINT}?client_key=${TIKTOK_CLIENT_ID}&redirect_uri=${REDIRECT_ENCODED}&scope=${SCOPES_ENCODED}&response_type=code&state=${STATE}&code_challenge=${CODE_CHALLENGE}&code_challenge_method=S256"
+    AUTH_URL="${AUTH_ENDPOINT}?client_id=${TIKTOK_CLIENT_ID}&redirect_uri=${REDIRECT_ENCODED}&scope=${SCOPES_ENCODED}&response_type=code&state=${STATE}&code_challenge=${CODE_CHALLENGE}&code_challenge_method=S256"
 
     # Save PKCE verifier for token exchange (needed when exchanging code for tokens)
     echo "$CODE_VERIFIER" > "$STATE_FILE.verifier"
