@@ -29,23 +29,30 @@ jobs:
             echo "✓ Test video created: ${{ github.event.inputs.video_file }}"
           fi
 
+      - name: Verify GitHub Secrets are present
+        env:
+          TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+        run: |
+          if [ -z "$TIKTOK_CLIENT_ID" ] || [ -z "$TIKTOK_CLIENT_SECRET" ]; then
+            echo "✗ ERROR: GitHub Secrets not found or empty"
+            echo "Required secrets: TIKTOK_CLIENT_ID, TIKTOK_CLIENT_SECRET"
+            exit 1
+          fi
+          echo "✓ GitHub Secrets verified (Client Key and Secret present)"
+
       - name: Run TikTok Sandbox Integration Test
         env:
           TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
         run: |
           echo "Starting TikTok Sandbox integration test..."
-          echo "Client ID: ${TIKTOK_CLIENT_ID:0:10}..."
           echo "Client Secret: [PROTECTED]"
           echo ""
 
-          # Note: This workflow demonstrates the automation but cannot complete OAuth
-          # because it requires user interaction (browser login) which isn't possible in CI
-          #
-          # For complete testing with OAuth:
-          # 1. Add GitHub Secrets: TIKTOK_CLIENT_ID and TIKTOK_CLIENT_SECRET
-          # 2. Run locally: export TIKTOK_CLIENT_ID=xxx && export TIKTOK_CLIENT_SECRET=yyy
-          # 3. Then run: ./tiktok-integration-demo.sh test-video.mp4
+          # Export variables to ensure they're available to the script
+          export TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID}"
+          export TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET}"
 
           ./tiktok-integration-demo.sh "${{ github.event.inputs.video_file }}"
 
