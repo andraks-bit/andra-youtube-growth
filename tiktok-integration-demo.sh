@@ -115,16 +115,16 @@ start_oauth() {
     CODE_CHALLENGE=$(echo -n "$CODE_VERIFIER" | python3 -c "import sys, hashlib, base64; data=sys.stdin.read().encode(); print(base64.urlsafe_b64encode(hashlib.sha256(data).digest()).decode().rstrip('='))")
 
     # Build authorization URL with proper encoding
-    # URL-encode the Client Key (same way as redirect_uri and scopes)
-    CLIENT_KEY_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$TIKTOK_CLIENT_ID', safe=''))")
+    # URL-encode the Client Key (pass as argv to avoid shell quoting issues)
+    CLIENT_KEY_ENCODED=$(python3 -c "import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=''))" "$TIKTOK_CLIENT_ID")
     if [ -z "$CLIENT_KEY_ENCODED" ]; then
         echo_error "Client Key URL encoding failed - encoded value is empty"
         exit 1
     fi
     echo_step "Client Key encoded (length: ${#CLIENT_KEY_ENCODED} chars)"
 
-    REDIRECT_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$REDIRECT_URI', safe=''))")
-    SCOPES_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('user.info.basic video.upload video.publish video.list', safe=''))")
+    REDIRECT_ENCODED=$(python3 -c "import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=''))" "$REDIRECT_URI")
+    SCOPES_ENCODED=$(python3 -c "import sys, urllib.parse; print(urllib.parse.quote(sys.argv[1], safe=''))" "user.info.basic video.upload video.publish video.list")
 
     # TikTok Web Login Kit OAuth endpoint with PKCE
     # Use the encoded Client Key in the URL
