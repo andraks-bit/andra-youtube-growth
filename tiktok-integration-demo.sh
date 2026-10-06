@@ -33,8 +33,17 @@ fi
 # Support both generic and Sandbox-specific credentials
 # Prefer Sandbox-specific credentials if available (for Sandbox testing)
 # Fall back to generic credentials (which may be Production or Sandbox)
-TIKTOK_CLIENT_ID="${TIKTOK_SANDBOX_CLIENT_ID:-${TIKTOK_CLIENT_ID:-}}"
-TIKTOK_CLIENT_SECRET="${TIKTOK_SANDBOX_CLIENT_SECRET:-${TIKTOK_CLIENT_SECRET:-}}"
+
+# Check which source we'll be using
+if [ -n "$TIKTOK_SANDBOX_CLIENT_ID" ]; then
+    CREDENTIAL_SOURCE="Sandbox-specific"
+    TIKTOK_CLIENT_ID="$TIKTOK_SANDBOX_CLIENT_ID"
+    TIKTOK_CLIENT_SECRET="$TIKTOK_SANDBOX_CLIENT_SECRET"
+else
+    CREDENTIAL_SOURCE="Generic (ensure these are Sandbox credentials)"
+    TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID:-}"
+    TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET:-}"
+fi
 
 # CRITICAL: Check if environment variable is corrupted (GitHub Actions masking as ***)
 if [ "$TIKTOK_CLIENT_ID" = "***" ] || [ "$TIKTOK_CLIENT_ID" = "*" ]; then
@@ -52,6 +61,23 @@ TIKTOK_CLIENT_SECRET=$(echo "$TIKTOK_CLIENT_SECRET" | xargs)
 if [ "$TIKTOK_CLIENT_ID" = "***" ] || [ "$TIKTOK_CLIENT_ID" = "*" ]; then
     echo_error "FATAL: Client Key became masked after trimming"
     exit 1
+fi
+
+# VALIDATION: Check if Client Key has reasonable characteristics
+CLIENT_KEY_LENGTH=${#TIKTOK_CLIENT_ID}
+if [ "$CLIENT_KEY_LENGTH" -lt 10 ]; then
+    echo_error "FATAL: Client Key is too short (${CLIENT_KEY_LENGTH} chars)"
+    echo_error "TikTok Client Keys are typically 20+ characters"
+    echo_error "You may have copied the wrong field from TikTok Developer Console"
+    echo_error "Verify you copied from: App Settings → Sandbox section → 'Client Key' field (NOT 'Sandbox ID' or 'App ID')"
+    exit 1
+fi
+
+# Check if it contains obviously invalid characters (should be alphanumeric with maybe - or _)
+if echo "$TIKTOK_CLIENT_ID" | grep -qE '[^a-zA-Z0-9_-]'; then
+    echo_error "WARNING: Client Key contains unexpected characters"
+    echo_info "TikTok Client Keys typically contain only letters, numbers, dashes, and underscores"
+    echo_info "If you see special characters or spaces, verify the correct value was copied from Developer Console"
 fi
 
 REDIRECT_URI="https://andraks-bit.github.io/andra-youtube-growth/tiktok-callback.html"
@@ -97,7 +123,8 @@ verify_inputs() {
         exit 1
     fi
 
-    echo_step "Client ID: ${TIKTOK_CLIENT_ID:0:10}..."
+    echo_step "Credential source: $CREDENTIAL_SOURCE"
+    echo_step "Client ID: ${TIKTOK_CLIENT_ID:0:10}... (length: ${#TIKTOK_CLIENT_ID} chars)"
     echo_step "Client Secret: [PROTECTED]"
     echo_success "Credentials loaded"
 
@@ -136,7 +163,14 @@ start_oauth() {
         exit 1
     fi
 
-    echo_step "Client Key loaded (length: ${#TIKTOK_CLIENT_ID} chars)"
+    echo_step "Client Key verification (source: $CREDENTIAL_SOURCE, length: ${#TIKTOK_CLIENT_ID} chars)"
+
+    # Log which credentials are being used (by characteristics, not value)
+    if [ -n "$TIKTOK_SANDBOX_CLIENT_ID" ]; then
+        echo_info "Using Sandbox-specific credentials (TIKTOK_SANDBOX_CLIENT_ID)"
+    else
+        echo_info "Using generic credentials (TIKTOK_CLIENT_ID) - ensure these are Sandbox credentials"
+    fi
 
     STATE=$(openssl rand -hex 16)
 
