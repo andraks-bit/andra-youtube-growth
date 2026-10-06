@@ -100,6 +100,13 @@ verify_inputs() {
 start_oauth() {
     echo_header "Step 1: Real TikTok OAuth Authorization"
 
+    # CRITICAL: Verify Client Key is present and non-empty BEFORE constructing URL
+    if [ -z "$TIKTOK_CLIENT_ID" ]; then
+        echo_error "Client Key is empty or not set!"
+        echo_info "This should have been caught by verify_inputs()"
+        exit 1
+    fi
+
     STATE=$(openssl rand -hex 16)
 
     # PKCE (RFC 7636) - Required for TikTok Web Login Kit security
@@ -112,6 +119,16 @@ start_oauth() {
 
     # TikTok Web Login Kit OAuth endpoint with PKCE
     AUTH_URL="${AUTH_ENDPOINT}?client_key=${TIKTOK_CLIENT_ID}&redirect_uri=${REDIRECT_ENCODED}&scope=${SCOPES_ENCODED}&response_type=code&state=${STATE}&code_challenge=${CODE_CHALLENGE}&code_challenge_method=S256"
+
+    # CRITICAL: Verify the URL actually contains a non-empty client_key parameter
+    # Extract everything after client_key= and before the next & to check it's not empty
+    CLIENT_KEY_VALUE=$(echo "$AUTH_URL" | grep -o 'client_key=[^&]*' | cut -d'=' -f2)
+    if [ -z "$CLIENT_KEY_VALUE" ]; then
+        echo_error "URL construction failed - client_key is empty in URL"
+        echo_error "This indicates the Client Key was not properly set during URL construction"
+        exit 1
+    fi
+    echo_success "Client Key verified in OAuth URL (length: ${#CLIENT_KEY_VALUE} chars)"
 
     # Save PKCE verifier for token exchange (needed when exchanging code for tokens)
     echo "$CODE_VERIFIER" > "$STATE_FILE.verifier"
