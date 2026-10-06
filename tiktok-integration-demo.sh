@@ -106,6 +106,7 @@ start_oauth() {
         echo_info "This should have been caught by verify_inputs()"
         exit 1
     fi
+    echo_step "Client Key loaded (length: ${#TIKTOK_CLIENT_ID} chars)"
 
     STATE=$(openssl rand -hex 16)
 
@@ -114,21 +115,30 @@ start_oauth() {
     CODE_CHALLENGE=$(echo -n "$CODE_VERIFIER" | python3 -c "import sys, hashlib, base64; data=sys.stdin.read().encode(); print(base64.urlsafe_b64encode(hashlib.sha256(data).digest()).decode().rstrip('='))")
 
     # Build authorization URL with proper encoding
+    # URL-encode the Client Key (same way as redirect_uri and scopes)
+    CLIENT_KEY_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$TIKTOK_CLIENT_ID', safe=''))")
+    if [ -z "$CLIENT_KEY_ENCODED" ]; then
+        echo_error "Client Key URL encoding failed - encoded value is empty"
+        exit 1
+    fi
+    echo_step "Client Key encoded (length: ${#CLIENT_KEY_ENCODED} chars)"
+
     REDIRECT_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('$REDIRECT_URI', safe=''))")
     SCOPES_ENCODED=$(python3 -c "import urllib.parse; print(urllib.parse.quote('user.info.basic video.upload video.publish video.list', safe=''))")
 
     # TikTok Web Login Kit OAuth endpoint with PKCE
-    AUTH_URL="${AUTH_ENDPOINT}?client_key=${TIKTOK_CLIENT_ID}&redirect_uri=${REDIRECT_ENCODED}&scope=${SCOPES_ENCODED}&response_type=code&state=${STATE}&code_challenge=${CODE_CHALLENGE}&code_challenge_method=S256"
+    # Use the encoded Client Key in the URL
+    AUTH_URL="${AUTH_ENDPOINT}?client_key=${CLIENT_KEY_ENCODED}&redirect_uri=${REDIRECT_ENCODED}&scope=${SCOPES_ENCODED}&response_type=code&state=${STATE}&code_challenge=${CODE_CHALLENGE}&code_challenge_method=S256"
 
     # CRITICAL: Verify the URL actually contains a non-empty client_key parameter
     # Extract everything after client_key= and before the next & to check it's not empty
-    CLIENT_KEY_VALUE=$(echo "$AUTH_URL" | grep -o 'client_key=[^&]*' | cut -d'=' -f2)
-    if [ -z "$CLIENT_KEY_VALUE" ]; then
-        echo_error "URL construction failed - client_key is empty in URL"
-        echo_error "This indicates the Client Key was not properly set during URL construction"
+    CLIENT_KEY_IN_URL=$(echo "$AUTH_URL" | grep -o 'client_key=[^&]*' | cut -d'=' -f2)
+    if [ -z "$CLIENT_KEY_IN_URL" ]; then
+        echo_error "URL construction failed - client_key is empty in final URL"
+        echo_error "This indicates Client Key was not properly injected into URL"
         exit 1
     fi
-    echo_success "Client Key verified in OAuth URL (length: ${#CLIENT_KEY_VALUE} chars)"
+    echo_success "Client Key verified in OAuth URL (length: ${#CLIENT_KEY_IN_URL} chars)"
 
     # Save PKCE verifier for token exchange (needed when exchanging code for tokens)
     echo "$CODE_VERIFIER" > "$STATE_FILE.verifier"
