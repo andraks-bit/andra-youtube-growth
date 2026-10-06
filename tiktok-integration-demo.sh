@@ -30,20 +30,11 @@ if [ -f .env ]; then
     set +a
 fi
 
-# Support both generic and Sandbox-specific credentials
-# Prefer Sandbox-specific credentials if available (for Sandbox testing)
-# Fall back to generic credentials (which may be Production or Sandbox)
-
-# Check which source we'll be using
-if [ -n "$TIKTOK_SANDBOX_CLIENT_ID" ]; then
-    CREDENTIAL_SOURCE="Sandbox-specific"
-    TIKTOK_CLIENT_ID="$TIKTOK_SANDBOX_CLIENT_ID"
-    TIKTOK_CLIENT_SECRET="$TIKTOK_SANDBOX_CLIENT_SECRET"
-else
-    CREDENTIAL_SOURCE="Generic (ensure these are Sandbox credentials)"
-    TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID:-}"
-    TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET:-}"
-fi
+# TikTok Sandbox uses SAME OAuth credentials as Production
+# Sandbox targeting is handled via Developer Console configuration (target users), not separate OAuth keys
+# Use the primary TIKTOK_CLIENT_ID and TIKTOK_CLIENT_SECRET (these should be the PRODUCTION app credentials)
+TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID:-}"
+TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET:-}"
 
 # CRITICAL: Check if environment variable is corrupted (GitHub Actions masking as ***)
 if [ "$TIKTOK_CLIENT_ID" = "***" ] || [ "$TIKTOK_CLIENT_ID" = "*" ]; then
@@ -123,10 +114,9 @@ verify_inputs() {
         exit 1
     fi
 
-    echo_step "Credential source: $CREDENTIAL_SOURCE"
     echo_step "Client ID: ${TIKTOK_CLIENT_ID:0:10}... (length: ${#TIKTOK_CLIENT_ID} chars)"
     echo_step "Client Secret: [PROTECTED]"
-    echo_success "Credentials loaded"
+    echo_success "Credentials loaded (TikTok Sandbox uses Production app credentials)"
 
     if [ -z "$VIDEO_FILE" ]; then
         echo_error "No video file provided!"
@@ -163,14 +153,7 @@ start_oauth() {
         exit 1
     fi
 
-    echo_step "Client Key verification (source: $CREDENTIAL_SOURCE, length: ${#TIKTOK_CLIENT_ID} chars)"
-
-    # Log which credentials are being used (by characteristics, not value)
-    if [ -n "$TIKTOK_SANDBOX_CLIENT_ID" ]; then
-        echo_info "Using Sandbox-specific credentials (TIKTOK_SANDBOX_CLIENT_ID)"
-    else
-        echo_info "Using generic credentials (TIKTOK_CLIENT_ID) - ensure these are Sandbox credentials"
-    fi
+    echo_step "Client Key verification (length: ${#TIKTOK_CLIENT_ID} chars)"
 
     STATE=$(openssl rand -hex 16)
 
