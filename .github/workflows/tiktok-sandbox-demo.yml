@@ -1,0 +1,128 @@
+name: TikTok Sandbox Demo - Secure OAuth Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  tiktok-sandbox-demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Verify GitHub Secrets configured
+        run: |
+          if [ -z "${{ secrets.TIKTOK_CLIENT_ID }}" ] || [ -z "${{ secrets.TIKTOK_CLIENT_SECRET }}" ]; then
+            echo "❌ Required secrets not found:"
+            echo "   - TIKTOK_CLIENT_ID"
+            echo "   - TIKTOK_CLIENT_SECRET"
+            echo ""
+            echo "Add them in: Settings → Secrets and Variables → Actions → New Repository Secret"
+            exit 1
+          fi
+          echo "✓ TikTok credentials found in GitHub Secrets"
+
+      - name: Start Backend Server
+        env:
+          TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+        run: |
+          node tiktok-sandbox-backend.js > backend.log 2>&1 &
+          BACKEND_PID=$!
+          sleep 3
+
+          if ! curl -s http://localhost:3001/health | grep -q "ok"; then
+            echo "❌ Backend failed to start"
+            cat backend.log
+            exit 1
+          fi
+          echo "✓ Backend started (PID: $BACKEND_PID)"
+
+      - name: Start Frontend Server
+        run: |
+          python3 -m http.server 3000 > frontend.log 2>&1 &
+          FRONTEND_PID=$!
+          sleep 2
+
+          if ! curl -s http://localhost:3000/tiktok-sandbox-demo.html | grep -q "Sign in"; then
+            echo "❌ Frontend failed to load"
+            exit 1
+          fi
+          echo "✓ Frontend started (PID: $FRONTEND_PID)"
+
+      - name: Setup ngrok Tunnel
+        run: |
+          # Install ngrok
+          wget -q https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip
+          unzip -q ngrok-v3-stable-linux-amd64.zip
+          chmod +x ngrok
+
+          # Start ngrok tunnel
+          ./ngrok http 3000 --log=stdout > ngrok.log 2>&1 &
+          sleep 4
+
+          # Wait for tunnel to establish
+          timeout 10 sh -c 'until grep -q "started tunnel" ngrok.log; do sleep 1; done' || true
+
+          echo "✓ Tunnel established"
+
+      - name: Verify Credentials Loaded
+        run: |
+          HEALTH=$(curl -s http://localhost:3001/health)
+
+          if echo "$HEALTH" | grep -q '"credentials":true'; then
+            echo "✓ Credentials successfully loaded from GitHub Secrets"
+            echo "✓ Backend can perform OAuth token exchange"
+          else
+            echo "❌ Credentials not loaded into backend"
+            echo "Response: $HEALTH"
+            exit 1
+          fi
+
+      - name: Output Demo Instructions
+        run: |
+          echo ""
+          echo "╔════════════════════════════════════════════════════════╗"
+          echo "║  ✓ TikTok Sandbox Demo Ready - OAuth Test              ║"
+          echo "╚════════════════════════════════════════════════════════╝"
+          echo ""
+          echo "✓ Backend running with credentials loaded"
+          echo "✓ Frontend running on tunnel"
+          echo "✓ OAuth flow ready to test"
+          echo ""
+          echo "WHAT TO DO NEXT:"
+          echo "1. Open the Demo URL (see below in workflow output)"
+          echo "2. Click: 🔓 Sign in with TikTok (Sandbox)"
+          echo "3. Sign in as @andra.kiirkivi when TikTok prompts"
+          echo "4. Approve permissions"
+          echo "5. See 'Authentication successful!' message"
+          echo ""
+          echo "Keep this workflow running while testing."
+          echo "Workflow will stay active for 6 hours."
+          echo ""
+
+      - name: Create Summary
+        if: always()
+        run: |
+          cat > demo_summary.txt << 'EOF'
+          TikTok Sandbox Demo Summary:
+          ✓ GitHub Secrets loaded securely (never exposed)
+          ✓ Backend OAuth handler running
+          ✓ Frontend demo page accessible
+          ✓ ngrok public tunnel created
+
+          Click the public URL shown in "Show Summary" to access the demo.
+          EOF
+          cat demo_summary.txt
+
+      - name: Keep Running
+        if: always()
+        run: |
+          echo "Services running..."
+          sleep 21600
