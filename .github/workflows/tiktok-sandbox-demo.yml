@@ -56,19 +56,26 @@ jobs:
           unzip -q ngrok-v3-stable-linux-amd64.zip
           chmod +x ngrok
           timeout 30 ./ngrok http 3000 >ngrok.log 2>&1 &
-          sleep 3
+          sleep 5
 
       - name: Get ngrok URL
-        timeout-minutes: 1
+        timeout-minutes: 2
         run: |
-          for i in {1..30}; do
-            URL=$(curl -s http://localhost:4040/api/tunnels | grep -oP '"public_url":"https://[^"]*' | cut -d'"' -f4 | head -1)
+          for i in {1..40}; do
+            RESPONSE=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null)
+            if [ -z "$RESPONSE" ]; then
+              sleep 1
+              continue
+            fi
+            URL=$(echo "$RESPONSE" | grep -o 'https://[a-z0-9.-]*\.ngrok[a-z0-9.-]*' | head -1)
             if [ -n "$URL" ]; then
               echo "URL=$URL" >/tmp/demo.env
               exit 0
             fi
             sleep 1
           done
+          echo "Failed to get ngrok URL. Last response:"
+          curl -s http://localhost:4040/api/tunnels
           exit 1
 
       - name: Report demo
