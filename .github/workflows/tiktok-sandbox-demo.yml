@@ -111,10 +111,15 @@ jobs:
             source /tmp/demo.env
             echo "DEMO_URL=$URL" >>$GITHUB_STEP_SUMMARY
             echo "Demo is ready at: $URL/tiktok-sandbox-demo.html" >>$GITHUB_STEP_SUMMARY
+            echo "Tunnel will remain active for 2 hours" >>$GITHUB_STEP_SUMMARY
           else
             echo "Demo setup failed - check logs" >>$GITHUB_STEP_SUMMARY
           fi
 
+      - name: Keep tunnel alive
+        if: always()
+        run: sleep 7200
+
       - name: Cleanup
         if: always()
-        run: pkill -9 node python3 ngrok 2>/dev/null || true
+        run: pkill -9 node python3 lt 2>/dev/null || true
