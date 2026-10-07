@@ -117,8 +117,6 @@ jobs:
           - ✓ Credentials loaded from GitHub Secrets (never exposed)
           - ✓ Backend handles OAuth securely
           - ✓ Client Secret stays on server only
-
-          **Workflow will keep services running for 6 hours**
           EOF
 
             echo "✓ Summary written with demo URL: $DEMO_URL"
@@ -140,8 +138,3 @@ jobs:
             exit 1
           fi
 
-      - name: Keep Services Running
-        if: always()
-        run: |
-          echo "Services running. Check GitHub Actions Summary for demo URL."
-          sleep 21600
