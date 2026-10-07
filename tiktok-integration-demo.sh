@@ -30,11 +30,22 @@ if [ -f .env ]; then
     set +a
 fi
 
-# TikTok Sandbox uses SAME OAuth credentials as Production
-# Sandbox targeting is handled via Developer Console configuration (target users), not separate OAuth keys
-# Use the primary TIKTOK_CLIENT_ID and TIKTOK_CLIENT_SECRET (these should be the PRODUCTION app credentials)
-TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID:-}"
-TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET:-}"
+# ROOT CAUSE FIX: TikTok Sandbox OAuth requires SANDBOX-SPECIFIC credentials
+# Sandbox is a separate OAuth environment - Production Client Key does NOT work in Sandbox
+# Prefer Sandbox credentials (TIKTOK_SANDBOX_CLIENT_ID) for Sandbox testing
+# Fall back to TIKTOK_CLIENT_ID only if Sandbox credentials not available
+
+if [ -n "$TIKTOK_SANDBOX_CLIENT_ID" ] && [ -n "$TIKTOK_SANDBOX_CLIENT_SECRET" ]; then
+    # Sandbox-specific credentials available - use them
+    TIKTOK_CLIENT_ID="$TIKTOK_SANDBOX_CLIENT_ID"
+    TIKTOK_CLIENT_SECRET="$TIKTOK_SANDBOX_CLIENT_SECRET"
+    CRED_SOURCE="Sandbox-specific (TIKTOK_SANDBOX_CLIENT_ID)"
+else
+    # Fall back to generic (assume Production for backward compatibility)
+    TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID:-}"
+    TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET:-}"
+    CRED_SOURCE="Generic (TIKTOK_CLIENT_ID)"
+fi
 
 # CRITICAL: Check if environment variable is corrupted (GitHub Actions masking as ***)
 if [ "$TIKTOK_CLIENT_ID" = "***" ] || [ "$TIKTOK_CLIENT_ID" = "*" ]; then
@@ -60,10 +71,11 @@ if [ "$CLIENT_KEY_LENGTH" -lt 10 ]; then
     echo_error "FATAL: Client Key is too short (${CLIENT_KEY_LENGTH} chars)"
     echo_error "TikTok Client Keys are typically 20+ characters"
     echo_error "You may have copied the wrong field from TikTok Developer Console"
-    echo_error "CRITICAL: Verify the exact field you copied from:"
-    echo_error "  TikTok Console → Apps → Your App → App Settings → Basic Information"
-    echo_error "  Copy the 'Client Key' value (NOT 'App ID', 'Sandbox ID', or any other field)"
-    echo_error "  This is the PRODUCTION app's Client Key (used for both Production and Sandbox testing)"
+    echo_error "CRITICAL: TikTok Sandbox OAuth requires Sandbox-specific credentials"
+    echo_error "  Verify you copied from the CORRECT location:"
+    echo_error "  TikTok Console → Apps → Your App → Sandbox section → 'Client Key' field"
+    echo_error "  (NOT from 'App Settings' or 'Basic Information' - those are Production credentials)"
+    echo_error "  Sandbox requires its own Client Key, not the Production app's key"
     exit 1
 fi
 
@@ -119,9 +131,10 @@ verify_inputs() {
         exit 1
     fi
 
-    echo_step "Client ID: ${TIKTOK_CLIENT_ID:0:10}... (length: ${#TIKTOK_CLIENT_ID} chars)"
+    echo_step "Credentials source: $CRED_SOURCE"
+    echo_step "Client Key: ${TIKTOK_CLIENT_ID:0:10}... (length: ${#TIKTOK_CLIENT_ID} chars)"
     echo_step "Client Secret: [PROTECTED]"
-    echo_success "Credentials loaded (TikTok Sandbox uses Production app credentials)"
+    echo_success "Credentials loaded"
 
     if [ -z "$VIDEO_FILE" ]; then
         echo_error "No video file provided!"

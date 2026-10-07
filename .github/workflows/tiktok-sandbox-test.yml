@@ -31,29 +31,41 @@ jobs:
 
       - name: Verify GitHub Secrets are present
         env:
+          TIKTOK_SANDBOX_CLIENT_ID: ${{ secrets.TIKTOK_SANDBOX_CLIENT_ID }}
+          TIKTOK_SANDBOX_CLIENT_SECRET: ${{ secrets.TIKTOK_SANDBOX_CLIENT_SECRET }}
           TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
         run: |
+          # Check for Sandbox-specific credentials (required for Sandbox OAuth)
+          if [ -n "$TIKTOK_SANDBOX_CLIENT_ID" ] && [ -n "$TIKTOK_SANDBOX_CLIENT_SECRET" ]; then
+            echo "✓ Sandbox credentials verified (TIKTOK_SANDBOX_CLIENT_ID and TIKTOK_SANDBOX_CLIENT_SECRET)"
+            exit 0
+          fi
+
+          # Fallback: check for generic credentials
           if [ -z "$TIKTOK_CLIENT_ID" ] || [ -z "$TIKTOK_CLIENT_SECRET" ]; then
             echo "✗ ERROR: GitHub Secrets not found or empty"
-            echo "Required secrets: TIKTOK_CLIENT_ID, TIKTOK_CLIENT_SECRET"
-            echo "These should be your PRODUCTION app's OAuth credentials"
-            echo "(TikTok Sandbox uses the same OAuth credentials as Production)"
+            echo "REQUIRED: TIKTOK_SANDBOX_CLIENT_ID and TIKTOK_SANDBOX_CLIENT_SECRET"
+            echo "  Copy from: TikTok Console → Your App → Sandbox → 'Client Key' and 'Client Secret'"
+            echo "  (NOT from 'App Settings' - that would be Production credentials)"
             exit 1
           fi
-          echo "✓ GitHub Secrets verified (OAuth credentials present)"
+          echo "⚠ Using fallback generic credentials (ideally use Sandbox-specific secrets)"
 
       - name: Run TikTok Sandbox Integration Test
         env:
+          TIKTOK_SANDBOX_CLIENT_ID: ${{ secrets.TIKTOK_SANDBOX_CLIENT_ID }}
+          TIKTOK_SANDBOX_CLIENT_SECRET: ${{ secrets.TIKTOK_SANDBOX_CLIENT_SECRET }}
           TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
         run: |
           echo "Starting TikTok Sandbox integration test..."
-          echo "Using Production app OAuth credentials (Sandbox targeting via Developer Console)"
           echo "Client Secret: [PROTECTED]"
           echo ""
 
-          # Export variables to ensure they're available to the script
+          # Export all credential variables - script will prefer Sandbox-specific if available
+          export TIKTOK_SANDBOX_CLIENT_ID="${TIKTOK_SANDBOX_CLIENT_ID}"
+          export TIKTOK_SANDBOX_CLIENT_SECRET="${TIKTOK_SANDBOX_CLIENT_SECRET}"
           export TIKTOK_CLIENT_ID="${TIKTOK_CLIENT_ID}"
           export TIKTOK_CLIENT_SECRET="${TIKTOK_CLIENT_SECRET}"
 
