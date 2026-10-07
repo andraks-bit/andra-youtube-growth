@@ -44,15 +44,39 @@ jobs:
       - name: Start Frontend Server
         timeout-minutes: 1
         run: |
+          # Verify the HTML file exists
+          if [ ! -f "tiktok-sandbox-demo.html" ]; then
+            echo "❌ tiktok-sandbox-demo.html not found in $(pwd)"
+            ls -la *.html 2>/dev/null || echo "No .html files found"
+            exit 1
+          fi
+          echo "✓ HTML file found"
+
+          # Start HTTP server
           timeout 30 python3 -m http.server 3000 > frontend.log 2>&1 &
+          HTTP_PID=$!
+          echo "Started HTTP server (PID: $HTTP_PID)"
+          sleep 1
+
+          # Verify server is listening
           for i in {1..10}; do
             if curl -s http://localhost:3000/tiktok-sandbox-demo.html 2>/dev/null | grep -q "Sign in"; then
-              echo "✓ Frontend ready"
+              echo "✓ Frontend ready and serving content"
               exit 0
             fi
+
+            # Debug output on each attempt
+            echo "Attempt $i: Checking if server responds..."
+            if ! curl -s http://localhost:3000/ 2>/dev/null | head -1; then
+              echo "  Server not responding yet"
+            fi
+
             sleep 1
           done
-          echo "❌ Frontend timeout"
+
+          echo "❌ Frontend failed to start"
+          echo "Server logs:"
+          cat frontend.log || echo "No logs available"
           exit 1
 
       - name: Install and Start ngrok
