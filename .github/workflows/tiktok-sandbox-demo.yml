@@ -62,7 +62,7 @@ jobs:
         timeout-minutes: 2
         run: |
           for i in {1..40}; do
-            RESPONSE=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null)
+            RESPONSE=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null || true)
             if [ -z "$RESPONSE" ]; then
               sleep 1
               continue
@@ -75,7 +75,7 @@ jobs:
             sleep 1
           done
           echo "Failed to get ngrok URL. Last response:"
-          curl -s http://localhost:4040/api/tunnels
+          curl -s http://localhost:4040/api/tunnels || true
           exit 1
 
       - name: Report demo
