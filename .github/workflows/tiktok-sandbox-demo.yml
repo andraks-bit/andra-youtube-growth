@@ -132,6 +132,14 @@ jobs:
             echo "====================="
             echo "Full demo: $DEMO_URL/tiktok-sandbox-demo.html"
             echo "====================="
+
+            # Write to file for easy retrieval
+            echo "$DEMO_URL" > DEMO_URL_LATEST.txt
+            git config user.email "bot@example.com"
+            git config user.name "GitHub Actions Bot"
+            git add DEMO_URL_LATEST.txt
+            git commit -m "Update demo URL: $DEMO_URL" || true
+            git push || true
           fi
 
       - name: Keep tunnel alive
