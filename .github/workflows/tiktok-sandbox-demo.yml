@@ -115,8 +115,23 @@ jobs:
             echo "demo_url=$URL" >>$GITHUB_OUTPUT
             echo "✅ Demo URL: $URL" >&2
             echo "✅ Full URL: $URL/tiktok-sandbox-demo.html" >&2
+            # Write URL to file
+            echo "$URL" > /tmp/demo_url.txt
+            cat /tmp/demo_url.txt >&2
           else
             echo "Demo setup failed - check logs" >>$GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Extract and display demo URL
+        if: always()
+        run: |
+          if [ -f /tmp/demo_url.txt ]; then
+            DEMO_URL=$(cat /tmp/demo_url.txt)
+            echo "====================="
+            echo "DEMO URL: $DEMO_URL"
+            echo "====================="
+            echo "Full demo: $DEMO_URL/tiktok-sandbox-demo.html"
+            echo "====================="
           fi
 
       - name: Keep tunnel alive
