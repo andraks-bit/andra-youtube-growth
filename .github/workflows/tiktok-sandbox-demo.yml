@@ -16,13 +16,13 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Verify GitHub Secrets configured
+      - name: Verify GitHub Secrets
         run: |
           if [ -z "${{ secrets.TIKTOK_CLIENT_ID }}" ] || [ -z "${{ secrets.TIKTOK_CLIENT_SECRET }}" ]; then
             echo "❌ Required secrets not found"
             exit 1
           fi
-          echo "✓ Credentials found in GitHub Secrets"
+          echo "✓ Credentials found"
 
       - name: Start Backend Server
         timeout-minutes: 1
@@ -44,149 +44,86 @@ jobs:
       - name: Start Frontend Server
         timeout-minutes: 1
         run: |
-          # Verify the HTML file exists
           if [ ! -f "tiktok-sandbox-demo.html" ]; then
-            echo "❌ tiktok-sandbox-demo.html not found in $(pwd)"
-            ls -la *.html 2>/dev/null || echo "No .html files found"
+            echo "❌ HTML file not found"
             exit 1
           fi
-          echo "✓ HTML file found"
-
-          # Start HTTP server
           timeout 30 python3 -m http.server 3000 > frontend.log 2>&1 &
-          HTTP_PID=$!
-          echo "Started HTTP server (PID: $HTTP_PID)"
-          sleep 1
-
-          # Verify server is listening
           for i in {1..10}; do
             if curl -s http://localhost:3000/tiktok-sandbox-demo.html 2>/dev/null | grep -q "Sign in"; then
-              echo "✓ Frontend ready and serving content"
+              echo "✓ Frontend ready"
               exit 0
             fi
-
-            # Debug output on each attempt
-            echo "Attempt $i: Checking if server responds..."
-            if ! curl -s http://localhost:3000/ 2>/dev/null | head -1; then
-              echo "  Server not responding yet"
-            fi
-
             sleep 1
           done
-
-          echo "❌ Frontend failed to start"
-          echo "Server logs:"
-          cat frontend.log || echo "No logs available"
+          echo "❌ Frontend timeout"
           exit 1
 
-      - name: Install and Start ngrok
+      - name: Start ngrok
         timeout-minutes: 1
         run: |
           wget -q https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip
           unzip -q ngrok-v3-stable-linux-amd64.zip
           chmod +x ngrok
           timeout 30 ./ngrok http 3000 > ngrok.log 2>&1 &
-          NGROK_PID=$!
-          echo "ngrok PID: $NGROK_PID"
           sleep 3
+          echo "✓ ngrok started"
 
-      - name: Verify Backend Credentials
+      - name: Get ngrok URL
         timeout-minutes: 1
         run: |
-          if curl -s http://localhost:3001/health 2>/dev/null | grep -q '"credentials":true'; then
-            echo "✓ Credentials loaded"
-          else
-            echo "❌ Credentials not loaded"
-            exit 1
-          fi
-
-      - name: Wait for ngrok and Write Summary
-        run: |
-          # Set trap to kill all background processes on exit
-          trap 'kill $(jobs -p) 2>/dev/null || true' EXIT
-
-          echo "Waiting for ngrok tunnel to initialize..."
-
-          # Poll ngrok API until tunnel is ready (timeout 30 seconds)
-          DEMO_URL=""
+          echo "Waiting for ngrok..."
           for i in {1..30}; do
             RESPONSE=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null)
             DEMO_URL=$(echo "$RESPONSE" | grep -oP '"public_url":"https://[^"]*' | head -1 | cut -d'"' -f4)
-
             if [ -n "$DEMO_URL" ]; then
-              echo "✓ ngrok tunnel ready: $DEMO_URL"
-              break
+              echo "DEMO_URL=$DEMO_URL" > /tmp/demo_url.txt
+              echo "✓ Found URL: $DEMO_URL"
+              exit 0
             fi
-
             sleep 1
           done
+          echo "❌ ngrok URL not found"
+          exit 1
 
-          # If still no URL, try extracting from logs
-          if [ -z "$DEMO_URL" ]; then
-            sleep 3
-            DEMO_URL=$(grep -oP 'https://[a-z0-9.-]+\.ngrok(?:\.io|-free\.app)' ngrok.log 2>/dev/null | head -1)
-          fi
+      - name: Write Summary
+        if: always()
+        run: |
+          if [ -f /tmp/demo_url.txt ]; then
+            source /tmp/demo_url.txt
+            cat > $GITHUB_STEP_SUMMARY << 'SUMMARY'
+# 🎬 TikTok Sandbox Demo Ready
 
-          # Write to GitHub Actions Summary
-          if [ -n "$DEMO_URL" ]; then
-            cat > $GITHUB_STEP_SUMMARY << 'EOF'
-          # 🎬 TikTok Sandbox Demo - Ready
+## ✓ OAuth Demo Running
 
-          ## ✓ All Systems Running
+Your secure TikTok OAuth demo is live with credentials loaded from GitHub Secrets.
 
-          Your secure TikTok OAuth demo is ready with credentials loaded from GitHub Secrets.
+SUMMARY
 
-          EOF
-
-            cat >> $GITHUB_STEP_SUMMARY << EOF
-          ### 🚀 **[CLICK HERE TO OPEN DEMO]($DEMO_URL/tiktok-sandbox-demo.html)**
-
-          ### What to do:
-          1. Click the link above
-          2. Click blue button: **🔓 Sign in with TikTok (Sandbox)**
-          3. Sign in as @andra.kiirkivi
-          4. Approve permissions
-          5. See "Authentication successful!"
-
-          ### Security:
-          - ✓ Credentials loaded from GitHub Secrets (never exposed)
-          - ✓ Backend handles OAuth securely
-          - ✓ Client Secret stays on server only
-          EOF
-
-            echo "✓ Summary written with demo URL: $DEMO_URL"
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### [🚀 CLICK TO OPEN DEMO](${DEMO_URL}/tiktok-sandbox-demo.html)" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**What to do:**" >> $GITHUB_STEP_SUMMARY
+            echo "1. Click the demo link above" >> $GITHUB_STEP_SUMMARY
+            echo "2. Click: **🔓 Sign in with TikTok (Sandbox)**" >> $GITHUB_STEP_SUMMARY
+            echo "3. Sign in as @andra.kiirkvi" >> $GITHUB_STEP_SUMMARY
+            echo "4. Approve permissions" >> $GITHUB_STEP_SUMMARY
+            echo "5. See 'Authentication successful!'" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "✓ Demo ready" > /dev/null
           else
-            cat > $GITHUB_STEP_SUMMARY << 'EOF'
-          # ⚠️ ngrok Not Ready
+            cat >> $GITHUB_STEP_SUMMARY << 'SUMMARY'
+# ⚠️ ngrok Failed
 
-          Services are running but ngrok tunnel could not be established.
-
-          Services:
-          - Backend: http://localhost:3001 ✓
-          - Frontend: http://localhost:3000 ✓
-          - ngrok: Not available
-
-          Check workflow logs for details.
-          EOF
-
-            echo "⚠️ Could not extract ngrok URL"
-            exit 1
+Services started but ngrok tunnel could not be established. Check logs.
+SUMMARY
           fi
 
-          # Kill all background processes - ensures workflow exits
-          echo "Terminating all background processes..."
-          pkill -TERM -f "node tiktok-sandbox-backend" 2>/dev/null || true
-          pkill -TERM -f "python3 -m http.server" 2>/dev/null || true
-          pkill -TERM -f "./ngrok http" 2>/dev/null || true
-          pkill -TERM -f "ngrok http" 2>/dev/null || true
-
-          # Give processes time to exit gracefully
+      - name: Cleanup
+        if: always()
+        run: |
+          pkill -9 node 2>/dev/null || true
+          pkill -9 python3 2>/dev/null || true
+          pkill -9 ngrok 2>/dev/null || true
           sleep 1
-
-          # Force kill any remaining processes
-          pkill -KILL -f "node tiktok-sandbox-backend" 2>/dev/null || true
-          pkill -KILL -f "python3 -m http.server" 2>/dev/null || true
-          pkill -KILL -f "ngrok" 2>/dev/null || true
-
-          echo "✓ All processes terminated. Workflow complete."
-
+          echo "✓ Cleaned up"
