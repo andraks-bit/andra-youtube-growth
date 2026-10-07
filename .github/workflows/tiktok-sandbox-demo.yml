@@ -19,14 +19,10 @@ jobs:
       - name: Verify GitHub Secrets configured
         run: |
           if [ -z "${{ secrets.TIKTOK_CLIENT_ID }}" ] || [ -z "${{ secrets.TIKTOK_CLIENT_SECRET }}" ]; then
-            echo "❌ Required secrets not found:"
-            echo "   - TIKTOK_CLIENT_ID"
-            echo "   - TIKTOK_CLIENT_SECRET"
-            echo ""
-            echo "Add them in: Settings → Secrets and Variables → Actions → New Repository Secret"
+            echo "❌ Required secrets not found"
             exit 1
           fi
-          echo "✓ TikTok credentials found in GitHub Secrets"
+          echo "✓ Credentials found in GitHub Secrets"
 
       - name: Start Backend Server
         env:
@@ -34,178 +30,118 @@ jobs:
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
         run: |
           node tiktok-sandbox-backend.js > backend.log 2>&1 &
-          BACKEND_PID=$!
           sleep 3
-
-          if ! curl -s http://localhost:3001/health | grep -q "ok"; then
-            echo "❌ Backend failed to start"
-            cat backend.log
+          if curl -s http://localhost:3001/health | grep -q "ok"; then
+            echo "✓ Backend started"
+          else
+            echo "❌ Backend failed"
             exit 1
           fi
-          echo "✓ Backend started (PID: $BACKEND_PID)"
 
       - name: Start Frontend Server
         run: |
           python3 -m http.server 3000 > frontend.log 2>&1 &
-          FRONTEND_PID=$!
           sleep 2
-
-          if ! curl -s http://localhost:3000/tiktok-sandbox-demo.html | grep -q "Sign in"; then
-            echo "❌ Frontend failed to load"
+          if curl -s http://localhost:3000/tiktok-sandbox-demo.html | grep -q "Sign in"; then
+            echo "✓ Frontend started"
+          else
+            echo "❌ Frontend failed"
             exit 1
           fi
-          echo "✓ Frontend started (PID: $FRONTEND_PID)"
 
-      - name: Setup ngrok Tunnel
+      - name: Install and Start ngrok
         run: |
-          # Install ngrok
           wget -q https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip
           unzip -q ngrok-v3-stable-linux-amd64.zip
           chmod +x ngrok
+          ./ngrok http 3000 > ngrok.log 2>&1 &
+          echo "ngrok started in background"
 
-          # Start ngrok tunnel
-          ./ngrok http 3000 --log=stdout > ngrok.log 2>&1 &
-          sleep 6
-
-          # Extract ngrok public URL
-          DEMO_URL=$(grep -oP 'https://[a-z0-9.-]+\.ngrok[a-z0-9.-]*' ngrok.log | head -1)
-
-          if [ -z "$DEMO_URL" ]; then
-            echo "Waiting for ngrok tunnel to initialize..."
-            sleep 5
-            DEMO_URL=$(curl -s http://localhost:4040/api/tunnels | grep -oP 'https://[a-z0-9.-]+\.ngrok[a-z0-9.-]*' | head -1)
-          fi
-
-          if [ -n "$DEMO_URL" ]; then
-            echo "DEMO_URL=$DEMO_URL" >> $GITHUB_ENV
-            echo "✓ Tunnel URL: $DEMO_URL"
-          else
-            echo "Checking ngrok API..."
-            curl -s http://localhost:4040/api/tunnels
-            echo "⚠️ Could not extract ngrok URL, will retry in verification step"
-          fi
-
-      - name: Verify Credentials Loaded
+      - name: Verify Backend Credentials
         run: |
-          HEALTH=$(curl -s http://localhost:3001/health)
-
-          if echo "$HEALTH" | grep -q '"credentials":true'; then
-            echo "✓ Credentials successfully loaded from GitHub Secrets"
-            echo "✓ Backend can perform OAuth token exchange"
+          if curl -s http://localhost:3001/health | grep -q '"credentials":true'; then
+            echo "✓ Credentials loaded"
           else
-            echo "❌ Credentials not loaded into backend"
-            echo "Response: $HEALTH"
+            echo "❌ Credentials not loaded"
             exit 1
           fi
 
-      - name: Extract and Display ngrok Public URL
+      - name: Wait for ngrok and Write Summary
         run: |
-          # Try to get ngrok URL from multiple sources
-          DEMO_URL=${{ env.DEMO_URL }}
+          echo "Waiting for ngrok tunnel to initialize..."
 
-          if [ -z "$DEMO_URL" ]; then
-            echo "Extracting ngrok URL from API..."
-            DEMO_URL=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null | grep -oP '"public_url":"https://[^"]+' | head -1 | cut -d'"' -f4)
-          fi
-
-          if [ -z "$DEMO_URL" ]; then
-            echo "Trying alternate method..."
-            DEMO_URL=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null | grep -oP 'https://[a-z0-9.-]+\.ngrok[a-z0-9.-]*' | head -1)
-          fi
-
-          if [ -z "$DEMO_URL" ]; then
-            echo "⚠️ Could not extract ngrok URL yet, checking logs..."
-            cat ngrok.log
-            sleep 3
-            DEMO_URL=$(grep -oP 'https://[a-z0-9.-]+\.ngrok[a-z0-9.-]*' ngrok.log | tail -1)
-          fi
-
-          if [ -n "$DEMO_URL" ]; then
-            echo "DEMO_URL=$DEMO_URL" >> $GITHUB_ENV
-            echo "✓ Public Demo URL: $DEMO_URL"
-          else
-            echo "⚠️ Could not extract ngrok URL - checking ngrok API"
-            curl -s http://localhost:4040/api/tunnels | jq .
-          fi
-
-      - name: Write Demo URL to Job Summary
-        if: always()
-        run: |
-          # Final attempt to get ngrok URL
-          DEMO_URL=${{ env.DEMO_URL }}
-
-          if [ -z "$DEMO_URL" ]; then
-            echo "Making final ngrok API call..."
+          # Poll ngrok API until tunnel is ready (timeout 30 seconds)
+          DEMO_URL=""
+          for i in {1..30}; do
             RESPONSE=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null)
-            echo "ngrok API Response: $RESPONSE"
-            DEMO_URL=$(echo "$RESPONSE" | grep -oP '"public_url":"https://[^"]+' | head -1 | cut -d'"' -f4 || echo "")
-          fi
+            DEMO_URL=$(echo "$RESPONSE" | grep -oP '"public_url":"https://[^"]*' | head -1 | cut -d'"' -f4)
 
+            if [ -n "$DEMO_URL" ]; then
+              echo "✓ ngrok tunnel ready: $DEMO_URL"
+              break
+            fi
+
+            sleep 1
+          done
+
+          # If still no URL, try extracting from logs
           if [ -z "$DEMO_URL" ]; then
-            DEMO_URL=$(grep -oP 'https://[a-z0-9.-]+\.ngrok[a-z0-9.-]*' ngrok.log 2>/dev/null | tail -1 || echo "")
+            sleep 3
+            DEMO_URL=$(grep -oP 'https://[a-z0-9.-]+\.ngrok(?:\.io|-free\.app)' ngrok.log 2>/dev/null | head -1)
           fi
 
+          # Write to GitHub Actions Summary
           if [ -n "$DEMO_URL" ]; then
-            cat >> $GITHUB_STEP_SUMMARY << EOF
-          # 🎬 TikTok Sandbox Demo - Ready to Test OAuth
+            # Ensure summary file is created
+            cat > $GITHUB_STEP_SUMMARY << 'EOF'
+          # 🎬 TikTok Sandbox Demo - Ready
 
-          ## ✓ All Systems Ready
+          ## ✓ All Systems Running
 
-          Your secure TikTok OAuth demo is running with credentials loaded from GitHub Secrets.
+          Your secure TikTok OAuth demo is ready with credentials loaded from GitHub Secrets.
 
-          ### 🔗 Click Here to Open Demo:
-          [$DEMO_URL]($DEMO_URL/tiktok-sandbox-demo.html)
-
-          ### Next Step:
-          1. Click the link above to open the demo
-          2. Click the blue button: **🔓 Sign in with TikTok (Sandbox)**
-          3. You'll be redirected to TikTok's login page
-          4. Sign in as @andra.kiirkivi
-          5. Approve the permissions
-          6. You should see "Authentication successful!"
-
-          ### How It Works:
-          - ✓ Backend running securely with credentials from GitHub Secrets
-          - ✓ Frontend demo page accessible via ngrok tunnel
-          - ✓ OAuth callback handler ready
-          - ✓ Token exchange secure (Client Secret never exposed)
-
-          **Keep this workflow running while testing. It will stay active for 6 hours.**
-
-          ---
-          Demo is live and ready. No additional setup needed.
           EOF
 
-            echo "✓ Demo URL written to job summary: $DEMO_URL"
-          else
+            # Append the clickable demo URL
             cat >> $GITHUB_STEP_SUMMARY << EOF
-          # ⚠️ ngrok URL Not Available
+          ### 🚀 **[CLICK HERE TO OPEN DEMO]($DEMO_URL/tiktok-sandbox-demo.html)**
 
-          The demo services are running, but the ngrok public URL could not be extracted.
+          ### What to do:
+          1. Click the link above
+          2. Click blue button: **🔓 Sign in with TikTok (Sandbox)**
+          3. Sign in as @andra.kiirkivi
+          4. Approve permissions
+          5. See "Authentication successful!"
 
-          **Fallback Option:** Use SSH port forwarding
-          \`\`\`
-          ssh -L 3000:localhost:3000 <your-github-runner>
-          \`\`\`
+          ### Security:
+          - ✓ Credentials loaded from GitHub Secrets (never exposed)
+          - ✓ Backend handles OAuth securely
+          - ✓ Client Secret stays on server only
 
-          Then access: http://localhost:3000/tiktok-sandbox-demo.html
+          **Workflow will keep services running for 6 hours**
+          EOF
+
+            echo "✓ Summary written with demo URL: $DEMO_URL"
+          else
+            cat > $GITHUB_STEP_SUMMARY << 'EOF'
+          # ⚠️ ngrok Not Ready
+
+          Services are running but ngrok tunnel could not be established.
+
+          Services:
+          - Backend: http://localhost:3001 ✓
+          - Frontend: http://localhost:3000 ✓
+          - ngrok: Not available
+
+          Check workflow logs for details.
           EOF
 
             echo "⚠️ Could not extract ngrok URL"
+            exit 1
           fi
-
-      - name: Output Demo Instructions
-        run: |
-          echo ""
-          echo "✓ Demo URL has been written to GitHub Actions Job Summary"
-          echo "Check the 'Summary' tab to see the clickable demo link"
-          echo ""
 
       - name: Keep Services Running
         if: always()
         run: |
-          echo "✓ All services running"
-          echo "✓ Check GitHub Actions Job Summary for demo URL"
-          echo ""
-          echo "Keeping services active for testing (6 hours)..."
+          echo "Services running. Check GitHub Actions Summary for demo URL."
           sleep 21600
