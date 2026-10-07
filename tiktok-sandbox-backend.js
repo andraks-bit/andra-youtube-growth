@@ -133,7 +133,11 @@ const server = http.createServer(async (req, res) => {
   // Health check
   if (pathname === '/health') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ status: 'ok', credentials: !!(CLIENT_KEY && CLIENT_SECRET) }));
+    res.end(JSON.stringify({
+      status: 'ok',
+      credentials: !!(CLIENT_KEY && CLIENT_SECRET),
+      client_key: CLIENT_KEY || null
+    }));
     return;
   }
 
