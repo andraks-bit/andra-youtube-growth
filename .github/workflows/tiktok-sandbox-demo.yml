@@ -1,62 +1,52 @@
-name: TikTok Sandbox Demo - Secure OAuth Test
+name: TikTok Sandbox Demo
 
 on:
-  workflow_dispatch:
+  workflow_dispatch
 
 jobs:
-  tiktok-sandbox-demo:
+  sandbox-demo:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Verify GitHub Secrets
+      - name: Verify secrets
         run: |
-          if [ -z "${{ secrets.TIKTOK_CLIENT_ID }}" ] || [ -z "${{ secrets.TIKTOK_CLIENT_SECRET }}" ]; then
-            echo "❌ Required secrets not found"
+          if [ -z "${{ secrets.TIKTOK_CLIENT_ID }}" ]; then
+            echo "Missing TIKTOK_CLIENT_ID"
             exit 1
           fi
-          echo "✓ Credentials found"
+          if [ -z "${{ secrets.TIKTOK_CLIENT_SECRET }}" ]; then
+            echo "Missing TIKTOK_CLIENT_SECRET"
+            exit 1
+          fi
+          echo "Secrets OK"
 
-      - name: Start Backend Server
+      - name: Start backend
         timeout-minutes: 1
         env:
           TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
         run: |
-          timeout 30 node tiktok-sandbox-backend.js > backend.log 2>&1 &
+          timeout 30 node tiktok-sandbox-backend.js >backend.log 2>&1 &
           for i in {1..10}; do
-            if curl -s http://localhost:3001/health 2>/dev/null | grep -q "ok"; then
-              echo "✓ Backend ready"
-              exit 0
-            fi
+            curl -s http://localhost:3001/health | grep -q "ok" && exit 0
             sleep 1
           done
-          echo "❌ Backend timeout"
           exit 1
 
-      - name: Start Frontend Server
+      - name: Start frontend
         timeout-minutes: 1
         run: |
-          if [ ! -f "tiktok-sandbox-demo.html" ]; then
-            echo "❌ HTML file not found"
-            exit 1
-          fi
-          timeout 30 python3 -m http.server 3000 > frontend.log 2>&1 &
+          [ -f tiktok-sandbox-demo.html ] || exit 1
+          timeout 30 python3 -m http.server 3000 >frontend.log 2>&1 &
           for i in {1..10}; do
-            if curl -s http://localhost:3000/tiktok-sandbox-demo.html 2>/dev/null | grep -q "Sign in"; then
-              echo "✓ Frontend ready"
-              exit 0
-            fi
+            curl -s http://localhost:3000/tiktok-sandbox-demo.html | grep -q "Sign in" && exit 0
             sleep 1
           done
-          echo "❌ Frontend timeout"
           exit 1
 
       - name: Start ngrok
@@ -65,62 +55,33 @@ jobs:
           wget -q https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip
           unzip -q ngrok-v3-stable-linux-amd64.zip
           chmod +x ngrok
-          timeout 30 ./ngrok http 3000 > ngrok.log 2>&1 &
+          timeout 30 ./ngrok http 3000 >ngrok.log 2>&1 &
           sleep 3
-          echo "✓ ngrok started"
 
       - name: Get ngrok URL
         timeout-minutes: 1
         run: |
-          echo "Waiting for ngrok..."
           for i in {1..30}; do
-            RESPONSE=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null)
-            DEMO_URL=$(echo "$RESPONSE" | grep -oP '"public_url":"https://[^"]*' | head -1 | cut -d'"' -f4)
-            if [ -n "$DEMO_URL" ]; then
-              echo "DEMO_URL=$DEMO_URL" > /tmp/demo_url.txt
-              echo "✓ Found URL: $DEMO_URL"
+            URL=$(curl -s http://localhost:4040/api/tunnels | grep -oP '"public_url":"https://[^"]*' | cut -d'"' -f4 | head -1)
+            if [ -n "$URL" ]; then
+              echo "URL=$URL" >/tmp/demo.env
               exit 0
             fi
             sleep 1
           done
-          echo "❌ ngrok URL not found"
           exit 1
 
-      - name: Write Summary
+      - name: Report demo
         if: always()
         run: |
-          if [ -f /tmp/demo_url.txt ]; then
-            source /tmp/demo_url.txt
-            cat > $GITHUB_STEP_SUMMARY << 'SUMMARY'
-# 🎬 TikTok Sandbox Demo Ready
-
-## ✓ OAuth Demo Running
-
-Your secure TikTok OAuth demo is live with credentials loaded from GitHub Secrets.
-SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "### [🚀 CLICK TO OPEN DEMO](${DEMO_URL}/tiktok-sandbox-demo.html)" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "**What to do:**" >> $GITHUB_STEP_SUMMARY
-            echo "1. Click the demo link above" >> $GITHUB_STEP_SUMMARY
-            echo "2. Click: **🔓 Sign in with TikTok (Sandbox)**" >> $GITHUB_STEP_SUMMARY
-            echo "3. Sign in as @andra.kiirkvi" >> $GITHUB_STEP_SUMMARY
-            echo "4. Approve permissions" >> $GITHUB_STEP_SUMMARY
-            echo "5. See 'Authentication successful!'" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f /tmp/demo.env ]; then
+            source /tmp/demo.env
+            echo "DEMO_URL=$URL" >>$GITHUB_STEP_SUMMARY
+            echo "Demo is ready at: $URL/tiktok-sandbox-demo.html" >>$GITHUB_STEP_SUMMARY
           else
-            cat >> $GITHUB_STEP_SUMMARY << 'SUMMARY'
-# ⚠️ ngrok Failed
-
-Services started but ngrok tunnel could not be established. Check logs.
-SUMMARY
+            echo "Demo setup failed - check logs" >>$GITHUB_STEP_SUMMARY
           fi
 
       - name: Cleanup
         if: always()
-        run: |
-          pkill -9 node 2>/dev/null || true
-          pkill -9 python3 2>/dev/null || true
-          pkill -9 ngrok 2>/dev/null || true
-          sleep 1
-          echo "✓ Cleaned up"
+        run: pkill -9 node python3 ngrok 2>/dev/null || true
