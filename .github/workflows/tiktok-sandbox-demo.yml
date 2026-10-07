@@ -112,6 +112,9 @@ jobs:
             echo "DEMO_URL=$URL" >>$GITHUB_STEP_SUMMARY
             echo "Demo is ready at: $URL/tiktok-sandbox-demo.html" >>$GITHUB_STEP_SUMMARY
             echo "Tunnel will remain active for 2 hours" >>$GITHUB_STEP_SUMMARY
+            echo "demo_url=$URL" >>$GITHUB_OUTPUT
+            echo "✅ Demo URL: $URL" >&2
+            echo "✅ Full URL: $URL/tiktok-sandbox-demo.html" >&2
           else
             echo "Demo setup failed - check logs" >>$GITHUB_STEP_SUMMARY
           fi
