@@ -25,41 +25,51 @@ jobs:
           echo "✓ Credentials found in GitHub Secrets"
 
       - name: Start Backend Server
+        timeout-minutes: 1
         env:
           TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
         run: |
-          node tiktok-sandbox-backend.js > backend.log 2>&1 &
-          sleep 3
-          if curl -s http://localhost:3001/health | grep -q "ok"; then
-            echo "✓ Backend started"
-          else
-            echo "❌ Backend failed"
-            exit 1
-          fi
+          timeout 30 node tiktok-sandbox-backend.js > backend.log 2>&1 &
+          for i in {1..10}; do
+            if curl -s http://localhost:3001/health 2>/dev/null | grep -q "ok"; then
+              echo "✓ Backend ready"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "❌ Backend timeout"
+          exit 1
 
       - name: Start Frontend Server
+        timeout-minutes: 1
         run: |
-          python3 -m http.server 3000 > frontend.log 2>&1 &
-          sleep 2
-          if curl -s http://localhost:3000/tiktok-sandbox-demo.html | grep -q "Sign in"; then
-            echo "✓ Frontend started"
-          else
-            echo "❌ Frontend failed"
-            exit 1
-          fi
+          timeout 30 python3 -m http.server 3000 > frontend.log 2>&1 &
+          for i in {1..10}; do
+            if curl -s http://localhost:3000/tiktok-sandbox-demo.html 2>/dev/null | grep -q "Sign in"; then
+              echo "✓ Frontend ready"
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "❌ Frontend timeout"
+          exit 1
 
       - name: Install and Start ngrok
+        timeout-minutes: 1
         run: |
           wget -q https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip
           unzip -q ngrok-v3-stable-linux-amd64.zip
           chmod +x ngrok
-          ./ngrok http 3000 > ngrok.log 2>&1 &
-          echo "ngrok started in background"
+          timeout 30 ./ngrok http 3000 > ngrok.log 2>&1 &
+          NGROK_PID=$!
+          echo "ngrok PID: $NGROK_PID"
+          sleep 3
 
       - name: Verify Backend Credentials
+        timeout-minutes: 1
         run: |
-          if curl -s http://localhost:3001/health | grep -q '"credentials":true'; then
+          if curl -s http://localhost:3001/health 2>/dev/null | grep -q '"credentials":true'; then
             echo "✓ Credentials loaded"
           else
             echo "❌ Credentials not loaded"
@@ -68,6 +78,9 @@ jobs:
 
       - name: Wait for ngrok and Write Summary
         run: |
+          # Set trap to kill all background processes on exit
+          trap 'kill $(jobs -p) 2>/dev/null || true' EXIT
+
           echo "Waiting for ngrok tunnel to initialize..."
 
           # Poll ngrok API until tunnel is ready (timeout 30 seconds)
@@ -92,7 +105,6 @@ jobs:
 
           # Write to GitHub Actions Summary
           if [ -n "$DEMO_URL" ]; then
-            # Ensure summary file is created
             cat > $GITHUB_STEP_SUMMARY << 'EOF'
           # 🎬 TikTok Sandbox Demo - Ready
 
@@ -102,7 +114,6 @@ jobs:
 
           EOF
 
-            # Append the clickable demo URL
             cat >> $GITHUB_STEP_SUMMARY << EOF
           ### 🚀 **[CLICK HERE TO OPEN DEMO]($DEMO_URL/tiktok-sandbox-demo.html)**
 
@@ -137,4 +148,21 @@ jobs:
             echo "⚠️ Could not extract ngrok URL"
             exit 1
           fi
+
+          # Kill all background processes - ensures workflow exits
+          echo "Terminating all background processes..."
+          pkill -TERM -f "node tiktok-sandbox-backend" 2>/dev/null || true
+          pkill -TERM -f "python3 -m http.server" 2>/dev/null || true
+          pkill -TERM -f "./ngrok http" 2>/dev/null || true
+          pkill -TERM -f "ngrok http" 2>/dev/null || true
+
+          # Give processes time to exit gracefully
+          sleep 1
+
+          # Force kill any remaining processes
+          pkill -KILL -f "node tiktok-sandbox-backend" 2>/dev/null || true
+          pkill -KILL -f "python3 -m http.server" 2>/dev/null || true
+          pkill -KILL -f "ngrok" 2>/dev/null || true
+
+          echo "✓ All processes terminated. Workflow complete."
 
