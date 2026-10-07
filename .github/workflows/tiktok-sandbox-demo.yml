@@ -50,32 +50,65 @@ jobs:
           exit 1
 
       - name: Start ngrok
-        timeout-minutes: 1
+        timeout-minutes: 2
         run: |
           wget -q https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip
+          if [ ! -f ngrok-v3-stable-linux-amd64.zip ]; then
+            echo "Failed to download ngrok"
+            exit 1
+          fi
           unzip -q ngrok-v3-stable-linux-amd64.zip
+          if [ ! -f ngrok ]; then
+            echo "Failed to unzip ngrok"
+            exit 1
+          fi
           chmod +x ngrok
-          timeout 30 ./ngrok http 3000 >ngrok.log 2>&1 &
+          timeout 60 ./ngrok http 3000 >ngrok.log 2>&1 &
+          NGROK_PID=$!
+          echo "ngrok started with PID: $NGROK_PID"
+          sleep 3
+          if ! ps -p $NGROK_PID > /dev/null; then
+            echo "ngrok process died immediately"
+            cat ngrok.log
+            exit 1
+          fi
           sleep 5
+          echo "Checking if ngrok API is listening..."
+          if ! curl -s http://localhost:4040/api/tunnels > /dev/null 2>&1; then
+            echo "ngrok API not responding after 8 seconds"
+            echo "ngrok.log contents:"
+            cat ngrok.log
+            netstat -tuln | grep 4040 || echo "Port 4040 not listening"
+            ps aux | grep ngrok | grep -v grep || echo "ngrok process not found"
+          fi
 
       - name: Get ngrok URL
         timeout-minutes: 2
         run: |
-          for i in {1..40}; do
+          echo "Waiting for ngrok tunnel to be created..."
+          for i in {1..60}; do
+            echo "Attempt $i/60..."
             RESPONSE=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null || true)
             if [ -z "$RESPONSE" ]; then
+              echo "  No response from API yet"
               sleep 1
               continue
             fi
+            echo "  Got response, checking for tunnel..."
             URL=$(echo "$RESPONSE" | grep -o 'https://[a-z0-9.-]*\.ngrok[a-z0-9.-]*' | head -1)
             if [ -n "$URL" ]; then
+              echo "  Found tunnel URL: $URL"
               echo "URL=$URL" >/tmp/demo.env
               exit 0
             fi
+            echo "  Response has no tunnel yet"
             sleep 1
           done
-          echo "Failed to get ngrok URL. Last response:"
-          curl -s http://localhost:4040/api/tunnels || true
+          echo "Failed to get ngrok URL after 60 attempts"
+          echo "Last API response:"
+          curl -s http://localhost:4040/api/tunnels || echo "API not responding"
+          echo "ngrok process status:"
+          ps aux | grep ngrok | grep -v grep || echo "ngrok not running"
           exit 1
 
       - name: Report demo
