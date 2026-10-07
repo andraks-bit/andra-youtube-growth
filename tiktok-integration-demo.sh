@@ -60,15 +60,20 @@ if [ "$CLIENT_KEY_LENGTH" -lt 10 ]; then
     echo_error "FATAL: Client Key is too short (${CLIENT_KEY_LENGTH} chars)"
     echo_error "TikTok Client Keys are typically 20+ characters"
     echo_error "You may have copied the wrong field from TikTok Developer Console"
-    echo_error "Verify you copied from: App Settings → Sandbox section → 'Client Key' field (NOT 'Sandbox ID' or 'App ID')"
+    echo_error "CRITICAL: Verify the exact field you copied from:"
+    echo_error "  TikTok Console → Apps → Your App → App Settings → Basic Information"
+    echo_error "  Copy the 'Client Key' value (NOT 'App ID', 'Sandbox ID', or any other field)"
+    echo_error "  This is the PRODUCTION app's Client Key (used for both Production and Sandbox testing)"
     exit 1
 fi
 
 # Check if it contains obviously invalid characters (should be alphanumeric with maybe - or _)
 if echo "$TIKTOK_CLIENT_ID" | grep -qE '[^a-zA-Z0-9_-]'; then
     echo_error "WARNING: Client Key contains unexpected characters"
-    echo_info "TikTok Client Keys typically contain only letters, numbers, dashes, and underscores"
-    echo_info "If you see special characters or spaces, verify the correct value was copied from Developer Console"
+    echo_error "TikTok Client Keys typically contain only: letters, numbers, dashes, underscores"
+    echo_error "Current characters: $(echo "$TIKTOK_CLIENT_ID" | sed 's/[a-zA-Z0-9_-]//g' | grep -o . | sort -u | tr '\n' ' ')"
+    echo_error "CRITICAL: Re-copy the 'Client Key' from TikTok Console → Basic Information (exact string, no modifications)"
+    exit 1
 fi
 
 REDIRECT_URI="https://andraks-bit.github.io/andra-youtube-growth/tiktok-callback.html"
@@ -212,6 +217,24 @@ start_oauth() {
     fi
 
     echo_success "Client Key verified in OAuth URL (original: ${ORIGINAL_LENGTH} chars, in URL: ${URL_ENCODED_LENGTH} chars)"
+
+    # DIAGNOSTIC: Verify OAuth URL structure matches TikTok Web Login Kit spec
+    echo_header "OAuth URL Diagnostic Report"
+
+    echo_step "Endpoint: ${AUTH_ENDPOINT}"
+    [ -z "$AUTH_ENDPOINT" ] && echo_error "WARNING: Endpoint is empty!"
+
+    echo_step "Client Key: ${ORIGINAL_LENGTH} chars (starts with alphanumeric: $(echo "$TIKTOK_CLIENT_ID" | grep -q '^[a-zA-Z0-9]' && echo 'yes' || echo 'NO'))"
+
+    echo_step "Redirect URI: $REDIRECT_URI"
+    if [ "$REDIRECT_URI" != "https://andraks-bit.github.io/andra-youtube-growth/tiktok-callback.html" ]; then
+        echo_error "WARNING: Redirect URI differs from configured value"
+    fi
+
+    PARAMS_COUNT=$(echo "$AUTH_URL" | grep -o '&' | wc -l)
+    echo_step "OAuth parameters in URL: $((PARAMS_COUNT + 1)) (should be 9: client_key, redirect_uri, scope, response_type, state, code_challenge, code_challenge_method, plus extras)"
+
+    echo_success "OAuth URL structure validated"
 
     # Save PKCE verifier for token exchange (needed when exchanging code for tokens)
     echo "$CODE_VERIFIER" > "$STATE_FILE.verifier"
