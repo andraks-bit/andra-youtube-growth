@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+
+# Defensive: this repo's code never writes credentials into its own tree
+# (the OAuth client/token files live outside this repo, in
+# ../blogger-automation/credentials/), but these patterns guard against any
+# credential file ever landing here by accident.
+credentials/
+*token*.json
+*client_secret*.json
+*.pem
+*.key

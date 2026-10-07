@@ -1,0 +1,818 @@
+[
+  {
+    "city": "Marmaris",
+    "country": "Turkey",
+    "token": "marmaris",
+    "boats": 34,
+    "landing_pages": 0,
+    "opportunity": 34.0,
+    "generatable": true,
+    "location_slugs": [
+      "marmaris"
+    ]
+  },
+  {
+    "city": "Port Hercule",
+    "country": "France",
+    "token": "port hercule",
+    "boats": 30,
+    "landing_pages": 0,
+    "opportunity": 30.0,
+    "generatable": false,
+    "location_slugs": [
+      "port-hercule-monaco-france-mrrn00fh"
+    ]
+  },
+  {
+    "city": "Latchi",
+    "country": "Cyprus",
+    "token": "latchi",
+    "boats": 18,
+    "landing_pages": 0,
+    "opportunity": 18.0,
+    "generatable": true,
+    "location_slugs": [
+      "latchi-cyprus"
+    ]
+  },
+  {
+    "city": "Vilamoura Marina",
+    "country": "Portugal",
+    "token": "vilamoura marina",
+    "boats": 13,
+    "landing_pages": 0,
+    "opportunity": 13.0,
+    "generatable": false,
+    "location_slugs": [
+      "vilamoura-marina-algarve-portugal-portugal-mrrjxba0"
+    ]
+  },
+  {
+    "city": "Hvr Croatia",
+    "country": "Croatia",
+    "token": "hvr croatia",
+    "boats": 11,
+    "landing_pages": 0,
+    "opportunity": 11.0,
+    "generatable": false,
+    "location_slugs": [
+      "hvr-croatia-croatia-mr3i32kd"
+    ]
+  },
+  {
+    "city": "Mandelieu Cannes",
+    "country": "France",
+    "token": "mandelieu cannes",
+    "boats": 11,
+    "landing_pages": 0,
+    "opportunity": 11.0,
+    "generatable": true,
+    "location_slugs": [
+      "mandelieu-cannes-france-mrd9pf7f"
+    ]
+  },
+  {
+    "city": "Limassol Marina Cyprus",
+    "country": "Cyprus",
+    "token": "limassol marina cyprus",
+    "boats": 11,
+    "landing_pages": 0,
+    "opportunity": 11.0,
+    "generatable": false,
+    "location_slugs": [
+      "limassol-marina-cyprus-cyprus-mrf0pxbb"
+    ]
+  },
+  {
+    "city": "Phuket",
+    "country": "Thailand",
+    "token": "phuket",
+    "boats": 97,
+    "landing_pages": 8,
+    "opportunity": 10.78,
+    "generatable": true,
+    "location_slugs": [
+      "phuket"
+    ]
+  },
+  {
+    "city": "ocean power boat club",
+    "country": "South Africa",
+    "token": "ocean power boat club",
+    "boats": 10,
+    "landing_pages": 0,
+    "opportunity": 10.0,
+    "generatable": false,
+    "location_slugs": [
+      "ocean-power-boat-club-cape-town-south-africa-mr3gr7t7"
+    ]
+  },
+  {
+    "city": "Marina di Rimini (Porto Turistico di Rimini)",
+    "country": "Italy",
+    "token": "marina di rimini porto turistico di rimini",
+    "boats": 10,
+    "landing_pages": 0,
+    "opportunity": 10.0,
+    "generatable": false,
+    "location_slugs": [
+      "marina-di-rimini-porto-turistico-di-rimini-italy-mroutc42"
+    ]
+  },
+  {
+    "city": "Puerto Deportivo Tomàs Maestre",
+    "country": "Spain",
+    "token": "puerto deportivo tomas maestre",
+    "boats": 10,
+    "landing_pages": 0,
+    "opportunity": 10.0,
+    "generatable": false,
+    "location_slugs": [
+      "puerto-deportivo-tomas-maestre-spain-mrazv0ye"
+    ]
+  },
+  {
+    "city": "No. 9",
+    "country": "Vietnam",
+    "token": "no 9",
+    "boats": 9,
+    "landing_pages": 0,
+    "opportunity": 9.0,
+    "generatable": false,
+    "location_slugs": [
+      "no-9-international-port-ngoc-chau-habour-tuan-chau-quang-nin-mramz1g5"
+    ]
+  },
+  {
+    "city": "Ibiza (departure point confirmed according to weather conditions)",
+    "country": "Spain",
+    "token": "ibiza departure point confirmed according to weather conditions",
+    "boats": 8,
+    "landing_pages": 0,
+    "opportunity": 8.0,
+    "generatable": false,
+    "location_slugs": [
+      "ibiza-departure-point-confirmed-according-to-weather-conditi-mrow22h4"
+    ]
+  },
+  {
+    "city": "Antalya",
+    "country": "Turkey",
+    "token": "antalya",
+    "boats": 7,
+    "landing_pages": 0,
+    "opportunity": 7.0,
+    "generatable": true,
+    "location_slugs": [
+      "antalya"
+    ]
+  },
+  {
+    "city": "Alanya",
+    "country": "Turkey",
+    "token": "alanya",
+    "boats": 7,
+    "landing_pages": 0,
+    "opportunity": 7.0,
+    "generatable": true,
+    "location_slugs": [
+      "alanya-turkey-mr5jsro2"
+    ]
+  },
+  {
+    "city": "Obala Nona",
+    "country": "Croatia",
+    "token": "obala nona",
+    "boats": 6,
+    "landing_pages": 0,
+    "opportunity": 6.0,
+    "generatable": false,
+    "location_slugs": [
+      "obala-nona-croatia-croatia-mr9bwyq2"
+    ]
+  },
+  {
+    "city": "Kemer",
+    "country": "Turkey",
+    "token": "kemer",
+    "boats": 6,
+    "landing_pages": 0,
+    "opportunity": 6.0,
+    "generatable": true,
+    "location_slugs": [
+      "kemer-turkey-mr5kbk4o"
+    ]
+  },
+  {
+    "city": "Deep Water Harbour (St. John’s)",
+    "country": "Antigua and Barbuda",
+    "token": "deep water harbour st john s",
+    "boats": 5,
+    "landing_pages": 0,
+    "opportunity": 5.0,
+    "generatable": false,
+    "location_slugs": [
+      "deep-water-harbour-st-john-s-antigua-and-barbuda"
+    ]
+  },
+  {
+    "city": "Maribel * Departure marina: Club Marítimo San Antonio de la Playa",
+    "country": "Spain",
+    "token": "maribel departure marina club maritimo san antonio de la playa",
+    "boats": 5,
+    "landing_pages": 0,
+    "opportunity": 5.0,
+    "generatable": false,
+    "location_slugs": [
+      "maribel-departure-marina-club-maritimo-san-antonio-de-la-pla-mrrlyrrv"
+    ]
+  },
+  {
+    "city": "Marina de Vilamoura 8125-507 Quarteira",
+    "country": "Portugal",
+    "token": "marina de vilamoura 8125 507 quarteira",
+    "boats": 5,
+    "landing_pages": 0,
+    "opportunity": 5.0,
+    "generatable": false,
+    "location_slugs": [
+      "marina-de-vilamoura-8125-507-quarteira-portugal-portugal-mrma0bsi"
+    ]
+  },
+  {
+    "city": "Club Marítimo San Antonio de la Playa",
+    "country": "Spain",
+    "token": "club maritimo san antonio de la playa",
+    "boats": 5,
+    "landing_pages": 0,
+    "opportunity": 5.0,
+    "generatable": false,
+    "location_slugs": [
+      "club-maritimo-san-antonio-de-la-playa-mallorca-spain-mrneu45k"
+    ]
+  },
+  {
+    "city": "Mallorca",
+    "country": "Spain",
+    "token": "mallorca",
+    "boats": 30,
+    "landing_pages": 6,
+    "opportunity": 4.29,
+    "generatable": true,
+    "location_slugs": [
+      "mallorca-avinguda-s-almudaina-8-07157-port-d-andratx-illes-b-mrc9osfa"
+    ]
+  },
+  {
+    "city": "Gibraltar",
+    "country": "Gibraltar",
+    "token": "gibraltar",
+    "boats": 4,
+    "landing_pages": 0,
+    "opportunity": 4.0,
+    "generatable": false,
+    "location_slugs": [
+      "gibraltar-gibraltar-mr3j0s8n"
+    ]
+  },
+  {
+    "city": "Marina Cap Cana",
+    "country": "Dominican Republic",
+    "token": "marina cap cana",
+    "boats": 4,
+    "landing_pages": 0,
+    "opportunity": 4.0,
+    "generatable": false,
+    "location_slugs": [
+      "marina-cap-cana-punta-cana-dominican-republic-mravzyuh"
+    ]
+  },
+  {
+    "city": "mykonos and Chios",
+    "country": "Greece",
+    "token": "mykonos and chios",
+    "boats": 4,
+    "landing_pages": 0,
+    "opportunity": 4.0,
+    "generatable": false,
+    "location_slugs": [
+      "mykonos-and-chios-greece-mr3hnv44"
+    ]
+  },
+  {
+    "city": "Split Riva (Split Harbour)",
+    "country": "Croatia",
+    "token": "split riva split harbour",
+    "boats": 4,
+    "landing_pages": 0,
+    "opportunity": 4.0,
+    "generatable": false,
+    "location_slugs": [
+      "split-riva-split-harbour-croatia-mrouazu2"
+    ]
+  },
+  {
+    "city": "Hvar Town",
+    "country": "Croatia",
+    "token": "hvar town",
+    "boats": 3,
+    "landing_pages": 0,
+    "opportunity": 3.0,
+    "generatable": true,
+    "location_slugs": [
+      "hvar"
+    ]
+  },
+  {
+    "city": "Sesimbra",
+    "country": "Portugal",
+    "token": "sesimbra",
+    "boats": 3,
+    "landing_pages": 0,
+    "opportunity": 3.0,
+    "generatable": true,
+    "location_slugs": [
+      "sesimbra-portugal"
+    ]
+  },
+  {
+    "city": "Parc Vaira'i",
+    "country": "France",
+    "token": "parc vaira i",
+    "boats": 3,
+    "landing_pages": 0,
+    "opportunity": 3.0,
+    "generatable": false,
+    "location_slugs": [
+      "parc-vaira-i-puna-auia-tahiti-france-mrcaeb6i"
+    ]
+  },
+  {
+    "city": "Nassau",
+    "country": "Bahamas",
+    "token": "nassau",
+    "boats": 3,
+    "landing_pages": 0,
+    "opportunity": 3.0,
+    "generatable": true,
+    "location_slugs": [
+      "nassau-bahamas-bahamas-mrasg2py"
+    ]
+  },
+  {
+    "city": "Side",
+    "country": "Turkey",
+    "token": "side",
+    "boats": 3,
+    "landing_pages": 0,
+    "opportunity": 3.0,
+    "generatable": true,
+    "location_slugs": [
+      "side-turkey-mr5k4nc7"
+    ]
+  },
+  {
+    "city": "Marina de Valencia (Puerto de Valencia) – Plaça de L’Ona",
+    "country": "Spain",
+    "token": "marina de valencia puerto de valencia placa de l ona",
+    "boats": 3,
+    "landing_pages": 0,
+    "opportunity": 3.0,
+    "generatable": false,
+    "location_slugs": [
+      "marina-de-valencia-puerto-de-valencia-placa-de-l-ona-spain-mromi0ge"
+    ]
+  },
+  {
+    "city": "Stockholm",
+    "country": "Sweden",
+    "token": "stockholm",
+    "boats": 2,
+    "landing_pages": 0,
+    "opportunity": 2.0,
+    "generatable": true,
+    "location_slugs": [
+      "stockholm"
+    ]
+  },
+  {
+    "city": "Marina de Lagos",
+    "country": "Portugal",
+    "token": "marina de lagos",
+    "boats": 2,
+    "landing_pages": 0,
+    "opportunity": 2.0,
+    "generatable": false,
+    "location_slugs": [
+      "marina-de-lagos-loja-5-lagos-portugal-portugal-mrowr4u4"
+    ]
+  },
+  {
+    "city": "Alicante",
+    "country": "Spain",
+    "token": "alicante",
+    "boats": 2,
+    "landing_pages": 0,
+    "opportunity": 2.0,
+    "generatable": true,
+    "location_slugs": [
+      "alicante"
+    ]
+  },
+  {
+    "city": "Morro Jable",
+    "country": "Spain",
+    "token": "morro jable",
+    "boats": 2,
+    "landing_pages": 0,
+    "opportunity": 2.0,
+    "generatable": true,
+    "location_slugs": [
+      "morro-jable-spain"
+    ]
+  },
+  {
+    "city": "Ocean Village Marina",
+    "country": "Gibraltar",
+    "token": "ocean village marina",
+    "boats": 2,
+    "landing_pages": 0,
+    "opportunity": 2.0,
+    "generatable": false,
+    "location_slugs": [
+      "ocean-village-marina-gibraltar-mqweuxzy"
+    ]
+  },
+  {
+    "city": "Surfers Paradise",
+    "country": "Australia",
+    "token": "surfers paradise",
+    "boats": 2,
+    "landing_pages": 0,
+    "opportunity": 2.0,
+    "generatable": true,
+    "location_slugs": [
+      "gold-coast"
+    ]
+  },
+  {
+    "city": "Machico",
+    "country": "Portugal",
+    "token": "machico",
+    "boats": 2,
+    "landing_pages": 0,
+    "opportunity": 2.0,
+    "generatable": true,
+    "location_slugs": [
+      "machico-portugal-mqw9jcbr"
+    ]
+  },
+  {
+    "city": "Oslo",
+    "country": "Norway",
+    "token": "oslo",
+    "boats": 2,
+    "landing_pages": 0,
+    "opportunity": 2.0,
+    "generatable": true,
+    "location_slugs": [
+      "oslo-fjord"
+    ]
+  },
+  {
+    "city": "Corfu Gouvia Marina",
+    "country": "Greece",
+    "token": "corfu gouvia marina",
+    "boats": 2,
+    "landing_pages": 0,
+    "opportunity": 2.0,
+    "generatable": false,
+    "location_slugs": [
+      "corfu-gouvia-marina-greece-mrf1ekcw"
+    ]
+  },
+  {
+    "city": "San Yago Charter – Marina de Vigo (Rúa As Avenidas",
+    "country": "Spain",
+    "token": "san yago charter marina de vigo rua as avenidas",
+    "boats": 2,
+    "landing_pages": 0,
+    "opportunity": 2.0,
+    "generatable": false,
+    "location_slugs": [
+      "san-yago-charter-marina-de-vigo-rua-as-avenidas-vigo-galicia-mrrljq21"
+    ]
+  },
+  {
+    "city": "Korčula Town / ACI Marina Korčula",
+    "country": "Croatia",
+    "token": "korcula town aci marina korcula",
+    "boats": 2,
+    "landing_pages": 0,
+    "opportunity": 2.0,
+    "generatable": false,
+    "location_slugs": [
+      "korcula-town-aci-marina-korcula-croatia-mrkyh1tw"
+    ]
+  },
+  {
+    "city": "Corfu",
+    "country": "Greece",
+    "token": "corfu",
+    "boats": 8,
+    "landing_pages": 6,
+    "opportunity": 1.14,
+    "generatable": true,
+    "location_slugs": [
+      "corfu-greece"
+    ]
+  },
+  {
+    "city": "SANTORINI",
+    "country": "Greece",
+    "token": "santorini",
+    "boats": 7,
+    "landing_pages": 6,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "santorini-greece-mrqiw5yx"
+    ]
+  },
+  {
+    "city": "Mykonos and",
+    "country": "Greece",
+    "token": "mykonos and",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": false,
+    "location_slugs": [
+      "mykonos-and-greece"
+    ]
+  },
+  {
+    "city": "Denia",
+    "country": "Spain",
+    "token": "denia",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "denia-spain"
+    ]
+  },
+  {
+    "city": "Abu Dhabi",
+    "country": "UAE",
+    "token": "abu dhabi",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "abu-dhabi"
+    ]
+  },
+  {
+    "city": "Boracay",
+    "country": "Philippines",
+    "token": "boracay",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "boracay"
+    ]
+  },
+  {
+    "city": "Sitges",
+    "country": "Spain",
+    "token": "sitges",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "sitges"
+    ]
+  },
+  {
+    "city": "Willemstad",
+    "country": "Curaçao",
+    "token": "willemstad",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "curacao"
+    ]
+  },
+  {
+    "city": "Hout Bay",
+    "country": "South Africa",
+    "token": "hout bay",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "hout-bay-south-africa-mrd5n1in"
+    ]
+  },
+  {
+    "city": "Cran Canaria",
+    "country": "Spain",
+    "token": "cran canaria",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "cran-canaria-puerto-rico-bass-spain-mr61oz7c"
+    ]
+  },
+  {
+    "city": "Rhodes Town",
+    "country": "Greece",
+    "token": "rhodes town",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "rhodes"
+    ]
+  },
+  {
+    "city": "Marina Taina",
+    "country": "France",
+    "token": "marina taina",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": false,
+    "location_slugs": [
+      "marina-taina-france-mrc1o7gb"
+    ]
+  },
+  {
+    "city": "Medulin",
+    "country": "Croatia",
+    "token": "medulin",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "medulin-croatia-croatia-mr6205eg"
+    ]
+  },
+  {
+    "city": "RHODES MARINA",
+    "country": "Greece",
+    "token": "rhodes marina",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": false,
+    "location_slugs": [
+      "rhodes-marina-greece-mr13evxf"
+    ]
+  },
+  {
+    "city": "Makenzi Fishing harbor andLarnaca Marina",
+    "country": "Cyprus",
+    "token": "makenzi fishing harbor andlarnaca marina",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": false,
+    "location_slugs": [
+      "makenzi-fishing-harbor-andlarnaca-marina-cyprus-mraoh4io"
+    ]
+  },
+  {
+    "city": "Tahiti",
+    "country": "France",
+    "token": "tahiti",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "tahiti-papeete-port-france-mrbswayx"
+    ]
+  },
+  {
+    "city": "Hurghada",
+    "country": "Egypt",
+    "token": "hurghada",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "hurghada"
+    ]
+  },
+  {
+    "city": "Korcula",
+    "country": "Croatia",
+    "token": "korcula",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "korcula-croatia-mrd5z42n"
+    ]
+  },
+  {
+    "city": "Milos",
+    "country": "Greece",
+    "token": "milos",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": true,
+    "location_slugs": [
+      "milos-greece"
+    ]
+  },
+  {
+    "city": "Via Marittima 1/3/5 Catania at \"La Tortuga\"",
+    "country": "Italy",
+    "token": "via marittima 1 3 5 catania at la tortuga",
+    "boats": 1,
+    "landing_pages": 0,
+    "opportunity": 1.0,
+    "generatable": false,
+    "location_slugs": [
+      "via-marittima-1-3-5-catania-at-la-tortuga-italy-mrm6usxv"
+    ]
+  },
+  {
+    "city": "Bodrum",
+    "country": "Turkey",
+    "token": "bodrum",
+    "boats": 4,
+    "landing_pages": 4,
+    "opportunity": 0.8,
+    "generatable": true,
+    "location_slugs": [
+      "bodrum"
+    ]
+  },
+  {
+    "city": "Split",
+    "country": "Croatia",
+    "token": "split",
+    "boats": 2,
+    "landing_pages": 4,
+    "opportunity": 0.4,
+    "generatable": true,
+    "location_slugs": [
+      "split"
+    ]
+  },
+  {
+    "city": "Lisbon",
+    "country": "Portugal",
+    "token": "lisbon",
+    "boats": 1,
+    "landing_pages": 2,
+    "opportunity": 0.33,
+    "generatable": true,
+    "location_slugs": [
+      "lisbon"
+    ]
+  },
+  {
+    "city": "Sotogrande",
+    "country": "Spain",
+    "token": "sotogrande",
+    "boats": 1,
+    "landing_pages": 4,
+    "opportunity": 0.2,
+    "generatable": true,
+    "location_slugs": [
+      "sotogrande-spain"
+    ]
+  },
+  {
+    "city": "Marbella",
+    "country": "Spain",
+    "token": "marbella",
+    "boats": 27,
+    "landing_pages": 377,
+    "opportunity": 0.07,
+    "generatable": true,
+    "location_slugs": [
+      "marbella"
+    ]
+  }
+]

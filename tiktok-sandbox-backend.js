@@ -16,7 +16,8 @@ const querystring = require('querystring');
 // Credentials from environment (GitHub Secrets or local .env)
 const CLIENT_KEY = process.env.TIKTOK_CLIENT_ID || process.env.TIKTOK_SANDBOX_CLIENT_ID;
 const CLIENT_SECRET = process.env.TIKTOK_CLIENT_SECRET || process.env.TIKTOK_SANDBOX_CLIENT_SECRET;
-const REDIRECT_URI = 'http://localhost:3001/callback';
+const PUBLIC_URL = process.env.PUBLIC_URL || 'http://localhost:3001';
+const REDIRECT_URI = `${PUBLIC_URL}/callback`;
 const TOKEN_ENDPOINT = 'https://open.tiktokapis.com/v2/oauth/token/';
 
 // In-memory storage for demo session (cleared on restart)
@@ -136,7 +137,8 @@ const server = http.createServer(async (req, res) => {
     res.end(JSON.stringify({
       status: 'ok',
       credentials: !!(CLIENT_KEY && CLIENT_SECRET),
-      client_key: CLIENT_KEY || null
+      client_key: CLIENT_KEY || null,
+      public_url: PUBLIC_URL
     }));
     return;
   }

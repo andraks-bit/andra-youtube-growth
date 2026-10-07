@@ -30,8 +30,9 @@ jobs:
         env:
           TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
           TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          PUBLIC_URL: http://localhost:3001
         run: |
-          timeout 30 node tiktok-sandbox-backend.js >backend.log 2>&1 &
+          timeout 120 node tiktok-sandbox-backend.js >backend.log 2>&1 &
           for i in {1..10}; do
             curl -s http://localhost:3001/health | grep -q "ok" && exit 0
             sleep 1
@@ -52,63 +53,55 @@ jobs:
       - name: Start ngrok
         timeout-minutes: 2
         run: |
-          wget -q https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.zip
-          if [ ! -f ngrok-v3-stable-linux-amd64.zip ]; then
-            echo "Failed to download ngrok"
-            exit 1
-          fi
-          unzip -q ngrok-v3-stable-linux-amd64.zip
-          if [ ! -f ngrok ]; then
-            echo "Failed to unzip ngrok"
-            exit 1
-          fi
-          chmod +x ngrok
-          timeout 60 ./ngrok http 3000 >ngrok.log 2>&1 &
-          NGROK_PID=$!
-          echo "ngrok started with PID: $NGROK_PID"
+          npm install -g localtunnel
+          timeout 60 lt --port 3001 --print-requests >tunnel.log 2>&1 &
+          TUNNEL_PID=$!
+          echo "localtunnel started with PID: $TUNNEL_PID"
           sleep 3
-          if ! ps -p $NGROK_PID > /dev/null; then
-            echo "ngrok process died immediately"
-            cat ngrok.log
+          if ! ps -p $TUNNEL_PID > /dev/null; then
+            echo "localtunnel process died immediately"
+            cat tunnel.log
             exit 1
           fi
           sleep 5
-          echo "Checking if ngrok API is listening..."
-          if ! curl -s http://localhost:4040/api/tunnels > /dev/null 2>&1; then
-            echo "ngrok API not responding after 8 seconds"
-            echo "ngrok.log contents:"
-            cat ngrok.log
-            netstat -tuln | grep 4040 || echo "Port 4040 not listening"
-            ps aux | grep ngrok | grep -v grep || echo "ngrok process not found"
+          TUNNEL_URL=$(grep -oP 'https://[a-z0-9-]+\.loca\.lt' tunnel.log | head -1)
+          if [ -z "$TUNNEL_URL" ]; then
+            echo "Failed to get tunnel URL"
+            echo "tunnel.log contents:"
+            cat tunnel.log
+            ps aux | grep lt | grep -v grep || echo "localtunnel not running"
+            exit 1
           fi
+          echo "TUNNEL_URL=$TUNNEL_URL" >/tmp/tunnel.env
+          echo "Tunnel ready at: $TUNNEL_URL"
 
-      - name: Get ngrok URL
+      - name: Get tunnel URL and restart backend
         timeout-minutes: 2
+        env:
+          TIKTOK_CLIENT_ID: ${{ secrets.TIKTOK_CLIENT_ID }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
         run: |
-          echo "Waiting for ngrok tunnel to be created..."
-          for i in {1..60}; do
-            echo "Attempt $i/60..."
-            RESPONSE=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null || true)
-            if [ -z "$RESPONSE" ]; then
-              echo "  No response from API yet"
-              sleep 1
-              continue
-            fi
-            echo "  Got response, checking for tunnel..."
-            URL=$(echo "$RESPONSE" | grep -o 'https://[a-z0-9.-]*\.ngrok[a-z0-9.-]*' | head -1)
-            if [ -n "$URL" ]; then
-              echo "  Found tunnel URL: $URL"
-              echo "URL=$URL" >/tmp/demo.env
+          if [ ! -f /tmp/tunnel.env ]; then
+            echo "Tunnel URL file not found"
+            cat tunnel.log || echo "No tunnel log"
+            exit 1
+          fi
+          source /tmp/tunnel.env
+          echo "Tunnel URL: $TUNNEL_URL"
+          pkill -f "node tiktok-sandbox-backend.js" || true
+          sleep 1
+          timeout 120 env PUBLIC_URL="$TUNNEL_URL" node tiktok-sandbox-backend.js >backend.log 2>&1 &
+          sleep 2
+          for i in {1..10}; do
+            HEALTH=$(curl -s http://localhost:3001/health || true)
+            if echo "$HEALTH" | grep -q "ok"; then
+              echo "Backend restarted with public URL: $TUNNEL_URL"
+              echo "URL=$TUNNEL_URL" >/tmp/demo.env
               exit 0
             fi
-            echo "  Response has no tunnel yet"
             sleep 1
           done
-          echo "Failed to get ngrok URL after 60 attempts"
-          echo "Last API response:"
-          curl -s http://localhost:4040/api/tunnels || echo "API not responding"
-          echo "ngrok process status:"
-          ps aux | grep ngrok | grep -v grep || echo "ngrok not running"
+          echo "Failed to restart backend with new PUBLIC_URL"
           exit 1
 
       - name: Report demo

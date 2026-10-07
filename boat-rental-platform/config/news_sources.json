@@ -1,0 +1,61 @@
+{
+  "_comment": "Discovery config for scripts/generate_news.py. Google News RSS is used ONLY to find candidate stories; the publisher's own page is then fetched and is the sole factual basis for the write-up. Measured supply 2026-07-22: ~25 relevant stories/30d, with es + tr contributing 10 each — local-language queries are what make near-daily viable, so keep them.",
+  "max_age_days": 7,
+  "min_source_chars": 900,
+  "markets": [
+    {
+      "lang": "en", "hl": "en-GB", "gl": "GB", "ceid": "GB:en",
+      "queries": [
+        "marina berths Spain",
+        "yacht charter Spain regulation",
+        "superyacht marina Mediterranean",
+        "nautical tourism marina investment",
+        "boat charter licence Greece Croatia Turkey"
+      ]
+    },
+    {
+      "lang": "es", "hl": "es", "gl": "ES", "ceid": "ES:es",
+      "queries": [
+        "puerto deportivo amarres",
+        "alquiler de barcos normativa",
+        "nautica puerto deportivo Andalucia",
+        "charter nautico Baleares normativa",
+        "puerto deportivo ampliacion obras"
+      ]
+    },
+    {
+      "lang": "tr", "hl": "tr", "gl": "TR", "ceid": "TR:tr",
+      "queries": [
+        "marina yat limani",
+        "tekne kiralama yonetmelik",
+        "yat turizmi marina yatirim"
+      ]
+    },
+    {
+      "lang": "fr", "hl": "fr", "gl": "FR", "ceid": "FR:fr",
+      "queries": ["port de plaisance anneaux", "location bateau reglementation"]
+    },
+    {
+      "lang": "it", "hl": "it", "gl": "IT", "ceid": "IT:it",
+      "queries": ["porto turistico posti barca", "noleggio barche normativa"]
+    },
+    {
+      "lang": "hr", "hl": "hr", "gl": "HR", "ceid": "HR:hr",
+      "queries": ["marina vezovi nautika", "najam plovila propisi"]
+    }
+  ],
+  "relevance_terms": "marina|yacht|boat|charter|nautic|amarre|puerto deportivo|berth|vessel|yat limani|tekne|bateau|plaisance|porto turistico|barche|plovil|vezov|skipper|superyacht",
+  "blocked_domains": [
+    "reutersconnect.com",
+    "gettyimages.com",
+    "alamy.com",
+    "shutterstock.com",
+    "news.google.com"
+  ],
+  "section_rules": [
+    { "match": "normativ|regulation|licence|license|yonetmelik|reglementation|law|decree|rule|propisi|ley|decreto", "section": "Regulation" },
+    { "match": "marina|puerto deportivo|port|amarre|berth|liman|anneaux|vezov", "section": "Marinas & ports" },
+    { "match": "storm|weather|temporal|season|temporada|closure|levante", "section": "Season & weather" }
+  ],
+  "default_section": "Charter market"
+}

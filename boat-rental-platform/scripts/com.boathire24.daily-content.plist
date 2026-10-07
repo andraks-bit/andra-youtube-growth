@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.boathire24.daily-content</string>
+
+    <!-- Catch-up guard: runs the full pipeline ONCE per day whenever the Mac is
+         awake. Fires on load (login/boot), hourly, and on wake (launchd runs
+         missed StartInterval jobs on wake). The guard no-ops if today already
+         ran or a run is in progress. This survives the laptop sleeping at 03:00. -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/sh</string>
+        <string>/Users/master/boat-rental-platform/scripts/daily_guard.sh</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- Check hourly; combined with on-wake firing this catches up after sleep. -->
+    <key>StartInterval</key>
+    <integer>3600</integer>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/master/boat-rental-platform</string>
+
+    <key>StandardOutPath</key>
+    <string>/Users/master/boat-rental-platform/logs/generate_content.stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/master/boat-rental-platform/logs/generate_content.stderr.log</string>
+
+    <!-- Secrets (DEEPSEEK_API_KEY, blog id, etc.) are read from the gitignored
+         .env.local by the scripts — do NOT put them here (this plist is committed). -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>CLAUDE_BACKEND</key>
+        <string>deepseek</string>
+        <key>PATH</key>
+        <string>/opt/local/bin:/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+</dict>
+</plist>

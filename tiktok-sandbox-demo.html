@@ -184,7 +184,8 @@
                 }
 
                 const state = generateRandomString(16);
-                const redirectUri = `${BACKEND_URL}/callback`;
+                const publicBackendUrl = health.public_url || BACKEND_URL;
+                const redirectUri = `${publicBackendUrl}/callback`;
                 const clientKey = health.client_key || localStorage.getItem('tiktok_client_key');
 
                 if (!clientKey) {

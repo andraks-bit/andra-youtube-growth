@@ -1,0 +1,423 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ── Dark Luxury Palette ── */
+  --color-background:   #07101e;
+  --color-surface:      #0c1828;
+  --color-surface-deep: #0a1420;
+
+  --color-ink:          #f4f4f2;
+  --color-ink-soft:     rgba(244,244,242,0.78);
+  --color-ink-muted:    rgba(244,244,242,0.50);
+
+  --color-gold:         #74cfe8;
+  --color-gold-dark:    #3a9ab8;
+  --color-gold-glow:    rgba(116,207,232,0.12);
+  --color-gold-line:    rgba(116,207,232,0.18);
+  --color-gold-hover:   rgba(116,207,232,0.45);
+
+  --color-whatsapp:     #25d366;
+  --color-whatsapp-d:   #1dab52;
+
+  --color-line:         rgba(116,207,232,0.18);
+  --color-line-soft:    rgba(255,255,255,0.05);
+
+  /* Semantic aliases Tailwind picks up */
+  --color-primary:              #74cfe8;
+  --color-primary-foreground:   #07101e;
+  --color-secondary:            #0c1828;
+  --color-muted:                rgba(244,244,242,0.50);
+  --color-border:               rgba(116,207,232,0.18);
+  --color-ring:                 #74cfe8;
+
+  /* Typography — system stack, zero latency */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Radius */
+  --radius-card:  14px;
+  --radius-inner: 8px;
+  --radius-sm:    6px;
+  --radius-md:    10px;
+  --radius-lg:    14px;
+  --radius-xl:    20px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Base ── */
+html { scroll-behavior: smooth; overflow-x: hidden; }
+
+/* Safety net: a full-bleed track (marquee, carousel) that forgets to clip
+   its own overflow shouldn't be able to widen the whole page — that's what
+   made mobile feel like it was zooming/panning sideways on touch. */
+body { overflow-x: hidden; }
+
+body {
+  background: #07101e;
+  color: #f4f4f2;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* ── Focus ── */
+:focus-visible {
+  outline: 2px solid #74cfe8;
+  outline-offset: 2px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #07101e; }
+::-webkit-scrollbar-thumb { background: rgba(116,207,232,0.28); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(116,207,232,0.5); }
+
+/* ── Links ── */
+a { color: inherit; text-decoration: none; }
+
+/* ── Form inputs — prevent iOS auto-zoom on focus ── */
+input, textarea, select {
+  font-size: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type="checkbox"], input[type="radio"] {
+  -webkit-appearance: none;
+}
+
+/* ── Prevent touch zoom on double-tap ── */
+body {
+  touch-action: manipulation;
+}
+
+/* ── Selection ── */
+::selection { background: rgba(116,207,232,0.25); color: #f4f4f2; }
+
+/* ── Eyebrow label ── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #74cfe8;
+  background: rgba(116,207,232,0.10);
+  border: 1px solid rgba(116,207,232,0.20);
+  padding: 4px 12px;
+  border-radius: 99px;
+}
+
+/* ── Section defaults ── */
+.section { padding: 80px 0; }
+.section-sm { padding: 56px 0; }
+@media (max-width: 768px) {
+  .section { padding: 48px 0; }
+  .section-sm { padding: 32px 0; }
+}
+
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── Gold divider ── */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(116,207,232,0.35), transparent);
+}
+
+/* ── Glass card ── */
+.glass-card {
+  background: #0c1828;
+  border: 1px solid rgba(116,207,232,0.18);
+  border-radius: 14px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.glass-card:hover {
+  border-color: rgba(116,207,232,0.45);
+  box-shadow: 0 24px 56px rgba(0,0,0,0.55);
+}
+
+/* ── Hero slideshow ── */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.hero-slide.active { opacity: 1; }
+
+/* ══════════════════════════════════════════════════════
+   Blog prose — complete typography stack
+   ══════════════════════════════════════════════════════ */
+.prose-dark {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(244,244,242,0.72);
+}
+
+/* Headings */
+.prose-dark h1 {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #f4f4f2;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.prose-dark h2 {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #f4f4f2;
+  margin-top: 2.75rem;
+  margin-bottom: 0.875rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(116,207,232,0.18);
+  line-height: 1.35;
+}
+.prose-dark h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f4f4f2;
+  margin-top: 2rem;
+  margin-bottom: 0.625rem;
+  line-height: 1.4;
+}
+.prose-dark h4 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #f4f4f2;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
+}
+
+/* Paragraphs */
+.prose-dark p {
+  margin-bottom: 1.375rem;
+  line-height: 1.85;
+  color: rgba(244,244,242,0.75);
+}
+.prose-dark p:last-child { margin-bottom: 0; }
+
+/* Lists */
+.prose-dark ul {
+  margin: 0.5rem 0 1.5rem 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.prose-dark ul li {
+  padding-left: 1.5rem;
+  position: relative;
+  color: rgba(244,244,242,0.70);
+  line-height: 1.75;
+}
+.prose-dark ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #74cfe8;
+  opacity: 0.75;
+}
+
+.prose-dark ol {
+  margin: 0.5rem 0 1.5rem 0;
+  padding-left: 0;
+  list-style: none;
+  counter-reset: prose-counter;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.prose-dark ol li {
+  padding-left: 2rem;
+  position: relative;
+  color: rgba(244,244,242,0.70);
+  line-height: 1.75;
+  counter-increment: prose-counter;
+}
+.prose-dark ol li::before {
+  content: counter(prose-counter) '.';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #74cfe8;
+  line-height: 1.75;
+}
+
+/* Inline elements */
+.prose-dark strong, .prose-dark b {
+  color: #f4f4f2;
+  font-weight: 700;
+}
+.prose-dark em, .prose-dark i {
+  font-style: italic;
+  color: rgba(244,244,242,0.80);
+}
+.prose-dark a {
+  color: #74cfe8;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.15s, text-decoration-color 0.15s;
+}
+.prose-dark a:hover { color: #f4f4f2; }
+
+/* Code */
+.prose-dark code {
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  background: rgba(116,207,232,0.10);
+  color: #74cfe8;
+  border: 1px solid rgba(116,207,232,0.18);
+  border-radius: 4px;
+  padding: 0.1em 0.45em;
+}
+.prose-dark pre {
+  background: #0a1420;
+  border: 1px solid rgba(116,207,232,0.15);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+.prose-dark pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+/* Blockquote */
+.prose-dark blockquote {
+  border-left: 3px solid #74cfe8;
+  background: rgba(116,207,232,0.05);
+  padding: 1rem 1.25rem 1rem 1.5rem;
+  margin: 2rem 0;
+  border-radius: 0 8px 8px 0;
+}
+.prose-dark blockquote p {
+  color: rgba(244,244,242,0.65);
+  font-style: italic;
+  margin: 0;
+}
+
+/* Horizontal rule */
+.prose-dark hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(116,207,232,0.28), transparent);
+  margin: 2.5rem 0;
+}
+
+/* Tables */
+.prose-dark table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+.prose-dark th {
+  background: rgba(116,207,232,0.08);
+  color: #74cfe8;
+  font-weight: 700;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(116,207,232,0.20);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.prose-dark td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: rgba(244,244,242,0.68);
+  vertical-align: top;
+}
+.prose-dark tr:last-child td { border-bottom: none; }
+
+/* Image captions */
+.prose-dark figure {
+  margin: 2rem 0;
+}
+.prose-dark figcaption {
+  font-size: 0.8125rem;
+  color: rgba(244,244,242,0.40);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* Lead / first paragraph */
+.prose-dark .lead {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: rgba(244,244,242,0.80);
+  font-weight: 400;
+}
+
+/* FAQ items (legacy class from early version) */
+.prose-dark .faq-item {
+  margin: 1.25rem 0;
+  padding: 1.25rem;
+  background: #0c1828;
+  border: 1px solid rgba(116,207,232,0.15);
+  border-radius: 12px;
+}
+.prose-dark .faq-item h3 {
+  color: #f4f4f2;
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-top: 0;
+}
+.prose-dark .faq-item p { margin: 0; }
+
+/* ── RDP (react-day-picker) dark overrides ── */
+.rdp { --rdp-accent-color: #74cfe8; color: #f4f4f2; }
+.rdp-day_selected button { background: #74cfe8 !important; color: #07101e !important; }
+.rdp-day_today button { border: 1px solid rgba(116,207,232,0.5); }
+
+/* ── Messages: responsive list ↔ thread (mobile shows ONE at a time, Airbnb-style) ── */
+.msgs-grid { display: flex; height: 600px; }
+.msgs-list { width: 280px; flex-shrink: 0; overflow-y: auto; border-right: 1px solid rgba(255,255,255,0.07); }
+.msgs-thread { display: flex; flex: 1; min-width: 0; flex-direction: column; }
+.msgs-back { display: none; }
+@media (max-width: 767.98px) {
+  .msgs-grid { height: 75vh; }
+  .msgs-back { display: flex; }
+  /* No conversation open → list fills the screen, thread hidden */
+  .msgs-grid:not(.has-conv) .msgs-thread { display: none; }
+  .msgs-grid:not(.has-conv) .msgs-list { width: 100%; }
+  /* Conversation open → thread fills the screen, list hidden (tap "← All messages" to go back) */
+  .msgs-grid.has-conv .msgs-list { display: none; }
+  .msgs-grid.has-conv .msgs-thread { width: 100%; }
+}
+
+/* ── Host bookings card: stack the row on phones so dates/notes don't wrap one word per line ── */
+.bk-row { display: flex; align-items: flex-start; gap: 16px; }
+.bk-actions { text-align: right; flex-shrink: 0; }
+@media (max-width: 639.98px) {
+  .bk-row { flex-direction: column; gap: 14px; }
+  .bk-actions { text-align: left; width: 100%; }
+}

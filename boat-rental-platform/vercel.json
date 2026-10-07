@@ -1,0 +1,49 @@
+{
+  "crons": [
+    {
+      "path": "/api/reindex",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/expire-requests",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/reminders",
+      "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/cron/payouts",
+      "schedule": "30 5 * * *"
+    },
+    {
+      "path": "/api/cron/ical-sync",
+      "schedule": "0 4 * * *"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "www.boathire24.com" }],
+      "destination": "https://boathire24.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.boathire24.com" }],
+      "destination": "https://boathire24.com/:path*",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}
