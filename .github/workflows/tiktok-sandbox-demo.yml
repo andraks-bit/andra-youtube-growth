@@ -65,12 +65,25 @@ jobs:
 
           # Start ngrok tunnel
           ./ngrok http 3000 --log=stdout > ngrok.log 2>&1 &
-          sleep 4
+          sleep 6
 
-          # Wait for tunnel to establish
-          timeout 10 sh -c 'until grep -q "started tunnel" ngrok.log; do sleep 1; done' || true
+          # Extract ngrok public URL
+          DEMO_URL=$(grep -oP 'https://[a-z0-9.-]+\.ngrok[a-z0-9.-]*' ngrok.log | head -1)
 
-          echo "✓ Tunnel established"
+          if [ -z "$DEMO_URL" ]; then
+            echo "Waiting for ngrok tunnel to initialize..."
+            sleep 5
+            DEMO_URL=$(curl -s http://localhost:4040/api/tunnels | grep -oP 'https://[a-z0-9.-]+\.ngrok[a-z0-9.-]*' | head -1)
+          fi
+
+          if [ -n "$DEMO_URL" ]; then
+            echo "DEMO_URL=$DEMO_URL" >> $GITHUB_ENV
+            echo "✓ Tunnel URL: $DEMO_URL"
+          else
+            echo "Checking ngrok API..."
+            curl -s http://localhost:4040/api/tunnels
+            echo "⚠️ Could not extract ngrok URL, will retry in verification step"
+          fi
 
       - name: Verify Credentials Loaded
         run: |
@@ -85,44 +98,114 @@ jobs:
             exit 1
           fi
 
+      - name: Extract and Display ngrok Public URL
+        run: |
+          # Try to get ngrok URL from multiple sources
+          DEMO_URL=${{ env.DEMO_URL }}
+
+          if [ -z "$DEMO_URL" ]; then
+            echo "Extracting ngrok URL from API..."
+            DEMO_URL=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null | grep -oP '"public_url":"https://[^"]+' | head -1 | cut -d'"' -f4)
+          fi
+
+          if [ -z "$DEMO_URL" ]; then
+            echo "Trying alternate method..."
+            DEMO_URL=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null | grep -oP 'https://[a-z0-9.-]+\.ngrok[a-z0-9.-]*' | head -1)
+          fi
+
+          if [ -z "$DEMO_URL" ]; then
+            echo "⚠️ Could not extract ngrok URL yet, checking logs..."
+            cat ngrok.log
+            sleep 3
+            DEMO_URL=$(grep -oP 'https://[a-z0-9.-]+\.ngrok[a-z0-9.-]*' ngrok.log | tail -1)
+          fi
+
+          if [ -n "$DEMO_URL" ]; then
+            echo "DEMO_URL=$DEMO_URL" >> $GITHUB_ENV
+            echo "✓ Public Demo URL: $DEMO_URL"
+          else
+            echo "⚠️ Could not extract ngrok URL - checking ngrok API"
+            curl -s http://localhost:4040/api/tunnels | jq .
+          fi
+
+      - name: Write Demo URL to Job Summary
+        if: always()
+        run: |
+          # Final attempt to get ngrok URL
+          DEMO_URL=${{ env.DEMO_URL }}
+
+          if [ -z "$DEMO_URL" ]; then
+            echo "Making final ngrok API call..."
+            RESPONSE=$(curl -s http://localhost:4040/api/tunnels 2>/dev/null)
+            echo "ngrok API Response: $RESPONSE"
+            DEMO_URL=$(echo "$RESPONSE" | grep -oP '"public_url":"https://[^"]+' | head -1 | cut -d'"' -f4 || echo "")
+          fi
+
+          if [ -z "$DEMO_URL" ]; then
+            DEMO_URL=$(grep -oP 'https://[a-z0-9.-]+\.ngrok[a-z0-9.-]*' ngrok.log 2>/dev/null | tail -1 || echo "")
+          fi
+
+          if [ -n "$DEMO_URL" ]; then
+            cat >> $GITHUB_STEP_SUMMARY << EOF
+          # 🎬 TikTok Sandbox Demo - Ready to Test OAuth
+
+          ## ✓ All Systems Ready
+
+          Your secure TikTok OAuth demo is running with credentials loaded from GitHub Secrets.
+
+          ### 🔗 Click Here to Open Demo:
+          [$DEMO_URL]($DEMO_URL/tiktok-sandbox-demo.html)
+
+          ### Next Step:
+          1. Click the link above to open the demo
+          2. Click the blue button: **🔓 Sign in with TikTok (Sandbox)**
+          3. You'll be redirected to TikTok's login page
+          4. Sign in as @andra.kiirkivi
+          5. Approve the permissions
+          6. You should see "Authentication successful!"
+
+          ### How It Works:
+          - ✓ Backend running securely with credentials from GitHub Secrets
+          - ✓ Frontend demo page accessible via ngrok tunnel
+          - ✓ OAuth callback handler ready
+          - ✓ Token exchange secure (Client Secret never exposed)
+
+          **Keep this workflow running while testing. It will stay active for 6 hours.**
+
+          ---
+          Demo is live and ready. No additional setup needed.
+          EOF
+
+            echo "✓ Demo URL written to job summary: $DEMO_URL"
+          else
+            cat >> $GITHUB_STEP_SUMMARY << EOF
+          # ⚠️ ngrok URL Not Available
+
+          The demo services are running, but the ngrok public URL could not be extracted.
+
+          **Fallback Option:** Use SSH port forwarding
+          \`\`\`
+          ssh -L 3000:localhost:3000 <your-github-runner>
+          \`\`\`
+
+          Then access: http://localhost:3000/tiktok-sandbox-demo.html
+          EOF
+
+            echo "⚠️ Could not extract ngrok URL"
+          fi
+
       - name: Output Demo Instructions
         run: |
           echo ""
-          echo "╔════════════════════════════════════════════════════════╗"
-          echo "║  ✓ TikTok Sandbox Demo Ready - OAuth Test              ║"
-          echo "╚════════════════════════════════════════════════════════╝"
-          echo ""
-          echo "✓ Backend running with credentials loaded"
-          echo "✓ Frontend running on tunnel"
-          echo "✓ OAuth flow ready to test"
-          echo ""
-          echo "WHAT TO DO NEXT:"
-          echo "1. Open the Demo URL (see below in workflow output)"
-          echo "2. Click: 🔓 Sign in with TikTok (Sandbox)"
-          echo "3. Sign in as @andra.kiirkivi when TikTok prompts"
-          echo "4. Approve permissions"
-          echo "5. See 'Authentication successful!' message"
-          echo ""
-          echo "Keep this workflow running while testing."
-          echo "Workflow will stay active for 6 hours."
+          echo "✓ Demo URL has been written to GitHub Actions Job Summary"
+          echo "Check the 'Summary' tab to see the clickable demo link"
           echo ""
 
-      - name: Create Summary
+      - name: Keep Services Running
         if: always()
         run: |
-          cat > demo_summary.txt << 'EOF'
-          TikTok Sandbox Demo Summary:
-          ✓ GitHub Secrets loaded securely (never exposed)
-          ✓ Backend OAuth handler running
-          ✓ Frontend demo page accessible
-          ✓ ngrok public tunnel created
-
-          Click the public URL shown in "Show Summary" to access the demo.
-          EOF
-          cat demo_summary.txt
-
-      - name: Keep Running
-        if: always()
-        run: |
-          echo "Services running..."
+          echo "✓ All services running"
+          echo "✓ Check GitHub Actions Job Summary for demo URL"
+          echo ""
+          echo "Keeping services active for testing (6 hours)..."
           sleep 21600
