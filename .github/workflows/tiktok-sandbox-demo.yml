@@ -97,9 +97,7 @@ jobs:
 ## ✓ OAuth Demo Running
 
 Your secure TikTok OAuth demo is live with credentials loaded from GitHub Secrets.
-
 SUMMARY
-
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "### [🚀 CLICK TO OPEN DEMO](${DEMO_URL}/tiktok-sandbox-demo.html)" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
@@ -110,7 +108,6 @@ SUMMARY
             echo "4. Approve permissions" >> $GITHUB_STEP_SUMMARY
             echo "5. See 'Authentication successful!'" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-            echo "✓ Demo ready" > /dev/null
           else
             cat >> $GITHUB_STEP_SUMMARY << 'SUMMARY'
 # ⚠️ ngrok Failed
