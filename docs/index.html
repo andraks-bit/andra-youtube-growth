@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Sandbox Demo - BoatHire24</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 28px;
+            color: #000;
+            margin-bottom: 8px;
+        }
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+        .status {
+            background: #f0f0f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+        .status.loading { background: #e3f2fd; color: #1565c0; }
+        .status.success { background: #e8f5e9; color: #2e7d32; border-left: 4px solid #4caf50; }
+        .status.error { background: #ffebee; color: #c62828; border-left: 4px solid #f44336; }
+        .status-icon { margin-right: 8px; font-size: 16px; }
+        .button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 12px;
+        }
+        .button-primary {
+            background: #000;
+            color: white;
+        }
+        .button-primary:hover:not(:disabled) {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .step {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #eee;
+        }
+        .step-title {
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .step-content {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+        .user-info {
+            background: #f9f9f9;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+        .user-info strong { color: #000; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 TikTok Sandbox Demo</h1>
+            <p>BoatHire24 - Secure OAuth & API Integration</p>
+        </div>
+
+        <div id="statusBox" class="status hidden"></div>
+
+        <!-- Phase 1: Authorization -->
+        <div id="phase1">
+            <div class="step-title">Secure TikTok OAuth Demo</div>
+            <div class="step-content" style="margin-bottom: 16px;">
+                This demo shows a complete, secure OAuth flow where your credentials are never exposed to the browser. Click to authenticate with TikTok's real Login Kit.
+            </div>
+            <button class="button button-primary" onclick="startOAuth()">
+                🔓 Sign in with TikTok (Sandbox)
+            </button>
+            <div class="step" style="margin-top: 16px; padding-top: 16px;">
+                <div class="step-title">🔧 Backend Status</div>
+                <div id="backendStatus" class="step-content">Checking...</div>
+            </div>
+        </div>
+
+        <!-- Phase 2: Success -->
+        <div id="phase3" class="hidden">
+            <div class="status success">
+                <span class="status-icon">✓</span>
+                <span>Authentication successful!</span>
+            </div>
+            <div class="step-content" style="margin-top: 12px;">
+                This demo shows TikTok's real OAuth flow working end-to-end:
+                <ul style="margin: 12px 0 0 20px;">
+                    <li>TikTok Login Kit authorization</li>
+                    <li>Secure callback handler</li>
+                    <li>PKCE-protected token exchange</li>
+                    <li>User authenticated</li>
+                </ul>
+            </div>
+            <button class="button button-primary" onclick="startOver()">
+                ← Try Again
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const BACKEND_URL = 'http://localhost:3001';
+
+        function showStatus(message, type = 'loading') {
+            const box = document.getElementById('statusBox');
+            const icons = { loading: '⏳', success: '✓', error: '✗' };
+            box.innerHTML = `<span class="status-icon">${icons[type]}</span><span>${message}</span>`;
+            box.className = `status ${type}`;
+            box.classList.remove('hidden');
+        }
+
+        function hideStatus() {
+            document.getElementById('statusBox').classList.add('hidden');
+        }
+
+        function showPhase(phase) {
+            document.getElementById('phase1').classList.add('hidden');
+            document.getElementById('phase3').classList.add('hidden');
+            document.getElementById(`phase${phase}`).classList.remove('hidden');
+        }
+
+        async function startOAuth() {
+            showStatus('Preparing secure OAuth flow...', 'loading');
+
+            try {
+                const verifier = generatePKCEVerifier();
+                const challenge = await generatePKCEChallenge(verifier);
+
+                const response = await fetch(`${BACKEND_URL}/set-verifier`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ verifier })
+                });
+
+                if (!response.ok) throw new Error('Failed to set verifier on backend');
+
+                const healthResponse = await fetch(`${BACKEND_URL}/health`);
+                const health = await healthResponse.json();
+
+                if (!health.credentials) {
+                    throw new Error('Backend credentials not configured');
+                }
+
+                const state = generateRandomString(16);
+                const publicBackendUrl = health.public_url || BACKEND_URL;
+                const redirectUri = `${publicBackendUrl}/callback`;
+                const clientKey = health.client_key || localStorage.getItem('tiktok_client_key');
+
+                if (!clientKey) {
+                    throw new Error('Client Key not available from backend');
+                }
+
+                const authUrl = new URL('https://www.tiktok.com/v2/auth/authorize/');
+                authUrl.searchParams.append('client_key', clientKey);
+                authUrl.searchParams.append('redirect_uri', redirectUri);
+                authUrl.searchParams.append('scope', 'user.info.basic video.upload video.publish');
+                authUrl.searchParams.append('response_type', 'code');
+                authUrl.searchParams.append('state', state);
+                authUrl.searchParams.append('code_challenge', challenge);
+                authUrl.searchParams.append('code_challenge_method', 'S256');
+
+                hideStatus();
+                window.location.href = authUrl.toString();
+
+            } catch (error) {
+                showStatus(`Setup Error: ${error.message}`, 'error');
+            }
+        }
+
+        async function pollForAuthResult() {
+            const maxAttempts = 60;
+            let attempts = 0;
+
+            showStatus('Waiting for TikTok authorization...', 'loading');
+
+            const pollInterval = setInterval(async () => {
+                attempts++;
+
+                try {
+                    const response = await fetch(`${BACKEND_URL}/session`);
+
+                    if (!response.ok) throw new Error('Backend unreachable');
+
+                    const session = await response.json();
+
+                    if (session.authenticated && session.user) {
+                        clearInterval(pollInterval);
+                        showStatus(`Signed in as @${session.user.display_name}`, 'success');
+                        setTimeout(() => {
+                            hideStatus();
+                            showPhase(3);
+                        }, 1500);
+                    }
+
+                    if (session.error) {
+                        clearInterval(pollInterval);
+                        showStatus(`TikTok Error: ${session.error}`, 'error');
+                    }
+
+                } catch (error) {
+                    console.error('Poll error:', error);
+                }
+
+                if (attempts >= maxAttempts) {
+                    clearInterval(pollInterval);
+                    showStatus('Authorization timeout', 'error');
+                }
+            }, 1000);
+        }
+
+        function startOver() {
+            showPhase(1);
+            hideStatus();
+        }
+
+        function generatePKCEVerifier() {
+            const length = 128;
+            const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += charset.charAt(Math.floor(Math.random() * charset.length));
+            }
+            return result;
+        }
+
+        async function generatePKCEChallenge(verifier) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(verifier);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashBase64 = btoa(String.fromCharCode(...hashArray))
+                .replace(/\+/g, '-')
+                .replace(/\//g, '_')
+                .replace(/=/g, '');
+            return hashBase64;
+        }
+
+        function generateRandomString(length) {
+            const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += charset.charAt(Math.floor(Math.random() * charset.length));
+            }
+            return result;
+        }
+
+        async function checkBackendStatus() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/health`);
+                if (response.ok) {
+                    const data = await response.json();
+                    const statusEl = document.getElementById('backendStatus');
+                    if (data.credentials) {
+                        statusEl.innerHTML = '✓ Backend ready with credentials';
+                        statusEl.style.color = '#2e7d32';
+                        return true;
+                    } else {
+                        statusEl.innerHTML = '⚠ Backend running (set env vars: TIKTOK_CLIENT_ID, TIKTOK_CLIENT_SECRET)';
+                        statusEl.style.color = '#f57c00';
+                        return false;
+                    }
+                }
+            } catch (error) {
+                document.getElementById('backendStatus').innerHTML = `✗ Backend not running on ${BACKEND_URL}`;
+                document.getElementById('backendStatus').style.color = '#c62828';
+            }
+            return false;
+        }
+
+        window.addEventListener('load', async () => {
+            await checkBackendStatus();
+
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('success')) {
+                pollForAuthResult();
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        });
+    </script>
+</body>
+</html>
