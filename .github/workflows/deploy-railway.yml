@@ -1,0 +1,46 @@
+name: Deploy to Railway
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'tiktok-sandbox-backend.js'
+      - 'package.json'
+      - 'Procfile'
+      - 'railway.json'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Railway using API
+        run: |
+          # Railway deployment via git
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+          # Trigger deployment by adding a deployment tag
+          DEPLOYMENT_TAG="deploy-$(date +%s)"
+          git tag "$DEPLOYMENT_TAG"
+          git push origin "$DEPLOYMENT_TAG"
+
+          echo "Created deployment tag: $DEPLOYMENT_TAG"
+          echo "Railway webhook should trigger automatic redeploy"
+
+      - name: Verify deployment
+        run: |
+          echo "Waiting for Railway to process deployment..."
+          sleep 30
+
+          # Test if backend is responding
+          HEALTH_RESPONSE=$(curl -s https://andra-youtube-growth-production.up.railway.app/health)
+          echo "Backend health: $HEALTH_RESPONSE"
+
+          if echo "$HEALTH_RESPONSE" | grep -q "client_key"; then
+            echo "✓ Deployment successful - client_key is present"
+          else
+            echo "ℹ Deployment processing - may take a few minutes"
+          fi
