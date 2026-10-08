@@ -152,6 +152,7 @@ const server = http.createServer(async (req, res) => {
     res.end(JSON.stringify({
       status: 'ok',
       credentials: !!(CLIENT_KEY && CLIENT_SECRET),
+      client_key: CLIENT_KEY || null,
       public_url: publicUrl
     }));
     return;
