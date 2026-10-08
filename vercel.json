@@ -15,6 +15,5 @@
   "env": {
     "TIKTOK_CLIENT_ID": "@tiktok_client_id",
     "TIKTOK_CLIENT_SECRET": "@tiktok_client_secret"
-  },
-  "public": false
+  }
 }
