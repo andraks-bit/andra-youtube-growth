@@ -1,0 +1,16 @@
+{
+  "name": "tiktok-sandbox-demo",
+  "version": "1.0.0",
+  "description": "TikTok Sandbox Secure OAuth Demo",
+  "main": "tiktok-sandbox-backend.js",
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "start": "node tiktok-sandbox-backend.js",
+    "dev": "node tiktok-sandbox-backend.js"
+  },
+  "keywords": ["tiktok", "oauth", "sandbox"],
+  "author": "BoatHire24",
+  "license": "MIT"
+}
