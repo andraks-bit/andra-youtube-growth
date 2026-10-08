@@ -257,6 +257,7 @@ server.listen(PORT, () => {
   console.log(`Local Port: ${PORT}`);
   console.log(`OAuth Callback: ${publicUrl}/callback`);
   console.log(`\nCredentials: ${CLIENT_KEY && CLIENT_SECRET ? '✓ Configured' : '✗ Missing'}`);
+  console.log(`Client Key: ${CLIENT_KEY ? '✓ Available' : '✗ Missing'}`);
   console.log(`\nThis backend handles OAuth callback securely.`);
   console.log(`Client Secret never exposed to browser or logs.\n`);
 });
