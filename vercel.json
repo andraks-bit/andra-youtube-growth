@@ -1,0 +1,10 @@
+{
+  "buildCommand": "true",
+  "devCommand": "node tiktok-sandbox-backend.js",
+  "env": {
+    "TIKTOK_CLIENT_ID": "@tiktok_client_id",
+    "TIKTOK_CLIENT_SECRET": "@tiktok_client_secret"
+  },
+  "public": false,
+  "regions": ["sfo1"]
+}
