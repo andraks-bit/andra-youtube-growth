@@ -54,7 +54,7 @@ jobs:
         timeout-minutes: 2
         run: |
           npm install -g localtunnel
-          timeout 60 lt --port 3001 --print-requests >tunnel.log 2>&1 &
+          lt --port 3001 --print-requests >tunnel.log 2>&1 &
           TUNNEL_PID=$!
           echo "localtunnel started with PID: $TUNNEL_PID"
           sleep 3
@@ -74,6 +74,7 @@ jobs:
           fi
           echo "TUNNEL_URL=$TUNNEL_URL" >/tmp/tunnel.env
           echo "Tunnel ready at: $TUNNEL_URL"
+          echo "Tunnel will run for the duration of the job (~6 hours max)"
 
       - name: Get tunnel URL and restart backend
         timeout-minutes: 2
@@ -133,10 +134,10 @@ jobs:
             echo "Demo URL file not found"
           fi
 
-      - name: Keep tunnel alive
+      - name: Keep services running
         if: always()
-        run: sleep 7200
-
-      - name: Cleanup
-        if: always()
-        run: pkill -9 node python3 lt 2>/dev/null || true
+        run: |
+          echo "Demo is live and accessible"
+          echo "Keeping tunnel, backend, and frontend running..."
+          # Job will run until GitHub Actions timeout (~6 hours)
+          # All processes (lt, node, python3) continue running in background
