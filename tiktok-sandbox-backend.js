@@ -16,9 +16,23 @@ const querystring = require('querystring');
 // Credentials from environment (GitHub Secrets or local .env)
 const CLIENT_KEY = process.env.TIKTOK_CLIENT_ID || process.env.TIKTOK_SANDBOX_CLIENT_ID;
 const CLIENT_SECRET = process.env.TIKTOK_CLIENT_SECRET || process.env.TIKTOK_SANDBOX_CLIENT_SECRET;
-const PUBLIC_URL = process.env.PUBLIC_URL || 'http://localhost:3001';
-const REDIRECT_URI = `${PUBLIC_URL}/callback`;
+const DEFAULT_PUBLIC_URL = process.env.PUBLIC_URL || 'http://localhost:3001';
 const TOKEN_ENDPOINT = 'https://open.tiktokapis.com/v2/oauth/token/';
+
+// Function to get public URL from request or environment
+function getPublicURL(req) {
+  if (process.env.PUBLIC_URL) return process.env.PUBLIC_URL;
+
+  // Auto-detect from request headers (for Railway, Heroku, etc)
+  const protocol = req.headers['x-forwarded-proto'] || 'http';
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+
+  if (host && host !== 'localhost:3001') {
+    return `${protocol}://${host}`;
+  }
+
+  return DEFAULT_PUBLIC_URL;
+}
 
 // In-memory storage for demo session (cleared on restart)
 let sessionState = {
@@ -133,23 +147,25 @@ const server = http.createServer(async (req, res) => {
 
   // Health check
   if (pathname === '/health') {
+    const publicUrl = getPublicURL(req);
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
       status: 'ok',
       credentials: !!(CLIENT_KEY && CLIENT_SECRET),
-      client_key: CLIENT_KEY || null,
-      public_url: PUBLIC_URL
+      public_url: publicUrl
     }));
     return;
   }
 
   // OAuth callback from TikTok
   if (pathname === '/callback') {
+    const publicUrl = getPublicURL(req);
     const code = query.code;
     const state = query.state;
     const error = query.error;
 
     console.log(`[Callback] Code: ${code ? code.substring(0, 10) + '...' : 'none'}, Error: ${error || 'none'}`);
+    console.log(`[Callback] Public URL: ${publicUrl}`);
 
     if (error) {
       sessionState.error = error;
@@ -230,14 +246,16 @@ const server = http.createServer(async (req, res) => {
   res.end('Not found');
 });
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
+  const publicUrl = process.env.PUBLIC_URL || `http://localhost:${PORT}`;
   console.log(`\n${'═'.repeat(60)}`);
   console.log(`TikTok Sandbox Secure Backend Running`);
   console.log(`${'═'.repeat(60)}`);
-  console.log(`\nBackend: http://localhost:${PORT}`);
-  console.log(`Frontend: http://localhost:3000`);
-  console.log(`\nCredentials: ${CLIENT_KEY && CLIENT_SECRET ? '✓ Set' : '✗ Missing'}`);
+  console.log(`\nPublic URL: ${publicUrl}`);
+  console.log(`Local Port: ${PORT}`);
+  console.log(`OAuth Callback: ${publicUrl}/callback`);
+  console.log(`\nCredentials: ${CLIENT_KEY && CLIENT_SECRET ? '✓ Configured' : '✗ Missing'}`);
   console.log(`\nThis backend handles OAuth callback securely.`);
-  console.log(`Client Secret never exposed to browser.\n`);
+  console.log(`Client Secret never exposed to browser or logs.\n`);
 });
