@@ -141,7 +141,10 @@
     </div>
 
     <script>
-        const BACKEND_URL = 'http://localhost:3001';
+        // Backend URL - auto-detect from window location or use Railway
+        const BACKEND_URL = window.location.hostname === 'localhost'
+          ? 'http://localhost:3001'
+          : 'https://andra-youtube-growth-production.up.railway.app';
 
         function showStatus(message, type = 'loading') {
             const box = document.getElementById('statusBox');
