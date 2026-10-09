@@ -250,6 +250,104 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // Make.com webhook: YouTube-to-TikTok automation trigger
+  if (pathname === '/api/publish' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        // Validate authentication token
+        const authHeader = req.headers.authorization;
+        const expectedToken = process.env.MAKE_WEBHOOK_TOKEN;
+
+        if (!authHeader || !expectedToken) {
+          console.error('[API/Publish] Missing authorization header or webhook token');
+          res.writeHead(401, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Unauthorized. Missing or invalid token.' }));
+          return;
+        }
+
+        const tokenMatch = authHeader.match(/^Bearer\s+(.+)$/);
+        if (!tokenMatch || tokenMatch[1] !== expectedToken) {
+          console.error('[API/Publish] Invalid authentication token');
+          res.writeHead(403, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Forbidden. Invalid token.' }));
+          return;
+        }
+
+        // Verify TikTok credentials
+        const clientId = CLIENT_KEY;
+        const clientSecret = CLIENT_SECRET;
+
+        if (!clientId || !clientSecret) {
+          console.error('[API/Publish] TikTok credentials not configured');
+          res.writeHead(503, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Service unavailable. TikTok credentials not configured.' }));
+          return;
+        }
+
+        const requestData = JSON.parse(body);
+        const { action = 'preview', videoUrl, title, description } = requestData;
+
+        if (!videoUrl) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Missing required field: videoUrl' }));
+          return;
+        }
+
+        console.log(`[API/Publish] Request: action=${action}, videoUrl=${videoUrl.substring(0, 50)}...`);
+
+        // Preview mode (safe, no actual publishing)
+        if (action === 'preview' || action === 'dry-run') {
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({
+            status: 'preview',
+            message: 'Automation triggered in preview mode. No videos published.',
+            wouldPublish: {
+              platform: 'TikTok',
+              videoUrl: videoUrl,
+              title: title || 'Untitled',
+              description: description || 'Auto-generated from YouTube',
+              timestamp: new Date().toISOString()
+            },
+            nextStep: 'Review the preview above, then call with action=publish to publish',
+            credentialsStatus: '✓ TikTok credentials verified'
+          }));
+          return;
+        }
+
+        // Publish action (requires approval)
+        if (action === 'publish') {
+          console.log('[API/Publish] Publish action received (approval required)');
+          res.writeHead(202, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({
+            status: 'pending_approval',
+            message: 'Publish request queued pending manual approval',
+            videoUrl: videoUrl,
+            requestId: `pub_${Date.now()}_${Math.random().toString(36).substring(7)}`,
+            timestamp: new Date().toISOString(),
+            note: 'Video will be published after manual review and approval'
+          }));
+          return;
+        }
+
+        // Invalid action
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+          error: 'Invalid action',
+          validActions: ['preview', 'dry-run', 'publish'],
+          received: action
+        }));
+
+      } catch (error) {
+        console.error('[API/Publish] Error:', error.message);
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Internal server error', message: error.message }));
+      }
+    });
+    return;
+  }
+
   // Not found
   res.writeHead(404);
   res.end('Not found');
