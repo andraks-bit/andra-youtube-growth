@@ -19,6 +19,14 @@ const CLIENT_SECRET = process.env.TIKTOK_CLIENT_SECRET || process.env.TIKTOK_SAN
 const DEFAULT_PUBLIC_URL = process.env.PUBLIC_URL || 'http://localhost:3001';
 const TOKEN_ENDPOINT = 'https://open.tiktokapis.com/v2/oauth/token/';
 
+// Verify credentials are loaded (for debugging)
+if (!CLIENT_KEY) {
+  console.warn('[WARNING] TIKTOK_CLIENT_ID environment variable not found');
+}
+if (!CLIENT_SECRET) {
+  console.warn('[WARNING] TIKTOK_CLIENT_SECRET environment variable not found');
+}
+
 // Function to get public URL from request or environment
 function getPublicURL(req) {
   if (process.env.PUBLIC_URL) return process.env.PUBLIC_URL;
