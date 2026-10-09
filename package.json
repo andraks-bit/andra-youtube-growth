@@ -4,7 +4,7 @@
   "description": "TikTok Sandbox Secure OAuth Demo",
   "main": "tiktok-sandbox-backend.js",
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "scripts": {
     "start": "node tiktok-sandbox-backend.js",
