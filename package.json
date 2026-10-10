@@ -11,6 +11,6 @@
     "dev": "node tiktok-sandbox-backend.js"
   },
   "keywords": ["tiktok", "oauth", "sandbox"],
-  "author": "BoatHire24",
+  "author": "Andra Kiirkivi",
   "license": "MIT"
 }
