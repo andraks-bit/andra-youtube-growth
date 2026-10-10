@@ -350,6 +350,22 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // TikTok site verification file
+  if (pathname === '/tiktokoOVlUe0ONedywupVL1M24vbaXs7FN0U4.txt') {
+    try {
+      const filePath = path.join(__dirname, 'tiktokoOVlUe0ONedywupVL1M24vbaXs7FN0U4.txt');
+      const content = fs.readFileSync(filePath, 'utf8');
+      res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end(content);
+      return;
+    } catch (error) {
+      console.error('[Verification] TikTok verification file not found');
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('Not found');
+      return;
+    }
+  }
+
   // Serve legal pages (Terms of Service, Privacy Policy)
   if (pathname === '/terms-of-service.html' || pathname === '/terms') {
     try {
