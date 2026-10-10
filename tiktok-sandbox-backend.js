@@ -12,6 +12,8 @@ const http = require('http');
 const url = require('url');
 const https = require('https');
 const querystring = require('querystring');
+const fs = require('fs');
+const path = require('path');
 
 // Credentials from environment (GitHub Secrets or local .env)
 const CLIENT_KEY = process.env.TIKTOK_CLIENT_ID || process.env.TIKTOK_SANDBOX_CLIENT_ID;
@@ -346,6 +348,31 @@ const server = http.createServer(async (req, res) => {
       }
     });
     return;
+  }
+
+  // Serve legal pages (Terms of Service, Privacy Policy)
+  if (pathname === '/terms-of-service.html' || pathname === '/terms') {
+    try {
+      const filePath = path.join(__dirname, 'terms-of-service.html');
+      const content = fs.readFileSync(filePath, 'utf8');
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(content);
+      return;
+    } catch (error) {
+      console.error('[Legal Pages] Terms of Service file not found');
+    }
+  }
+
+  if (pathname === '/privacy-policy.html' || pathname === '/privacy') {
+    try {
+      const filePath = path.join(__dirname, 'privacy-policy.html');
+      const content = fs.readFileSync(filePath, 'utf8');
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(content);
+      return;
+    } catch (error) {
+      console.error('[Legal Pages] Privacy Policy file not found');
+    }
   }
 
   // Not found
